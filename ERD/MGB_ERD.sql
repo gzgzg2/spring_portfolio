@@ -306,5 +306,5 @@ ALTER TABLE PLAN
 	ON DELETE RESTRICT
 ;
 
-
+show tables;
 
