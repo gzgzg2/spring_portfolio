@@ -1,0 +1,183 @@
+.siva {
+    margin-top: 5%;
+    width: 100%;
+    height: 40%;
+    background-color: aquamarine;
+}
+
+#sivaH2 {
+    margin-left: 45%;
+}
+
+#navYam {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+#navYam ul li {
+    margin-top: 2%;
+    display: inline-block;
+    width: 13%;
+    height: 250px;
+    margin-left: 5px;
+    background-color: blueviolet;
+    list-style: none;
+} 
+.navYam2 {
+    width: 100%;
+    height: 100%;
+}
+
+.navYam2 ul li {
+    margin-top: 2%;
+    display: inline-block;
+    width: 19%;
+    height: 250px;
+    margin-left: 8px;
+    background-color: blueviolet;
+    list-style: none;
+} 
+
+#hot {
+    margin-left: 37%;
+}
+
+#hashtag1{
+    margin-bottom: 5px;
+}
+
+#hashtag {
+    float: right;
+    width: 50%;
+    height: auto;
+    background-color: blueviolet;
+    margin-top: 20px;
+}
+
+#hashtag1 a, #hashtag2 a{
+    width: 100px;
+    height: 50px;
+    background-color: cadetblue;
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 50px;
+    text-decoration: none;
+    color: white;
+}
+
+#navYam4 {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+   
+}
+
+#navYam4 ul li {
+    margin-top: 2%;
+    display: inline-block;
+    width: 13%;
+    height: 250px;
+    margin-left: 5px;
+    background-color: blueviolet;
+    list-style: none;
+    position: relative;
+} 
+
+#navYam5 {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+
+
+#navYam5 ul li {
+    margin-top: 2%;
+    display: inline-block;
+    width: 13%;
+    height: 250px;
+    margin-left: 5px;
+    background-color: blueviolet;
+    list-style: none;
+    position: relative;
+} 
+
+
+#navYam4 ul li:nth-child(1) {
+    margin-left: 15%;
+}
+
+#navYam5 ul li:nth-child(1) {
+    margin-left: 15%;
+}
+
+.navYam4div {
+    top: 150px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: thistle;
+}
+
+
+.video-section1 {
+	height: 350px;
+	padding-top: 120px;
+}
+.video-section1 .video-text1 {
+    text-align: left;
+    display: inline-block;
+    width: 40%;
+    background-color: tomato;
+}
+.video-section1 .video-text1 h2 {
+	font-size: 48px;
+	color: #ffffff;
+    margin-bottom: 16px;
+
+}
+.video-section1 .video-text1 p {
+	font-size: 20px;
+	color: #ffffff;
+    margin-bottom: 40px;
+
+}
+
+/* 인기상품 ?*/
+.Hot {
+    margin-top: 5%;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 5%;
+}
+
+#hotId {
+    width: 100%;
+    height: 300px;
+}
+
+.hothot {
+    width: 32%;
+    height: 200px;
+    background-color: turquoise;
+    float: left;
+    margin-left: 10px;
+}
+
+.hothot:nth-child(1) {
+    margin-left: 1%;
+}
+
+#sivaH3 {
+    margin-left: 15%;
+}
+
+.siva1 {
+    margin-top: 2%;
+    width: 100%;
+    height: auto;
+    background-color: aquamarine;
+}
