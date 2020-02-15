@@ -69,8 +69,8 @@
 }
 
 #navYam4 {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     background-color: blue;
    
 }
@@ -87,12 +87,10 @@
 } 
 
 #navYam5 {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     background-color: blue;
 }
-
-
 
 #navYam5 ul li {
     margin-top: 2%;
@@ -146,7 +144,7 @@
 
 }
 
-/* Ïù∏Í∏∞ÏÉÅÌíà ?*/
+/* ¿Œ±‚ªÛ«∞ ?*/
 .Hot {
     margin-top: 5%;
     width: 100%;
@@ -180,4 +178,209 @@
     width: 100%;
     height: auto;
     background-color: aquamarine;
+}
+
+#member {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(233, 233, 233);
+}
+
+#memberH2 {
+  padding-left: 7%;
+  padding-bottom: 3%;
+}
+
+#memDiv {
+    width: 95%;
+    height: 85%;
+    background-color: aquamarine;
+    margin: 0 auto;
+    top: 5%;
+    position: relative;
+}
+
+#side {
+    width: 15%;
+    height: 45%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    top: 8%;
+    left: 7%;
+    position: absolute;
+    float: left;
+}
+#sideul li {
+    list-style: none;
+    width: 40%;
+    font-size: 25px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+#sideul li:nth-child(1) {
+    margin-top: 40px;
+}
+
+#memberForm {
+    top: 8%;
+    width: 70%;
+    height: 90%;
+    left: 24%;
+    border-radius: 20px;
+    position: absolute;
+    background-color: #ffffff;
+}
+
+#frmH2 {
+    padding-top: 2%;
+    padding-left: 40%;
+}
+
+#frmP {
+    padding-left: 35%;
+}
+
+
+#ftable {
+    margin-top: -0.2%;
+    border-collapse: collapse;
+}
+
+#fatable td {
+    white-space:nowrap;
+}
+
+#ftable tr, #ftable td{
+    width: 400px;
+    padding: 30px;
+    border-bottom: 1px solid #cccccc;
+}
+
+
+#ftableDiv {
+    width: 1200px;
+    height: auto;
+    border: 1px solid #cccccc;
+    margin-left: 2%;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom: none;
+}
+
+
+#siva3 {
+    width: auto;
+    height: auto;
+    position: relative;
+    margin-top: 20px;
+    background-color: brown;
+}
+
+#hotel1 {
+    margin:0 auto;
+    display: table;
+}
+
+/* «“¿ŒªÛ«∞ */
+.Hot2 {
+    margin-top: 3%;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 5%;
+    background-color: chartreuse;
+    position: relative;
+}
+
+#hotId2 {
+    width: 100%;
+    height: 300px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+.hothot2 {
+    width: 25%;
+    height: 200px;
+    background-color: turquoise;
+    float: left;
+    margin-left: 10px;
+}
+
+.hothot2:nth-child(1) {
+    margin-left: 12%;
+}
+
+/*º˜º“ ¿Œ±‚∆‰¿Ã¡ˆ*/
+
+#sivaH4 {
+    margin-left: 15%;
+}
+
+#siva4 {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.sivaHot {
+    margin-top: 2%;
+    width: 100%;
+    height: auto;
+    background-color: aquamarine;
+    margin-bottom: 7%;
+}
+
+#navYamHot1 {
+    width: auto;
+    height: auto;
+    background-color: cornflowerblue;
+}
+
+#navYamHot2 {
+    width: auto;
+    height: auto;
+    background-color: cornflowerblue;
+}
+
+#navYamHot1 ul li, #navYamHot2 ul li {
+    margin-top: 2%;
+    display: inline-block;
+    width: 13%;
+    height: 250px;
+    margin-left: 5px;
+    background-color: blueviolet;
+    list-style: none;
+    position: relative;
+}
+
+#navYamHot1 ul li:nth-child(1), #navYamHot2 ul li:nth-child(1) {
+    margin-left: 16%;
+}
+
+#siva5 {
+    width: auto;
+    height: auto;
+}
+
+#sivaH5 {
+    margin-left: 16%;
+}
+
+.sivaHotH {
+    margin-top: 2%;
+    width: 100%;
+    height: auto;
+    background-color: aquamarine;
+    margin-bottom: 7%;
+}
+
+
+.inputY {
+    margin-left: 20px;
+}
+
+.inputSpan {
+    margin-left: 20px;
 }
