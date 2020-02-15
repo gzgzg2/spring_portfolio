@@ -4,11 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.MyPageDAO">
-	<select id="select" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
+	<select id="selectByUid" resultType="com.lec.mbg.mybatis.beans.MyPageInfoDTO">
 		SELECT member_uid uid, member_name name,
 			   member_id id, member_pw pw, member_email email,
 			   member_gender gender, member_birth birth, member_pic pic,
-			   member_tel tel FROM  MEMBER;
+			   member_tel tel FROM MEMBER WHERE member_uid = #{param1};
 	</select>
-
+	
+	<update id="mypageUpdate" flushCache="true">
+		UPDATE MEMBER SET member_email = #{dto.member_email}, member_tel #{dto.member_tel} 
+		WHERE member_uid = #{param1}
+	</update>
+	
 </mapper>	

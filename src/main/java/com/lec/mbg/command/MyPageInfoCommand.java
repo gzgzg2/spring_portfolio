@@ -6,8 +6,8 @@ public class MyPageInfoCommand implements Command {
 
 	@Override
 	public void execute(Model model) {
-		// TODO Auto-generated method stub
-
+		
+		
 	}
 
 }
