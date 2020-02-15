@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.mbg.command.Command;
-import com.lec.mbg.command.MyPageInfoCommand;
 
 @Controller
-@RequestMapping("/user/mypage")
+@RequestMapping("/user")
 public class UserMypageController {
 	private SqlSession sqlSession;
 	private Command command;
@@ -22,11 +22,9 @@ public class UserMypageController {
 	}
 	
 	
-	@PostMapping(value = "/info") 
+	@RequestMapping(value = "/mypageInfo") 
 	public String mypageSelect(Model model) {
-		command = new MyPageInfoCommand();
-		command.execute(model);
-		return "user/mypage/info";
+		return "user/mypageInfo";
 	}
 
 	

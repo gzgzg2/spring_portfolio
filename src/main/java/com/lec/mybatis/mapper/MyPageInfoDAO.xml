@@ -16,4 +16,7 @@
 		WHERE member_uid = #{param1}
 	</update>
 	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE memeber_uid = #{param1};
+	</delete>
 </mapper>	
