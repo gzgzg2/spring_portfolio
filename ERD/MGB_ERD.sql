@@ -100,9 +100,9 @@ CREATE TABLE PLAN
 	plan_date date,
 	plan_stay int NOT NULL,
 	trans_uid int NOT NULL,
-	planner_uid int NOT NULL,
-	plan_local_uid int NOT NULL,
-	plan_next_local_uid int NOT NULL,
+	planner_uid int ,
+	plan_local_uid int ,
+	plan_next_local_uid int ,
 	member_uid int NOT NULL,
 	PRIMARY KEY (plan_uid),
 	UNIQUE (plan_uid)
@@ -135,7 +135,7 @@ CREATE TABLE REVIEW
 	review_star int NOT NULL,
 	review_content varchar(50),
 	review_id varchar(50) NOT NULL,
-	member_uid int NOT NULL,
+	member_uid int ,
 	book_uid int NOT NULL,
 	PRIMARY KEY (review_uid),
 	UNIQUE (review_uid)
