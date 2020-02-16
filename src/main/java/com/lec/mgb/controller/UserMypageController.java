@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.lec.mbg.command.Command;
+import com.lec.mgb.command.Command;
 
 @Controller
 @RequestMapping("/user")

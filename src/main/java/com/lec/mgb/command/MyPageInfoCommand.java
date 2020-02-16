@@ -1,4 +1,4 @@
-package com.lec.mbg.command;
+package com.lec.mgb.command;
 
 import org.springframework.ui.Model;
 

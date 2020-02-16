@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lec.mgb.mybatis.beans.UserActivDAO">
+	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_img,
+			t.ticket_uid, t.ticket_name, t.ticket_first_cost, t.ticket_last_cost, t.ticket_info
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+			and a.activ_uid = #{activ_uid};
+	</select>
+</mapper>	

@@ -1,4 +1,4 @@
-package com.lec.mbg.mybatis.beans;
+package com.lec.mgb.mybatis.beans;
 
 import java.sql.Timestamp;
 
@@ -15,12 +15,12 @@ public class MyPageInfoDTO {
 	
 	
 	
-	//±âº» »ý¼ºÀÚ
+	//ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public MyPageInfoDTO() {
 		super();
 	}
 
-	//¸Å°³º¯¼ö »ý¼ºÀÚ
+	//ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public MyPageInfoDTO(int member_uid, String member_name, String member_id, String member_pw, String member_email,
 			String member_gender, Timestamp member_birth, String member_pic, String member_tel) {
 		super();

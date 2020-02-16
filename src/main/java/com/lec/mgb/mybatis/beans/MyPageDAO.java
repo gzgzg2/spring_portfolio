@@ -1,4 +1,4 @@
-package com.lec.mbg.mybatis.beans;
+package com.lec.mgb.mybatis.beans;
 
 import org.apache.ibatis.annotations.Param;
 
