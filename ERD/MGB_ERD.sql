@@ -297,4 +297,12 @@ ALTER TABLE PLAN
 show tables;
 
 
-
+insert into member(
+	member_name,
+	member_id,
+	member_pw,
+	member_email, 
+	member_gender, 
+	member_birth,
+	member_pic,
+	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');
