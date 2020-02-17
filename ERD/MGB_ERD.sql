@@ -134,7 +134,6 @@ CREATE TABLE REVIEW
 	review_star int NOT NULL,
 	review_content varchar(100),
 	review_id varchar(50) NOT NULL,
-	member_uid int,
 	book_uid int NOT NULL,
 	PRIMARY KEY (review_uid),
 	UNIQUE (review_uid)
@@ -253,12 +252,7 @@ ALTER TABLE PLANNER
 ;
 
 
-ALTER TABLE REVIEW
-	ADD FOREIGN KEY (member_uid)
-	REFERENCES MEMBER (member_uid)
-	ON UPDATE RESTRICT
-	ON DELETE SET NULL
-;
+
 
 
 ALTER TABLE PLAN
