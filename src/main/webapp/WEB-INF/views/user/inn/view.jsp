@@ -24,15 +24,16 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 
     <style>
+    	#google_maps {
+    		display: none;
+    	}
         .right .info {
             padding: 0
         }
-
         .right .info .badge {
             display: block;
             top: 0
         }
-
         .right .info .badge span {
             display: inline-block;
             float: left;
@@ -42,21 +43,18 @@
             color: #fff;
             line-height: 18px
         }
-
         /*.right .info strong{display:block;margin-top:9px;font-size:28px}*/
         .right .info h2 {
             display: inline;
             margin: 9px 0 0 0;
             font-size: 28px
         }
-
         .right .info .score_cnt {
             position: relative;
             clear: both;
             margin: 9px 0 6px 0;
             font-size: 18px
         }
-
         .right .info .score_cnt span {
             display: inline-block;
             position: relative;
@@ -70,42 +68,34 @@
             line-height: 17px;
             color: #fff
         }
-
         .right .info .score_cnt b {
             font-weight: normal;
             color: rgba(0, 0, 0, 0.38)
         }
-
         .right .info .score_cnt .call {
             display: none
         }
-
         .right .info .address {
             margin: 6px 0 8px 0;
             font-size: 18px
         }
-
         .right .info .benifit_wrap {
             margin-right: 0
         }
-
         .right .info .benifit_wrap span {
             font-size: 16px
         }
-
         .event_link {
             margin-top: 16px;
             padding: 0;
             background: none
         }
-
         .event_link section {
             display: block;
             position: relative;
             padding: 12px 44px 12px 12px;
             border-radius: 4px
         }
-
         .event_link section:after {
             display: inline-block;
             content: "";
@@ -118,7 +108,6 @@
             background: url('//image.goodchoice.kr/images/web_v3/ico_arr_gt.png') right 50% no-repeat;
             background-size: 12px auto
         }
-
         .event_link section ul li {
             overflow: hidden;
             padding-left: 16px;
@@ -130,7 +119,6 @@
             white-space: nowrap;
             text-overflow: ellipsis
         }
-
         .event_link .bg_pink:after {
             display: inline-block;
             content: "";
@@ -143,7 +131,6 @@
             background: url('//image.goodchoice.kr/images/web_v3/ico_arr_gt.png') right 50% no-repeat;
             background-size: 12px auto
         }
-
         .event_link .bg_pink.on:after {
             display: inline-block;
             content: "";
@@ -156,7 +143,6 @@
             background: url('//image.goodchoice.kr/images/web_v3/ico_arr_gt.png') right 50% no-repeat;
             background-size: 12px auto
         }
-
         .event_link section ul li {
             overflow: hidden;
             padding-left: 16px;
@@ -168,15 +154,12 @@
             white-space: nowrap;
             text-overflow: ellipsis
         }
-
         .bg_pink.on {
             border-radius: 4px
         }
-
         .event_link div {
             display: none !important
         }
-
         .right .comment {
             display: block;
             position: relative;
@@ -184,14 +167,12 @@
             padding: 26px 24px;
             background: rgb(250, 250, 250)
         }
-
         .right .comment strong {
             display: block;
             margin-bottom: 15px;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.87)
         }
-
         .right .comment button {
             position: absolute;
             top: 24px;
@@ -201,7 +182,6 @@
             font-size: 16px;
             color: rgb(0, 121, 107)
         }
-
         .right .comment div {
             display: block;
             overflow: hidden;
@@ -210,7 +190,6 @@
             line-height: 26px;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .right .comment .clamp {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -218,14 +197,12 @@
             height: 52px;
             text-overflow: ellipsis
         }
-
         .tab {
             width: 962px;
             margin: 0 auto;
             padding: 0 16px;
             margin-top: 38px
         }
-
         .tab button {
             float: none;
             width: auto;
@@ -238,28 +215,23 @@
             font-size: 18px;
             color: rgba(0, 0, 0, 0.38)
         }
-
         .tab button:nth-child(2) {
             width: auto
         }
-
         .tab .on {
             border-bottom: 3px solid rgb(242, 17, 76);
             font-weight: bold;
             color: rgb(230, 28, 81)
         }
-
         .room_info {
             width: 962px;
             margin: 0 auto;
         }
-
         .room_info .gallery_m .index {
             display: block;
             background: none;
             text-align: center
         }
-
         .room_info .gallery_m .index p {
             display: inline-block;
             height: 40px;
@@ -267,7 +239,6 @@
             font-size: 15px;
             line-height: 40px
         }
-
         .room_info .room {
             overflow: hidden;
             position: relative;
@@ -278,27 +249,22 @@
             background: #fff;
             box-sizing: border-box
         }
-
         .room_info .room.on {
             height: 826px
         }
-
         .room_info .room.on .cal_bg,
         .room_info .room.on .pic_wrap {
             display: block;
             opacity: 0;
             transition: 0.4s
         }
-
         .room_info .room.on .cal_bg.visible,
         .room_info .room.on .pic_wrap.visible {
             opacity: 1
         }
-
         .room_info {
             background: #fff
         }
-
         .room_info .pic_wrap {
             display: none;
             position: absolute;
@@ -306,21 +272,17 @@
             left: 111px;
             margin: 0 !important
         }
-
         .room_info .gallery_m,
         .room_info .pic_wrap {
             width: 738px;
             height: 417px
         }
-
         .room_info .gallery_m {
             display: block
         }
-
         .room_info .gallery_m .owl-stage-outer {
             height: 417px
         }
-
         .room_info .btn_date {
             display: inline-block;
             position: relative;
@@ -336,11 +298,9 @@
             line-height: 40px;
             color: rgba(0, 0, 0, 0.87)
         }
-
         .room_info .btn_date strong {
             display: none
         }
-
         .room_info .btn_date:after {
             display: inline-block;
             content: "";
@@ -352,14 +312,12 @@
             background: url('//image.goodchoice.kr/images/web_v3/ico_arr_down.png') 0 0 no-repeat;
             background-size: 24px auto
         }
-
         .room_info .room {
             overflow: hidden;
             position: relative;
             margin: 0 0 24px 0;
             background: #fff
         }
-
         .room_info .room .cal_bg {
             display: none;
             position: absolute;
@@ -369,7 +327,6 @@
             height: 528px;
             background: #f9f9f9
         }
-
         .room_info .room .cal_bg button {
             display: inline-block;
             position: absolute;
@@ -382,7 +339,6 @@
             background-size: 24px auto;
             text-indent: -9999px
         }
-
         .room_info .pic_view {
             display: inline-block;
             position: absolute;
@@ -392,16 +348,13 @@
             height: 226px;
             cursor: pointer
         }
-
         .room_info .pic_view img {
             width: 376px;
             height: 226px
         }
-
         .room_info .pic_view.pic_empty:after {
             display: none;
         }
-
         .room_info .room .title {
             display: block;
             height: 37px;
@@ -410,24 +363,20 @@
             font-weight: bold;
             line-height: 1
         }
-
         .room_info .room .info {
             overflow: hidden;
             margin: 0;
             min-height: 188px
         }
-
         .room_info .info .half {
             float: left;
             width: 233px
         }
-
         .room_info .info .half:last-child {
             float: left;
             width: 233px;
             margin-left: 46px
         }
-
         .room_info .info .half:after {
             display: inline-block;
             content: "";
@@ -438,7 +387,6 @@
             height: 187px;
             background: rgba(0, 0, 0, 0.08)
         }
-
         .room_info .info .half .price {
             padding: 0;
             border: none;
@@ -446,7 +394,6 @@
             border-bottom: none;
             box-sizing: border-box
         }
-
         .room_info .info .half .price strong {
             display: block;
             height: 20px;
@@ -454,7 +401,6 @@
             font-weight: bold;
             line-height: 1.4
         }
-
         .room_info .info .half .price strong span {
             display: inline-block;
             position: relative;
@@ -468,7 +414,6 @@
             vertical-align: top;
             letter-spacing: -1px
         }
-
         .room_info .info .half .price div {
             height: 64px;
             padding: 0 0 0 0;
@@ -477,7 +422,6 @@
             color: rgb(230, 28, 81);
             text-align: right
         }
-
         .room_info .info .price div .through {
             margin-bottom: 3px;
             height: 29px;
@@ -487,7 +431,6 @@
             font-weight: normal;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .room_info .info .price div .through_none {
             margin-bottom: 3px;
             height: 29px;
@@ -495,7 +438,6 @@
             font-size: 16px;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .room_info .info .price div p span {
             display: inline-block;
             position: relative;
@@ -507,26 +449,22 @@
             line-height: normal;
             color: #fff
         }
-
         .room_info .info .half .price ul {
             height: 64px;
             padding: 11px 0 0 0
         }
-
         .room_info .info .half .price ul li {
             position: relative;
             margin-bottom: 7px;
             font-size: 16px;
             text-align: right
         }
-
         .room_info .info .half .price ul li span {
             position: absolute;
             top: 0;
             left: 0;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .room_info .info button {
             display: block;
             width: 100%;
@@ -538,18 +476,15 @@
             color: #fff;
             text-align: center
         }
-
         .room_info .info .none ul,
         .room_info .info .none div .through {
             visibility: hidden
         }
-
         .room_info .info .none div p,
         .room_info .info .ended p {
             color: rgba(0, 0, 0, 0.87);
             font-weight: bold
         }
-
         .room_info .info .fast .price {
             position: relative;
             padding: 0;
@@ -558,7 +493,6 @@
             border-bottom: none;
             box-sizing: border-box
         }
-
         .room_info .info .fast .price strong {
             display: block;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -566,7 +500,6 @@
             font-size: 18px;
             line-height: 1
         }
-
         .room_info .info .fast .price div {
             position: absolute;
             top: 10px;
@@ -574,23 +507,19 @@
             font-size: 18px;
             text-align: right
         }
-
         .room_info .info .fast .price div p b {
             font-size: 20px;
             color: rgb(255, 43, 92)
         }
-
         .room_info .info .fast .through {
             margin-bottom: 6px !important;
             padding-top: 14px !important
         }
-
         .room_info .info .fast ul {
             overflow: hidden;
             position: relative;
             height: 65px
         }
-
         .room_info .info .fast ul:after {
             display: inline-block;
             content: "";
@@ -602,7 +531,6 @@
             margin-top: 0;
             background: rgba(0, 0, 0, 0.08)
         }
-
         .room_info .info .fast ul li {
             position: relative;
             float: left;
@@ -611,15 +539,12 @@
             font-size: 16px;
             text-align: right
         }
-
         .room_info .info .fast ul li:last-child {
             padding-right: 0
         }
-
         .room_info .info .fast ul li:last-child span {
             left: 24px
         }
-
         .room_info .info .fast ul li span {
             display: inline-block;
             position: absolute;
@@ -628,7 +553,6 @@
             padding-right: 0;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .room_info .info .room_info_null .price {
             position: relative;
             padding: 0;
@@ -637,7 +561,6 @@
             border-bottom: none;
             box-sizing: border-box
         }
-
         .room_info .info .room_info_null .price strong {
             display: block;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -645,7 +568,6 @@
             font-size: 18px;
             line-height: 1
         }
-
         .room_info .info .room_info_null .price div {
             position: absolute;
             top: 76px;
@@ -653,23 +575,19 @@
             font-size: 18px;
             text-align: right
         }
-
         .room_info .info .room_info_null .price div p b {
             font-size: 20px;
             color: rgb(255, 43, 92)
         }
-
         .room_info .info .room_info_null .through {
             margin-bottom: 6px !important;
             padding-top: 14px !important
         }
-
         .room_info .info .room_info_null ul {
             overflow: hidden;
             position: relative;
             height: 65px
         }
-
         .room_info .info .room_info_null ul:after {
             display: inline-block;
             content: "";
@@ -681,7 +599,6 @@
             margin-top: 0;
             background: rgba(0, 0, 0, 0.08)
         }
-
         .room_info .info .room_info_null ul li {
             position: relative;
             float: left;
@@ -690,15 +607,12 @@
             font-size: 16px;
             text-align: right
         }
-
         .room_info .info .room_info_null ul li:last-child {
             padding-right: 0
         }
-
         .room_info .info .room_info_null ul li:last-child span {
             left: 24px
         }
-
         .room_info .info .room_info_null ul li span {
             display: inline-block;
             position: absolute;
@@ -707,7 +621,6 @@
             padding-right: 0;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .room_info .info .hotel .price {
             position: relative;
             padding: 0;
@@ -716,7 +629,6 @@
             border-bottom: none;
             box-sizing: border-box
         }
-
         .room_info .info .hotel .price strong {
             display: block;
             padding-top: 41px;
@@ -725,7 +637,6 @@
             font-size: 16px;
             line-height: 1
         }
-
         .room_info .info .hotel .price div {
             position: absolute;
             top: 10px;
@@ -733,52 +644,43 @@
             font-size: 18px;
             text-align: right
         }
-
         .room_info .info .hotel .price div p b {
             font-size: 20px
         }
-
         .room_info .info .hotel .price button {
             height: 48px;
             margin: 12px 0;
             font-size: 16px;
             line-height: 48px
         }
-
         .room_info .info .hotel .through {
             margin-bottom: 6px !important;
             padding-top: 14px !important
         }
-
         .room .owl-nav div {
             width: 40px !important;
             height: 62px !important
         }
-
         .room .owl-nav .disabled {
             opacity: 0.3
         }
-
         .room .owl-prev {
             left: 0 !important;
             border-radius: 0 4px 4px 0;
             background: #FFF url('//image.goodchoice.kr/images/web_v3/ico_arr_lt_4.png') 50% 50% no-repeat !important;
             background-size: 20px auto !important
         }
-
         .room .owl-next {
             right: 0 !important;
             border-radius: 4px 0 0 4px;
             background: #FFF url('//image.goodchoice.kr/images/web_v3/ico_arr_gt_4.png') 50% 50% no-repeat !important;
             background-size: 20px auto !important
         }
-
         .detail_info {
             width: 962px;
             margin: 0 auto;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08)
         }
-
         .detail_info button {
             display: block;
             position: relative;
@@ -789,7 +691,6 @@
             font-size: 18px;
             line-height: 80px
         }
-
         .detail_info button:after {
             display: inline-block;
             content: "";
@@ -802,16 +703,13 @@
             background: #fff url('//image.goodchoice.kr/images/web_v3/ico_arr_3.png') 0 0 no-repeat;
             background-size: 12px auto
         }
-
         .detail_info .on {
             border-bottom: none
         }
-
         .detail_info .on:after {
             background: #fff url('//image.goodchoice.kr/images/web_v3/ico_arr_3.png') 0 -8px no-repeat;
             background-size: 12px auto
         }
-
         .detail_info section {
             overflow: hidden;
             padding: 0 57px;
@@ -819,85 +717,69 @@
             border-radius: 5px;
             background: rgb(250, 250, 250)
         }
-
         .detail_info .boss_intro {
             display: none
         }
-
         .detail_info .default_info {
             padding: 12px 57px 48px 57px
         }
-
         .detail_info .default_info strong {
             display: block;
             margin: 35px 0 10px 0;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .detail_info .default_info p {
             font-size: 15px;
             line-height: 24px;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .detail_info .default_info .map {
             width: 100%;
             height: 160px;
             margin-top: 30px;
             background: #e8e8e8
         }
-
         .dot_txt {
             font-size: 16px;
             line-height: 26px;
             color: rgba(0, 0, 0, 0.56)
         }
-
         .dot_txt li {
             margin-bottom: 7px;
             padding-left: 14px;
             background: url('//image.goodchoice.kr/images/web_v3/ico_bul_3.png') 0 2px no-repeat;
             background-size: 12px auto
         }
-
         .col_pink {
             color: rgb(242, 17, 76)
         }
-
         .right .info .benefit_wrap span {
             font-size: 16px
         }
-
         .theme.ie_fix img {
             height: 250px
         }
-
         .room_info .info .hotel .price button{height:56px;padding:0;background:#fff url('//image.goodchoice.kr/images/web_v3/ico_arr_gt_2.png') 100% 50% no-repeat;background-size:12px auto;font-size:16px;color:rgba(0,0,0,0.87);text-align:left}
-
         .room_info .info .hotel .price button{height:48px;margin:12px 0;font-size:16px;line-height:48px}
 	    .room_info .info .hotel .through{margin-bottom:6px !important;padding-top:14px !important}
         .gra_left_right_red{
             margin-top: 50px;
             background: #dfa974;
         }
-
         .bd-title>ul>li {
             list-style: none;
             font-size: 1.2em;
         }
-
         .bd-title > ul > li {
             list-style: none;
             font-size: 1.2em;
             float: left;
             margin: 0px 20px;
         }
-
         .bd-title > ul > li:nth-child(1), .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5), .modal_layer .icon_close {
             cursor: pointer;
         }
-
         .comment-option i {
             color: rgb(255,167,38);
         }
@@ -909,7 +791,6 @@
             border-bottom: 1px solid #ebebeb;
             margin-bottom: 10px;
         }
-
         .room_info_more {
             background-color: rgb(245,245,245);
             padding: 20px;
@@ -923,7 +804,6 @@
         .comment-option {
             display: none;
         }
-
         .modal_layer {
             display: none;
             position:fixed;
@@ -968,11 +848,9 @@
             color: white;
             background-color: #dfa974;
         }
-
         .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5) {
             color: #aaa;
         }
-
         @media (min-width: 991px) {
             .inn_img {width: 100%}
         }
@@ -1026,7 +904,6 @@
         </div>
     </section>
     <!-- Blog Details Hero End -->
-
     <!-- Blog Details Section Begin -->
     <section class="blog-details-section">
         <div class="container">
@@ -1061,8 +938,8 @@
 		                                    <div class="price">
 		                                        <strong>가격</strong>
 		                                            <div>
-		                                                <p class="through_none" style="text-decoration: inherit; visibility: hidden;">0</p>
-		                                                <p><b style="color: rgba(0,0,0,1)">${dto.room_fee }</b> <!-- 표시금액 --></p>
+		                                                <p class="through_none" style="text-decoration: inherit; visibility: hidden;">${dto.room_first_cost }</p>
+		                                                <p><b style="color: rgba(0,0,0,1)">${dto.room_last_cost }</b> <!-- 표시금액 --></p>
 		                                            </div>
 		                                    </div>
 		                                    <button type="button" onclick="openModal()" class="gra_left_right_red"> 예약</button>
@@ -1086,48 +963,19 @@
                                 <span>10</span>
                             </div>
                             <h5>전체 리뷰 3개</h5>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
+                            <c:forEach var="review" items="${review }">
+	                            <div class="single-comment-item first-comment">
+	                                <div class="sc-author">
+	                                    <img src="${review.member_pic }" alt="">
+	                                </div>
+	                                <div class="sc-text">
+	                                    <span>2020-02-10 / 00:00:00</span>
+	                                    <p style="margin-top: 7px;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></p>
+	                                    <h5>${review.member_id }</h5>
+	                                    <p>${review.review_content }</p>
+	                                </div>
+	                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -1135,7 +983,6 @@
         </div>
     </section>
     <!-- Blog Details Section End -->
-
     <!-- Recommend Blog Section Begin -->
     <section class="recommend-blog-section spad">
         <div class="container">
@@ -1178,7 +1025,6 @@
         </div>
     </section>
     <!-- Recommend Blog Section End -->
-
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -1283,7 +1129,6 @@
         </div>
     </div>
     <!-- Search model end -->
-
     <!-- Js Plugins -->
     <script src="${pageContext.request.contextPath}/USERJS/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/bootstrap.min.js"></script>
@@ -1293,7 +1138,6 @@
     <script src="${pageContext.request.contextPath}/USERJS/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
-
     <script>
         $(document).ready(function() {
             $(".bd-title > ul > li").eq(0).click(function() {
@@ -1324,7 +1168,6 @@
     <script>
         const firstDate = new Date();
         const secondDate = new Date(Date.now());
-
         var calendar = new dhx.Calendar("calendar", {
             css: "dhx_widget--bordered",
             range: true,

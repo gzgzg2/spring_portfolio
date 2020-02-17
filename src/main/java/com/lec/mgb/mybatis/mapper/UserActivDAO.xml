@@ -6,12 +6,25 @@
 <mapper namespace="com.lec.mgb.mybatis.beans.UserActivDAO">
 	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 
-			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_img,
+			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel,
 			t.ticket_uid, t.ticket_name, t.ticket_first_cost, t.ticket_last_cost, t.ticket_info
 		FROM
 			activ a, ticket t
 		WHERE
 			a.activ_uid = t.activ_uid
+			and a.activ_uid = #{activ_uid};
+	</select>
+	
+	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+		r.review_uid, r.review_title, r.review_star, r.review_content, r.review_id, m.member_uid, m.member_id, m.member_pic
+		FROM
+			review r, book b, ticket t, activ a, member m
+		WHERE
+			r.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
 			and a.activ_uid = #{activ_uid};
 	</select>
 </mapper>	
