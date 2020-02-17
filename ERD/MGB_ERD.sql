@@ -56,8 +56,9 @@ CREATE TABLE INN
 	inn_uid int NOT NULL AUTO_INCREMENT,
 	inn_name varchar(50) NOT NULL,
 	inn_loc varchar(100) NOT NULL,
-	inn_ment varchar(200),
+	inn_ment text,
 	inn_info text,
+	inn_pic varchar(200),
 	inn_sep int CHECK (inn_sep IN (1,2,3,4)),
 	PRIMARY KEY (inn_uid),
 	UNIQUE (inn_uid)
