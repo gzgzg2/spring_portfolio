@@ -174,7 +174,9 @@ CREATE TABLE TOUR
 	tour_name varchar(50) NOT NULL,
 	tour_cost int NOT NULL,
 	tour_period int,
-	tour_info text,
+	tour_info1 text,
+	tour_info2 text,
+	tour_info3 text,
 	tour_pic varchar(200),
 	PRIMARY KEY (tour_uid),
 	UNIQUE (tour_uid)
