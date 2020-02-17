@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lec.mgb.mybatis.beans.UserInnDAO">
+	<select id="selectInnByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep,
+			r.room_uid, r.room_name, r.room_info, r.room_pic, r.room_fee
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and i.inn_uid = #{inn_uid};
+	</select>
+</mapper>	
