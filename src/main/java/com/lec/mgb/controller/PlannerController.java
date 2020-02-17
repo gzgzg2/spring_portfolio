@@ -11,7 +11,7 @@ String location;
 	@RequestMapping("/planner")
 	public String openNewMap() {
 	
-		location = "planner/TestPlanner";
+		location = "user/planner/TestPlanner";
 	
 		return location;
 	}

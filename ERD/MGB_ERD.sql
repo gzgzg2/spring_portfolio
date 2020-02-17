@@ -132,7 +132,7 @@ CREATE TABLE REVIEW
 	review_uid int NOT NULL AUTO_INCREMENT,
 	review_title varchar(50) NOT NULL,
 	review_star int NOT NULL,
-	review_content varchar(50),
+	review_content varchar(100),
 	review_id varchar(50) NOT NULL,
 	member_uid int,
 	book_uid int NOT NULL,
