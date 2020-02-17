@@ -27,6 +27,8 @@ CREATE TABLE ACTIV
 	activ_loc varchar(50) NOT NULL,
 	activ_info text,
 	activ_shop_info text,
+	activ_tel int,
+	activ_pic varchar(200),
 	PRIMARY KEY (activ_uid),
 	UNIQUE (activ_uid)
 );
@@ -43,6 +45,7 @@ CREATE TABLE BOOK
 	room_uid int,
 	ticket_uid int,
 	tour_uid int,
+	plan_uid int,
 	PRIMARY KEY (book_uid),
 	UNIQUE (book_uid)
 );
@@ -52,7 +55,7 @@ CREATE TABLE INN
 (
 	inn_uid int NOT NULL AUTO_INCREMENT,
 	inn_name varchar(50) NOT NULL,
-	inn_loc varchar(50) NOT NULL,
+	inn_loc varchar(100) NOT NULL,
 	inn_ment varchar(200),
 	inn_info text,
 	inn_sep int CHECK (inn_sep IN (1,2,3,4)),
@@ -100,10 +103,9 @@ CREATE TABLE PLAN
 	plan_date date,
 	plan_stay int NOT NULL,
 	trans_uid int NOT NULL,
-	planner_uid int ,
-	plan_local_uid int ,
-	plan_next_local_uid int ,
-	member_uid int NOT NULL,
+	planner_uid int NOT NULL,
+	plan_local_uid int,
+	plan_next_local_uid int,
 	PRIMARY KEY (plan_uid),
 	UNIQUE (plan_uid)
 );
@@ -113,11 +115,8 @@ CREATE TABLE PLANNER
 (
 	planner_uid int NOT NULL AUTO_INCREMENT,
 	planner_title varchar(50) NOT NULL,
-	planner_dep_time date NOT NULL,
-	planner_sleep int NOT NULL,
-	planner_end_time date NOT NULL,
 	planner_view_cnt int NOT NULL DEFAULT 0,
-	planner_stat int DEFAULT 1 CHECK(planner_stat IN (0,1)),
+	planner_stat int DEFAULT 1 CHECK(planner_stat IN (0,1)), 
 	planner_cost_trans int DEFAULT 0,
 	planner_cost_inn int DEFAULT 0,
 	planner_cost_eat int DEFAULT 0,
@@ -135,7 +134,7 @@ CREATE TABLE REVIEW
 	review_star int NOT NULL,
 	review_content varchar(50),
 	review_id varchar(50) NOT NULL,
-	member_uid int ,
+	member_uid int,
 	book_uid int NOT NULL,
 	PRIMARY KEY (review_uid),
 	UNIQUE (review_uid)
@@ -146,11 +145,11 @@ CREATE TABLE ROOM
 (
 	room_uid int NOT NULL AUTO_INCREMENT,
 	room_name varchar(50) NOT NULL,
-	room_cap int,
 	room_info text,
 	room_pic varchar(200) DEFAULT 'nopic',
-	room_fee int NOT NULL,
+	room_last_cost int NOT NULL,
 	inn_uid int NOT NULL,
+	room_first_cost int,
 	PRIMARY KEY (room_uid),
 	UNIQUE (room_uid)
 );
@@ -159,8 +158,7 @@ CREATE TABLE ROOM
 CREATE TABLE TICKET
 (
 	ticket_uid int NOT NULL AUTO_INCREMENT,
-	ticket_name varchar(50) NOT NULL,
-	ticket_cost_div text,
+	ticket_name varchar(100) NOT NULL,
 	ticket_first_cost int,
 	ticket_last_cost int NOT NULL,
 	ticket_info text,
@@ -177,6 +175,7 @@ CREATE TABLE TOUR
 	tour_cost int NOT NULL,
 	tour_period int,
 	tour_info text,
+	tour_pic varchar(200),
 	PRIMARY KEY (tour_uid),
 	UNIQUE (tour_uid)
 );
@@ -243,12 +242,7 @@ ALTER TABLE BOOK
 ;
 
 
-ALTER TABLE PLAN
-	ADD FOREIGN KEY (member_uid)
-	REFERENCES MEMBER (member_uid)
-	ON UPDATE RESTRICT
-	ON DELETE CASCADE
-;
+
 
 
 ALTER TABLE PLANNER
@@ -271,7 +265,7 @@ ALTER TABLE PLAN
 	ADD FOREIGN KEY (planner_uid)
 	REFERENCES PLANNER (planner_uid)
 	ON UPDATE RESTRICT
-	ON DELETE SET NULL
+	ON DELETE CASCADE
 ;
 
 
@@ -307,4 +301,6 @@ ALTER TABLE PLAN
 ;
 
 show tables;
+
+
 
