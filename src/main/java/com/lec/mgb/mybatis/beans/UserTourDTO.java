@@ -7,7 +7,9 @@ public class UserTourDTO {
 	private String tour_name;
 	private int tour_cost;
 	private int tour_period;
-	private int tour_info;
+	private int tour_info1;
+	private int tour_info2;
+	private int tour_info3;
 	private int tour_img;
 	
 	private int review_uid;
@@ -27,15 +29,18 @@ public class UserTourDTO {
 		super();
 	}
 
-	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, int tour_info, int tour_img,
-			int review_uid, String review_title, int review_star, String review_content, String member_id,
-			String member_pic, Timestamp book_date, int book_member_cnt, int book_cost, String book_name) {
+	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, int tour_info1, int tour_info2,
+			int tour_info3, int tour_img, int review_uid, String review_title, int review_star, String review_content,
+			String member_id, String member_pic, Timestamp book_date, int book_member_cnt, int book_cost,
+			String book_name) {
 		super();
 		this.tour_uid = tour_uid;
 		this.tour_name = tour_name;
 		this.tour_cost = tour_cost;
 		this.tour_period = tour_period;
-		this.tour_info = tour_info;
+		this.tour_info1 = tour_info1;
+		this.tour_info2 = tour_info2;
+		this.tour_info3 = tour_info3;
 		this.tour_img = tour_img;
 		this.review_uid = review_uid;
 		this.review_title = review_title;
@@ -82,12 +87,28 @@ public class UserTourDTO {
 		this.tour_period = tour_period;
 	}
 
-	public int getTour_info() {
-		return tour_info;
+	public int getTour_info1() {
+		return tour_info1;
 	}
 
-	public void setTour_info(int tour_info) {
-		this.tour_info = tour_info;
+	public void setTour_info1(int tour_info1) {
+		this.tour_info1 = tour_info1;
+	}
+
+	public int getTour_info2() {
+		return tour_info2;
+	}
+
+	public void setTour_info2(int tour_info2) {
+		this.tour_info2 = tour_info2;
+	}
+
+	public int getTour_info3() {
+		return tour_info3;
+	}
+
+	public void setTour_info3(int tour_info3) {
+		this.tour_info3 = tour_info3;
 	}
 
 	public int getTour_img() {
@@ -177,4 +198,8 @@ public class UserTourDTO {
 	public void setBook_name(String book_name) {
 		this.book_name = book_name;
 	}
+
+
+	
+	
 }
