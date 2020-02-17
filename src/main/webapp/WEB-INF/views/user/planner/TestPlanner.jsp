@@ -121,7 +121,7 @@
                     <div class="app-main__inner" id="map">
                             <div class="search-wrapper">
                                 <div class="input-holder">
-                                    <input type="text" class="search-input" placeholder="Type to search">
+                                    <input type="text" class="search-input" placeholder="지역을 검색하세요">
                                     <button class="search-icon"><span></span></button>
                                 </div>
                                 <button class="close"></button>
