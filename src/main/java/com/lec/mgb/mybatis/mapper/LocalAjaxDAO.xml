@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.lec.mgb.mybatis.beans.LocalAjaxDAO">
+    	<select id="select" resultType="com.lec.mgb.mybatis.beans.LocalDTO">
+		SELECT 
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,	
+			local_tel,
+			local_pic
+		FROM 
+			LOCAL 
+	</select>
+    
+    </mapper>	
