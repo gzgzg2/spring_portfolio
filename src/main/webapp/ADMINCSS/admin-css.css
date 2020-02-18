@@ -1,0 +1,74 @@
+
+.app-main .app-main__inner{padding:5% 10% 0 10%;flex:1}
+
+.app-main .app-main__inner-crawling{padding:14.8px 10% 0 10%;flex:1}
+
+.app-main__inner-crawling .admin-search-motel-crawling-btn{padding-bottom: 14.8px;}
+
+.change-member-info{width:40%; margin: 0 auto;}
+
+.admin-info-title{font-size: 14px;}
+
+.admin-info-title-label{float: left;}
+
+.admin-bir .admin-bir-yy .form-control{width:100%;}
+
+
+/* 관리자 표 */
+.admin-table{width:100%;margin-bottom:1rem;}
+.admin-table thead tr .table-th-left{border-top-left-radius: 10px;}
+.admin-table thead tr .table-th-right{border-top-right-radius: 10px;}
+.admin-table th,.admin-table td{padding:.55rem;vertical-align:middle;font-size: 1erm;}
+.admin-table thead th{vertical-align:bottom;}
+.admin-table tbody{border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;}
+.admin-table thead tr{background-color: #0069d9; border-radius: 20px;}
+.admin-table thead{color:white}
+.admin-table tbody tr:nth-of-type(odd){background-color: white;}
+
+.admin-table tbody tr:nth-of-type(even){background-color: white;}
+
+.admin-search-bar{width:100%; display: flex;}
+
+.admin-search-bar .search-bar-title{height: inherit;}
+
+.admin-search-bar .admin-search-select{width:auto; margin-left: 20%;}
+
+.admin-search-bar .admin-search-select .form-control-sm.form-control{width:auto; height: 38px; padding: 6px 12px;}
+
+.admin-search-bar .admin-search-text{width:100%; margin: 0 1%;}
+
+.admin-search-bar .admin-local-search-text{width:100%; margin: 0 1% 0 21%;}
+
+.admin-search-bar .admin-search-bar-btn{width:auto; height: inherit; margin-right: 20%;}
+
+.admin-search-bar .admin-search-select .form-control-sm.form-control{width:122px;}
+
+/* 관리자 검색바 버튼*/
+.admin-search-btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:0.8erm;line-height:1.5;border-radius:.25rem;color:black;background-color:#dcdcdc;border-color:#dcdcdc;transition:color 0.15s,background-color 0.15s,border-color 0.15s,box-shadow 0.15s;
+    display: inline-block;font-weight: 400; height: 38px;}
+.admin-search-btn:hover{background-color:#dbdbdb;border-color:#d5d5d5;cursor: pointer;}
+.admin-search-btn:active{background-color:#d5d5d5;border-color:#cecece}
+
+/* 관리자 버튼(info) */
+.admin-info-btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:0.8erm;line-height:1.5;border-radius:.25rem;color:#fff;background-color:#007bff;border-color:#007bff;transition:color 0.15s,background-color 0.15s,border-color 0.15s,box-shadow 0.15s;
+    display: inline-block;font-weight: 400; }
+.admin-info-btn:hover{background-color:#0069d9;border-color:#0062cc;cursor: pointer;}
+.admin-info-btn:active{background-color:#0062cc;border-color:#005cbf}
+
+/* 관리자 버튼(delete) */
+.admin-delete-btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:0.8erm;line-height:1.5;border-radius:.25rem;color:#fff;background-color:#dc3545;border-color:#dc3545;transition:color 0.15s,background-color 0.15s,border-color 0.15s,box-shadow 0.15s;
+    display: inline-block;font-weight: 400; }
+.admin-delete-btn:hover{background-color:#c82333;border-color:#bd2130;cursor: pointer;}
+.admin-delete-btn:active{background-color:#bd2130;border-color:#b21f2d}
+
+/* 관리자 버튼(Activ) */
+.admin-activ-btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:0.8erm;line-height:1.5;border-radius:.25rem;color:#fff;background-color:#28a745;border-color:#28a745;transition:color 0.15s,background-color 0.15s,border-color 0.15s,box-shadow 0.15s;
+    display: inline-block;font-weight: 400; }
+.admin-activ-btn:hover{background-color:#218838;border-color:#1e7e34;cursor: pointer;}
+.admin-activ-btn:active{background-color:#1e7e34;border-color:#1c7430}
+
+/* 관리자 버튼(Tour) */
+.admin-tour-btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;user-select:none;border:1px solid transparent;padding:.375rem .75rem;font-size:0.8erm;line-height:1.5;border-radius:.25rem;color:#fff;background-color:#ffc107;border-color:#ffc107;transition:color 0.15s,background-color 0.15s,border-color 0.15s,box-shadow 0.15s;
+    display: inline-block;font-weight: 400; }
+.admin-tour-btn:hover{background-color:#e0a800;border-color:#d39e00;cursor: pointer;}
+.admin-tour-btn:active{background-color:#d39e00;border-color:#c69500}
