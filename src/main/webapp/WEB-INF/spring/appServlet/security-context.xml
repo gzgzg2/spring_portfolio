@@ -10,16 +10,17 @@
 	<bean id="customAccessDenied" class="com.lec.mgb.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccess" class="com.lec.mgb.security.CustomLoginSuccessHandler"></bean>
 
+	
 	<!-- security 요소들  -->
 	<security:http>
 		<!-- 특정 url pattern 요청이 들어올때 인터셉터를 이용한 접근 제한 설정 -->
-		<security:intercept-url pattern="/admin/**" access="permitAll"/>
+		<security:intercept-url pattern="/user/**" access="permitAll"/>
 		
 		<!-- /sample/member URL요청은 ROLE_MEMBER 라는 권한이 있는 사용자만 접근 가능 -->
-		<security:intercept-url pattern="/admin/admin-LocalManage" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/user/mypageInfo" access="hasRole('ROLE_MEMBER')"/>
 		
 		<!-- /sample/admin URL요청은 ROLE_ADMIN 라는 권한이 있는 사용자만 접근 가능 -->
-		<security:intercept-url pattern="/admin/admin-LocalManage" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<security:form-login/><!-- 스프링에서 기본적으로 제공되는 로그인 페이지 사용 -->
 	
@@ -34,10 +35,11 @@
 		
 		<!-- UserDerailsService 를 사용한 인증과 권한 처리 -->
 		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+			<!-- 	<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 				<security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN, ROLE_MEMBER"/>
-			</security:user-service>
+				 -->
+			<!-- JDBC 사용 -->
+			<security:jdbc-user-service data-source-ref="dataSource"/>
 		
 		</security:authentication-provider>
 	

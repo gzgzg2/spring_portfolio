@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS ROOM;
 DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
+DROP TABLE IF EXISTS member_auth;
 DROP TABLE IF EXISTS PLANNER;
 DROP TABLE IF EXISTS MEMBER;
 DROP TABLE IF EXISTS TOUR;
@@ -58,8 +59,8 @@ CREATE TABLE INN
 	inn_loc varchar(100) NOT NULL,
 	inn_ment text,
 	inn_info text,
-	inn_pic varchar(200),
 	inn_sep int CHECK (inn_sep IN (1,2,3,4)),
+	inn_pic varchar(200),
 	PRIMARY KEY (inn_uid),
 	UNIQUE (inn_uid)
 );
@@ -91,10 +92,18 @@ CREATE TABLE MEMBER
 	member_birth date,
 	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
 	member_tel varchar(50) NOT NULL,
+	member_enabled char(1),
 	PRIMARY KEY (member_uid),
 	UNIQUE (member_uid),
 	UNIQUE (member_id),
 	UNIQUE (member_email)
+);
+
+
+CREATE TABLE member_auth
+(
+	auth varchar(50),
+	member_id varchar(50)
 );
 
 
@@ -117,7 +126,7 @@ CREATE TABLE PLANNER
 	planner_uid int NOT NULL AUTO_INCREMENT,
 	planner_title varchar(50) NOT NULL,
 	planner_view_cnt int NOT NULL DEFAULT 0,
-	planner_stat int DEFAULT 1 CHECK(planner_stat IN (0,1)), 
+	planner_stat int DEFAULT 1 CHECK(planner_stat IN (0,1)),
 	planner_cost_trans int DEFAULT 0,
 	planner_cost_inn int DEFAULT 0,
 	planner_cost_eat int DEFAULT 0,
@@ -175,9 +184,9 @@ CREATE TABLE TOUR
 	tour_cost int NOT NULL,
 	tour_period int,
 	tour_info1 text,
+	tour_pic varchar(200),
 	tour_info2 text,
 	tour_info3 text,
-	tour_pic varchar(200),
 	PRIMARY KEY (tour_uid),
 	UNIQUE (tour_uid)
 );
@@ -191,7 +200,6 @@ CREATE TABLE TRANS
 	PRIMARY KEY (trans_uid),
 	UNIQUE (trans_uid)
 );
-
 
 
 /* Create Foreign Keys */
@@ -299,13 +307,3 @@ ALTER TABLE PLAN
 
 show tables;
 
-
-insert into member(
-	member_name,
-	member_id,
-	member_pw,
-	member_email, 
-	member_gender, 
-	member_birth,
-	member_pic,
-	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');

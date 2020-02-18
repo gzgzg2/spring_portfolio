@@ -16,7 +16,6 @@ public class UserInnDTO {
 	private String room_pic;
 	private int room_first_cost;
 	private int room_last_cost;
-	private int room_fee;
 
 	private int review_uid;
 	private String review_title;
@@ -37,7 +36,7 @@ public class UserInnDTO {
 
 	public UserInnDTO(int inn_uid, String inn_name, String inn_loc, String inn_ment, String inn_info, int inn_sep,
 			int room_uid, String room_name, String room_info, String room_pic, int room_first_cost, int room_last_cost,
-			int room_fee, int review_uid, String review_title, int review_star, String review_content, String member_id,
+			int review_uid, String review_title, int review_star, String review_content, String member_id,
 			String member_pic, Timestamp book_date, int book_member_cnt, int book_cost, String book_name) {
 		super();
 		this.inn_uid = inn_uid;
@@ -52,7 +51,6 @@ public class UserInnDTO {
 		this.room_pic = room_pic;
 		this.room_first_cost = room_first_cost;
 		this.room_last_cost = room_last_cost;
-		this.room_fee = room_fee;
 		this.review_uid = review_uid;
 		this.review_title = review_title;
 		this.review_star = review_star;
@@ -65,6 +63,8 @@ public class UserInnDTO {
 		this.book_name = book_name;
 	}
 
+	// getter / setter
+	
 	public int getInn_uid() {
 		return inn_uid;
 	}
@@ -161,14 +161,6 @@ public class UserInnDTO {
 		this.room_last_cost = room_last_cost;
 	}
 
-	public int getRoom_fee() {
-		return room_fee;
-	}
-
-	public void setRoom_fee(int room_fee) {
-		this.room_fee = room_fee;
-	}
-
 	public int getReview_uid() {
 		return review_uid;
 	}
@@ -249,9 +241,4 @@ public class UserInnDTO {
 		this.book_name = book_name;
 	}
 
-	
-	
-
-	// getter / setter
-	
 }

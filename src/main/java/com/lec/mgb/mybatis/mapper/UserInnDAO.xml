@@ -7,11 +7,24 @@
 	<select id="selectInnByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
 			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep,
-			r.room_uid, r.room_name, r.room_info, r.room_pic, r.room_fee
+			r.room_uid, r.room_name, r.room_info, r.room_pic, r.room_first_cost, r.room_last_cost
 		FROM
 			inn i, room r
 		WHERE
 			i.inn_uid = r.inn_uid
+			and i.inn_uid = #{inn_uid};
+	</select>
+	
+	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			re.review_uid, re.review_title, re.review_star, re.review_content, re.review_id, m.member_uid, m.member_id, m.member_pic
+		FROM
+			review re, book b, room r, inn i, member m
+		WHERE
+			re.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.room_uid = r.room_uid
+			and r.inn_uid = i.inn_uid
 			and i.inn_uid = #{inn_uid};
 	</select>
 </mapper>	

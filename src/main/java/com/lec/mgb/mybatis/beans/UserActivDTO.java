@@ -8,7 +8,8 @@ public class UserActivDTO {
 	private String activ_loc;
 	private String activ_info;
 	private String activ_shop_info;
-	private String activ_img;
+	private String activ_pic;
+	private int activ_tel;
 
 	private int ticket_uid;
 	private String ticket_name;
@@ -20,6 +21,8 @@ public class UserActivDTO {
 	private String review_title;
 	private int review_star;
 	private String review_content;
+	private String review_id;
+	private String member_uid;
 	private String member_id;
 	private String member_pic;
 	
@@ -32,19 +35,22 @@ public class UserActivDTO {
 	public UserActivDTO() {
 		super();
 	}
+	
+	
 
 	public UserActivDTO(int activ_uid, String activ_name, String activ_loc, String activ_info, String activ_shop_info,
-			String activ_img, int ticket_uid, String ticket_name, int ticket_first_cost, int ticket_last_cost,
-			String ticket_info, int review_uid, String review_title, int review_star, String review_content,
-			String member_id, String member_pic, Timestamp book_date, int book_member_cnt, int book_cost,
-			String book_name) {
+			String activ_pic, int activ_tel, int ticket_uid, String ticket_name, int ticket_first_cost,
+			int ticket_last_cost, String ticket_info, int review_uid, String review_title, int review_star,
+			String review_content, String review_id, String member_uid, String member_id, String member_pic,
+			Timestamp book_date, int book_member_cnt, int book_cost, String book_name) {
 		super();
 		this.activ_uid = activ_uid;
 		this.activ_name = activ_name;
 		this.activ_loc = activ_loc;
 		this.activ_info = activ_info;
 		this.activ_shop_info = activ_shop_info;
-		this.activ_img = activ_img;
+		this.activ_pic = activ_pic;
+		this.activ_tel = activ_tel;
 		this.ticket_uid = ticket_uid;
 		this.ticket_name = ticket_name;
 		this.ticket_first_cost = ticket_first_cost;
@@ -54,6 +60,8 @@ public class UserActivDTO {
 		this.review_title = review_title;
 		this.review_star = review_star;
 		this.review_content = review_content;
+		this.review_id = review_id;
+		this.member_uid = member_uid;
 		this.member_id = member_id;
 		this.member_pic = member_pic;
 		this.book_date = book_date;
@@ -105,12 +113,20 @@ public class UserActivDTO {
 		this.activ_shop_info = activ_shop_info;
 	}
 
-	public String getActiv_img() {
-		return activ_img;
+	public String getActiv_pic() {
+		return activ_pic;
 	}
 
-	public void setActiv_img(String activ_img) {
-		this.activ_img = activ_img;
+	public void setActiv_pic(String activ_pic) {
+		this.activ_pic = activ_pic;
+	}
+
+	public int getActiv_tel() {
+		return activ_tel;
+	}
+
+	public void setActiv_tel(int activ_tel) {
+		this.activ_tel = activ_tel;
 	}
 
 	public int getTicket_uid() {
@@ -185,6 +201,22 @@ public class UserActivDTO {
 		this.review_content = review_content;
 	}
 
+	public String getReview_id() {
+		return review_id;
+	}
+
+	public void setReview_id(String review_id) {
+		this.review_id = review_id;
+	}
+
+	public String getMember_uid() {
+		return member_uid;
+	}
+
+	public void setMember_uid(String member_uid) {
+		this.member_uid = member_uid;
+	}
+
 	public String getMember_id() {
 		return member_id;
 	}
@@ -234,5 +266,11 @@ public class UserActivDTO {
 	}
 
 
+	
+	
+	
+	
+	
+	
 	
 }

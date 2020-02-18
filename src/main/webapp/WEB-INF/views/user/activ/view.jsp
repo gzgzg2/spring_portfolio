@@ -32,10 +32,32 @@
         ._12lb1P{position:relative}._3dXd6H{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;overflow:hidden}._3dXd6H>*{-webkit-flex-shrink:0;flex-shrink:0;visibility:hidden}._3dXd6H>:first-child{visibility:visible}@supports (--v:0){._3dXd6H>*{margin-right:var(--margin);visibility:visible}}._16Qcyd ._3dXd6H{opacity:0;visibility:hidden}.F11iAR>*{-webkit-transform:translateX(-50%);transform:translateX(-50%)}.F11iAR>:first-child{margin-left:50%}._18R7Uv{opacity:0;position:absolute;top:0;right:0;bottom:0;left:0}._16Qcyd ._18R7Uv{opacity:1}
         .I8_Yvh{background:#fff8e3;border-radius:0 0 2rem 2rem;padding:2rem 1.6rem;position:relative}.Sfckur{font-size:1.6rem;font-weight:700}._30BWF5,.Sfckur{word-break:break-all}._30BWF5{font-size:1.4rem;line-height:1.42857;margin-top:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:pre-line}@media screen and (min-width:48em){.I8_Yvh{padding:3.5rem 4rem}.Sfckur{font-size:1.8rem}._30BWF5{font-size:1.6rem;line-height:1.5;margin-top:1.2rem}}
         ._1cU2Rb{padding-right:2rem;padding-left:2rem;margin-top:2rem}@media screen and (max-width:15.625em){._1cU2Rb{padding-right:1.5rem;padding-left:1.5rem}}._3b4H87{border-bottom:.1rem solid #f2f2f2;padding-bottom:3rem}._3k8VKK{border-radius:.4rem .4rem 0 0;overflow:hidden}._1eWj7a{min-width:100%;padding-top:64%}.OkBHZJ{width:auto;background:rgba(0,0,0,.62);border-radius:1.1rem;color:#fff;font-size:1.1rem;line-height:1.18182;padding:.5rem 1rem .4rem;position:absolute;top:1rem;right:1rem;bottom:auto;left:auto;z-index:1}._2iehXo{font-weight:700}._1p7zMs{opacity:.5}._1CtWYs,.hKyXk3{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:none;width:5.2rem;height:5.2rem;border-radius:.4rem;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;margin-bottom:50%;position:absolute;top:50%;z-index:1}._1CtWYs svg,.hKyXk3 svg{border-radius:50%;box-shadow:0 0 .4rem 0 rgba(0,0,0,.33);fill:none;fill-rule:nonzero;display:block}._1CtWYs svg rect,.hKyXk3 svg rect{fill:#fff}._1CtWYs svg path,.hKyXk3 svg path{fill:#2e2e2e}.hKyXk3{left:0}._1CtWYs{right:0}
-        .activ h2 {font-size: 1.5em; font-weight: bold;}
+        .activ > h2 {font-size: 1.5em; font-weight: bold;}
         .activ table {font-size: 0.95em;}
         .activ table tr:first-child {border-top: 3px solid #eee;}
         .activ table tr {border-bottom: 3px solid #eee; margin-block-end: 5px;}
+        
+        .activ_shop_info {
+        	margin-top: 40px;
+        	padding: 20px;
+        	background-color: #f0f0f0;
+        }
+        .activ_shop_info > div > h2, .activ_shop_info > div > div > h2 {
+        	font-size: 1.6em;
+        	font-weight: bold;
+        }
+        .activ_shop_info > div > div > h3 {
+        	font-size: 1.3em;
+        	font-weight: 600;
+        	margin-top: 5px;
+        }
+        .activ_shop_info > div > div > ul {
+        	margin: 5px 0px 20px 20px;
+        }
+        .activ_shop_info > div > div > ul > li > div > ul {
+        	margin-left: 10px;
+        }
+        
         hr {display: none}
 
         .bd-title>ul>li {
@@ -132,6 +154,7 @@
             padding-top: 30px;
             clear: both;
         }
+
     </style>
 
     <!-- Css Styles -->
@@ -152,7 +175,7 @@
 	<jsp:include page="../userHeader.jsp"/>
 
     <!-- Blog Details Hero Section Begin -->
-    <section class="blog-details-hero set-bg" data-setbg="${dto[0].activ_img }">
+    <section class="blog-details-hero set-bg" data-setbg="${dto[0].activ_pic }">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
@@ -161,11 +184,11 @@
                         <h2>${dto[0].activ_name }</h2>
                         <ul>
                             <li class="b-time" style="color: white"><i class="icon_clock_alt"></i> ${dto[0].activ_loc }</li>
-                            <li style="color: white"><i class="icon_phone"></i> ${dto[0].activ_info }</li>
+                            <li style="color: white"><i class="icon_phone"></i> ${dto[0].activ_tel }</li>
                         </ul>
                         <div>
                             <button onclick="goTicket()">
-                                예약 하기
+                              	 예약 하기
                             </button>
                         </div>
                     </div>
@@ -193,7 +216,10 @@
                         <div class="ativ_info" style="clear: both;">
                             <div class="activ">
                                 <h2 class="_2QOkke">소개</h2>
-                                ${dto[0].activ_shop_info }
+                                ${dto[0].activ_info }
+                                <div class="activ_shop_info">
+	                                ${dto[0].activ_shop_info }                                
+                                </div>
                             </div>
                         </div>
                         <div class="ativ_ticket">
@@ -241,48 +267,19 @@
                                 <span>10</span>
                             </div>
                             <h5>전체 리뷰 3개</h5>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-comment-item first-comment">
-                                <div class="sc-author">
-                                    <img src="img/blog/blog-details/avatar/avatar-1.jpg" alt="">
-                                </div>
-                                <div class="sc-text">
-                                    <span>2020-02-10 / 00:00:00</span>
-                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span></p>
-                                    <h5>Brandon Kelley</h5>
-                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et
-                                        dolore magnam.
-                                    </p>
-                                </div>
-                            </div>
+                            <c:forEach var="review" items="${review }">
+	                            <div class="single-comment-item first-comment">
+	                                <div class="sc-author">
+	                                    <img src="${review.member_pic }" alt="">
+	                                </div>
+	                                <div class="sc-text">
+	                                    <span>2020-02-10 / 00:00:00</span>
+	                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></p>
+	                                    <h5>${review.review_id }</h5>
+	                                    <p>${review.review_content }</p>
+	                                </div>
+                            	</div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -439,11 +436,17 @@
                 $(".ativ_ticket").css("display", "none")
                 $(".comment-option").css("display", "block")
             })
+            
+            $(".bd-hero-text > ul > li:nth-child(2)").text(change($(".bd-hero-text > ul > li:nth-child(2)").text()));
         })
         function goTicket() {
             $(".ativ_info").css("display", "none")
             $(".ativ_ticket").css("display", "block")
             $(".comment-option").css("display", "none")
+        }
+        
+        function change(num) {
+        	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
         }
     </script>
 
