@@ -201,7 +201,7 @@
 								console.log(locations[i]);
 							}
 							console.log(locations.length);
-							var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+							var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
 
 							for (var i = 0; i < locations.length; i++) {
 
