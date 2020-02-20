@@ -13,10 +13,10 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		
 		System.out.println("Access Denied Handler");
-		System.out.println("redirect ?•©?‹ˆ?‹¤...");
+		System.out.println("redirect ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½...");
 		
 		response.sendRedirect(request.getContextPath() + "/accessError");
 			

@@ -10,12 +10,10 @@ DROP TABLE IF EXISTS ROOM;
 DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
-DROP TABLE IF EXISTS member_auth;
 DROP TABLE IF EXISTS PLANNER;
-DROP TABLE IF EXISTS MEMBER;
+DROP TABLE IF EXISTS member cascade;
 DROP TABLE IF EXISTS TOUR;
 DROP TABLE IF EXISTS TRANS;
-
 
 
 
@@ -86,13 +84,15 @@ CREATE TABLE MEMBER
 	member_uid int NOT NULL AUTO_INCREMENT,
 	member_name varchar(50),
 	member_id varchar(50) NOT NULL,
-	member_pw varchar(50) NOT NULL,
+	member_pw varchar(100) NOT NULL,
+	member_pwEncode varchar(100),
 	member_email varchar(50) NOT NULL,
 	member_gender varchar(2) CHECK(member_gender IN ('M','F')),
 	member_birth date,
 	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
-	member_tel varchar(50) NOT NULL,
-	member_enabled char(1),
+	member_tel varchar(50) NOT null default '010-0000-0000',
+	enabled char(1) default '1',
+	auth varchar(50) NOT null default 'ROLE_MEMBER',
 	PRIMARY KEY (member_uid),
 	UNIQUE (member_uid),
 	UNIQUE (member_id),
@@ -100,11 +100,32 @@ CREATE TABLE MEMBER
 );
 
 
-CREATE TABLE member_auth
+/*CREATE TABLE member_auth
 (
-	auth varchar(50),
-	member_id varchar(50)
-);
+	
+	member_id varchar(50) NOT NULL,
+	auth varchar(50) NOT null default 'ROLE_MEMBER',
+	CONSTRAINT fk_member_auth FOREIGN KEY(member_id) REFERENCES MEMBER(member_id)
+);*/
+
+
+/*INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('user00', '1234', '12345');
+INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('member00', '1234', '12346');
+INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('admin00', '1234', '12347');
+
+INSERT INTO member_auth VALUES ('user00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('member00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('admin00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('admin00', 'ROLE_ADMIN');
+INSERT INTO member_auth VALUES ('qkrwlals1', 'ROLE_MEMBER');*/
+
+-- 확인
+/*SELECT u.member_id, u.member_pw ,u.enabled, a.auth
+FROM MEMBER u, member_auth a
+WHERE u.member_id = a.member_id;*/
+
+select * from member;
+
 
 
 CREATE TABLE PLAN
@@ -306,4 +327,17 @@ ALTER TABLE PLAN
 ;
 
 show tables;
+			  
+SELECT * FROM MEMBER;
+SELECT member_id username, auth FROM MEMBER WHERE member_id = 'alsry1';
+insert into member(
+	member_name,
+	member_id,
+	member_pw,
+	member_email, 
+	member_gender, 
+	member_birth,
+	member_pic,
+	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');
 
+insert into authorities values ('user00', 'ROLE_USER');

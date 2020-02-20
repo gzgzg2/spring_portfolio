@@ -29,7 +29,7 @@ public class UserActivController {
 		this.sqlSession = sqlSession;
 		C.sqlSesssion = sqlSession;
 	}
-	private Command command;
+	private Command command;           
 
 	@RequestMapping("/list")
 	public String listSelect(Model model) {

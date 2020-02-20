@@ -11,6 +11,11 @@
 			   member_tel tel FROM MEMBER WHERE member_uid = #{param1};
 	</select>
 	
+	<select id="selectMember" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
+		SELECT member_uid uid, member_name name, member_pic pic
+			   FROM MEMBER WHERE member_id = #{param1};
+	</select>
+	
 	<update id="mypageUpdate" flushCache="true">
 		UPDATE MEMBER SET member_email = #{dto.member_email}, member_tel #{dto.member_tel} 
 		WHERE member_uid = #{param1}
