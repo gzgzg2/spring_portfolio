@@ -1,5 +1,9 @@
 package com.lec.mgb.controller;
 
+import java.sql.Date;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +18,6 @@ import com.lec.mgb.command.Command;
 import com.lec.mgb.command.UserTourCheckCommand;
 import com.lec.mgb.command.UserTourListCommand;
 import com.lec.mgb.command.UserTourReserveCommand;
-import com.lec.mgb.command.UserTourReserveOkCommand;
 import com.lec.mgb.command.UserTourViewCommand;
 import com.lec.mgb.mybatis.beans.UserTourDTO;
 
@@ -44,25 +47,23 @@ public class UserTourController {
 		return "user/tour/view";
 	}
 	@PostMapping("/reserve")
-	public String ReserveSelect(int tour_uid, Model model) {
+	public String ReserveSelect(int tour_uid, Date book_date, int book_member_cnt, Model model, HttpSession session) {
+		int member_uid = (int) session.getAttribute("loginUid");
+		
+		model.addAttribute("member_uid", member_uid);
 		model.addAttribute("tour_uid", tour_uid);
-		command = new UserTourReserveCommand();
-		command.execute(model);
+		model.addAttribute("book_date", book_date);
+		model.addAttribute("book_member_cnt", book_member_cnt);
+		new UserTourReserveCommand().execute(model);
 		return "user/tour/reserve";
 	}
-	@PostMapping("/rerserveOk")
-	public String ReserveOk(int mb_uid, UserTourDTO dto, Model model) {
-		model.addAttribute("mb_uid", mb_uid);
-		model.addAttribute("dto", dto);
-		command = new UserTourReserveOkCommand();
-		command.execute(model);
-		return "user/tour/reserveOk";
-	}
 	@RequestMapping("/check")
-	public String ReserveCheck(int mb_uid, Model model) {
-		model.addAttribute("mb_uid", mb_uid);
-		command = new UserTourCheckCommand();
-		command.execute(model);
+	public String ReserveCheck(UserTourDTO dto, Model model, HttpSession session) {
+		int member_uid = (int) session.getAttribute("loginUid");
+		model.addAttribute("member_uid", member_uid);
+		model.addAttribute("dto", dto);
+		
+		new UserTourCheckCommand().execute(model);
 		return "user/tour/check";
 	}
 	

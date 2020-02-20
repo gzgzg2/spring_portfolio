@@ -17,6 +17,7 @@
 	<resources mapping="/USERCSS/**" location="/USERCSS/" />
 	<resources mapping="/USERJS/**" location="/USERJS/" />
 	<resources mapping="/USERSOURCE/**" location="/USERSOURCE/" />
+	<resources mapping="/ADMINCSS/**" location="/ADMINCSS/" />
 
 	<!-- security csrf -->
 	

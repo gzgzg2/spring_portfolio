@@ -27,4 +27,44 @@
 			and t.activ_uid = a.activ_uid
 			and a.activ_uid = #{activ_uid};
 	</select>
-</mapper>	
+	
+	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			member_name, member_tel
+		FROM
+			member
+		WHERE
+			member_uid = #{member_uid};
+	</select>
+	
+	<select id="selectTicketNameByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			a.activ_name, t.ticket_name, t.ticket_last_cost
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+			and t.ticket_uid = #{ticket_uid};
+	</select>
+	
+	<insert id="insertBook">
+		INSERT INTO
+			book(book_date, book_member_cnt, book_cost, book_name, book_member_name, book_member_tel, member_uid, ticket_uid)
+		VALUES
+			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.ticket_uid});
+	</insert>
+	
+	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+		FROM
+			book b, member m, ticket t, activ a
+		WHERE
+			b.member_uid = 1
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
+		ORDER BY
+			b.book_uid desc
+		LIMIT 1;
+	</select>
+</mapper>

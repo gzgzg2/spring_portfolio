@@ -7,10 +7,8 @@ public class UserTourDTO {
 	private String tour_name;
 	private int tour_cost;
 	private int tour_period;
-	private int tour_info1;
-	private int tour_info2;
-	private int tour_info3;
-	private int tour_img;
+	private String tour_info;
+	private String tour_pic;
 	
 	private int review_uid;
 	private String review_title;
@@ -23,25 +21,30 @@ public class UserTourDTO {
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
+	private String book_member_name;
+	private int book_member_tel;
+	private int member_uid;
+	
+	private String member_name;
+	private String member_tel;
 	
 	// 기본 생성자
 	public UserTourDTO() {
 		super();
 	}
 
-	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, int tour_info1, int tour_info2,
-			int tour_info3, int tour_img, int review_uid, String review_title, int review_star, String review_content,
+	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, String tour_info,
+			String tour_pic, int review_uid, String review_title, int review_star, String review_content,
 			String member_id, String member_pic, Timestamp book_date, int book_member_cnt, int book_cost,
-			String book_name) {
+			String book_name, String book_member_name, int book_member_tel, int member_uid, String member_name,
+			String member_tel) {
 		super();
 		this.tour_uid = tour_uid;
 		this.tour_name = tour_name;
 		this.tour_cost = tour_cost;
 		this.tour_period = tour_period;
-		this.tour_info1 = tour_info1;
-		this.tour_info2 = tour_info2;
-		this.tour_info3 = tour_info3;
-		this.tour_img = tour_img;
+		this.tour_info = tour_info;
+		this.tour_pic = tour_pic;
 		this.review_uid = review_uid;
 		this.review_title = review_title;
 		this.review_star = review_star;
@@ -52,9 +55,13 @@ public class UserTourDTO {
 		this.book_member_cnt = book_member_cnt;
 		this.book_cost = book_cost;
 		this.book_name = book_name;
+		this.book_member_name = book_member_name;
+		this.book_member_tel = book_member_tel;
+		this.member_uid = member_uid;
+		this.member_name = member_name;
+		this.member_tel = member_tel;
 	}
 
-	// getter / setter
 	public int getTour_uid() {
 		return tour_uid;
 	}
@@ -87,36 +94,20 @@ public class UserTourDTO {
 		this.tour_period = tour_period;
 	}
 
-	public int getTour_info1() {
-		return tour_info1;
+	public String getTour_info() {
+		return tour_info;
 	}
 
-	public void setTour_info1(int tour_info1) {
-		this.tour_info1 = tour_info1;
+	public void setTour_info(String tour_info) {
+		this.tour_info = tour_info;
 	}
 
-	public int getTour_info2() {
-		return tour_info2;
+	public String getTour_pic() {
+		return tour_pic;
 	}
 
-	public void setTour_info2(int tour_info2) {
-		this.tour_info2 = tour_info2;
-	}
-
-	public int getTour_info3() {
-		return tour_info3;
-	}
-
-	public void setTour_info3(int tour_info3) {
-		this.tour_info3 = tour_info3;
-	}
-
-	public int getTour_img() {
-		return tour_img;
-	}
-
-	public void setTour_img(int tour_img) {
-		this.tour_img = tour_img;
+	public void setTour_pic(String tour_pic) {
+		this.tour_pic = tour_pic;
 	}
 
 	public int getReview_uid() {
@@ -199,7 +190,45 @@ public class UserTourDTO {
 		this.book_name = book_name;
 	}
 
+	public String getBook_member_name() {
+		return book_member_name;
+	}
 
-	
+	public void setBook_member_name(String book_member_name) {
+		this.book_member_name = book_member_name;
+	}
+
+	public int getBook_member_tel() {
+		return book_member_tel;
+	}
+
+	public void setBook_member_tel(int book_member_tel) {
+		this.book_member_tel = book_member_tel;
+	}
+
+	public int getMember_uid() {
+		return member_uid;
+	}
+
+	public void setMember_uid(int member_uid) {
+		this.member_uid = member_uid;
+	}
+
+	public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+	public String getMember_tel() {
+		return member_tel;
+	}
+
+	public void setMember_tel(String member_tel) {
+		this.member_tel = member_tel;
+	}
+
 	
 }

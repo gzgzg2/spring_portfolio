@@ -1,6 +1,6 @@
 package com.lec.mgb.mybatis.beans;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class MyPageInfoDTO {
 	private int member_uid;
@@ -9,7 +9,7 @@ public class MyPageInfoDTO {
 	private String member_pw;
 	private String member_email;
 	private String member_gender;
-	private Timestamp member_birth;
+	private Date member_birth;
 	private String member_pic;
 	private String member_tel;
 	private String member_pwEncode;
@@ -20,7 +20,7 @@ public class MyPageInfoDTO {
 
 
 	public MyPageInfoDTO(int member_uid, String member_name, String member_id, String member_pw, String member_email,
-			String member_gender, Timestamp member_birth, String member_pic, String member_tel,
+			String member_gender, Date member_birth, String member_pic, String member_tel,
 			String member_pwEncode) {
 		super();
 		this.member_uid = member_uid;
@@ -34,6 +34,8 @@ public class MyPageInfoDTO {
 		this.member_tel = member_tel;
 		this.member_pwEncode = member_pwEncode;
 	}
+
+
 
 
 	public int getMember_uid() {
@@ -56,14 +58,17 @@ public class MyPageInfoDTO {
 	}
 
 
+
 	public String getMember_id() {
 		return member_id;
 	}
 
 
+
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+
 
 
 	public String getMember_pw() {
@@ -74,6 +79,7 @@ public class MyPageInfoDTO {
 	public void setMember_pw(String member_pw) {
 		this.member_pw = member_pw;
 	}
+
 
 
 	public String getMember_email() {
@@ -96,12 +102,13 @@ public class MyPageInfoDTO {
 	}
 
 
-	public Timestamp getMember_birth() {
+
+	public Date getMember_birth() {
 		return member_birth;
 	}
 
 
-	public void setMember_birth(Timestamp member_birth) {
+	public void setMember_birth(Date member_birth) {
 		this.member_birth = member_birth;
 	}
 
@@ -111,15 +118,14 @@ public class MyPageInfoDTO {
 	}
 
 
+
 	public void setMember_pic(String member_pic) {
 		this.member_pic = member_pic;
 	}
 
-
 	public String getMember_tel() {
 		return member_tel;
 	}
-
 
 	public void setMember_tel(String member_tel) {
 		this.member_tel = member_tel;
@@ -134,10 +140,6 @@ public class MyPageInfoDTO {
 	public void setMember_pwEncode(String member_pwEncode) {
 		this.member_pwEncode = member_pwEncode;
 	}
-	
-	
-	
-	
 	
 	
 }

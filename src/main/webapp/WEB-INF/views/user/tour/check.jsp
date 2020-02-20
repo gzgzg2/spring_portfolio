@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -78,141 +80,7 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Section Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="canvas-open">
-        <i class="icon_menu"></i>
-    </div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="canvas-close">
-            <i class="icon_close"></i>
-        </div>
-        <div class="search-icon search-switch">
-            <i class="icon_search"></i>
-        </div>
-        <div class="header-configure-area">
-            <div class="language-option">
-                <img src="img/flag.jpg" alt="">
-                <span>EN <i class="fa fa-angle-down"></i></span>
-                <div class="flag-dropdown">
-                    <ul>
-                        <li><a href="#">Zi</a></li>
-                        <li><a href="#">Fr</a></li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#" class="bk-btn">Booking Now</a>
-        </div>
-        <nav class="mainmenu mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./pages.html">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">News</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="top-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-        </div>
-        <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-        </ul>
-    </div>
-    <!-- Offcanvas Menu Section End -->
-
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="top-nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="tn-left">
-                            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="tn-right">
-                            <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                            <a href="#" class="bk-btn">Booking Now</a>
-                            <div class="language-option">
-                                <img src="img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="menu-item">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="nav-menu">
-                            <nav class="mainmenu">
-                                <ul>
-                                    <li><a href="./index.html">Home</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="active"><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-                            <div class="nav-right search-switch">
-                                <i class="icon_search"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
+    <jsp:include page="../userHeader.jsp"/>
 
     <!-- Blog Details Hero Section Begin -->
     <section class="blog-details-hero set-bg">
@@ -220,28 +88,28 @@
             <div class="row" style=" width: 80%; margin: 0 auto;">
                 <div class="modal_layer select_date">
                     <div class="modal_inner">
-                        <div class="modal_top">
-                            <h3>투어 예약</h3>
-                        </div>
-                        <div class="modal_description">
-                            <h5>투어 제목</h5>
-                            <p>투어투어</p>
-                            <h5>투어 기간</h5>
-                            <p>1박 2일</p>
-                            <h5>예약자명</h5>
-                            <p>ooo</p>
-                            <h5>이메일 주소</h5>
-                            <p>aaa@bbb.ccc</p>
-                            <h5>예약자 번호</h5>
-                            <p>ooo-oooo-oooo</p>
-                            <h5>투어 날짜</h5>
-                            <p>2020-02-12</p>
-                        </div>
-                        <div class="modal_button">
-                            <div class="modal_back">
-                                <button onclick="location.href = './index.html'">메인 화면으로</button>
-                            </div>
-                        </div>
+	                    <c:if test="${sessionScope.loginUid == dto.member_uid }">
+	                        <div class="modal_top">
+	                            <h3>액티비티 예약</h3>
+	                        </div>
+	                        <div class="modal_description">
+	                            <h5>액티비티 제목</h5>
+	                            <p>${dto.tour_name }</p>
+	                            <h5>인원 수</h5>
+	                            <p>${dto.book_member_cnt }</p>
+	                            <h5>티켓 구매일</h5>
+	                            <p>${dto.book_date }</p>
+	                            <h5>예약자명</h5>
+	                            <p>${dto.book_member_name }</p>
+	                            <h5>예약자 번호</h5>
+	                            <p class="tel">${dto.book_member_tel }</p>
+	                        </div>
+	                        <div class="modal_button">
+	                            <div class="modal_back">
+	                                <button onclick="location.href = './index.html'">메인 화면으로</button>
+	                            </div>
+	                        </div>
+	                	</c:if>
                     </div>
                 </div>
             </div>
@@ -362,12 +230,18 @@
             $(".modal_inner .icon_close").click(function() {
                 $(".modal_layer").css("display", "none")
             })
+            
+            $(".tel").text(change($(".tel").text()));
         })
         function openModal() {
             $(".modal_layer").css("display", "block");
         }
 
         $(".blog-details-hero").css("height", screen.height);
+        
+        function change(num) {
+        	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+        }
     </script>
 
 </body>
