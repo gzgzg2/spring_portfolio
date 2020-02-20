@@ -14,16 +14,17 @@
     <title>Sona | Template</title>
 
     <!-- Calendar -->
-	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>
-	<link rel="stylesheet" href="./calendar_trial/codebase/calendar.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/index.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/calendar.css?v=6.4.1">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/USERJS/calendar.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/calendar1.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner2.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner3.css">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 
     <style>
+    	.dhx_calendar.dhx_widget.dhx_widget--bordered { margin: 0 auto; }
     	#google_maps {
     		display: none;
     	}
@@ -786,11 +787,6 @@
         .comment-option h3, .comment-option h5, .comment-option .star_avg {
             text-align: center;
         }
-        .comment-option h5 {
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ebebeb;
-            margin-bottom: 10px;
-        }
         .room_info_more {
             background-color: rgb(245,245,245);
             padding: 20px;
@@ -881,15 +877,13 @@
         <div class="container">
             <div class="row" style=" width: 80%; margin: 0 auto;">
                 <div class="col-lg-5 inn_img">
-                    <img src="http://image.goodchoice.kr/resize_490x348/affiliate/2018/06/12/5b1f453ded22c.jpg">
+                    <img src="${dto[0].inn_pic }">
                 </div>
                 <div class="col-lg-7"">
-                    <h3><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #dfa974; border: 1px solid #dfa974; border-radius: 5px;">
-					<c:choose>
-						<c:when test="${dto[0].inn_sep == 1 } ">호텔</c:when>
-						<c:when test="${dto[0].inn_sep == 2 } ">펜션</c:when>
-						<c:when test="${dto[0].inn_sep == 3 } ">리조트</c:when>
-					</c:choose>
+                    <h3 style="white-space: nowrap;"><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #dfa974; border: 1px solid #dfa974; border-radius: 5px;">
+					<c:if test="${dto[0].inn_sep == 1 }">호텔</c:if>
+					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
+					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
                     <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span>만족해요</p>
                     <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
@@ -942,7 +936,8 @@
 		                                                <p><b style="color: rgba(0,0,0,1)">${dto.room_last_cost }</b> <!-- 표시금액 --></p>
 		                                            </div>
 		                                    </div>
-		                                    <button type="button" onclick="openModal()" class="gra_left_right_red"> 예약</button>
+		                                    <c:if test="${dto.room_last_cost == 0 || empty sessionScope.loginUid }"><button type="button" style="background-color: #bbb; border-color: #bbb;" disabled="disabled" class="gra_left_right_red"> 전화로 예약해주세요</button></c:if>
+		                                    <c:if test="${dto.room_last_cost != 0 && not empty sessionScope.loginUid }"><button type="button" onclick="openModal(${dto.room_uid })" class="gra_left_right_red"> 예약</button></c:if>
 		                                </div>
 		                            </div>
 	                            </div>
@@ -962,17 +957,18 @@
                                 <i class="icon_star"></i>
                                 <span>10</span>
                             </div>
-                            <h5>전체 리뷰 3개</h5>
+                            <h5>전체 리뷰 ${fn:length(review) }개</h5>
                             <c:forEach var="review" items="${review }">
 	                            <div class="single-comment-item first-comment">
 	                                <div class="sc-author">
 	                                    <img src="${review.member_pic }" alt="">
 	                                </div>
 	                                <div class="sc-text">
-	                                    <span>2020-02-10 / 00:00:00</span>
-	                                    <p style="margin-top: 7px;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></p>
-	                                    <h5>${review.member_id }</h5>
-	                                    <p>${review.review_content }</p>
+	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
+	                                    <div style="padding: 10px;">
+		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
+		                                    <p>${review.review_content }</p>	                                    
+	                                    </div>
 	                                </div>
 	                            </div>
                             </c:forEach>
@@ -1099,25 +1095,31 @@
     </footer>
     <!-- Footer Section End -->
     <div class="modal_layer select_date">
-        <div class="modal_inner">
-            <div class="modal_top">
-                <div><i class="icon_close"></i></div>
-                <h3>객실 예약</h3>
-            </div>
-            <div class="modal_description">
-                <section class="dhx_sample-container">
-                    <div class="dhx_sample-container__widget" id="calendar"></div>
-                </section>
-            </div>
-            <div class="modal_button row">
-                <div class="modal_prev col-sm-6">
-                    <button>prev</button>
-                </div>
-                <div class="modal_next col-sm-6">
-                    <button onclick="location.href = './innReserve.html'">next</button>
-                </div>
-            </div>
-        </div>
+    	<form action="${pageContext.request.contextPath}/user/inn/reserve" method="POST" onsubmit="return chkSubmit()">
+    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    		<input type="hidden" name="room_uid" value=""/>
+    		<input type="hidden" name="book_date" value=""/>
+    		<input type="hidden" name="book_date_end" value=""/>
+	        <div class="modal_inner">
+	            <div class="modal_top">
+	                <div><i class="icon_close"></i></div>
+	                <h3>객실 예약</h3>
+	            </div>
+	            <div class="modal_description">
+	                <section class="dhx_sample-container">
+	                    <div class="dhx_sample-container__widget" id="calendar"></div>
+	                </section>
+	            </div>
+	            <div class="modal_button row">
+	                <div class="modal_prev col-sm-6">
+	                    <button>prev</button>
+	                </div>
+	                <div class="modal_next col-sm-6">
+	                    <button type="submit">next</button>
+	                </div>
+	            </div>
+	        </div>
+        </form>
     </div>
     <!-- Search model Begin -->
     <div class="search-model">
@@ -1160,8 +1162,9 @@
                 $(".modal_layer").css("display", "none")
             })
         })
-        function openModal() {
-            $(".modal_layer").css("display", "block");
+        function openModal(room_uid) {
+            $(".modal_layer").css("display", "block")
+            $("input:hidden[name='room_uid']").val(room_uid)
         }
     </script>
 
@@ -1173,6 +1176,44 @@
             range: true,
             value: [firstDate, secondDate]
         });
+        
+        calendar.events.on("change",function(firstDate, secondDate, click){
+        	var year = secondDate.getFullYear();
+        	var month = secondDate.getMonth() + 1;
+        	month = month.toString().length < 2 ? month = "0" + month : month;
+        	var date = secondDate.getDate();
+        	
+        	var year2 = firstDate.getFullYear();
+        	var month2 = firstDate.getMonth();
+        	month2 = month.toString().length < 2 ? month = "0" + month : month;
+        	var date2 = firstDate.getDate();
+        	
+			$("input:hidden[name='book_date']").val(year + "-" + month + "-" + date)
+			$("input:hidden[name='book_date_end']").val(year2 + "-" + month2 + "-" + date2)
+        });
+        calendar.events.on("cancelClick",function(firstDate, secondDate, click){
+			$("input:hidden[name='book_date']").val("")
+        });
+        
+        function chkSubmit() {
+        	var now = new Date(Date.now());
+        	var book_date = $("input:hidden[name='book_date']").val()
+        	var book_date_end = $("input:hidden[name='book_date_end']").val()
+        	
+        	if (book_date.trim().length != 0 && book_date_end.trim().length != 0 && book_date != book_date_end) {
+        		var year = book_date.substring(0, 4)
+         		var month = book_date.substring(5, 7)
+          		var date = book_date.substring(8, 10)
+          		
+          		if (year >= now.getFullYear() && month >= now.getMonth() + 1 && date > now.getDate()) {
+          			return true;
+          		} else {
+          			alert(now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate() + " 이후로 선택해주세요")
+          		}
+        	}
+        	
+        	return false;
+        }
     </script>
 </body>
 

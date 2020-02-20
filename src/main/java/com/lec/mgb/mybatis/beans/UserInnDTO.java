@@ -1,6 +1,6 @@
 package com.lec.mgb.mybatis.beans;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class UserInnDTO {
 	private int inn_uid;
@@ -9,6 +9,7 @@ public class UserInnDTO {
 	private String inn_ment;
 	private String inn_info;
 	private int inn_sep;
+	private String inn_pic;
 	
 	private int room_uid;
 	private String room_name;
@@ -24,10 +25,15 @@ public class UserInnDTO {
 	private String member_id;
 	private String member_pic;
 	
-	private Timestamp book_date;
+	private String member_name;
+	private int member_tel;
+	private Date book_date;
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
+	private String book_member_name;
+	private int book_member_tel;
+	private int member_uid;
 	
 	// 기본 생성자
 	public UserInnDTO() {
@@ -35,9 +41,11 @@ public class UserInnDTO {
 	}
 
 	public UserInnDTO(int inn_uid, String inn_name, String inn_loc, String inn_ment, String inn_info, int inn_sep,
-			int room_uid, String room_name, String room_info, String room_pic, int room_first_cost, int room_last_cost,
-			int review_uid, String review_title, int review_star, String review_content, String member_id,
-			String member_pic, Timestamp book_date, int book_member_cnt, int book_cost, String book_name) {
+			String inn_pic, int room_uid, String room_name, String room_info, String room_pic, int room_first_cost,
+			int room_last_cost, int review_uid, String review_title, int review_star, String review_content,
+			String member_id, String member_pic, String member_name, int member_tel, Date book_date,
+			int book_member_cnt, int book_cost, String book_name, String book_member_name, int book_member_tel,
+			int member_uid) {
 		super();
 		this.inn_uid = inn_uid;
 		this.inn_name = inn_name;
@@ -45,6 +53,7 @@ public class UserInnDTO {
 		this.inn_ment = inn_ment;
 		this.inn_info = inn_info;
 		this.inn_sep = inn_sep;
+		this.inn_pic = inn_pic;
 		this.room_uid = room_uid;
 		this.room_name = room_name;
 		this.room_info = room_info;
@@ -57,14 +66,17 @@ public class UserInnDTO {
 		this.review_content = review_content;
 		this.member_id = member_id;
 		this.member_pic = member_pic;
+		this.member_name = member_name;
+		this.member_tel = member_tel;
 		this.book_date = book_date;
 		this.book_member_cnt = book_member_cnt;
 		this.book_cost = book_cost;
 		this.book_name = book_name;
+		this.book_member_name = book_member_name;
+		this.book_member_tel = book_member_tel;
+		this.member_uid = member_uid;
 	}
 
-	// getter / setter
-	
 	public int getInn_uid() {
 		return inn_uid;
 	}
@@ -111,6 +123,14 @@ public class UserInnDTO {
 
 	public void setInn_sep(int inn_sep) {
 		this.inn_sep = inn_sep;
+	}
+
+	public String getInn_pic() {
+		return inn_pic;
+	}
+
+	public void setInn_pic(String inn_pic) {
+		this.inn_pic = inn_pic;
 	}
 
 	public int getRoom_uid() {
@@ -209,11 +229,27 @@ public class UserInnDTO {
 		this.member_pic = member_pic;
 	}
 
-	public Timestamp getBook_date() {
+	public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+	public int getMember_tel() {
+		return member_tel;
+	}
+
+	public void setMember_tel(int member_tel) {
+		this.member_tel = member_tel;
+	}
+
+	public Date getBook_date() {
 		return book_date;
 	}
 
-	public void setBook_date(Timestamp book_date) {
+	public void setBook_date(Date book_date) {
 		this.book_date = book_date;
 	}
 
@@ -241,4 +277,29 @@ public class UserInnDTO {
 		this.book_name = book_name;
 	}
 
+	public String getBook_member_name() {
+		return book_member_name;
+	}
+
+	public void setBook_member_name(String book_member_name) {
+		this.book_member_name = book_member_name;
+	}
+
+	public int getBook_member_tel() {
+		return book_member_tel;
+	}
+
+	public void setBook_member_tel(int book_member_tel) {
+		this.book_member_tel = book_member_tel;
+	}
+
+	public int getMember_uid() {
+		return member_uid;
+	}
+
+	public void setMember_uid(int member_uid) {
+		this.member_uid = member_uid;
+	}
+
+	
 }

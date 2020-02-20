@@ -39,6 +39,9 @@
             margin: 0 auto;
 
         }
+        .reserve > div > h4 {
+        	margin-bottom: 8px;
+        }
         .reserve {
             height: 800px;
             margin-bottom: 200px;
@@ -68,7 +71,7 @@
         }
         
         .inn_name, .room_name, .room_price {
-            padding: 15px;
+            padding: 25px;
         }
         .side > div > p {
             padding-bottom: 5px;
@@ -86,216 +89,93 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
-    <!-- Offcanvas Menu Section Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="canvas-open">
-        <i class="icon_menu"></i>
-    </div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="canvas-close">
-            <i class="icon_close"></i>
-        </div>
-        <div class="search-icon search-switch">
-            <i class="icon_search"></i>
-        </div>
-        <div class="header-configure-area">
-            <div class="language-option">
-                <img src="img/flag.jpg" alt="">
-                <span>EN <i class="fa fa-angle-down"></i></span>
-                <div class="flag-dropdown">
-                    <ul>
-                        <li><a href="#">Zi</a></li>
-                        <li><a href="#">Fr</a></li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#" class="bk-btn">Booking Now</a>
-        </div>
-        <nav class="mainmenu mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./pages.html">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">News</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="top-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-        </div>
-        <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-        </ul>
-    </div>
-    <!-- Offcanvas Menu Section End -->
-
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="top-nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="tn-left">
-                            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="tn-right">
-                            <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                            <a href="#" class="bk-btn">Booking Now</a>
-                            <div class="language-option">
-                                <img src="img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="menu-item">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="nav-menu">
-                            <nav class="mainmenu">
-                                <ul>
-                                    <li><a href="./index.html">Home</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="active"><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-                            <div class="nav-right search-switch">
-                                <i class="icon_search"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
-
+	<jsp:include page="../userHeader.jsp"/>
+	
     <!-- Blog Details Hero End -->
 
     <!-- Blog Details Section Begin -->
     <section class="blog-details-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <div class="blog-details-text">
                         <div class="reserve">
-                            <form>
+                            <form action="${pageContext.request.contextPath}/user/activ/check" method="POST" onsubmit="return chkSubmit()">
+                            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="title">
                                     <h2>액티비티 예약</h2>
                                 </div>
                                 <div class="info">
+                                    <input type="hidden" name="book_name" value="${ticket[0].activ_name } - ${ticket[0].ticket_name }" />
+                                    <input type="hidden" name="book_member_cnt" value="${book_member_cnt }" />
+                                    <input type="hidden" name="book_cost" value="${ticket[0].ticket_last_cost * book_member_cnt }" />
+                                    <input type="hidden" name="member_uid" value="${member_uid }" />
+                                    <input type="hidden" name="ticket_uid" value="${ticket_uid }" />
                                     <h5>예약자 정보</h5>
                                     <label>
-                                        예약자 이름<br>
-                                        <input type="text">
+                                     	예약자 이름<br>
+                                        <input type="text" name="book_member_name" value="">
                                     </label>
                                     <label>
-                                        이메일 주소<br>
-                                        <input type="text">
+	                                    <input type="checkbox" name="same_member_name"/>
+	                                                                               사용자 정보와 같습니다.
                                     </label>
                                     <label>
-                                        예약자 <br>
-                                        <input type="text">
+                                      	예약자 핸드폰 <br>
+                                        <input type="text" name="book_member_tel" value="">
                                         <button>휴대폰 인증</button>
                                     </label>
                                     <label>
                                         <input type="text">
                                         <button>인증번호 확인</button>
                                     </label>
+                                    <label>
+	                                    <input type="checkbox" name="same_member_tel"/>
+	                                                                               사용자 정보와 같습니다.
+                                    </label>
                                 </div>
                                 <div class="term">
                                     <h5>이용 약관</h5>
                                     <label>
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="term_all">
                                         <strong>전체 동의</strong>
                                     </label>
                                     <label>
-                                        <input type="checkbox">
-                                        개인정보 수집 및 이용 동의 (필수)
+                                        <input type="checkbox" name="term1">
+                                     	개인정보 수집 및 이용 동의 (필수)
                                     </label>
                                     <label>
-                                        <input type="checkbox">
-                                        개인정보 제 3자 제공 동의 (필수)
+                                        <input type="checkbox" name="term2">
+                                                                                        개인정보 제 3자 제공 동의 (필수)
                                     </label>
                                     <label>
-                                        <input type="checkbox">
-                                        만 14세 이상입니다. (필수)
+                                        <input type="checkbox" name="term3">
+                                                                                         만 14세 이상입니다. (필수)
                                     </label>
-                                    <label><button onclick="location.href='./activCheck.html'">예약 하기</button> </label>
+                                    <label><button type="submit">예약 하기</button> </label>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="reserve side" style="height: auto;">
-                        <div class="inn_name">
-                            <h4>액티비티 이름</h4>
-                            <p>...</p>
-                        </div>
-                        <div class="room_name">
-                            <h4>유효기간</h4>
-                            <p>...</p>
-                        </div>
-                        <div class="room_price">
-                            <h4>총가격</h4>
-                            <p>...</p>
-                        </div>
-                        <div class="res_button">
-                            <button onclick="location.href='./activCheck.html'">예약 하기</button>
-                        </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-4">
+	                    <div class="reserve side" style="height: auto;">
+	                        <div class="inn_name">
+	                            <h4>${ticket[0].activ_name }</h4>
+	                            <p>${ticket[0].ticket_name }</p>
+	                        </div>
+	                        <div class="room_name">
+	                            <h4>티켓 수</h4>
+	                            <p>${book_member_cnt }</p>
+	                        </div>
+	                        <div class="room_price">
+	                            <h4>총가격</h4>
+	                            <p>${ticket[0].ticket_last_cost * book_member_cnt }</p>
+	                        </div>
+	                        <div class="res_button">
+	                            <button type="submit">예약 하기</button>
+	                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -394,6 +274,49 @@
     <script src="${pageContext.request.contextPath}/USERJS/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
+    
+    <script>
+    	$(document).ready(function() {
+    		$("input:checkbox[name='same_member_name']").click(function() {
+    			if ($("input:checkbox[name='same_member_name']").prop("checked")) {
+    				$("input:text[name='book_member_name']").val("${member[0].member_name }").prop("readonly", true).css("background-color", "#fcfcfc")
+    			} else {
+    				$("input:text[name='book_member_name']").val("").prop("readonly", false).css("background-color", "white")
+    			}
+    		})
+    		$("input:checkbox[name='same_member_tel']").click(function() {
+    			if ($("input:checkbox[name='same_member_tel']").prop("checked")) {
+    				$("input:text[name='book_member_tel']").val("${member[0].member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
+    			} else {
+    				$("input:text[name='book_member_tel']").val("").prop("readonly", false).css("background-color", "white")
+    			}
+    		})
+    		$("input:checkbox[name='term_all']").click(function() {
+    			if ($("input:checkbox[name='term_all']").prop("checked")) {
+    				$(".term").find("input:checkbox").prop("checked", true)	
+    			} else {
+    				$(".term").find("input:checkbox").prop("checked", false)
+    			}
+    		})
+    	})
+    	function chkSubmit() {
+    		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
+    			!$("input:text[name='book_member_tel']").val().trim().length == 0 &&
+    			$("input:checkbox[name='term1']").prop("checked") &&
+    			$("input:checkbox[name='term2']").prop("checked") &&
+    			$("input:checkbox[name='term3']").prop("checked")) {
+				return true;
+    		}
+    		
+    		if ($("input:text[name='book_member_name']").val().trim().length == 0) {
+    			$("input:text[name='book_member_name']").focus()
+    		} else if ($("input:text[name='book_member_tel']").val().trim().length == 0) {
+	    		$("input:text[name='book_member_tel']").focus()
+    		}
+    		
+    		return false;
+    	}
+    </script>
 
 </body>
 

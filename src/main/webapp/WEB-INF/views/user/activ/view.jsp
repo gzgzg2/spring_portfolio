@@ -94,12 +94,6 @@
         .comment-option h3, .comment-option h5, .comment-option .star_avg {
             text-align: center;
         }
-        .comment-option h5 {
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ebebeb;
-            margin-bottom: 10px;
-        }
-		
         .ticket {
         	margin: 20px 0px;
             border: 3px solid #dfa974;
@@ -223,14 +217,16 @@
                             </div>
                         </div>
                         <div class="ativ_ticket">
-                            <form action="./activReserve.html" method="POST">
+                            <form method="POST" action="${pageContext.request.contextPath}/user/activ/reserve">
+                            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <h3>티켓</h3>
                                 <c:forEach var="dto" items="${dto }">
-                            		<div class="ticket">
+                           		<div class="ticket">
                                     <div class="ticket_header">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" id="jb-checkbox" class="custom-control-input">
-                                            <label class="custom-control-label" for="jb-checkbox">${dto.ticket_name }</label>
+                                            <label><input type="radio" name="ticket_uid" value="${dto.ticket_uid }">
+                                            	${dto.ticket_name }
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="ticket_description">
@@ -239,20 +235,24 @@
                                     <div class="ticket_footer row">
                                         <div class="ticket_amount col-sm-6">
                                             <div>
-                                                <button>-</button>
-                                                <div>0</div>
-                                                <button>+</button>
+                                                <button type="button" class="ticketDec" disabled="true">-</button>
+                                                	<div class="book_member_cnt">0</div>
+                                                <button type="button" class="ticketInc" disabled="true">+</button>
                                             </div>
-                                        </div>
-                                        <div class="ticket_price col-sm-6">
-                                            <p>${dto.ticket_first_cost }</p>
-                                            <p>${dto.ticket_last_cost }</p>
-                                        </div>
-                                    </div>
-                                </div>
+	                                        </div>
+	                                        <div class="ticket_price col-sm-6">
+	                                            <p>${dto.ticket_first_cost }</p>
+	                                            <p>${dto.ticket_last_cost }</p>
+	                                        </div>
+                                 		</div>
+                                	</div>
                             	</c:forEach>
                                 <div>
-                                    <button type="submit">결제 하기</button>
+                                	<c:if test="${not empty member_uid }">
+                                		<input type="hidden" name="book_member_cnt" value=0 />
+                                		<c:if test="${empty sessionScope.loginUid }"><button style="background-color: #bbb; border-color: #bbb;" disabled="disabled" type="submit">로그인 후 이용해주세요</button></c:if>
+	                                    <c:if test="${not empty sessionScope.loginUid }"><button type="submit">결제 하기</button></c:if>
+                                	</c:if>
                                 </div>
                             </form>
                         </div>
@@ -266,19 +266,20 @@
                                 <i class="icon_star"></i>
                                 <span>10</span>
                             </div>
-                            <h5>전체 리뷰 3개</h5>
+                            <h5>전체 리뷰 ${fn:length(review) }개</h5>
                             <c:forEach var="review" items="${review }">
 	                            <div class="single-comment-item first-comment">
 	                                <div class="sc-author">
 	                                    <img src="${review.member_pic }" alt="">
 	                                </div>
 	                                <div class="sc-text">
-	                                    <span>2020-02-10 / 00:00:00</span>
-	                                    <p style="margin-top: 7px;">리뷰 제목<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></p>
-	                                    <h5>${review.review_id }</h5>
-	                                    <p>${review.review_content }</p>
+	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
+	                                    <div style="padding: 10px;">
+		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
+		                                    <p>${review.review_content }</p>	                                    
+	                                    </div>
 	                                </div>
-                            	</div>
+	                            </div>
                             </c:forEach>
                         </div>
                     </div>
@@ -421,6 +422,7 @@
 
     <script>
         $(document).ready(function() {
+        	$("input:radio[name='ticket_uid']").prop("checked", false)
             $(".bd-title > ul > li").eq(0).click(function() {
                 $(".ativ_info").css("display", "block")
                 $(".ativ_ticket").css("display", "none")
@@ -435,6 +437,31 @@
                 $(".ativ_info").css("display", "none")
                 $(".ativ_ticket").css("display", "none")
                 $(".comment-option").css("display", "block")
+            })
+            $("input:radio[name='ticket_uid']").click(function() {
+            	$(".ticketInc").attr("disabled", true)
+            	$(".ticketDec").attr("disabled", true)
+            	$("input:hidden[name='book_member_cnt']").val(1);
+            	$(this).parent().parent().parent().next().next().find(".book_member_cnt").text(1);
+            	$(this).parent().parent().parent().next().next().find(".ticketInc").attr("disabled", false)
+            	$(this).parent().parent().parent().next().next().find(".ticketDec").attr("disabled", false)
+            })
+            $(".ticketInc").click(function() {
+            	var book_member_cnt = parseInt($("input:hidden[name='book_member_cnt']").val());
+            	$("input:hidden[name='book_member_cnt']").val(book_member_cnt + 1)
+            	$(this).parent().find(".book_member_cnt").text(book_member_cnt + 1)
+            })
+            $(".ticketDec").click(function() {
+            	var book_member_cnt = parseInt($("input:hidden[name='book_member_cnt']").val());
+            	
+            	if (book_member_cnt == 1) {
+            		$(this).parent().parent().parent().prev().prev().find("input:radio[name='ticket_uid']").prop("checked", false)
+            		$(".ticketInc").attr("disabled", true)
+            		$(".ticketDec").attr("disabled", true)
+            	}
+            	
+            	$("input:hidden[name='book_member_cnt']").val(book_member_cnt - 1)
+            	$(this).parent().find(".book_member_cnt").text(book_member_cnt - 1)
             })
             
             $(".bd-hero-text > ul > li:nth-child(2)").text(change($(".bd-hero-text > ul > li:nth-child(2)").text()));
