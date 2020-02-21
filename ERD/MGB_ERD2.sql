@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
 DROP TABLE IF EXISTS member_auth;
+DROP TABLE member_auth cascade;
 DROP TABLE IF EXISTS PLANNER;
 DROP TABLE IF EXISTS MEMBER;
 DROP TABLE IF EXISTS TOUR;
@@ -183,10 +184,8 @@ CREATE TABLE TOUR
 	tour_name varchar(50) NOT NULL,
 	tour_cost int NOT NULL,
 	tour_period int,
-	tour_info1 text,
+	tour_info text,
 	tour_pic varchar(200),
-	tour_info2 text,
-	tour_info3 text,
 	PRIMARY KEY (tour_uid),
 	UNIQUE (tour_uid)
 );
@@ -306,4 +305,17 @@ ALTER TABLE PLAN
 ;
 
 show tables;
+
+
+INSERT INTO LOCAL(
+	local_name,
+	local_hello,
+	local_lat,
+	local_lng,
+	local_loc,
+	local_tel
+	) VALUES 
+('우도(해양도립공원)','소가 누워있는 형상을 하고 있는 제주의 가장 큰 부속섬','33.51949','126.95109','제주특별자치도 제주시 우도면 삼양고수물길 1','064-782-5671'),
+('성산일출봉(UNESCO 세계자연유산)','바다위에 우뚝 솟아난 수성화산·유네스코 세계자연유산, 천연기념물 제420호, 올레1코스','33.462147','126.936424','제주특별자치도 서귀포시 성산읍 일출로 284-12','064-783-0959'),
+('사려니숲길','제주 숨은 비경 31, 삼나무 향기에 취하며 걷는 아름답고 청정한 숲길','33.40845','126.63976','제주특별자치도 제주시 조천읍 교래리 산 137-1','064-900-8800');
 
