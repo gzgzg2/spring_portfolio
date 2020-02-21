@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.AdminMemberDAO">
+	
+	<select id="select" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
+		SELECT
+			member_uid uid,
+			member_name name,
+			member_id id,
+			member_email email,
+			member_gender gender,
+			member_birth birth,
+			member_pic pic,
+			member_tel tel
+		FROM 
+			MEMBER 
+		ORDER 
+			BY member_uid DESC
+	</select>
+
+
+
+</mapper>

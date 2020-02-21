@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html lang="ko">
+
+<!doctype html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>관리자(예약관리)</title>
+    <title>관리자(숙소관리)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
+    
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ADMINCSS/admin_main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ADMINCSS/admin_css.css">
 
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ADMINCSS/admin-main.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ADMINCSS/admin-css.css">
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -156,28 +156,28 @@
                         <ul class="vertical-nav-menu">
                             
                             <li>
-                                <a href="admin_MemberManage">
+                                <a href="admin-1.html">
                                     <i class="metismenu-icon pe-7s-rocket"></i>
                                     회원 관리
                                 </a>
                             </li>
 
                             <li>
-                                <a href="admin_BookingManage" class="mm-active">
+                                <a href="admin-3.html">
                                     <i class="metismenu-icon pe-7s-display2"></i>
                                     예약 관리
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="admin_MotelManage">
+                                <a href="admin-5.html" class="mm-active">
                                     <i class="metismenu-icon pe-7s-display2"></i>
                                     숙소 관리
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="admin_LocalManage">
+                                <a href="admin-6.html">
                                     <i class="metismenu-icon pe-7s-mouse"></i>
                                     여행지 관리
                                 </a>
@@ -191,78 +191,68 @@
 
                 <div class="app-page-title">
 
-                    <h2>예약 관리</h2>
+                    <h2>숙소 관리</h2>
                     
                 </div>
-                
-                
-                <div class="app-main__inner">
+
+                <div class="app-main__inner-crawling">
+
+                    <div class="admin-search-motel-crawling-btn">
+                        <input type="button" class="mb-2 mr-2 btn btn-primary active" value="숙소 정보 가져오기">
+                    </div>
+
                     <form>
 
                         <table class="admin-table table-bordered">
                             <colgroup>
                                 <col width="8%"/>
-                                <col width="18.4%"/>
-                                <col width="18.4%"/>
-                                <col width="18.4%"/>
-                                <col width="18.4%"/>
-                                <col width="18.4%"/>
+                                <col width="23%"/>
+                                <col width="23%"/>
+                                <col width="23%"/>
+                                <col width="23%"/>
                             </colgroup>
                             <thead>
-                                <tr>
-                                    <th class="table-th-left">No</th>
-                                    <th>액티비티 명</th>
-                                    <th>예약 시간</th>
-                                    <th>예약자</th>
-                                    <th>예약 상세 정보</th>
-                                    <th class="table-th-right">삭제</th>
-                                </tr>
+                            <tr>
+                                <th class="table-th-left">No</th>
+                                <th>액티비티 이름</th>
+                                <th>주소</th>
+                                <th>업체 정보</th>
+                                <th class="table-th-right">삭제</th>
+                            </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <th scope="row">1</th>
                                 <td>아</td>
-                                <td>0101-01-01 12:00</td>
-                                <td>이름</td>
-                                <td>
-                                        <button class="admin-info-btn">Info</button>
-                                </td>
+                                <td>서울</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
-                                </tr>
+                            </tr>
                             <tr>
-                                    <th scope="row">2</th>
-                                    <td>아</td>
-                                    <td>0101-01-01 12:00</td>
-                                    <td>이름</td>
-                                <td>
-                                    <button class="admin-info-btn">Info</button>
-                                </td>
+                                <th scope="row">2</th>
+                                <td>하기</td>
+                                <td>인천</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td>아</td>
-                                <td>0101-01-01 12:00</td>
-                                <td>이름</td>
-                                <td>
-                                    <button class="admin-info-btn">Info</button>
-                                </td>
+                                <td>싫다</td>
+                                <td>강릉</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">4</th>
-                                <td>아</td>
-                                <td>0101-01-01 12:00</td>
-                                <td>이름</td>
-                                <td>
-                                    <button class="admin-info-btn">Info</button>
-                                </td>
+                                <td>귀</td>
+                                <td>전주</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
@@ -270,29 +260,23 @@
                             <tr>
                                 
                                 <th scope="row">5</th>
-                                <td>아</td>
-                                <td>0101-01-01 12:00</td>
-                                <td>이름</td>
-                                <td>
-                                    <button class="admin-info-btn">Info</button>
-                                </td>
+                                <td>찮</td>
+                                <td>부산</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">6</th>
-                                <td>아</td>
-                                <td>0101-01-01 12:00</td>
-                                <td>이름</td>
-                                <td>
-                                    <button class="admin-info-btn">Info</button>
-                                </td>
+                                <td>다</td>
+                                <td>제주도</td>
+                                <td>02-0000-0000</td>
                                 <td>
                                     <button class="admin-delete-btn">Delete</button>
                                 </td>
                             </tr>
-                        </tbody>
+                            </tbody>
                         </table>
 
                         <div class="admin-search-bar">
@@ -300,8 +284,8 @@
                             <div class="admin-search-select">
                                 
                                 <select class="form-control-sm form-control">
-                                    <option>액티비티 명</option>
-                                    <option>예약자 명</option>
+                                    <option>숙소명</option>
+                                    <option>위치</option>
                                 </select>
                                 
                             </div>
@@ -321,12 +305,10 @@
                         </div>
 
                     </form>
-                
                 </div>
 
             </div>
         </div>
     </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/ADMINCSS/assets/scripts/main.js"></script>
-</body>
+<script type="text/javascript" src="./assets/scripts/main.js"></script></body>
 </html>
