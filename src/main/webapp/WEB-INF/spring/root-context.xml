@@ -18,5 +18,4 @@
 		<beans:property name="password" value="1234"/>
 	</beans:bean>
 	
-	
 </beans>

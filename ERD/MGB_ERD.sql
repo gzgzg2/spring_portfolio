@@ -299,6 +299,7 @@ ALTER TABLE PLAN
 
 show tables;
 
+select * from member;
 
 insert into member(
 	member_name,

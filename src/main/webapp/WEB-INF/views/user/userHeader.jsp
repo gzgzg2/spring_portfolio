@@ -17,15 +17,15 @@
                         <nav class="mainmenu">
                             <ul>
                                 <li><a href="${pageContext.request.contextPath}/user/index">홈</a></li>
-                                <li><a href="${pageContext.request.contextPath}/user/planner/planner">플래너</a></li>
-                                <li><a href="${pageContext.request.contextPath}/user/tour/list">한국투어</a>
+                                <li><a href="${pageContext.request.contextPath}/user/planner">플래너</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/list">한국투어</a>
                                     <ul class="dropdown">
                                         <li><a href="${pageContext.request.contextPath}/user/">관광지</a></li>
                                         <li><a href="${pageContext.request.contextPath}/user/activ/list">액티비티</a></li>
                                     </ul>
-                                <li><a href="${pageContext.request.contextPath}/user/inn/list">숙소</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/list">숙소</a></li>
                                 </li>
-                                <li class="active"><a href="${pageContext.request.contextPath}/user/temp/list">템플릿</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/user/list">템플릿</a></li>
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">

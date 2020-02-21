@@ -6,7 +6,7 @@
 <mapper namespace="com.lec.mgb.mybatis.beans.UserInnDAO">
 	<select id="selectInnByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
-			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep,
+			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep, i.inn_pic,
 			r.room_uid, r.room_name, r.room_info, r.room_pic, r.room_first_cost, r.room_last_cost
 		FROM
 			inn i, room r
@@ -26,5 +26,45 @@
 			and b.room_uid = r.room_uid
 			and r.inn_uid = i.inn_uid
 			and i.inn_uid = #{inn_uid};
+	</select>
+	
+	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			member_name, member_tel
+		FROM
+			member
+		WHERE
+			member_uid = #{member_uid};
+	</select>
+	
+	<select id="selectRoomNameByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			i.inn_name, r.room_name, r.room_last_cost, r.room_uid, i.inn_sep
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and r.room_uid = #{room_uid};
+	</select>
+	
+	<insert id="insertBook">
+		INSERT INTO
+			book(book_date, book_cost, book_name, book_member_name, book_member_tel, member_uid, room_uid)
+		VALUES
+			(now(), #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.room_uid});
+	</insert>
+	
+	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			m.member_uid, i.inn_name, r.room_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+		FROM
+			book b, member m, inn i, room r
+		WHERE
+			b.member_uid = #{member_uid}
+			and b.room_uid = r.room_uid
+			and r.inn_uid = i.inn_uid
+		ORDER BY
+			b.book_uid desc
+		LIMIT 1;
 	</select>
 </mapper>	

@@ -1,5 +1,7 @@
 package com.lec.mgb.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,6 @@ import com.lec.mgb.command.Command;
 import com.lec.mgb.command.UserActivCheckCommand;
 import com.lec.mgb.command.UserActivListCommand;
 import com.lec.mgb.command.UserActivReserveCommand;
-import com.lec.mgb.command.UserActivReserveOkCommand;
 import com.lec.mgb.command.UserActivViewCommand;
 import com.lec.mgb.mybatis.beans.UserActivDTO;
 
@@ -29,7 +30,7 @@ public class UserActivController {
 		this.sqlSession = sqlSession;
 		C.sqlSesssion = sqlSession;
 	}
-	private Command command;
+	private Command command;           
 
 	@RequestMapping("/list")
 	public String listSelect(Model model) {
@@ -44,25 +45,18 @@ public class UserActivController {
 		return "user/activ/view";
 	}
 	@PostMapping("/reserve")
-	public String ReserveSelect(int activ_uid, Model model) {
-		model.addAttribute("activ_uid", activ_uid);
-		command = new UserActivReserveCommand();
-		command.execute(model);
+	public String ReserveSelect(int ticket_uid, int book_member_cnt, Model model, HttpSession session) {
+		model.addAttribute("ticket_uid", ticket_uid);
+		model.addAttribute("book_member_cnt", book_member_cnt);
+		model.addAttribute("member_uid", session.getAttribute("loginUid"));
+		new UserActivReserveCommand().execute(model);
 		return "user/activ/reserve";
 	}
-	@PostMapping("/rerserveOk")
-	public String ReserveOk(int mb_uid, UserActivDTO dto, Model model) {
-		model.addAttribute("mb_uid", mb_uid);
+	@PostMapping("/check")
+	public String ReserveOk(UserActivDTO dto, Model model, HttpSession session) {
 		model.addAttribute("dto", dto);
-		command = new UserActivReserveOkCommand();
-		command.execute(model);
-		return "user/activ/reserveOk";
-	}
-	@RequestMapping("/check")
-	public String ReserveCheck(int mb_uid, Model model) {
-		model.addAttribute("mb_uid", mb_uid);
-		command = new UserActivCheckCommand();
-		command.execute(model);
+		model.addAttribute("member_uid", session.getAttribute("loginUid"));
+		new UserActivCheckCommand().execute(model);
 		return "user/activ/check";
 	}
 	

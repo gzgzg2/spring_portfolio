@@ -84,7 +84,7 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100  login_form">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="${pageContext.request.contextPath}/login">
 					<span class="login100-form-title">
 						LOGIN
 					</span>
@@ -95,7 +95,8 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
 
@@ -120,7 +121,7 @@
 							Don’t have an account?
 						</span>
 
-						<a href="./join.html" class="txt3">
+						<a href="${pageContext.request.contextPath}/join.jsp" class="txt3">
 							Join now
 						</a>
 					</div>

@@ -10,13 +10,14 @@ DROP TABLE IF EXISTS ROOM;
 DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
+
 DROP TABLE IF EXISTS member_auth;
 DROP TABLE member_auth cascade;
+
 DROP TABLE IF EXISTS PLANNER;
-DROP TABLE IF EXISTS MEMBER;
+DROP TABLE IF EXISTS member cascade;
 DROP TABLE IF EXISTS TOUR;
 DROP TABLE IF EXISTS TRANS;
-
 
 
 
@@ -43,6 +44,8 @@ CREATE TABLE BOOK
 	book_member_cnt int NOT NULL DEFAULT 1,
 	book_cost int NOT NULL,
 	book_name varchar(100) NOT NULL,
+	book_member_name varchar(50) NOT NULL,
+	book_member_tel int NOT NULL,
 	member_uid int,
 	room_uid int,
 	ticket_uid int,
@@ -87,13 +90,15 @@ CREATE TABLE MEMBER
 	member_uid int NOT NULL AUTO_INCREMENT,
 	member_name varchar(50),
 	member_id varchar(50) NOT NULL,
-	member_pw varchar(50) NOT NULL,
+	member_pw varchar(100) NOT NULL,
+	member_pwEncode varchar(100),
 	member_email varchar(50) NOT NULL,
 	member_gender varchar(2) CHECK(member_gender IN ('M','F')),
 	member_birth date,
 	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
-	member_tel varchar(50) NOT NULL,
-	member_enabled char(1),
+	member_tel varchar(50) NOT null default '010-0000-0000',
+	enabled char(1) default '1',
+	auth varchar(50) NOT null default 'ROLE_MEMBER',
 	PRIMARY KEY (member_uid),
 	UNIQUE (member_uid),
 	UNIQUE (member_id),
@@ -101,11 +106,32 @@ CREATE TABLE MEMBER
 );
 
 
-CREATE TABLE member_auth
+/*CREATE TABLE member_auth
 (
-	auth varchar(50),
-	member_id varchar(50)
-);
+	
+	member_id varchar(50) NOT NULL,
+	auth varchar(50) NOT null default 'ROLE_MEMBER',
+	CONSTRAINT fk_member_auth FOREIGN KEY(member_id) REFERENCES MEMBER(member_id)
+);*/
+
+
+/*INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('user00', '1234', '12345');
+INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('member00', '1234', '12346');
+INSERT INTO MEMBER (member_id, member_pw, member_email) VALUES ('admin00', '1234', '12347');
+
+INSERT INTO member_auth VALUES ('user00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('member00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('admin00', 'ROLE_MEMBER');
+INSERT INTO member_auth VALUES ('admin00', 'ROLE_ADMIN');
+INSERT INTO member_auth VALUES ('qkrwlals1', 'ROLE_MEMBER');*/
+
+-- 확인
+/*SELECT u.member_id, u.member_pw ,u.enabled, a.auth
+FROM MEMBER u, member_auth a
+WHERE u.member_id = a.member_id;*/
+
+select * from member;
+
 
 
 CREATE TABLE PLAN
@@ -143,7 +169,7 @@ CREATE TABLE REVIEW
 	review_uid int NOT NULL AUTO_INCREMENT,
 	review_title varchar(50) NOT NULL,
 	review_star int NOT NULL,
-	review_content varchar(100),
+	review_content text,
 	review_id varchar(50) NOT NULL,
 	book_uid int NOT NULL,
 	PRIMARY KEY (review_uid),
@@ -305,6 +331,19 @@ ALTER TABLE PLAN
 ;
 
 show tables;
+			  
+SELECT * FROM MEMBER;
+SELECT member_id username, auth FROM MEMBER WHERE member_id = 'alsry1';
+insert into member(
+	member_name,
+	member_id,
+	member_pw,
+	member_email, 
+	member_gender, 
+	member_birth,
+	member_pic,
+	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');
+
 
 
 INSERT INTO LOCAL(
@@ -318,4 +357,7 @@ INSERT INTO LOCAL(
 ('우도(해양도립공원)','소가 누워있는 형상을 하고 있는 제주의 가장 큰 부속섬','33.51949','126.95109','제주특별자치도 제주시 우도면 삼양고수물길 1','064-782-5671'),
 ('성산일출봉(UNESCO 세계자연유산)','바다위에 우뚝 솟아난 수성화산·유네스코 세계자연유산, 천연기념물 제420호, 올레1코스','33.462147','126.936424','제주특별자치도 서귀포시 성산읍 일출로 284-12','064-783-0959'),
 ('사려니숲길','제주 숨은 비경 31, 삼나무 향기에 취하며 걷는 아름답고 청정한 숲길','33.40845','126.63976','제주특별자치도 제주시 조천읍 교래리 산 137-1','064-900-8800');
+
+
+insert into authorities values ('user00', 'ROLE_USER');
 

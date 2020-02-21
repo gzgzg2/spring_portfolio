@@ -1,6 +1,6 @@
 package com.lec.mgb.mybatis.beans;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class UserActivDTO {
 	private int activ_uid;
@@ -26,23 +26,27 @@ public class UserActivDTO {
 	private String member_id;
 	private String member_pic;
 	
-	private Timestamp book_date;
+	private Date book_date;
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
+	private String book_member_name;
+	private int book_member_tel;
+	private String member_name;
+	private String member_email;
+	private String member_tel;
 	
 	// 기본 생성자
 	public UserActivDTO() {
 		super();
 	}
-	
-	
 
 	public UserActivDTO(int activ_uid, String activ_name, String activ_loc, String activ_info, String activ_shop_info,
 			String activ_pic, int activ_tel, int ticket_uid, String ticket_name, int ticket_first_cost,
 			int ticket_last_cost, String ticket_info, int review_uid, String review_title, int review_star,
 			String review_content, String review_id, String member_uid, String member_id, String member_pic,
-			Timestamp book_date, int book_member_cnt, int book_cost, String book_name) {
+			Date book_date, int book_member_cnt, int book_cost, String book_name, String book_member_name,
+			int book_member_tel, String member_name, String member_email, String member_tel) {
 		super();
 		this.activ_uid = activ_uid;
 		this.activ_name = activ_name;
@@ -68,11 +72,13 @@ public class UserActivDTO {
 		this.book_member_cnt = book_member_cnt;
 		this.book_cost = book_cost;
 		this.book_name = book_name;
+		this.book_member_name = book_member_name;
+		this.book_member_tel = book_member_tel;
+		this.member_name = member_name;
+		this.member_email = member_email;
+		this.member_tel = member_tel;
 	}
 
-
-
-	// getter / setter
 	public int getActiv_uid() {
 		return activ_uid;
 	}
@@ -233,11 +239,11 @@ public class UserActivDTO {
 		this.member_pic = member_pic;
 	}
 
-	public Timestamp getBook_date() {
+	public Date getBook_date() {
 		return book_date;
 	}
 
-	public void setBook_date(Timestamp book_date) {
+	public void setBook_date(Date book_date) {
 		this.book_date = book_date;
 	}
 
@@ -265,12 +271,45 @@ public class UserActivDTO {
 		this.book_name = book_name;
 	}
 
+	public String getBook_member_name() {
+		return book_member_name;
+	}
 
-	
-	
-	
-	
-	
-	
+	public void setBook_member_name(String book_member_name) {
+		this.book_member_name = book_member_name;
+	}
+
+	public int getBook_member_tel() {
+		return book_member_tel;
+	}
+
+	public void setBook_member_tel(int book_member_tel) {
+		this.book_member_tel = book_member_tel;
+	}
+
+	public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+	public String getMember_email() {
+		return member_email;
+	}
+
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
+
+	public String getMember_tel() {
+		return member_tel;
+	}
+
+	public void setMember_tel(String member_tel) {
+		this.member_tel = member_tel;
+	}
+
 	
 }

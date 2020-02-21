@@ -34,11 +34,11 @@
 <body>
 	<c:choose>
 		<c:when test="${not empty sessionScope.loginUid}">
-			<jsp:include page="topMenuIncludeMyPage.jsp"/>
+			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
 		</c:when>
 		
 		<c:otherwise>
-			<jsp:include page="topMenuIncludeMyPage.jsp"/>
+			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
 		</c:otherwise>
    	</c:choose>
    	

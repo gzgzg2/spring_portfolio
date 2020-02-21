@@ -103,38 +103,43 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 login_form">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/joinOk" method="POST">
 					<span class="login100-form-title">
 						JOIN
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="이름">
+						<input class="input100" type="text" name="member_name" placeholder="이름">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
                     
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="아이디">
+						<input class="input100" type="text" name="member_id" placeholder="아이디">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
                     
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="이메일">
+						<input class="input100" type="text" name="member_email" placeholder="이메일">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="text" name="usernmame" placeholder="전화번호">
+						<input class="input100" type="text" name="member_tel" placeholder="전화번호">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
                     </div>
                     
                     <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="password" name="pass" placeholder="비밀번호">
+						<input class="input100" type="password" name="member_pw" placeholder="비밀번호">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="password" name="pass" placeholder="비밀번호 체크">
+						<input class="input100" type="password" placeholder="비밀번호 체크">
 						<span class="focus-input100"></span>
                     </div>
 
@@ -148,9 +153,8 @@
                     </div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							JOIN
-						</button>
+						<input type="submit" value="회원가입"/>
+							
 					</div>
 
 					<div class="flex-col-c p-t-170 p-b-40">

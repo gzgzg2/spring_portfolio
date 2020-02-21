@@ -2,6 +2,8 @@ package com.lec.mgb.command;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 import com.lec.mgb.c.C;
@@ -21,6 +23,7 @@ public class UserActivViewCommand implements Command {
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("review", review);
+		model.addAttribute("member_uid", 1);
 	}
 
 }

@@ -5,10 +5,15 @@
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.MyPageDAO">
 	<select id="selectByUid" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
-		SELECT member_uid uid, member_name name,
-			   member_id id, member_pw pw, member_email email,
-			   member_gender gender, member_birth birth, member_pic pic,
-			   member_tel tel FROM MEMBER WHERE member_uid = #{param1};
+		SELECT member_uid member_uid, member_name member_name,
+			   member_id member_id, member_pw member_pw, member_email member_email,
+			   member_gender member_gender, member_birth member_birth, member_pic member_pic,
+			   member_tel member_tel FROM MEMBER WHERE member_uid = #{param1};
+	</select>
+	
+	<select id="selectMember" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
+		SELECT member_uid member_uid, member_name member_name, member_pic member_pic
+			   FROM MEMBER WHERE member_id = #{param1};
 	</select>
 	
 	<update id="mypageUpdate" flushCache="true">

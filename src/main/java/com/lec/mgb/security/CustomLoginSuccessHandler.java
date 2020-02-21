@@ -7,35 +7,72 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.ui.Model;
+
+import com.lec.mgb.c.C;
+import com.lec.mgb.mybatis.beans.MyPageDAO;
+import com.lec.mgb.mybatis.beans.MyPageInfoDTO;
+import com.lec.mgb.mybatis.beans.UserJoinLoginDAO;
 
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
-
-	// ë¡œê·¸?¸ ì§í›„?— ?ˆ˜?–‰?˜?Š” ì½”ë“œ
+	
+	private SqlSession sqlSession;
+	
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+		C.sqlSesssion = sqlSession;
+	}
+		
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
-		System.out.println("ë¡œê·¸?¸ ?„±ê³?!");
 		
-		// Authentication ê°ì²´ë¥? ?´?š©?•´?„œ ?‚¬?š©?ê°? ê°?ì§? ëª¨ë“  ê¶Œí•œ?„ ë¬¸ì?—´ë¡? ì²´í¬ ê°??Š¥
+		System.out.println("ìš°ì—");
+		
 		List<String> roleNames = new ArrayList<String>();
 		authentication.getAuthorities().forEach(authority -> {
 			roleNames.add(authority.getAuthority());
-		});	//ì»¤ë„¥?…˜ ê°ì²´ë¥? ë¦¬í„´
+		});	
 		
 		System.out.println("ROLE NAMES: " + roleNames);
 		
-		// ë§Œì•½ ?‚¬?š©?ê°? ROLE_ADMIN ê¶Œí•œ?„ ê°?ì¡Œë‹¤ë©? ë¡œê·¸?¸?›„ ê³§ë°”ë¡? /sample/admin ?œ¼ë¡? ?´?™
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect(request.getContextPath() + "/sample/admin");
+			response.sendRedirect(request.getContextPath() + "/admin/admin-BookingManage");
 			return;
 		}
 		
+		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			response.sendRedirect(request.getContextPath() + "/sample/member");
+			HttpSession httpSession = request.getSession(true);
+			MyPageInfoDTO dto = new MyPageInfoDTO();
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			UserDetails userDetails = (UserDetails)principal;
+			
+			MyPageDAO dao = C.sqlSesssion.getMapper(MyPageDAO.class);
+			String member_id = userDetails.getUsername();
+			dto = dao.selectMember(member_id);
+			
+			System.out.println(dao.selectMember(member_id));
+			System.out.println(member_id);
+			httpSession.setAttribute("loginUid", dto.getMember_uid());
+			httpSession.setAttribute("userPic", dto.getMember_pic());
+			
+			System.out.println(httpSession.getAttribute("loginUid"));
+			System.out.println(httpSession.getAttribute("userPic"));
+			
+			System.out.println(request.getContextPath() + "/user/mypage/mypageInfo");
+			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo");
 			return;
 		}
 		
