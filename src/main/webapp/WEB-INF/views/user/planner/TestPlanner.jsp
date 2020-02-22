@@ -12,12 +12,17 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>MGB_Planner 플래너작성</title>
 
 <link href="${pageContext.request.contextPath}/USERCSS/mainplanner.css"
 	rel="stylesheet" text="text/css">
+	  <script>
+  </script>
 </head>
 <body>
 	<div
@@ -119,15 +124,20 @@
 									class="metismenu-icon pe-7s-plane"></i> Guest님의 여행목록입니다.
 							</a></li>
 						</ul>
+						<div class = "planList"></div>
 					</div>
+					
 				</div>
+				
 			</div>
-			<div class="app-main__outer">
+			
+			
+			
 				<div class="app-main__inner" id="map">
 					<div class="search-wrapper">
 						<div class="input-holder">
 							<input type="text" class="search-input" placeholder="지역을 검색하세요">
-							<button class="search-icon">
+							<button class="search-icon" onclick="Search()">
 								<span></span>
 							</button>
 						</div>
@@ -157,98 +167,171 @@
 							</div>
 						</div>
 					</div>
-
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
-					<script>
-						var locations = new Array();
-						var container = document.getElementById('map');
-						var options = {
-							center : new kakao.maps.LatLng(33.506964,
-									126.493271),
-							level : 10
-						};
-						var map = new kakao.maps.Map(container, options);
-
-						// AJAX컨트롤
-						var url = "${pageContext.request.contextPath}/AJAXLocal/list";
-						$.ajax({
-							url : url,
-							type : "GET",
-							cache : false,
-							success : function(data, status) {
-								if (status == "success") {
-									parseJSON(data);
-								}
-								;
-							}
-						});//end ajax
-
-						function parseJSON(jsonObj) {
-							var count = jsonObj.count;
-							var list = jsonObj.list;
-							var arrLat = new Array();
-							var arrLng = new Array();
-
-							for (var i = 0; i < count; i++) {
-								// 마커 좌표 배열담아주기
-								locations.push({
-									content : '<div style="padding:5px;">'+list[i].local_name+'<br></div>',
-									latlng : new kakao.maps.LatLng(
-											parseFloat(list[i].local_lat),
-											parseFloat(list[i].local_lng))
-								});
-								console.log(locations[i]);
-							}
-							console.log(locations.length);
-							var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
-
-							for (var i = 0; i < locations.length; i++) {
-
-								// 마커 이미지의 이미지 크기 입니다
-								var imageSize = new kakao.maps.Size(35, 35);
-
-								// 마커 이미지를 생성합니다    
-								var markerImage = new kakao.maps.MarkerImage(
-										imageSrc, imageSize);
-
-								// 마커를 생성합니다
-								var marker = new kakao.maps.Marker({
-									map : map, // 마커를 표시할 지도
-									position : locations[i].latlng, // 마커를 표시할 위치
-									image : markerImage
-								// 마커 이미지 
-								});
-
-								// 인포윈도우를 생성합니다
-								var infowindow = new kakao.maps.InfoWindow({
-									content : locations[i].content
-								});
-
-								// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-							    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-								(function(marker, infowindow) {
-							        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-							        kakao.maps.event.addListener(marker, 'click', function() {
-							            infowindow.open(map, marker);
-							        });
-
-							        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-							        kakao.maps.event.addListener(marker, 'mouseout', function() {
-							            infowindow.close();
-							        });
-							    })(marker, infowindow);
-							
-
-							}
-						} //end parseJSON
-					</script>
 				</div>
 			</div>
-
-
 		</div>
-	</div>
+	
+
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
+	<script>
+		var locations = new Array();
+		var container = document.getElementById('map');
+		var options = {
+			center : new kakao.maps.LatLng(33.506964, 126.493271),
+			level : 10
+		};
+		var map = new kakao.maps.Map(container, options);
+
+		// AJAX컨트롤
+		var url = "${pageContext.request.contextPath}/AJAXLocal/list";
+		$.ajax({
+			url : url,
+			type : "GET",
+			cache : false,
+			success : function(data, status) {
+				if (status == "success") {
+					parseJSON(data);
+				}
+				;
+			}
+		});//end ajax
+
+		function parseJSON(jsonObj) {
+			var count = jsonObj.count;
+			var list = jsonObj.list;
+			var arrLat = new Array();
+			var arrLng = new Array();
+			
+			
+			for (var i = 0; i < count; i++) {
+				// content내용작성
+				var content = document.createElement('div')
+				content.className = 'wrap';
+				content.innerHTML = '    <div class="info">' + 
+	           						'        <div class="title">' + list[i].local_name + 
+	          						'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	            					'        </div>' + 
+	            					'        <div class="body">' + 
+	            					'            <div class="img">' +
+	            					'                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">' +
+	            					'           </div>' + 
+	            					'            <div class="desc">' + 
+	            					'                <div class="ellipsis">'+list[i].local_hello+'</div>' + 
+	            					'                <div class="jibun ellipsis">tel : '+list[i].local_tel+'</div>' + 
+	            					'                <div><button class="Add" onclick="Add('+list[i].local_uid+')">지역 추가하기</button></div>' + 
+	            					'            </div>' + 
+	            					'        </div>' + 
+	            					'    </div>';
+				
+	           	// 마커 좌표 배열담아주기
+				locations.push({
+					content :content,
+					latlng : new kakao.maps.LatLng(
+							parseFloat(list[i].local_lat),
+							parseFloat(list[i].local_lng)),
+					local_name : list[i].local_name
+				});
+				
+			}
+			
+			
+			var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
+
+			for (var i = 0; i < locations.length; i++) {
+
+				// 마커 이미지의 이미지 크기 입니다
+				var imageSize = new kakao.maps.Size(25, 25);
+
+				// 마커 이미지를 생성합니다    
+				var markerImage = new kakao.maps.MarkerImage(imageSrc,
+						imageSize);
+
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map : map, // 마커를 표시할 지도
+					position : locations[i].latlng, // 마커를 표시할 위치
+					image : markerImage,
+					title : locations[i].local_name
+					
+				// 마커 이미지 
+				});
+				
+
+				// 인포윈도우를 생성합니다
+				var overlay = new kakao.maps.CustomOverlay({
+					content : locations[i].content,
+					map: map,
+					position: marker.getPosition(),
+					clickable:true
+				});
+				overlay.setMap(null);
+
+				// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+				// 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+				(function(marker, overlay) {
+					// 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+					kakao.maps.event.addListener(marker, 'click', function() {
+						overlay.setMap(map);
+						map.setLevel(9);
+						map.setCenter(marker.getPosition());
+					});
+
+					// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+					kakao.maps.event.addListener(map, 'click', function () {
+						overlay.setMap(null);
+					});
+				})(marker, overlay);	
+			}
+		} //end parseJSON
+	
+		//Add 버튼이 눌렀을때 DIV추가
+		function Add(local_uid) {
+			
+			var url = "${pageContext.request.contextPath}/AJAXLocal/AddPlan/"+local_uid+"";
+			$.ajax({
+				url : url,
+				type : "GET",
+				cache : false,
+				success : function(data, status) {
+					if (status == "success") {
+						planList(data);
+					};
+				}
+			});//end ajax
+			
+		// DIV내용 구성
+		function planList(jsonObj) {
+			var html = 
+			'<ul style="margin-top:10px"><li>여행지 : '+jsonObj.local_name+'</li>'
+			+ '<li>상세주소 : 상세주소는 안알랴쥼 ㅎㅎ</li></ul>';
+			
+			$('.planList').append(html);
+			}
+		};
+
+		 $(document).ready(function(){
+				$('.planList').sortable();
+				$('.planList').disableSelection();
+		 });
+		// 검색기능
+		function Search() {
+			
+			
+		}
+		
+		// 오버레이 삭제
+		function closeOverlay() {
+			overlay.setMap(null);
+			}
+	</script>
+
+
+
+
+
+
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/USERCSS/assets/scripts/main.js"></script>
 </body>
