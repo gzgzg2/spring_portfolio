@@ -54,17 +54,30 @@
 			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.ticket_uid});
 	</insert>
 	
-	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
-			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			b.book_uid
 		FROM
 			book b, member m, ticket t, activ a
 		WHERE
-			b.member_uid = 1
+			b.member_uid = #{member_uid}
 			and b.ticket_uid = t.ticket_uid
 			and t.activ_uid = a.activ_uid
 		ORDER BY
 			b.book_uid desc
+		LIMIT 1;
+	</select>
+	
+	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+		FROM
+			book b, member m, activ a, ticket t
+		WHERE
+			b.member_uid = #{member_uid}
+			and b.book_uid = #{book_uid}
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
 		LIMIT 1;
 	</select>
 </mapper>

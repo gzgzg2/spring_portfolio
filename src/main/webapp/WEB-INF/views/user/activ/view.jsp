@@ -13,12 +13,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
 
-    <!-- Calendar -->
-	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>
-	<link rel="stylesheet" href="./calendar_trial/codebase/calendar.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/index.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/calendar.css?v=6.4.1">
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -153,7 +147,6 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/elegant-icons.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/flaticon.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/owl.carousel.min.css">
@@ -162,6 +155,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/magnific-popup.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
+    <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -177,8 +171,8 @@
                         <span>액티비티</span>
                         <h2>${dto[0].activ_name }</h2>
                         <ul>
-                            <li class="b-time" style="color: white"><i class="icon_clock_alt"></i> ${dto[0].activ_loc }</li>
-                            <li style="color: white"><i class="icon_phone"></i> ${dto[0].activ_tel }</li>
+                            <li class="b-time" style="color: white"><i class="fas fa-map-marker-alt"></i> ${dto[0].activ_loc }</li>
+                            <li style="color: white"><i class="fas fa-phone-alt"></i> ${dto[0].activ_tel }</li>
                         </ul>
                         <div>
                             <button onclick="goTicket()">
@@ -258,13 +252,12 @@
                         </div>
                         <div class="comment-option">
                             <h3>리뷰</h3>
+                            <c:set var="total" value="0"/>
+                            <c:forEach var="review" items="${review }">
+                            	<c:set var="total" value="${total + review.review_star }"/>
+                            </c:forEach>
                             <div class="star_avg">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <span>10</span>
+                                <span><c:out value="${total / fn:length(review) }"/></span>
                             </div>
                             <h5>전체 리뷰 ${fn:length(review) }개</h5>
                             <c:forEach var="review" items="${review }">
@@ -300,8 +293,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-1.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Travel Trip</span>
                             <h4><a href="#">Tremblant In Canada</a></h4>
@@ -309,8 +302,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-2.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Camping</span>
                             <h4><a href="#">Choosing A Static Caravan</a></h4>
@@ -318,8 +311,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-3.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Event</span>
                             <h4><a href="#">Copper Canyon</a></h4>
@@ -341,7 +334,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img src="${pageContext.request.contextPath }/resources/img/footer-logo.png" alt="">
                                 </a>
                             </div>
                             <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
@@ -464,7 +457,7 @@
             	$(this).parent().find(".book_member_cnt").text(book_member_cnt - 1)
             })
             
-            $(".bd-hero-text > ul > li:nth-child(2)").text(change($(".bd-hero-text > ul > li:nth-child(2)").text()));
+            $(".bd-hero-text > ul > li:nth-child(2)").html(change($(".bd-hero-text > ul > li:nth-child(2)").html()));
         })
         function goTicket() {
             $(".ativ_info").css("display", "none")
@@ -475,6 +468,22 @@
         function change(num) {
         	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
         }
+        $(document).ready(function() {
+        	var star = $(".star_avg span").text();
+        	var icon = "";        	
+        	star = Math.floor(star);
+        	
+        	for (i = 0; i < Math.floor(star / 2); i++) { icon += "<i class='fas fa-star'></i>"; }
+        	if (star % 2 == 1) icon += "<i class='fas fa-star-half-alt'></i>";
+        	icon += ("<span>" + $(".star_avg span").text() + "</span>");
+        	
+        	$(".star_avg").html(icon);
+        	
+        	star = 5 - $(".star_avg i").length;
+        	for (i = 0; i < star; i++) { 
+        		$(".star_avg span").before("<i class='far fa-star'></i>"); 
+       		}
+        })
     </script>
 
 </body>

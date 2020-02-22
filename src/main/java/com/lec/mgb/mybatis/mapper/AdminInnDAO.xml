@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.AdminInnDAO">
+	<select id="selectInn" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT inn_name FROM inn;
+	</select>
+	<insert id="insertInn">
+		INSERT into INN(inn_name, inn_loc, inn_ment, inn_info, inn_pic, inn_sep)
+		VALUES(#{inn_name}, #{inn_loc}, #{inn_ment}, #{inn_info}, #{inn_pic}, #{inn_sep})
+	</insert>
+	<update id="updateInn">
+		UPDATE INN
+		SET
+			inn_loc = #{inn_loc},
+			inn_ment = #{inn_ment},
+			inn_info = #{inn_info},
+			inn_pic = #{inn_pic}
+		WHERE
+			inn_name = #{inn_name}
+	</update>
+	<insert id="insertRoom">
+		INSERT into room(room_name, room_first_cost, room_pic, room_last_cost, inn_uid)
+		VALUES(#{room_name}, #{room_first_cost}, #{room_pic}, #{room_last_cost}, #{inn_uid})
+	</insert>
+	<select id="selectRoomUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			r.room_uid
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+		AND
+			i.inn_uid = #{inn_uid}
+		LIMIT
+			1
+	</select>
+	<insert id="insertBook">
+		INSERT INTO book(book_date, book_member_cnt, book_cost, book_name, member_uid, room_uid, book_member_name, book_member_tel)
+		VALUES("2020-01-01", 1, 1, #{book_name}, 1, #{room_uid}, #{book_member_name}, 1)
+	</insert>
+	<insert id="insertReview">
+		INSERT INTO review(review_title, review_star, review_content, review_id, book_uid)
+		VALUES(#{review_title}, #{review_star}, #{review_content}, #{review_id}, #{book_uid})
+	</insert>
+	<select id="selectBookUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT book_uid FROM BOOK ORDER BY book_uid DESC LIMIT 1
+	</select>
+	<select id="selectInnUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT inn_uid FROM INN ORDER BY inn_uid DESC LIMIT 1
+	</select>
+</mapper>

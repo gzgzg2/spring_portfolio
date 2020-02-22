@@ -191,14 +191,14 @@
 
                 <div class="app-page-title">
 
-                    <h2>숙소 관리</h2>
+                    <h2>액티비티 관리</h2>
                     
                 </div>
 
                 <div class="app-main__inner-crawling">
 
                     <div class="admin-search-motel-crawling-btn">
-                        <input type="button" class="mb-2 mr-2 btn btn-primary active" value="숙소 정보 가져오기">
+                        <input type="button" onclick="location.href='./activCrawl'" class="mb-2 mr-2 btn btn-primary active" value="액티비티 정보 가져오기">
                     </div>
 
                     <form>

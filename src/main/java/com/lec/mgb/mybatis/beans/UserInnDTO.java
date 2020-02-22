@@ -26,13 +26,14 @@ public class UserInnDTO {
 	private String member_pic;
 	
 	private String member_name;
-	private int member_tel;
+	private String member_tel;
+	private int book_uid;
 	private Date book_date;
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
 	private String book_member_name;
-	private int book_member_tel;
+	private String book_member_tel;
 	private int member_uid;
 	
 	// 기본 생성자
@@ -43,8 +44,8 @@ public class UserInnDTO {
 	public UserInnDTO(int inn_uid, String inn_name, String inn_loc, String inn_ment, String inn_info, int inn_sep,
 			String inn_pic, int room_uid, String room_name, String room_info, String room_pic, int room_first_cost,
 			int room_last_cost, int review_uid, String review_title, int review_star, String review_content,
-			String member_id, String member_pic, String member_name, int member_tel, Date book_date,
-			int book_member_cnt, int book_cost, String book_name, String book_member_name, int book_member_tel,
+			String member_id, String member_pic, String member_name, String member_tel, int book_uid, Date book_date,
+			int book_member_cnt, int book_cost, String book_name, String book_member_name, String book_member_tel,
 			int member_uid) {
 		super();
 		this.inn_uid = inn_uid;
@@ -68,6 +69,7 @@ public class UserInnDTO {
 		this.member_pic = member_pic;
 		this.member_name = member_name;
 		this.member_tel = member_tel;
+		this.book_uid = book_uid;
 		this.book_date = book_date;
 		this.book_member_cnt = book_member_cnt;
 		this.book_cost = book_cost;
@@ -237,12 +239,20 @@ public class UserInnDTO {
 		this.member_name = member_name;
 	}
 
-	public int getMember_tel() {
+	public String getMember_tel() {
 		return member_tel;
 	}
 
-	public void setMember_tel(int member_tel) {
+	public void setMember_tel(String member_tel) {
 		this.member_tel = member_tel;
+	}
+
+	public int getBook_uid() {
+		return book_uid;
+	}
+
+	public void setBook_uid(int book_uid) {
+		this.book_uid = book_uid;
 	}
 
 	public Date getBook_date() {
@@ -285,11 +295,11 @@ public class UserInnDTO {
 		this.book_member_name = book_member_name;
 	}
 
-	public int getBook_member_tel() {
+	public String getBook_member_tel() {
 		return book_member_tel;
 	}
 
-	public void setBook_member_tel(int book_member_tel) {
+	public void setBook_member_tel(String book_member_tel) {
 		this.book_member_tel = book_member_tel;
 	}
 
@@ -301,5 +311,7 @@ public class UserInnDTO {
 		this.member_uid = member_uid;
 	}
 
+	
+	
 	
 }

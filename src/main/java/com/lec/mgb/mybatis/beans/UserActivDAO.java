@@ -9,6 +9,7 @@ public interface UserActivDAO {
 	public UserActivDTO [] selectMemberByUid(int member_uid);
 	public UserActivDTO [] selectTicketNameByUid(int ticket_uid);
 	public int insertBook(@Param("member_uid")int member_uid, @Param("dto")UserActivDTO dto);
-	public UserActivDTO selectCheckNameByUid(int member_uid);
+	public UserActivDTO selectBookUidByUid(int member_uid);
+	public UserActivDTO selectCheckByUid(@Param("member_uid")int member_uid, @Param("book_uid")int book_uid);
 	
 }

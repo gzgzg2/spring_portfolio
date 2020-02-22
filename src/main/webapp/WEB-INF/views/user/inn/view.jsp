@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -22,8 +23,12 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 
     <style>
+    	.star_avg span {
+    		padding-left: 5px;
+    	}
     	.dhx_calendar.dhx_widget.dhx_widget--bordered { margin: 0 auto; }
     	#google_maps {
     		display: none;
@@ -871,6 +876,10 @@
 <body>
     <!-- Header Section Begin -->
 	<jsp:include page="../userHeader.jsp"/>
+	<c:set var="total" value="0"/>
+    <c:forEach var="review" items="${review }">
+    	<c:set var="total" value="${total + review.review_star }"/>
+    </c:forEach>
 
     <!-- Blog Details Hero Section Begin -->
     <section style="padding-top: 50px; height: 350px;" class="blog-details-hero set-bg">
@@ -885,7 +894,7 @@
 					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
-                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span>만족해요</p>
+                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>만족해요</p>
                     <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
                     <div class="comment" style="background: #ececec; padding: 12px 17px;">
                         <strong>사장님 한마디</strong>
@@ -950,12 +959,7 @@
                         <div class="comment-option">
                             <h3>리뷰</h3>
                             <div class="star_avg">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <span>10</span>
+                                <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
                             <h5>전체 리뷰 ${fn:length(review) }개</h5>
                             <c:forEach var="review" items="${review }">
@@ -966,7 +970,7 @@
 	                                <div class="sc-text">
 	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
 	                                    <div style="padding: 10px;">
-		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
+		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.book_member_name }</p>
 		                                    <p>${review.review_content }</p>	                                    
 	                                    </div>
 	                                </div>
@@ -990,8 +994,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-1.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Travel Trip</span>
                             <h4><a href="#">Tremblant In Canada</a></h4>
@@ -999,8 +1003,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-2.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Camping</span>
                             <h4><a href="#">Choosing A Static Caravan</a></h4>
@@ -1008,8 +1012,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
+                <div class="col-sm-4">
+                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-3.jpg">
                         <div class="bi-text">
                             <span class="b-tag">Event</span>
                             <h4><a href="#">Copper Canyon</a></h4>
@@ -1030,7 +1034,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img src="${pageContext.request.contextPath }/resources/img/footer-logo.png" alt="">
                                 </a>
                             </div>
                             <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
@@ -1214,6 +1218,23 @@
         	
         	return false;
         }
+        
+        $(document).ready(function() {
+        	var star = $(".star_avg span").text();
+        	var icon = "";        	
+        	star = Math.floor(star);
+        	
+        	for (i = 0; i < Math.floor(star / 2); i++) { icon += "<i class='fas fa-star'></i>"; }
+        	if (star % 2 == 1) icon += "<i class='fas fa-star-half-alt'></i>";
+        	icon += ("<span>" + $(".star_avg span").text() + "</span>");
+        	
+        	$(".star_avg").html(icon);
+        	
+        	star = 5 - $(".star_avg i").length;
+        	for (i = 0; i < star; i++) { 
+        		$(".star_avg span").before("<i class='far fa-star'></i>"); 
+       		}
+        })
     </script>
 </body>
 

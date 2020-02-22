@@ -55,8 +55,8 @@
         .bd-hero-text div button {
             color: white;
             font-weight: bold;
-            width: 100%;
-            margin-top: 10px;
+            width: 60%;
+            margin: 10px auto 0px auto;
             padding: 10px 20px;
             border: 1px solid #dfa974;
             border-radius: 5px;
@@ -141,7 +141,7 @@
 
     <!-- Blog Details Hero Section Begin -->
     <section class="blog-details-hero set-bg" data-setbg="${dto[0].tour_pic }">
-        <div class="container">
+        <div style="width: 100%;">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bd-hero-text">
@@ -149,7 +149,7 @@
                         <h2 style="width: 100%">${dto[0].tour_name }</h2>
                         <ul>
                             <li class="b-time"><i class="icon_clock_alt"></i> ${dto[0].tour_period }박 ${dto[0].tour_period + 1 }일</li>
-                            <li><i class="icon_star"></i> 9.5</li>
+                            <li><i class='fas fa-star'></i> 9.5</li>
                         </ul>
                         <div>
                         	<c:if test="${empty sessionScope.loginUid }"><button style="background-color: #bbb; border-color: #bbb;" disabled="disabled">예약은 로그인 후 이용 가능합니다</button></c:if>
@@ -181,13 +181,12 @@
                         </div>
                         <div class="comment-option">
                             <h3>리뷰</h3>
+                            <c:set var="total" value="0"/>
+                            <c:forEach var="review" items="${review }">
+                            	<c:set var="total" value="${total + review.review_star }"/>
+                            </c:forEach>
                             <div class="star_avg">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <span>10</span>
+                                <span><c:out value="${total / fn:length(review) }"/></span>
                             </div>
                             <h5>전체 리뷰 ${fn:length(review) }개</h5>
                             <c:forEach var="review" items="${review }">
@@ -435,6 +434,22 @@
     		
     		return false;
     	}
+    	$(document).ready(function() {
+        	var star = $(".star_avg span").text();
+        	var icon = "";        	
+        	star = Math.floor(star);
+        	
+        	for (i = 0; i < Math.floor(star / 2); i++) { icon += "<i class='fas fa-star'></i>"; }
+        	if (star % 2 == 1) icon += "<i class='fas fa-star-half-alt'></i>";
+        	icon += ("<span>" + $(".star_avg span").text() + "</span>");
+        	
+        	$(".star_avg").html(icon);
+        	
+        	star = 5 - $(".star_avg i").length;
+        	for (i = 0; i < star; i++) { 
+        		$(".star_avg span").before("<i class='far fa-star'></i>"); 
+       		}
+        })
     </script>
 </body>
 

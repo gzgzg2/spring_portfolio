@@ -101,10 +101,10 @@
                 <div class="col-lg-8">
                     <div class="blog-details-text">
                         <div class="reserve">
-                            <form action="${pageContext.request.contextPath}/user/tour/check" method="POST" onsubmit="return chkSubmit()">
+                            <form action="${pageContext.request.contextPath}/user/tour/reserveOk" method="POST" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="title">
-                                    <h2>투어 예약${book_member_cnt }</h2>
+                                    <h2>투어 예약</h2>
                                 </div>
                                 <div class="info">
                                     <input type="hidden" name="book_name" value="${tour[0].tour_name }" />

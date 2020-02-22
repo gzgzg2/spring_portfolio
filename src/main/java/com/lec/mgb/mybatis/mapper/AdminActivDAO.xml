@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.AdminActivDAO">
+	<select id="selectActiv" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT activ_name, activ_uid FROM activ;
+	</select>
+	<insert id="insertActiv">
+		INSERT into ACTIV(activ_name, activ_loc, activ_info, activ_shop_info, activ_pic, activ_tel)
+		VALUES(#{activ_name}, #{activ_loc}, #{activ_info}, #{activ_shop_info}, #{activ_pic}, #{activ_tel})
+	</insert>
+	<update id="updateActiv">
+		UPDATE ACTIV
+		SET
+			activ_loc = #{activ_loc},
+			activ_info = #{activ_info},
+			activ_shop_info = #{activ_shop_info},
+			activ_pic = #{activ_pic},
+			activ_tel = #{activ_tel}
+		WHERE
+			activ_name = #{activ_name}
+	</update>
+	<select id="selectTicket" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			ticket_name 
+		FROM
+			ticket 
+		WHERE 
+			ticket_name = #{ticket_name}
+			and activ_uid = #{activ_uid};
+	</select>
+	<insert id="insertTicket">
+		INSERT into TICKET(ticket_name, ticket_first_cost, ticket_last_cost, ticket_info, activ_uid)
+		VALUES(#{ticket_name}, #{ticket_first_cost}, #{ticket_last_cost}, #{ticket_info}, #{activ_uid})
+	</insert>
+	<update id="updateTicket">
+		UPDATE ticket
+		SET
+			ticket_first_cost = #{ticket_first_cost},
+			ticket_last_cost = #{ticket_last_cost},
+			ticket_info = #{ticket_info}
+		WHERE
+			ticket_name = #{ticket_name}
+	</update>
+	<select id="selectActivUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT activ_uid FROM activ ORDER BY activ_uid DESC LIMIT 1
+	</select>
+</mapper>

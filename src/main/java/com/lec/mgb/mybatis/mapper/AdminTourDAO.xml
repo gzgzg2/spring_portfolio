@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.AdminTourDAO">
+	<select id="selectTourName" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT tour_name FROM tour;
+	</select>
+	<insert id="insertTour">
+		INSERT into TOUR(tour_name, tour_cost, tour_period, tour_info, tour_pic)
+		VALUES(#{tour_name}, #{tour_cost}, #{tour_period}, #{tour_info}, #{tour_pic});
+	</insert>
+	<update id="updateTour">
+		UPDATE 
+			TOUR
+		SET 
+			tour_cost = #{tour_cost},
+			tour_period = #{tour_period},
+			tour_info = #{tour_info},
+			tour_pic = #{tour_pic}
+		WHERE
+			tour_name = #{tour_name}
+	</update>
+</mapper>

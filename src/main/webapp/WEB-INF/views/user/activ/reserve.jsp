@@ -101,7 +101,7 @@
                 <div class="col-lg-8">
                     <div class="blog-details-text">
                         <div class="reserve">
-                            <form action="${pageContext.request.contextPath}/user/activ/check" method="POST" onsubmit="return chkSubmit()">
+                            <form action="${pageContext.request.contextPath}/user/activ/reserveOk" method="POST" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="title">
                                     <h2>액티비티 예약</h2>
