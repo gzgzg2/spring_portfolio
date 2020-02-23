@@ -14,7 +14,9 @@
 		GROUP BY
 		   t.tour_uid
 		ORDER BY
-		   r.review_star DESC;
+		   r.review_star DESC
+		LIMIT
+			#{fromRow}, #{writePages};
 	</select>
 
 	<select id="selectTourByCostHigh" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
@@ -26,7 +28,9 @@
 		GROUP BY
 		   t.tour_uid
 		ORDER BY
-		   t.tour_cost DESC;
+		   t.tour_cost DESC
+		LIMIT
+		   #{fromRow}, #{writePages};
 	</select>
 	
 	<select id="selectTourByCostLow" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
@@ -38,7 +42,9 @@
 		GROUP BY
 		   t.tour_uid
 		ORDER BY
-		   t.tour_cost ASC;
+		   t.tour_cost ASC
+		LIMIT
+		   #{fromRow}, #{writePages};
 	</select>
 
 	<select id="selectTourByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">

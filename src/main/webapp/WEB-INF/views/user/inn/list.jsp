@@ -29,6 +29,51 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style_rami.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/swiper.min.css">
+    
+    <style>
+      .swiper2 > .swiper-wrapper {
+      	height: 30%;
+      }
+      html, body {
+        position: relative;
+        height: 100%;
+      }
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+      }
+      .swiper-container {
+        width: 100%;
+        height: 1000px;
+      }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+  
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+      .swiper-slide h5, .swiper-slide p {
+      	text-align: left;
+      }
+    </style>
     
     <style>
     	.navYam2 > ul > li:hover { cursor: pointer; }
@@ -910,7 +955,7 @@ legend {
 }
 
 .s003 form .inner-form .input-field.first-wrap {
-  width: 150px;
+  width: 105px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -1124,28 +1169,39 @@ legend {
                     <div class="col-lg-6">
                         <div class="ap-title">
                             <div id="siva3">
-                                <h2 id="hotel1">호텔</h2>
-                                <nav class="navYam2">
-                                    <ul>
-                                   		<c:forEach var="dto" items="${dto }">
-	                                        <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
-	                                        	<div class="item_img">
-	                                        		<img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
-	                                        	</div>
-	                                        	<div class="item_info" style="padding: 7px;">
-	                                        		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
-	                                        		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
-	                                        		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
-	                                        	</div>
-	                                        </li>
-                                   		</c:forEach>
-                                    </ul>
-                                </nav>
+                              <h2 id="hotel1">호텔</h2>
+                                <div class="swiper-container swiper1">
+                                    <div class="swiper-wrapper">
+                                    	<c:forEach var="dto" items="${dto }" varStatus="status">
+	                                    	<c:if test="${status.count % 12 == 1 || status.count == 1 }">
+	                                    		<div class="swiper-slide">
+					                              <nav class="navYam2">
+					                                  <ul>
+					                                  	</c:if>
+					                                      <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+					                                      	<div class="item_img">
+					                                      		<img src="${dto.inn_pic }"/>
+					                                      	</div>
+					                                      	<div class="item_info" style="padding: 7px;">
+					                                      		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+					                                      		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+					                                      		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+					                                      	</div> 
+					                                      </li>
+					                                    <c:if test="${status.count % 12 == 0 && status.count != 0 }">
+				                                  	  </ul>
+					                              </nav>
+				                              </div>
+				                           </c:if>
+				                    	</c:forEach>
+			                    	</div>
+			                	</div>
+			                  <div class="swiper-pagination swiper-pagination1"></div>
                             </div>
                         </div>
-                    </div>    
-            </div>
-           
+                    </div>
+            	</div>    
+            </div>   
         </div>
     </section>
     <!-- About Us Page Section End -->
@@ -1153,20 +1209,64 @@ legend {
     <!-- Video Section Begin -->
     <section class="Hot2">
             <div class="section-title">
-                <span>Our Gallery</span>
-                <h2>Discover Our Work</h2>
+                <span>할인 중인 숙소입니다</span>
+                <h2>할인 숙소</h2>
             </div>
             
             <div id="hotId2">
-                <div class="hothot2"></div>
-
-                <div class="hothot2"></div>
-
-                <div class="hothot2"></div>
+	            <div class="swiper-container swiper2">
+	                <div class="swiper-wrapper">
+		            	<c:forEach var="dto" items="${sale }" varStatus="status">
+		            		<c:if test="${status.count % 3 == 1 || status.count == 1 }"><div class="swiper-slide"></c:if>
+				                <div class="hothot2">
+					                <div class="item_img">
+					              		<img src="${dto.inn_pic }"/>
+					              	</div>
+					              	<div class="item_info" style="padding: 7px;">
+					              		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+					              		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+					              		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_first_cost }</p>
+					              		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+					              	</div> 
+				                </div>
+				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
+				    	</c:forEach>
+	                </div>
+	            </div>
+	            <div class="swiper-pagination swiper-pagination2"></div>
             </div>
-
     </section>
-
+	
+	<!-- 액티비티 -->
+    <section class="sivaHotH">
+        <div id="siva5">
+            <h2 id="sivaH5">인기 숙소</h2>
+            <div id="button1">
+                
+            </div>
+            <div id="navSale">
+                <nav id="navYamHot1">
+                    <c:forEach var="dto" items="${popular }" varStatus="status">
+	                	<c:if test="${status.count % 5 == 1 || status.count == 1 }">
+	                		<ul></c:if>
+	                			<li>
+	                				<div class="item_img">
+                                  		<img src="${dto.inn_pic }"/>
+                                  	</div>
+                                  	<div class="item_info" style="padding: 7px;">
+                                  		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                  		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                  		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                  	</div> 
+	                			</li>
+                			<c:if test="${status.count == 5 || status.count == 10 }">
+               			</ul></c:if>
+	               	</c:forEach>
+                </nav>
+            </div>
+        </div>
+    </section>
+	
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -1254,6 +1354,24 @@ legend {
     <script src="${pageContext.request.contextPath}/USERJS/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
+    <script src="${pageContext.request.contextPath}/USERJS/swiper.min.js"></script>
+    
+    <script>
+    var swiper1 = new Swiper('.swiper1', {
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination1',
+          clickable: true,
+        },
+      });
+      var swiper2 = new Swiper('.swiper2', {
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination2',
+          clickable: true,
+        },
+      });
+    </script>
     
     <script>
     	$(document).ready(function() {

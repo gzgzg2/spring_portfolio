@@ -155,6 +155,7 @@ public class AdminActivCrawlCommand implements Command {
 					for (int j = 0; j < ticketTitle.length; j++) {
 						UserActivDTO dto = dao.selectTicket(ticketTitle[j], selectActiv[i].getActiv_uid());
 						if (dto != null) {
+							System.out.println("!!!!!");
 							if (ticketFirstCost[j].trim().length() == 0) {
 								dao.updateTicket("0", ticketLastCost[j], ticketInfo[j], ticketTitle[j]);
 							} else {
@@ -164,19 +165,20 @@ public class AdminActivCrawlCommand implements Command {
 					}
 					
 					continue;
-				}
-				if (tel.trim().length() == 0) {
-					dao.insertActiv(title, loc, poster, ActivShopInfo, mainPic, null);
 				} else {
-					dao.insertActiv(title, loc, poster, ActivShopInfo, mainPic, tel);					
-				}
-				
-				int activ_uid = dao.selectActivUid().getActiv_uid();
-				for (int j = 0; j < ticketEl.size(); j++) {
-					if (ticketFirstCost[j].trim().length() == 0) {
-						dao.insertTicket(ticketTitle[j], "0", ticketLastCost[j], ticketInfo[j], activ_uid);						
+					if (tel.trim().length() == 0) {
+						dao.insertActiv(title, loc, poster, ActivShopInfo, mainPic, null);
 					} else {
-						dao.insertTicket(ticketTitle[j], ticketFirstCost[j], ticketLastCost[j], ticketInfo[j], activ_uid);						
+						dao.insertActiv(title, loc, poster, ActivShopInfo, mainPic, tel);					
+					}
+					
+					int activ_uid = dao.selectActivUid().getActiv_uid();
+					for (int j = 0; j < ticketEl.size(); j++) {
+						if (ticketFirstCost[j].trim().length() == 0) {
+							dao.insertTicket(ticketTitle[j], "0", ticketLastCost[j], ticketInfo[j], activ_uid);						
+						} else {
+							dao.insertTicket(ticketTitle[j], ticketFirstCost[j], ticketLastCost[j], ticketInfo[j], activ_uid);						
+						}
 					}
 				}
 			}

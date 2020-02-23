@@ -204,7 +204,7 @@ public class AdminInnCrawlCommand implements Command {
 						ReviewTitle[l] =  ReviewItem[l].substring(ReviewItem[l].indexOf("epilrate_textinfo") + 20);
 						ReviewTitle[l] =  ReviewTitle[l].substring(0, ReviewTitle[l].indexOf("\",\""));
 						book_name[l] = ReviewItem[l].substring(ReviewItem[l].indexOf("armgname") + 11);
-						book_name[l] =  book_name[l].substring(0, book_name[l].indexOf("객실") - 1);
+						book_name[l] =  book_name[l].substring(0, book_name[l].indexOf("\","));
 						ReviewStar[l] = ReviewItem[l].substring(ReviewItem[l].indexOf("epilrate") + 10);
 						ReviewStar[l] = ReviewStar[l].substring(0, ReviewStar[l].indexOf(",\""));
 						if (ReviewStar[l].contains(".")) ReviewStar[l] = ReviewStar[l].substring(0, ReviewStar[l].indexOf("."));

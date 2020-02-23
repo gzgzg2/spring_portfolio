@@ -6,14 +6,40 @@
 <mapper namespace="com.lec.mgb.mybatis.beans.UserInnDAO">
 	<select id="selectInn" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
-			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
 		FROM
 			inn i, room r
 		WHERE
 			i.inn_uid = r.inn_uid
-			and not r.room_last_cost IN (0)
 		GROUP BY
 			i.inn_uid;
+	</select>
+	<select id="selectInnSale" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and not r.room_first_cost IN (0)
+		GROUP BY
+			i.inn_uid;
+	</select>
+	<select id="selectInnPopular" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+		     i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, ro.room_last_cost, AVG(r.review_star) 'review_star'
+		FROM
+		     inn i, room ro, book b, review r
+		WHERE
+			 i.inn_uid = ro.inn_uid
+			 and ro.room_uid = b.room_uid  
+		     and b.book_uid = r.book_uid
+		GROUP BY
+		     i.inn_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
 	</select>
 	
 	<select id="selectInnByKeyword" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">

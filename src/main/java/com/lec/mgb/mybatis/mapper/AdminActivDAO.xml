@@ -23,7 +23,7 @@
 	</update>
 	<select id="selectTicket" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
-			ticket_name 
+			ticket_name
 		FROM
 			ticket 
 		WHERE 

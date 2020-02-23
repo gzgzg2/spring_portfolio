@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 public interface UserInnDAO {
 
 	public UserInnDTO [] selectInn();
+	public UserInnDTO [] selectInnSale();
+	public UserInnDTO [] selectInnPopular();
 	public UserInnDTO [] selectInnByKeyword(@Param("inn_loc")String inn_loc, @Param("inn_name")String inn_name);
 	public UserInnDTO [] selectInnByUid(int inn_uid);
 	public UserInnDTO [] selectReviewByUid(int inn_uid);

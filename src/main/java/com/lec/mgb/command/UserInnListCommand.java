@@ -12,6 +12,8 @@ public class UserInnListCommand implements Command {
 	public void execute(Model model) {
 		UserInnDAO dao = C.sqlSesssion.getMapper(UserInnDAO.class);
 		UserInnDTO [] dto = null;
+		UserInnDTO [] sale = null;
+		UserInnDTO [] popular = null;
 		String inn_loc = (String) model.getAttribute("searchOption");
 		String inn_name = (String) model.getAttribute("searchKeyword");
 		
@@ -27,9 +29,13 @@ public class UserInnListCommand implements Command {
 			model.addAttribute("inn_name", inn_name.replaceAll("%", ""));
 		} else {
 			dto = dao.selectInn();
+			sale = dao.selectInnSale();
+			popular = dao.selectInnPopular();
 		}
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("sale", sale);
+		model.addAttribute("popular", popular);
 	}
 
 }

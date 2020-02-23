@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserTourDAO {
-	public ArrayList<UserTourDTO> selectTourByStarHigh();
-	public ArrayList<UserTourDTO> selectTourByCostHigh();
-	public ArrayList<UserTourDTO> selectTourByCostLow();
+	public ArrayList<UserTourDTO> selectTourByStarHigh(@Param("fromRow") int fromRow, @Param("writePages") int writePages);
+	public ArrayList<UserTourDTO> selectTourByCostHigh(@Param("fromRow") int fromRow, @Param("writePages") int writePages);
+	public ArrayList<UserTourDTO> selectTourByCostLow(@Param("fromRow") int fromRow, @Param("writePages") int writePages);
 	public UserTourDTO [] selectTourByUid(int tour_uid);
 	public UserTourDTO [] selectReviewByUid(int tour_uid);
 	public UserTourDTO selectMemberByUid(int member_uid);
