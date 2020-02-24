@@ -6,22 +6,23 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.mgb.c.C;
 import com.lec.mgb.command.Command;
+import com.lec.mgb.command.UserDeleteCommand;
 import com.lec.mgb.command.UserJoinOkCommand;
 import com.lec.mgb.mybatis.beans.MyPageInfoDTO;
 import com.lec.mgb.validation.JoinValidator;
 
 @Controller
 @RequestMapping("/user/account")
-public class UserJoinController {
+public class UserAccountController {
 
 	// MyBatis
 	private SqlSession sqlSession;
@@ -51,4 +52,13 @@ public class UserJoinController {
 		command.execute(model);
 		return "user/account/joinOk";
 	}
+	
+	@RequestMapping(value = "/accountBye/{member_uid}")
+	public String accountDel(@PathVariable("member_uid") String member_uid, Model model) {
+		model.addAttribute("member_uid", member_uid);
+		System.out.println(model.getAttribute("member_uid") + "음");
+		command = new  UserDeleteCommand();
+		command.execute(model);
+		return "user/account/accountBye";
+	} 
 }

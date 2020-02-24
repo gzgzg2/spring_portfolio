@@ -4,14 +4,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>귤귤플래너</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -30,7 +29,18 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
 </head>
-
+ <script>
+	function memberDelete(){
+		if (confirm("정말 삭제하시겠습니까??")){ 
+	
+	    	location.href="${pageContext.request.contextPath}/user/account/accountBye/${sessionScope.loginUid}";
+	
+		}else{   
+		
+		    return;
+		}
+	}
+</script>
 <body>
 	<c:choose>
 		<c:when test="${not empty sessionScope.loginUid}">
@@ -42,7 +52,35 @@
 		</c:otherwise>
    	</c:choose>
    	
+   	
    <section id="member">
+   
+   <!-- 모달 -->
+   	<div id="pwChange" class="modal">
+		<div class="ramimo">
+			<span class="close">&times;</span><br>
+			<form id="passFrm" method="POST">
+				<label class="label">
+					<span class="pwSpan">현재 비밀번호</span><br>
+					<input class="passwordInput" type="password" name="member_pw"/><br>
+				</label>
+				
+				<label class="label">
+					<span class="pwSpan">변경할 비밀번호</span><br>
+					<input class="passwordInput" type="password" name="member_newPw"/><br>
+				</label>
+				
+				<label class="label">
+					<span class="pwSpan">비밀번호 확인</span><br>
+					<input id="newPwChk" type="password" name="member_pwCheck"/><br>
+				</label>
+				
+				<hr>
+				<input type="submit" value="변경하기"/>
+			</form>
+		</div>
+	</div>	
+	
        <div id="memDiv">
            <h2 id="memberH2">마이페이지</h2>
            <div id="side">
@@ -65,28 +103,29 @@
                         <tr>
                             <td>프로필</td>
                             <td><label>나만의 프로필 이미지로 변경해보세요.<input type="file"></label></td>
-                            <td><button>회원탈퇴</button></td>
+                            <td><input type="button" value="회원탈퇴" onclick="memberDelete();" ></td>
+   
                         </tr>
 
                         <tr>
-                            <td>이름</td>
+                            <td>이름${dto.member_name}</td>
                             <td>성별</td>
                             <td>생년월일</td>
                         </tr>
 
                         <tr>
-                            <td><label>이메일<span class="inputY" onclick="doChange(this)">가나다라마바사</span><input type="hidden" name="email" value="가나다라마바사"></label></td>
-                            <td colspan="2"><label>전화번호<span class="inputY" onclick="doChange(this)">가나다라마바사</span><input type="hidden" name="tel" value="가나다라마바사"></label></td>
+                            <td><label>이메일<input type="text" name="member_email" value="${dto.member_email}"></label></td>
+                            <td colspan="2"><label>전화번호<input type="text" name="member_tel" value="${dto.member_tel}"></label></td>
                         </tr>
 
                         <tr>
-                            <td><span>아이디</span></td>
+                            <td><span>아이디${dto.member_id}</span></td>
                             <td colspan="2">10</td>
                         </tr>
 
                         <tr>
                             <td>비밀번호</td>
-                            <td colspan="2"><button>비밀번호 변경 ></button></td>
+                            <td colspan="2"><input type="button" id="passwordChagneBtn" value="비밀번호 변경 >"></td>
                         </tr>
                     </table>
                 </div>
@@ -95,52 +134,6 @@
         </div>
    </section>
 
-<script>
-    function doChange(e){
-       var nodeName = e.nodeName.toUpperCase();
-       var parent = e.parentNode;
-
-       
-
-       if(nodeName == "SPAN"){
-          //기존 e 가 span 이었으면 <input> 으로 바꾸기 
-          var txt = e.innerHTML.trim();
-          parent.removeChild(e);
-          
-          var node = document.createElement("input");
-          node.value = txt;
-          node.setAttribute('onfocusout', 'doChange(this)');
-          node.setAttribute('onkeydown', 'doEnter(this)')
-          
-          
-          parent.appendChild(node);
-          node.focus();
-        
-          
-       } else if (nodeName == "INPUT") {
-          var txt = e.value.trim(); // <INPUT> 입력값
-          parent.removeChild(e); // 기존 <INPUT> 삭제
-          
-          var node = document.createElement("span");
-          var txtNode = document.createTextNode(txt);
-          node.appendChild(txtNode);
-          node.setAttribute('onclick', 'doChange(this)');
-          parent.appendChild(node);
-
-          $(".inputY").addClass("inputSpan");
-          
-       }
-
-    } 
-    
-    function doEnter(e) {
-       //13은 엔터
-       if(event.keyCode == 13) {
-          doChange(e);
-       }
-    }
-    
-    </script>
     <!-- Js Plugins -->
     <script src="${pageContext.request.contextPath}/USERJS/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/bootstrap.min.js"></script>
@@ -151,5 +144,17 @@
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
 </body>
-
+<script>
+	var modal = document.getElementById("pwChange");
+	var btn = document.getElementById("passwordChagneBtn");
+	var span = document.getElementsByClassName("close")[0];
+	
+	btn.onclick = function(){
+		modal.style.display = "block";
+	};
+	
+	span.onclick = function() {
+		modal.style.display = "none";
+	};
+</script>
 </html>

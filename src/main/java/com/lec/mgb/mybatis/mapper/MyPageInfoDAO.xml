@@ -5,10 +5,10 @@
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.MyPageDAO">
 	<select id="selectByUid" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
-		SELECT member_uid member_uid, member_name member_name,
-			   member_id member_id, member_pw member_pw, member_email member_email,
-			   member_gender member_gender, member_birth member_birth, member_pic member_pic,
-			   member_tel member_tel FROM MEMBER WHERE member_uid = #{param1};
+		SELECT member_uid, member_name,
+			   member_id, member_pw, member_email,
+			   member_gender, member_birth, member_pic,
+			   member_tel FROM MEMBER WHERE member_uid = #{param1};
 	</select>
 	
 	<select id="selectMember" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
@@ -18,10 +18,10 @@
 	
 	<update id="mypageUpdate" flushCache="true">
 		UPDATE MEMBER SET member_email = #{dto.member_email}, member_tel #{dto.member_tel} 
-		WHERE member_uid = #{param1}
+		WHERE member_uid = #{param1};
 	</update>
 	
 	<delete id="deleteMember">
-		DELETE FROM MEMBER WHERE memeber_uid = #{param1};
+		DELETE FROM MEMBER WHERE member_uid = #{param1};
 	</delete>
 </mapper>	
