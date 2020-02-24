@@ -858,6 +858,19 @@
         .comment_mobile {
         	display: none;
         }
+        .paging { text-align: center; }
+        .paging p {
+			text-align: center;
+		}
+		.paging > p > span { padding-left: 5px; }
+		.paging_button {
+			width: 62px;
+			margin: 0 auto;
+		}
+		.paging_button button {
+			border: none;
+			background-color: white;
+		}
     </style>
 
     <!-- Css Styles -->
@@ -956,26 +969,20 @@
                         <div class="room_info_more">
                             ${dto[0].inn_info }
                         </div>
-                        <div class="comment-option">
+                        <div id="comment" class="comment-option">
                             <h3>리뷰</h3>
                             <div class="star_avg">
                                 <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
-                            <h5>전체 리뷰 ${fn:length(review) }개</h5>
-                            <c:forEach var="review" items="${review }">
-	                            <div class="single-comment-item first-comment">
-	                                <div class="sc-author">
-	                                    <img src="${review.member_pic }" alt="">
-	                                </div>
-	                                <div class="sc-text">
-	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
-	                                    <div style="padding: 10px;">
-		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.book_member_name }</p>
-		                                    <p>${review.review_content }</p>	                                    
-	                                    </div>
-	                                </div>
-	                            </div>
-                            </c:forEach>
+                            <h5 style="padding-bottom: 50px;">전체 리뷰 ${fn:length(review) }개</h5>
+                            <div class="review"></div>
+                            <div class="paging">
+					        	<p>Page<span class="0">1</span></p>
+					        	<div class="paging_button">
+							        <button onclick="change(0)">◀</button>
+							        <button onclick="change(1)">▶</button>
+					        	</div>
+					        </div>
                         </div>
                     </div>
                 </div>
@@ -1165,10 +1172,80 @@
             $(".modal_inner .icon_close").click(function() {
                 $(".modal_layer").css("display", "none")
             })
+            $.ajax({
+    			url: "http://localhost:8090/mgb/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/0/5",
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+	                    row += "<img src='" + data[i].member_pic + "' alt=''>";
+	                    row += "</div>";
+	                    row += "<div class='sc-text'>";
+	                    row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>";
+						row += "<div style='padding: 10px;''>";
+						row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].book_member_name + "</p>";
+						row += "<p>" + data[i].review_content + "</p>";
+						row += "</div>";
+						row += "</div>";
+						row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    		}
+    			}
+    		})
         })
         function openModal(room_uid) {
             $(".modal_layer").css("display", "block")
             $("input:hidden[name='room_uid']").val(room_uid)
+        }
+        
+        function change(go) {
+    		var curPage = parseInt($(".paging p span").text());
+    		var curOption = $(".current").text();
+    		
+    		if (go == 0 && curPage != 1) {
+    			paging((curPage * 5) - 10, 5);
+   				$(".paging p span").text(curPage - 1)
+    		} else if (go == 1) {
+    			paging(curPage * 5, 5);
+   				$(".paging p span").text(curPage + 1)
+    		}
+    		
+    		location.href="#comment";
+    	}
+        
+        function paging(writePage, page) {
+        	$.ajax({
+    			url: "http://localhost:8090/mgb/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/" + writePage + "/" + page,
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+	                    row += "<img src='" + data[i].member_pic + "' alt=''>";
+	                    row += "</div>";
+	                    row += "<div class='sc-text'>";
+	                    row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>";
+						row += "<div style='padding: 10px;''>";
+						row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].book_member_name + "</p>";
+						row += "<p>" + data[i].review_content + "</p>";
+						row += "</div>";
+						row += "</div>";
+						row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    					paging(writePage - 5, 5);
+    					$(".paging p span").text(writePage / 5);
+    					alert("더 이상 리뷰가 없습니다");
+    				}
+    			}
+    		})
         }
     </script>
 

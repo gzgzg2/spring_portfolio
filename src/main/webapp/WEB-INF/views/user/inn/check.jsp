@@ -88,12 +88,14 @@
 	                    <div class="modal_description">
 	                        <h5>객실 이름</h5>
 	                        <p>${dto.inn_name }<br>${dto.room_name }</p>
-	                        <h5>티켓 구매일</h5>
+	                        <h5>체크인 날짜</h5>
 	                        <p>${fn:substring(dto.book_date, 0, 10) }</p>
 	                        <h5>예약자명</h5>
 	                        <p>${dto.book_member_name }</p>
 	                        <h5>예약자 번호</h5>
 	                        <p class="tel">${dto.book_member_tel }</p>
+	                        <h5>총 가격</h5>
+	                        <p class="cost">${dto.book_cost }</p>
 	                    </div>
 	                    <div class="modal_button">
 	                        <div class="modal_back">
@@ -222,6 +224,7 @@
             })
             
             $(".tel").text(change($(".tel").text()));
+           	$(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
         })
         function openModal() {
             $(".modal_layer").css("display", "block");

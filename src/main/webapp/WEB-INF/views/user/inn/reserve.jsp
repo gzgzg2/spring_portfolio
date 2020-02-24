@@ -37,6 +37,7 @@
         }
         .reserve > div > h4 {
         	margin-bottom: 8px;
+        	font-weight: bold;
         }
         .reserve {
             height: 800px;
@@ -100,11 +101,12 @@
                             <form action="${pageContext.request.contextPath}/user/inn/reserveOk" method="POST" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="title">
-                                    <h2>액티비티 예약</h2>
+                                    <h2>숙소 예약</h2>
                                 </div>
                                 <div class="info">
                                     <input type="hidden" name="book_name" value="${dto.inn_name } - ${dto.room_name }" />
                                     <input type="hidden" name="book_cost" value="${dto.room_last_cost }" />
+                                    <input type="hidden" name="book_date" value="${book_date }" />
                                     <input type="hidden" name="member_uid" value="${member_uid }" />
                                     <input type="hidden" name="room_uid" value="${dto.room_uid }" />
                                     <h5>예약자 정보</h5>
@@ -119,7 +121,7 @@
                                     <label>
                                       	예약자 핸드폰 <br>
                                         <input type="text" name="book_member_tel" value="">
-                                        <button>휴대폰 인증</button>
+                                        <button type="button" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
                                     <label>
                                         <input type="text">
@@ -159,6 +161,10 @@
 	                            <h4>숙소 이름</h4>
 	                            <p>${dto.inn_name }<br>${dto.room_name }</p>
 	                        </div>
+	                        <div class="inn_name">
+	                        	<h4>체크인 날짜</h4>
+								<p>${book_date }</p>
+	                        </div>
 	                        <div class="room_name">
 	                            <h4>객실 타입</h4>
 	                            <p>
@@ -169,11 +175,15 @@
 	                        </div>
 	                        <div class="room_price">
 	                            <h4>총가격</h4>
-	                            <p>${dto.room_last_cost }</p>
+	                            <p class="cost">${dto.room_last_cost }</p>
 	                        </div>
 	                        <div class="res_button">
 	                            <button type="submit">예약 하기</button>
 	                        </div>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/user/inn/sendSMS" method="POST" onsubmit="return chkSMS()" id="smsForm">
+                        	<input type="hidden" name="tel"/>
+                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </div>
                 </div>
@@ -297,6 +307,8 @@
     				$(".term").find("input:checkbox").prop("checked", false)
     			}
     		})
+
+            $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
     		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
@@ -311,6 +323,17 @@
     			$("input:text[name='book_member_name']").focus()
     		} else if ($("input:text[name='book_member_tel']").val().trim().length == 0) {
 	    		$("input:text[name='book_member_tel']").focus()
+    		}
+    		
+    		return false;
+    	}
+    	function sendSMS() {
+    		$("#smsForm").submit();
+    	}
+    	function chkSMS() {
+    		if ($("input:text[name='book_member_tel']").val().trim().length == 11) {
+    			$("input:hidden[name='tel']").val($("input:text[name='book_member_tel']").val());
+    			return true;
     		}
     		
     		return false;

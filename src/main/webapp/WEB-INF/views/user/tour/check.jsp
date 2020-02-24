@@ -94,14 +94,16 @@
 	                    <div class="modal_description">
 	                        <h5>투어 제목</h5>
 	                        <p>${dto.tour_name }</p>
+	                        <h5>투어 날짜</h5>
+	                        <p>${dto.book_date }</p>
 	                        <h5>인원 수</h5>
 	                        <p>${dto.book_member_cnt }</p>
-	                        <h5>티켓 구매일</h5>
-	                        <p>${dto.book_date }</p>
 	                        <h5>예약자명</h5>
 	                        <p>${dto.book_member_name }</p>
 	                        <h5>예약자 번호</h5>
 	                        <p class="tel">${dto.book_member_tel }</p>
+	                        <h5>총 가격</h5>
+	                        <p class="cost">${dto.book_cost }</p>
 	                    </div>
 	                    <div class="modal_button">
 	                        <div class="modal_back">
@@ -230,6 +232,7 @@
             })
             
             $(".tel").text(change($(".tel").text()));
+           	$(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
         })
         function openModal() {
             $(".modal_layer").css("display", "block");

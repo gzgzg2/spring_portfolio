@@ -6,13 +6,28 @@
 <mapper namespace="com.lec.mgb.mybatis.beans.UserActivDAO">
 	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 
-			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel,
+			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel, a.activ_uid,
 			t.ticket_uid, t.ticket_name, t.ticket_first_cost, t.ticket_last_cost, t.ticket_info
 		FROM
 			activ a, ticket t
 		WHERE
 			a.activ_uid = t.activ_uid
 			and a.activ_uid = #{activ_uid};
+	</select>
+	
+	<select id="selectReviewStarByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			r.review_star
+		FROM
+			review r, book b, ticket t, activ a, member m
+		WHERE
+			r.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
+			and a.activ_uid = #{activ_uid}
+		ORDER BY
+			r.review_uid DESC;
 	</select>
 	
 	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
@@ -25,7 +40,11 @@
 			and b.member_uid = m.member_uid
 			and b.ticket_uid = t.ticket_uid
 			and t.activ_uid = a.activ_uid
-			and a.activ_uid = #{activ_uid};
+			and a.activ_uid = #{activ_uid}
+		ORDER BY
+			r.review_uid DESC
+		LIMIT
+			#{writePages}, #{page};
 	</select>
 	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
@@ -54,6 +73,17 @@
 			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.ticket_uid});
 	</insert>
 	
+	<select id="selectTitleByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			a.activ_name, t.ticket_name
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+		AND
+			t.ticket_uid = #{ticket_uid}
+	</select>
+	
 	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
 			b.book_uid
@@ -70,7 +100,7 @@
 	
 	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
-			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt, b.book_cost, b.book_date
 		FROM
 			book b, member m, activ a, ticket t
 		WHERE

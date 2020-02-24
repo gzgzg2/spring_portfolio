@@ -56,6 +56,18 @@
 			tour_uid = #{tour_uid};
 	</select>
 	
+	<select id="selectReviewStarByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT
+			re.review_star
+		FROM
+			review re, book b, tour t, member m
+		WHERE
+			re.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.tour_uid = t.tour_uid
+			and t.tour_uid = #{tour_uid};
+	</select>
+	
 	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		SELECT
 			re.review_uid, re.review_title, re.review_star, re.review_content, re.review_id, m.member_uid, m.member_id, m.member_pic
@@ -65,7 +77,11 @@
 			re.book_uid = b.book_uid
 			and b.member_uid = m.member_uid
 			and b.tour_uid = t.tour_uid
-			and t.tour_uid = #{tour_uid};
+			and t.tour_uid = #{tour_uid}
+		ORDER BY
+			re.review_uid DESC
+		LIMIT
+			#{writePages}, #{page};
 	</select>
 	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
@@ -81,8 +97,14 @@
 		INSERT INTO
 			book(book_date, book_member_cnt, book_cost, book_name, book_member_name, book_member_tel, member_uid, tour_uid)
 		VALUES
-			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.tour_uid});
+			(#{dto.book_date}, #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.tour_uid});
 	</insert>
+	
+	<select id="selectTitleByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT tour_name
+		FROM tour
+		WHERE tour_uid = #{tour_uid}
+	</select>
 	
 	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		SELECT
@@ -99,7 +121,7 @@
 	
 	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		SELECT
-			m.member_uid, t.tour_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			m.member_uid, t.tour_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt, b.book_cost
 		FROM
 			book b, member m, tour t
 		WHERE

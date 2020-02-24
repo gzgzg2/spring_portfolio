@@ -17,7 +17,7 @@ public class UserTourViewCommand implements Command {
 		
 		UserTourDAO dao = C.sqlSesssion.getMapper(UserTourDAO.class);
 		UserTourDTO [] dto = dao.selectTourByUid(tour_uid);
-		UserTourDTO [] review = dao.selectReviewByUid(tour_uid);
+		UserTourDTO [] review = dao.selectReviewStarByUid(tour_uid);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("review", review);

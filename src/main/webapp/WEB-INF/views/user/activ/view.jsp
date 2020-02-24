@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -142,7 +143,21 @@
             padding-top: 30px;
             clear: both;
         }
-
+        .paging { text-align: center; }
+		.paging p {
+			text-align: center;
+		}
+		.paging > p > span { padding-left: 5px; }
+		.paging_button {
+			width: 62px;
+			margin: 0 auto;
+		}
+		.paging_button button {
+			border: none;
+			background-color: white;
+		}
+		.star_avg > span { padding-left: 5px; }
+		.comment-option > h5 { padding-bottom: 30px; }
     </style>
 
     <!-- Css Styles -->
@@ -257,23 +272,17 @@
                             	<c:set var="total" value="${total + review.review_star }"/>
                             </c:forEach>
                             <div class="star_avg">
-                                <span><c:out value="${total / fn:length(review) }"/></span>
+                                <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
                             <h5>전체 리뷰 ${fn:length(review) }개</h5>
-                            <c:forEach var="review" items="${review }">
-	                            <div class="single-comment-item first-comment">
-	                                <div class="sc-author">
-	                                    <img src="${review.member_pic }" alt="">
-	                                </div>
-	                                <div class="sc-text">
-	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
-	                                    <div style="padding: 10px;">
-		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
-		                                    <p>${review.review_content }</p>	                                    
-	                                    </div>
-	                                </div>
-	                            </div>
-                            </c:forEach>
+                            <div class="review"></div>
+                            <div class="paging">
+					        	<p>Page<span class="0">1</span></p>
+					        	<div class="paging_button">
+							        <button onclick="change(0)">◀</button>
+							        <button onclick="change(1)">▶</button>
+					        	</div>
+					        </div>
                         </div>
                     </div>
                 </div>
@@ -468,6 +477,52 @@
         function change(num) {
         	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
         }
+        
+        function change(go) {
+    		var curPage = parseInt($(".paging p span").text());
+    		var curOption = $(".current").text();
+    		
+    		if (go == 0 && curPage != 1) {
+    			paging((curPage * 5) - 10, 5);
+   				$(".paging p span").text(curPage - 1)
+    		} else if (go == 1) {
+    			paging(curPage * 5, 5);
+   				$(".paging p span").text(curPage + 1)
+    		}
+    		
+    		location.href="#comment";
+    	}
+        
+        function paging(writePage, page) {
+        	$.ajax({
+    			url: "http://localhost:8090/mgb/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/" + writePage + "/" + page,
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+    					row += "<img src='" + data[i].member_pic + "' alt=''>";
+    					row += "</div>";
+    					row += "<div class='sc-text'>";
+    					row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>"
+    					row += "<div style='padding: 10px;'>";
+    					row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].member_id + "</p>";
+    					row += "<p>" + data[i].review_content + "</p>";
+    					row += "</div>";
+    					row += "</div>";
+    					row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    					paging(writePage - 5, 5);
+    					$(".paging p span").text(writePage / 5);
+    					alert("더 이상 리뷰가 없습니다");
+    				}
+    			}
+    		})
+        }
+        
         $(document).ready(function() {
         	var star = $(".star_avg span").text();
         	var icon = "";        	
@@ -480,9 +535,34 @@
         	$(".star_avg").html(icon);
         	
         	star = 5 - $(".star_avg i").length;
-        	for (i = 0; i < star; i++) { 
-        		$(".star_avg span").before("<i class='far fa-star'></i>"); 
-       		}
+        	for (i = 0; i < star; i++) { $(".star_avg span").before("<i class='far fa-star'></i>"); }
+        	
+        	$.ajax({
+    			url: "http://localhost:8090/mgb/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/0/5",
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+    					row += "<img src='" + data[i].member_pic + "' alt=''>";
+    					row += "</div>";
+    					row += "<div class='sc-text'>";
+    					row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>"
+    					row += "<div style='padding: 10px;'>";
+    					row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].member_id + "</p>";
+    					row += "<p>" + data[i].review_content + "</p>";
+    					row += "</div>";
+    					row += "</div>";
+    					row += "</div>";
+    				}
+    				$(".review").html(row);
+    				
+    				if (row.trim().length == 0) {
+    	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    		}
+    			}
+    		})
         })
     </script>
 

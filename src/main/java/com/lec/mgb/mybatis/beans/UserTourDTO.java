@@ -18,7 +18,7 @@ public class UserTourDTO {
 	private String member_pic;
 	
 	private int book_uid;
-	private Timestamp book_date;
+	private String book_date;
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
@@ -36,7 +36,7 @@ public class UserTourDTO {
 
 	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, String tour_info,
 			String tour_pic, int review_uid, String review_title, int review_star, String review_content,
-			String member_id, String member_pic, int book_uid, Timestamp book_date, int book_member_cnt, int book_cost,
+			String member_id, String member_pic, int book_uid, String book_date, int book_member_cnt, int book_cost,
 			String book_name, String book_member_name, String book_member_tel, int member_uid, String member_name,
 			String member_tel) {
 		super();
@@ -168,11 +168,11 @@ public class UserTourDTO {
 		this.book_uid = book_uid;
 	}
 
-	public Timestamp getBook_date() {
+	public String getBook_date() {
 		return book_date;
 	}
 
-	public void setBook_date(Timestamp book_date) {
+	public void setBook_date(String book_date) {
 		this.book_date = book_date;
 	}
 

@@ -41,6 +41,7 @@
         }
         .reserve > div > h4 {
         	margin-bottom: 8px;
+        	font-weight: bold;
         }
         .reserve {
             height: 800px;
@@ -111,6 +112,7 @@
                                     <input type="hidden" name="book_member_cnt" value="${book_member_cnt }" />
                                     <input type="hidden" name="book_cost" value="${tour[0].tour_cost * book_member_cnt }" />
                                     <input type="hidden" name="tour_uid" value="${tour[0].tour_uid }" />
+                                    <input type="hidden" name="book_date" value="${book_date }" />
                                     <h5>예약자 정보</h5>
                                     <label>
                                      	예약자 이름<br>
@@ -163,13 +165,17 @@
 	                            <h4>투어 제목</h4>
 	                            <p>${tour[0].tour_name }</p>
 	                        </div>
+	                        <div class="inn_name">
+	                            <h4>인원 수</h4>
+	                            <p>${book_member_cnt }</p>
+	                        </div>
 	                        <div class="room_name">
 	                            <h4>투어 기간</h4>
-	                            <p>${tour[0].tour_period }박 ${tour[0].tour_period + 1 }일</p>
+	                            <p>${book_date } (${tour[0].tour_period }박 ${tour[0].tour_period + 1 }일)</p>
 	                        </div>
 	                        <div class="room_price">
 	                            <h4>총가격</h4>
-	                            <p>${tour[0].tour_cost * book_member_cnt }</p>
+	                            <p class="cost">${tour[0].tour_cost * book_member_cnt }</p>
 	                        </div>
 	                        <div class="res_button">
 	                            <button type="submit">예약 하기</button>
@@ -297,6 +303,7 @@
     				$(".term").find("input:checkbox").prop("checked", false)
     			}
     		})
+            $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
     		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&

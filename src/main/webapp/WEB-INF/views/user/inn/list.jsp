@@ -32,9 +32,14 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/swiper.min.css">
     
     <style>
-      .swiper2 > .swiper-wrapper {
-      	height: 30%;
-      }
+		.hothot2 { height: auto; }
+		.hothot2:hover { cursor: pointer; }
+		.hothot2:nth-child(1) { margin: 0; }
+		.swiper2 { height: 600px !important; }
+		.sivaHotH { margin-top: 320px; }
+		.about-page-text { margin: 0; }
+		.spad { padding: 0; }
+		#navYamHot1 li:hover { cursor: pointer; }
       html, body {
         position: relative;
         height: 100%;
@@ -1214,11 +1219,11 @@ legend {
             </div>
             
             <div id="hotId2">
-	            <div class="swiper-container swiper2">
+	            <div class="swiper-container swiper2" style="height: 300px;">
 	                <div class="swiper-wrapper">
 		            	<c:forEach var="dto" items="${sale }" varStatus="status">
 		            		<c:if test="${status.count % 3 == 1 || status.count == 1 }"><div class="swiper-slide"></c:if>
-				                <div class="hothot2">
+				                <div class="hothot2" onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
 					                <div class="item_img">
 					              		<img src="${dto.inn_pic }"/>
 					              	</div>
@@ -1232,8 +1237,8 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
+      				<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
-	            <div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	
@@ -1249,7 +1254,7 @@ legend {
                     <c:forEach var="dto" items="${popular }" varStatus="status">
 	                	<c:if test="${status.count % 5 == 1 || status.count == 1 }">
 	                		<ul></c:if>
-	                			<li>
+	                			<li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
 	                				<div class="item_img">
                                   		<img src="${dto.inn_pic }"/>
                                   	</div>

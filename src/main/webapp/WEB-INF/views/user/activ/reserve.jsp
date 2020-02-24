@@ -41,6 +41,7 @@
         }
         .reserve > div > h4 {
         	margin-bottom: 8px;
+        	font-weight: bold;
         }
         .reserve {
             height: 800px;
@@ -161,8 +162,8 @@
 	                <div class="col-lg-4">
 	                    <div class="reserve side" style="height: auto;">
 	                        <div class="inn_name">
-	                            <h4>${ticket[0].activ_name }</h4>
-	                            <p>${ticket[0].ticket_name }</p>
+	                            <h4>액티비티 이름</h4>
+	                            <p>${ticket[0].activ_name }<br>${ticket[0].ticket_name }</p>
 	                        </div>
 	                        <div class="room_name">
 	                            <h4>티켓 수</h4>
@@ -170,7 +171,7 @@
 	                        </div>
 	                        <div class="room_price">
 	                            <h4>총가격</h4>
-	                            <p>${ticket[0].ticket_last_cost * book_member_cnt }</p>
+	                            <p class="cost">${ticket[0].ticket_last_cost * book_member_cnt }</p>
 	                        </div>
 	                        <div class="res_button">
 	                            <button type="submit">예약 하기</button>
@@ -298,6 +299,8 @@
     				$(".term").find("input:checkbox").prop("checked", false)
     			}
     		})
+    		
+            $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
     		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
