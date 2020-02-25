@@ -18,6 +18,7 @@ import com.lec.mgb.command.UserActivReserveOkCommand;
 import com.lec.mgb.command.UserActivListCommand;
 import com.lec.mgb.command.UserActivReserveCommand;
 import com.lec.mgb.command.UserActivViewCommand;
+import com.lec.mgb.command.UserInnListCommand;
 import com.lec.mgb.mybatis.beans.UserActivDTO;
 
 @Controller
@@ -35,8 +36,14 @@ public class UserActivController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
-		command = new UserActivListCommand();
-		command.execute(model);
+		new UserActivListCommand().execute(model);
+		return "user/activ/list";
+	}
+	@RequestMapping("/list/search")
+	public String listSearch(String searchOption, String searchKeyword, Model model) {
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("searchKeyword", searchKeyword);
+		new UserActivListCommand().execute(model);
 		return "user/activ/list";
 	}
 	@GetMapping("/view/{activ_uid}")

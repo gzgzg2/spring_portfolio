@@ -856,6 +856,7 @@ ul, ol {
 -----------------------*/
 
 .footer-section {
+	padding-top: 50px;
 	background: #222736;
 }
 .footer-section .footer-text {
@@ -1852,7 +1853,6 @@ ul, ol {
 
 .recommend-blog-section {
 	padding-top: 65px;
-	padding-bottom: 50px;
 }
 .recommend-blog-section .section-title {
 	margin-bottom: 37px;

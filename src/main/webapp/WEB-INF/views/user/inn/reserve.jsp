@@ -82,6 +82,7 @@
             background-color: #dfa974;
             vertical-align: bottom;
         }
+        .auth { display: none; }
     </style>
 </head>
 
@@ -109,6 +110,7 @@
                                     <input type="hidden" name="book_date" value="${book_date }" />
                                     <input type="hidden" name="member_uid" value="${member_uid }" />
                                     <input type="hidden" name="room_uid" value="${dto.room_uid }" />
+                                    <input type="hidden" name="ifChkSMS" value="0" />
                                     <h5>예약자 정보</h5>
                                     <label>
                                      	예약자 이름<br>
@@ -123,9 +125,9 @@
                                         <input type="text" name="book_member_tel" value="">
                                         <button type="button" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
-                                    <label>
-                                        <input type="text">
-                                        <button>인증번호 확인</button>
+                                    <label class="auth">
+                                        <input type="text" name="authKey">
+                                        <button onclick="chkSMS()">인증번호 확인</button>
                                     </label>
                                     <label>
 	                                    <input type="checkbox" name="same_member_tel"/>
@@ -313,6 +315,7 @@
     	function chkSubmit() {
     		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
     			!$("input:text[name='book_member_tel']").val().trim().length == 0 &&
+    			$("input:hidden[name='ifChkSMS']").val().trim() == 1 &&
     			$("input:checkbox[name='term1']").prop("checked") &&
     			$("input:checkbox[name='term2']").prop("checked") &&
     			$("input:checkbox[name='term3']").prop("checked")) {
@@ -328,12 +331,59 @@
     		return false;
     	}
     	function sendSMS() {
-    		$("#smsForm").submit();
+    		if ($("input:text[name='book_member_tel']").val().trim().length == 11) {
+    			var rd = Math.floor(Math.random()*(999999-100000+1)) + 100000 + "";
+    			var tel = $("input:text[name='book_member_tel']").val().trim();
+    			
+    			$.ajax({
+        			url : "${pageContext.request.contextPath}/user/sendSMS",
+        			type : "POST",
+        			cache : false,
+        			data : {  // POST 방식 ajax() request 할시 parameter
+        				"rd" : rd,
+        				"tel" : tel,
+        				"${_csrf.parameterName }" : "${_csrf.token }"
+        			},
+        			success : function(data, status){
+        				if(status == "success"){
+        					if (data == 1) {
+	        					alert("인증번호가 휴대폰으로 전송 되었습니다!");
+	        					$(".auth").css("display", "block");
+	            				$("input:text[name='book_member_tel']").val("${member.member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
+        					} else {
+        						alert("전화번호를 확인해주세요!");
+        					}
+        				}
+        			}
+        		});  			
+    		}
+    		
+    		return false;
     	}
     	function chkSMS() {
-    		if ($("input:text[name='book_member_tel']").val().trim().length == 11) {
-    			$("input:hidden[name='tel']").val($("input:text[name='book_member_tel']").val());
-    			return true;
+    		if ($("input:text[name='authKey']").val().trim().length == 6) {
+    			var authKey = $("input:text[name='authKey']").val().trim();
+    			
+    			$.ajax({
+        			url : "${pageContext.request.contextPath}/user/chkSMS",
+        			type : "POST",
+        			cache : false,
+        			data : {  // POST 방식 ajax() request 할시 parameter
+        				"authKey" : authKey,
+        				"${_csrf.parameterName }" : "${_csrf.token }"
+        			},
+        			success : function(data, status){
+        				if(status == "success"){
+        					if (data == 1) {
+        						alert("휴대폰 인증 성공");
+        						$("input:hidden[name='ifChkSMS']").val("1");
+        						$(".auth").html("");
+        					} else {
+        						alert("인증번호를 확인해주세요");
+        					}
+        				}
+        			}
+        		});  			
     		}
     		
     		return false;

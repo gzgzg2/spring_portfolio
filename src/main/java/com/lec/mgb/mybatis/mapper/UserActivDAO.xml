@@ -4,6 +4,61 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.UserActivDAO">
+	<select id="selectActiv" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+			and not t.ticket_last_cost IN (0)
+		GROUP BY
+			a.activ_uid;
+	</select>
+	<select id="selectActivSale" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, t.ticket_first_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.ticket_uid
+			and not t.ticket_first_cost IN (0)
+			and not t.ticket_last_cost IN (0)
+		GROUP BY
+			a.activ_uid;
+	</select>
+	<select id="selectActivPopular" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+		     a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, AVG(r.review_star) 'review_star', a.activ_pic
+		FROM
+		     activ a, ticket t, book b, review r
+		WHERE
+			 a.activ_uid = t.activ_uid
+			 and t.ticket_uid = b.ticket_uid
+		     and b.book_uid = r.book_uid
+			 and not t.ticket_last_cost IN (0)
+		GROUP BY
+		     t.ticket_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
+	</select>
+	<select id="selectActivByKeyword" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.ticket_uid
+			and not t.ticket_last_cost IN (0)
+			and not t.ticket_last_cost IN (0)
+			and a.activ_name like (#{activ_name})
+			and a.activ_loc like (#{activ_loc})
+		GROUP BY
+			a.activ_uid;
+	</select>
+	
 	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 
 			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel, a.activ_uid,

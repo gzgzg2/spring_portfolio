@@ -11,29 +11,32 @@
 			inn i, room r
 		WHERE
 			i.inn_uid = r.inn_uid
+			and not r.room_last_cost IN (0)
 		GROUP BY
 			i.inn_uid;
 	</select>
 	<select id="selectInnSale" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
-		SELECT 
-			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
+		SELECT
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, r.room_first_cost, i.inn_pic
 		FROM
 			inn i, room r
 		WHERE
 			i.inn_uid = r.inn_uid
 			and not r.room_first_cost IN (0)
+			and not r.room_last_cost IN (0)
 		GROUP BY
 			i.inn_uid;
 	</select>
 	<select id="selectInnPopular" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
-		     i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, ro.room_last_cost, AVG(r.review_star) 'review_star'
+		     i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, ro.room_last_cost, AVG(r.review_star) 'review_star', i.inn_pic
 		FROM
 		     inn i, room ro, book b, review r
 		WHERE
 			 i.inn_uid = ro.inn_uid
 			 and ro.room_uid = b.room_uid  
 		     and b.book_uid = r.book_uid
+			 and not ro.room_last_cost IN (0)
 		GROUP BY
 		     i.inn_uid
 		ORDER BY
@@ -44,7 +47,7 @@
 	
 	<select id="selectInnByKeyword" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
-			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
 		FROM
 			inn i, room r
 		WHERE
@@ -52,6 +55,7 @@
 			and not r.room_last_cost IN (0)
 			and i.inn_loc like (#{inn_loc})
 			and i.inn_name like (#{inn_name})
+			and not r.room_last_cost IN (0)
 		GROUP BY
 			i.inn_uid;
 	</select>

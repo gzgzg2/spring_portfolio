@@ -11,6 +11,7 @@ public interface UserTourDAO {
 	public UserTourDTO [] selectTourByUid(int tour_uid);
 	public ArrayList<UserTourDTO> selectReviewByUid(@Param("tour_uid")int tour_uid, @Param("writePages")int writePages, @Param("page")int page);
 	public UserTourDTO [] selectReviewStarByUid(int tour_uid);
+	public UserTourDTO [] selectTourPopular();
 	public UserTourDTO selectMemberByUid(int member_uid);
 	public int insertBook (@Param("member_uid")int member_uid, @Param("dto")UserTourDTO dto);
 	public UserTourDTO selectBookUidByUid(int member_uid);

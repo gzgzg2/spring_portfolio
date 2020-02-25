@@ -166,6 +166,10 @@
         .event_link div {
             display: none !important
         }
+        .comment {
+        	overflow: hidden;
+        	height: 113px;
+        }
         .right .comment {
             display: block;
             position: relative;
@@ -852,6 +856,10 @@
         .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5) {
             color: #aaa;
         }
+        .inn_img {
+        	width: 100%;
+    		height: 250px;
+        }
         @media (min-width: 991px) {
             .inn_img {width: 100%}
         }
@@ -871,6 +879,7 @@
 			border: none;
 			background-color: white;
 		}
+		.recommend:hover { cursor: pointer; }
     </style>
 
     <!-- Css Styles -->
@@ -907,11 +916,11 @@
 					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
-                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>만족해요</p>
+                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span><span class="star_comment"></span></p>
                     <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
                     <div class="comment" style="background: #ececec; padding: 12px 17px;">
                         <strong>사장님 한마디</strong>
-                        <button style="float: right; background: none; border: none; margin-right: 2%;">더보기</button>
+                        <button class="more" style="float: right; background: none; border: none; margin-right: 2%;" onclick="more()">더보기</button>
                         <div class="clamp" style="font-size: 0.9em; margin-top: 10px;">${dto[0].inn_ment }
                         </div>
                     </div>
@@ -954,8 +963,8 @@
 		                                    <div class="price">
 		                                        <strong>가격</strong>
 		                                            <div>
-		                                                <p class="through_none" style="text-decoration: inherit; visibility: hidden;">${dto.room_first_cost }</p>
-		                                                <p><b style="color: rgba(0,0,0,1)">${dto.room_last_cost }</b> <!-- 표시금액 --></p>
+		                                                <p class="through_none" style="text-decoration: line-through;"><c:if test="${dto.room_first_cost != 0 }"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></c:if></p>
+		                                                <p><b style="color: rgba(0,0,0,1)"><c:if test="${dto.room_last_cost != 0 }"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/> 원</c:if><c:if test="${dto.room_last_cost == 0 }">가격 준비 중!</c:if></b> <!-- 표시금액 --></p>
 		                                            </div>
 		                                    </div>
 		                                    <c:if test="${dto.room_last_cost == 0 || empty sessionScope.loginUid }"><button type="button" style="background-color: #bbb; border-color: #bbb;" disabled="disabled" class="gra_left_right_red"> 전화로 예약해주세요</button></c:if>
@@ -991,46 +1000,36 @@
     </section>
     <!-- Blog Details Section End -->
     <!-- Recommend Blog Section Begin -->
-    <section class="recommend-blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Recommended</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${fn:length(popular) >= 3 }">
+	    <section class="recommend-blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="section-title">
+	                        <h2 style="font-weight: bold;">추천 숙소</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<c:forEach var="i" begin="0" end="2" step="1">
+		                <div class="col-sm-4 recommend" onclick="location.href='${pageContext.request.contextPath}/user/inn/view/${popular[i].inn_uid }'">
+		                    <div class="blog-item set-bg" data-setbg="${popular[i].inn_pic }">
+		                        <div class="bi-text">
+		                            <span class="b-tag">
+		                            	<c:if test="${popular[i].inn_sep == 1 }">호텔</c:if>
+										<c:if test="${popular[i].inn_sep == 2 }">펜션</c:if>
+										<c:if test="${popular[i].inn_sep == 3 }">리조트</c:if>
+		                            </span>
+		                            <h4 style="color: white; font-weight: bold;">${popular[i].inn_name }</h4>
+		                            <div class="b-time"><i class="fas fa-map-marker-alt"></i> ${popular[i].inn_loc }</div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	            </div>
+	        </div>
+	    </section>
+   	</c:if>
     <!-- Recommend Blog Section End -->
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -1173,7 +1172,7 @@
                 $(".modal_layer").css("display", "none")
             })
             $.ajax({
-    			url: "http://localhost:8090/mgb/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/0/5",
+    			url: "${pageContext.request.contextPath}/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/0/5",
     			method: "GET",
     			success: function(data) {
     				var row = "";
@@ -1220,7 +1219,7 @@
         
         function paging(writePage, page) {
         	$.ajax({
-    			url: "http://localhost:8090/mgb/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/" + writePage + "/" + page,
+    			url: "${pageContext.request.contextPath}/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/" + writePage + "/" + page,
     			method: "GET",
     			success: function(data) {
     				var row = "";
@@ -1296,6 +1295,16 @@
         	return false;
         }
         
+        function more() {
+        	if ($(".more").text() === "더보기") {
+        		$(".more").text("접기")
+            	$(".comment").css("height", "auto")
+        	} else if ($(".more").text() === "접기") {
+        		$(".more").text("더보기")
+            	$(".comment").css("height", "113px")
+        	}
+        }
+        
         $(document).ready(function() {
         	var star = $(".star_avg span").text();
         	var icon = "";        	
@@ -1311,6 +1320,20 @@
         	for (i = 0; i < star; i++) { 
         		$(".star_avg span").before("<i class='far fa-star'></i>"); 
        		}
+        	
+        	var starCeil = Math.ceil("${total / fn:length(review) }");
+        	
+        	if (starCeil >= 9) {
+	        	$(".star_comment").text("완벽해요")
+        	} else if (starCeil >= 7) {
+        		$(".star_comment").text("만족해요")
+        	} else if (starCeil >= 5) {
+        		$(".star_comment").text("그저 그래요")
+        	} else if (starCeil >= 3) {
+        		$(".star_comment").text("별로에요")
+        	} else if (starCeil >= 0) {
+        		$(".star_comment").text("끔찍해요")
+        	}
         })
     </script>
 </body>

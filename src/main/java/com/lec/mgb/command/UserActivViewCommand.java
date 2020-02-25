@@ -20,9 +20,11 @@ public class UserActivViewCommand implements Command {
 		UserActivDAO dao = C.sqlSesssion.getMapper(UserActivDAO.class);
 		UserActivDTO dto [] = dao.selectActivByUid(activ_uid);
 		UserActivDTO review [] = dao.selectReviewStarByUid(activ_uid);
+		UserActivDTO popular [] = dao.selectActivPopular();
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("review", review);
+		model.addAttribute("popular", popular);
 		model.addAttribute("member_uid", 1);
 	}
 

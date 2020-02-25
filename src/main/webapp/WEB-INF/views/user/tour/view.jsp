@@ -26,6 +26,16 @@
     <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 
     <style>
+    	.bd-hero-text h2 {
+        	background-color: rgba(68,68,68,0.6);
+        	padding: 15px 0px;
+        	font-weight: bold;
+        }
+        
+        .bd-hero-text ul li {
+        	font-weight: bold;
+        }
+    
     	.dhx_calendar.dhx_widget.dhx_widget--bordered {
     		margin: 0 auto;
     	}
@@ -51,7 +61,7 @@
             cursor: pointer;
         }
         .bd-hero-text div {
-            width: 30%;
+            width: 40%;
             margin: 0 auto;
         }
         .bd-hero-text div button {
@@ -134,6 +144,7 @@
 			background-color: white;
 		}
 		.star_avg > span { padding-left: 5px; }
+		body {overflow-x: hidden;}
     </style>
 
     <!-- Css Styles -->
@@ -163,14 +174,14 @@
     <!-- Blog Details Hero Section Begin -->
     <section class="blog-details-hero set-bg" data-setbg="${dto[0].tour_pic }">
         <div style="width: 100%;">
-            <div class="row">
+            <div style="padding: 0;" class="row">
                 <div class="col-lg-12">
-                    <div class="bd-hero-text">
+                    <div style="padding: 0;" class="bd-hero-text">
                         <span>투어</span>
                         <h2 style="width: 100%">${dto[0].tour_name }</h2>
                         <ul>
-                            <li class="b-time"><i class="icon_clock_alt"></i> ${dto[0].tour_period }박 ${dto[0].tour_period + 1 }일</li>
-                            <li><i class='fas fa-star'></i> <fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></li>
+                            <li style="color: white;" class="b-time"><i class="far fa-calendar"></i> ${dto[0].tour_period }박 ${dto[0].tour_period + 1 }일</li>
+                            <c:if test="${fn:length(review) != 0 }"><li style="color: white;"><i class='fas fa-star'></i> <fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></li></c:if>
                         </ul>
                         <div>
                         	<c:if test="${empty sessionScope.loginUid }"><button style="background-color: #bbb; border-color: #bbb;" disabled="disabled">예약은 로그인 후 이용 가능합니다</button></c:if>
@@ -223,46 +234,31 @@
     <!-- Blog Details Section End -->
 
     <!-- Recommend Blog Section Begin -->
-    <section class="recommend-blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Recommended</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${fn:length(popular) >= 3 }">
+	    <section class="recommend-blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="section-title">
+	                        <h2 style="font-weight: bold;">추천 숙소</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<c:forEach var="i" begin="0" end="2" step="1">
+		                <div class="col-sm-4 recommend" onclick="location.href='${pageContext.request.contextPath}/user/inn/view/${popular[i].tour_uid }'">
+		                    <div class="blog-item set-bg" data-setbg="${popular[i].tour_pic }">
+		                        <div class="bi-text">
+		                            <h4 style="color: white; font-weight: bold;">${popular[i].tour_name }</h4>
+		                            <div class="b-time"><i class="far fa-calendar"></i> ${dto[0].tour_period }박 ${dto[0].tour_period + 1 }일</div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	            </div>
+	        </div>
+	    </section>
+   	</c:if>
     <!-- Recommend Blog Section End -->
 
     <!-- Footer Section Begin -->
@@ -345,7 +341,7 @@
 					<section class="dhx_sample-container">
 						<div class="dhx_sample-container__widget" id="calendar"></div>
 					</section>
-					<label>인원 수 : <input type="text" name="book_member_cnt"></label>
+					<label style="width: 100%; text-align: center;">인원 수 : <input type="text" name="book_member_cnt" value="1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></label>
 	            </div>
 	            <div class="modal_button row">
 	                <div class="modal_prev col-sm-6">
@@ -394,6 +390,7 @@
 
             $(".modal_inner .icon_close").click(function() {
                 $(".modal_layer").css("display", "none")
+                $("input:text[name='book_member_cnt']").val("1")
             })
         })
         function openModal() {
@@ -438,11 +435,17 @@
     		
     		if (year >= d.getFullYear() && month >= d.getMonth() + 1 && date > d.getDate()) {
     			$("input:text[name='book_date']").val(year + "-" + month + "-" + date)
-				return true;
     		} else {
     			alert(year + "/" + month + "/" + date + " 이후로 선택해주세요")
     		}
     		
+	   		var book_member_cnt = parseInt($("input:text[name='book_member_cnt']").val().trim());
+	   		if (book_member_cnt != 0) {
+	   			return true;
+	   		} else {
+	   			alert("인원 수를 다시 입력해주세요")
+	   		}
+	   		
     		return false;
     	}
     	$(document).ready(function() {
@@ -461,7 +464,7 @@
         		$(".star_avg span").before("<i class='far fa-star'></i>"); 
        		}
         	$.ajax({
-    			url: "http://localhost:8090/mgb/user/tour/ajax/review/" + ${dto[0].tour_uid } + "/0/5",
+    			url: "${pageContext.request.contextPath}/user/tour/ajax/review/" + ${dto[0].tour_uid } + "/0/5",
     			method: "GET",
     			success: function(data) {
     				var row = "";
@@ -482,6 +485,7 @@
     				$(".review").html(row);
     				if (row.trim().length == 0) {
     	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    			$(".star_avg").html("");
     	    		}
     			}
     		})
@@ -504,7 +508,7 @@
     	
     	function paging(writePage, page) {
         	$.ajax({
-    			url: "http://localhost:8090/mgb/user/tour/ajax/review/" + ${dto[0].tour_uid } + "/" + writePage + "/" + page,
+    			url: "${pageContext.request.contextPath}/user/tour/ajax/review/" + ${dto[0].tour_uid } + "/" + writePage + "/" + page,
     			method: "GET",
     			success: function(data) {
     				var row = "";

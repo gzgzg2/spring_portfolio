@@ -18,9 +18,11 @@ public class UserInnViewCommand implements Command {
 		UserInnDAO dao = C.sqlSesssion.getMapper(UserInnDAO.class);
 		UserInnDTO dto [] = dao.selectInnByUid(inn_uid);
 		UserInnDTO review [] = dao.selectReviewStarByUid(inn_uid);
+		UserInnDTO popular [] = dao.selectInnPopular();
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("review", review);
+		model.addAttribute("popular", popular);
 	}
 
 }

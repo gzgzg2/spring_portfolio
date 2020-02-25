@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -32,6 +33,19 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/swiper.min.css">
     
     <style>
+    	.item_info h5 {
+    		line-height: 1.5em;
+    	}
+        .sep {
+		    color: white;
+		    font-weight: bold;
+		    padding: 2px 5px;
+		    margin: 5px;
+		    font-size: 0.8em;
+		    background-color: #dfa974;
+		    border: 1px solid #dfa974;
+		    border-radius: 5px;
+		}
 		.hothot2 { height: auto; }
 		.hothot2:hover { cursor: pointer; }
 		.hothot2:nth-child(1) { margin: 0; }
@@ -1188,9 +1202,15 @@ legend {
 					                                      		<img src="${dto.inn_pic }"/>
 					                                      	</div>
 					                                      	<div class="item_info" style="padding: 7px;">
-					                                      		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+					                                      		<h5 style="font-weight: bold; margin-top: 5px;">
+					                                      		<span class="sep">
+						                                      		<c:if test="${dto.inn_sep == 1 }">호텔</c:if>
+																	<c:if test="${dto.inn_sep == 2 }">펜션</c:if>
+																	<c:if test="${dto.inn_sep == 3 }">리조트</c:if>
+																</span>
+																${dto.inn_name }</h5>
 					                                      		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
-					                                      		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+					                                      		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
 					                                      	</div> 
 					                                      </li>
 					                                    <c:if test="${status.count % 12 == 0 && status.count != 0 }">
@@ -1228,17 +1248,23 @@ legend {
 					              		<img src="${dto.inn_pic }"/>
 					              	</div>
 					              	<div class="item_info" style="padding: 7px;">
-					              		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+					              		<h5 style="font-weight: bold; margin-top: 5px;">
+					              			<span class="sep">
+	                                      		<c:if test="${dto.inn_sep == 1 }">호텔</c:if>
+												<c:if test="${dto.inn_sep == 2 }">펜션</c:if>
+												<c:if test="${dto.inn_sep == 3 }">리조트</c:if>
+											</span>
+					              		${dto.inn_name }</h5>
 					              		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
-					              		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_first_cost }</p>
-					              		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+					              		<p style="margin: 0px 10px 0px 0px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></p>
+					              		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
 					              	</div> 
 				                </div>
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
-      				<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
+   				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	
@@ -1259,9 +1285,15 @@ legend {
                                   		<img src="${dto.inn_pic }"/>
                                   	</div>
                                   	<div class="item_info" style="padding: 7px;">
-                                  		<h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                  		<h5 style="font-weight: bold; margin-top: 5px;">
+                                  			<span class="sep">
+	                                      		<c:if test="${dto.inn_sep == 1 }">호텔</c:if>
+												<c:if test="${dto.inn_sep == 2 }">펜션</c:if>
+												<c:if test="${dto.inn_sep == 3 }">리조트</c:if>
+											</span>
+                                  		${dto.inn_name }</h5>
                                   		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
-                                  		<p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                  		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
                                   	</div> 
 	                			</li>
                 			<c:if test="${status.count == 5 || status.count == 10 }">
@@ -1396,6 +1428,11 @@ legend {
     			$("li[data-value='서귀포시']").addClass("selected")
     			$("li[data-value='서귀포시']").addClass("focus")
     			$(".current").text("서귀포시")
+    		}
+    		
+    		if ((window.location.pathname).toString().includes("search")) {
+    			$(".Hot2").css("display", "none");
+    			$(".sivaHotH").css("display", "none");
     		}
     	})
     </script>

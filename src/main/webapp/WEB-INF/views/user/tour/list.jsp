@@ -242,7 +242,7 @@
     	
     	function starHigh(page, viewPage) {
     		$.ajax({
-    			url: "http://localhost:8090/mgb/user/tour/ajax/starHigh/" + page + "/" + viewPage,
+    			url: "${pageContext.request.contextPath}/user/tour/ajax/starHigh/" + page + "/" + viewPage,
     			method: "GET",
     			success: function(data) {
     				var row = "<div class='row'>";
@@ -283,7 +283,7 @@
     	
     	function costHigh(page, viewPage) {
     		$.ajax({
-    			url: "http://localhost:8090/mgb/user/tour/ajax/costHigh/" + page + "/" + viewPage,
+    			url: "${pageContext.request.contextPath}/user/tour/ajax/costHigh/" + page + "/" + viewPage,
     			method: "GET",
     			success: function(data) {
     				var row = "<div class='row'>";
@@ -324,7 +324,7 @@
     	
     	function costLow(page, viewPage) {
     		$.ajax({
-    			url: "http://localhost:8090/mgb/user/tour/ajax/costLow/" + page + "/" + viewPage,
+    			url: "${pageContext.request.contextPath}/user/tour/ajax/costLow/" + page + "/" + viewPage,
     			method: "GET",
     			success: function(data) {
     				var row = "<div class='row'>";

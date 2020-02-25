@@ -40,8 +40,7 @@ public class UserInnController {
 	@GetMapping("/view/{inn_uid}")
 	public String view(@PathVariable("inn_uid")int inn_uid, Model model, HttpSession session) {
 		model.addAttribute("inn_uid", inn_uid);
-		command = new UserInnViewCommand();
-		command.execute(model);
+		new UserInnViewCommand().execute(model);
 		return "user/inn/view";
 	}
 	@PostMapping("/reserve")

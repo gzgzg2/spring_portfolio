@@ -84,6 +84,23 @@
 			#{writePages}, #{page};
 	</select>
 	
+	<select id="selectTourPopular" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT 
+		     t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, AVG(r.review_star) 'review_star', t.tour_pic
+		FROM
+		     tour t, book b, review r
+		WHERE
+			 t.tour_uid = b.tour_uid  
+		     and b.book_uid = r.book_uid
+			 and not t.tour_cost IN (0)
+		GROUP BY
+		     t.tour_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
+	</select>
+	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		SELECT
 			member_name, member_tel

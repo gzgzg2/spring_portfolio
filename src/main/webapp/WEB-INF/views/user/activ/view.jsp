@@ -32,6 +32,16 @@
         .activ table tr:first-child {border-top: 3px solid #eee;}
         .activ table tr {border-bottom: 3px solid #eee; margin-block-end: 5px;}
         
+        .bd-hero-text h2 {
+        	background-color: rgba(68,68,68,0.6);
+        	padding: 15px 0px;
+        	font-weight: bold;
+        }
+        
+        .bd-hero-text ul li {
+        	font-weight: bold;
+        }
+        
         .activ_shop_info {
         	margin-top: 40px;
         	padding: 20px;
@@ -250,8 +260,8 @@
                                             </div>
 	                                        </div>
 	                                        <div class="ticket_price col-sm-6">
-	                                            <p>${dto.ticket_first_cost }</p>
-	                                            <p>${dto.ticket_last_cost }</p>
+	                                            <p><c:if test="${dto.ticket_first_cost != 0 }"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/> 원</c:if></p>
+	                                            <p><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/> 원</p>
 	                                        </div>
                                  		</div>
                                 	</div>
@@ -292,46 +302,31 @@
     <!-- Blog Details Section End -->
 
     <!-- Recommend Blog Section Begin -->
-    <section class="recommend-blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Recommended</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="blog-item set-bg" data-setbg="${pageContext.request.contextPath }/resources/img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${fn:length(popular) >= 3 }">
+	    <section class="recommend-blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="section-title">
+	                        <h2 style="font-weight: bold;">추천 숙소</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<c:forEach var="i" begin="0" end="2" step="1">
+		                <div class="col-sm-4 recommend" onclick="location.href='${pageContext.request.contextPath}/user/activ/view/${popular[i].activ_uid }'">
+		                    <div class="blog-item set-bg" data-setbg="${popular[i].activ_pic }">
+		                        <div class="bi-text">
+		                            <h4 style="color: white; font-weight: bold;">${popular[i].activ_name }</h4>
+		                            <div class="b-time"><i class="fas fa-map-marker-alt"></i> ${popular[i].activ_loc }</div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	            </div>
+	        </div>
+	    </section>
+   	</c:if>
     <!-- Recommend Blog Section End -->
 
     <!-- Footer Section Begin -->
@@ -466,7 +461,7 @@
             	$(this).parent().find(".book_member_cnt").text(book_member_cnt - 1)
             })
             
-            $(".bd-hero-text > ul > li:nth-child(2)").html(change($(".bd-hero-text > ul > li:nth-child(2)").html()));
+            $(".bd-hero-text > ul > li:nth-child(2)").html(tel($(".bd-hero-text > ul > li:nth-child(2)").html()));
         })
         function goTicket() {
             $(".ativ_info").css("display", "none")
@@ -474,7 +469,7 @@
             $(".comment-option").css("display", "none")
         }
         
-        function change(num) {
+        function tel(num) {
         	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
         }
         
@@ -495,7 +490,7 @@
         
         function paging(writePage, page) {
         	$.ajax({
-    			url: "http://localhost:8090/mgb/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/" + writePage + "/" + page,
+    			url: "${pageContext.request.contextPath}/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/" + writePage + "/" + page,
     			method: "GET",
     			success: function(data) {
     				var row = "";
@@ -538,7 +533,7 @@
         	for (i = 0; i < star; i++) { $(".star_avg span").before("<i class='far fa-star'></i>"); }
         	
         	$.ajax({
-    			url: "http://localhost:8090/mgb/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/0/5",
+    			url: "${pageContext.request.contextPath}/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/0/5",
     			method: "GET",
     			success: function(data) {
     				var row = "";
@@ -560,6 +555,7 @@
     				
     				if (row.trim().length == 0) {
     	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    			$(".star_avg").html("");
     	    		}
     			}
     		})
