@@ -9,6 +9,7 @@
 
 	<bean id="customAccessDenied" class="com.lec.mgb.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccess" class="com.lec.mgb.security.CustomLoginSuccessHandler"/>
+	<bean id="customLogoutSuccess" class="com.lec.mgb.security.CustomLogoutSuccessHandler"/>
 
 	
 	<!-- security 요소들  -->
@@ -30,9 +31,10 @@
 			authentication-success-handler-ref="customLoginSuccess"/>
 	
 		<!-- <security:access-denied-handler error-page="/accessError"/>  -->
-		<security:access-denied-handler/>
+		<security:access-denied-handler error-page="/user/account/loginFail"/>
 		
-		<security:logout logout-url="/customLogout" invalidate-session="true"></security:logout>
+		<security:logout logout-url="/user/account/logoutOk" 
+			invalidate-session="false" delete-cookies="JSESSIONID"/>
 	</security:http>
 	
 	<!-- passwordEncoding -->

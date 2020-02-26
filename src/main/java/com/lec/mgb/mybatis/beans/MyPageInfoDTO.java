@@ -13,7 +13,7 @@ public class MyPageInfoDTO {
 	private String member_pic;
 	private String member_tel;
 	private String member_pwEncode;
-	
+	private String member_newPw;
 	public MyPageInfoDTO() {
 		super();
 	}
@@ -21,7 +21,7 @@ public class MyPageInfoDTO {
 
 	public MyPageInfoDTO(int member_uid, String member_name, String member_id, String member_pw, String member_email,
 			String member_gender, Date member_birth, String member_pic, String member_tel,
-			String member_pwEncode) {
+			String member_pwEncode, String member_newPw) {
 		super();
 		this.member_uid = member_uid;
 		this.member_name = member_name;
@@ -33,6 +33,7 @@ public class MyPageInfoDTO {
 		this.member_pic = member_pic;
 		this.member_tel = member_tel;
 		this.member_pwEncode = member_pwEncode;
+		this.member_newPw = member_newPw;
 	}
 
 
@@ -140,6 +141,17 @@ public class MyPageInfoDTO {
 	public void setMember_pwEncode(String member_pwEncode) {
 		this.member_pwEncode = member_pwEncode;
 	}
+
+
+	public String getMember_newPw() {
+		return member_newPw;
+	}
+
+
+	public void setMember_newPw(String member_newPw) {
+		this.member_newPw = member_newPw;
+	}
+	
 	
 	
 }
