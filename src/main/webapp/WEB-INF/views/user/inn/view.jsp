@@ -168,7 +168,6 @@
         }
         .comment {
         	overflow: hidden;
-        	height: 113px;
         }
         .right .comment {
             display: block;
@@ -860,8 +859,12 @@
         	width: 100%;
     		height: 250px;
         }
-        @media (min-width: 991px) {
+        @media (max-width: 1200px) {
+        }
+        @media (max-width: 991px) {
             .inn_img {width: 100%}
+            .info-section { position: relative; top: 250px; }
+            .inn-info { padding-top: 110px; }
         }
         .comment_mobile {
         	display: none;
@@ -910,13 +913,13 @@
                 <div class="col-lg-5 inn_img">
                     <img src="${dto[0].inn_pic }">
                 </div>
-                <div class="col-lg-7"">
+                <div class="col-lg-7 inn-info">
                     <h3 style="white-space: nowrap;"><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #dfa974; border: 1px solid #dfa974; border-radius: 5px;">
 					<c:if test="${dto[0].inn_sep == 1 }">호텔</c:if>
 					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
-                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span><span class="star_comment"></span></p>
+                    <p style="margin-top: 7px; color: rgb(255,167,38)"><c:if test="${total != 0 }"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span></c:if><span class="star_comment"></span></p>
                     <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
                     <div class="comment" style="background: #ececec; padding: 12px 17px;">
                         <strong>사장님 한마디</strong>
@@ -933,7 +936,7 @@
     <section class="blog-details-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 offset-lg-1">
+                <div class="info-section col-lg-10 offset-lg-1">
                     <div class="blog-details-text">
                         <div class="bd-title">
                             <ul>
@@ -1193,6 +1196,7 @@
     				$(".review").html(row);
     				if (row.trim().length == 0) {
     	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    			$(".star_avg").html("");
     	    		}
     			}
     		})
@@ -1296,16 +1300,25 @@
         }
         
         function more() {
+        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
+        	var h2 = $(".inn-info p").eq(0).outerHeight()
+        	var h3 = $(".inn-info p").eq(1).outerHeight()
+        	
         	if ($(".more").text() === "더보기") {
         		$(".more").text("접기")
             	$(".comment").css("height", "auto")
         	} else if ($(".more").text() === "접기") {
         		$(".more").text("더보기")
-            	$(".comment").css("height", "113px")
+            	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
         	}
         }
         
         $(document).ready(function() {
+        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
+        	var h2 = $(".inn-info p").eq(0).outerHeight()
+        	var h3 = $(".inn-info p").eq(1).outerHeight()
+        	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
+        	
         	var star = $(".star_avg span").text();
         	var icon = "";        	
         	star = Math.floor(star);

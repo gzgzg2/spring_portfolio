@@ -46,7 +46,12 @@
 		    border: 1px solid #dfa974;
 		    border-radius: 5px;
 		}
-		.hothot2 { height: auto; }
+		.hothot2 { height: 400px; }
+		.item_img2 { height: 200px; }
+		.hothot2 > .item_img2 > img { 
+			width: 100%;
+			height: 100%;
+		}
 		.hothot2:hover { cursor: pointer; }
 		.hothot2:nth-child(1) { margin: 0; }
 		.swiper2 { height: 600px !important; }
@@ -68,7 +73,7 @@
       }
       .swiper-container {
         width: 100%;
-        height: 1000px;
+        height: 1200px;
       }
       .swiper-slide {
         text-align: center;
@@ -95,7 +100,15 @@
     </style>
     
     <style>
+    	.navYam2 > ul > li { height: 300px; margin-top: 5%; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
+    	.item_info > h5 { height: 81px; }
+    	.item_info > p { height: 45px; }
+    	.item_img { height: 133px; }
+    	.item_img > img {
+	    	width: 100%;
+			height: 100%;
+		}
     	/* Sections
    ========================================================================== */
 	/**
@@ -1238,21 +1251,21 @@
 		            	<c:forEach var="dto" items="${sale }" varStatus="status">
 		            		<c:if test="${status.count % 3 == 1 || status.count == 1 }"><div class="swiper-slide"></c:if>
 				                <div class="hothot2" onclick="location.href='${pageContext.request.contextPath }/user/activ/view/${dto.activ_uid }'">
-					                <div class="item_img">
+					                <div class="item_img2">
 					              		<img src="${dto.activ_pic }"/>
 					              	</div>
 					              	<div class="item_info" style="padding: 7px;">
 					              		<h5 style="font-weight: bold; margin-top: 5px;">${dto.activ_name }</h5>
 					              		<p class="activ_loc" style="margin-bottom: 0px;">${fn:substring(dto.activ_loc, 8, fn:length(dto.activ_loc)) }</p>
-					              		<p style="margin: 0px 10px 0px 0px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/></p>
+					              		<p style="margin: 20px 10px 0px 0px; height: 20px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/></p>
 					              		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/>원 ~</p>
 					              	</div> 
 				                </div>
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
+   					<div class="swiper-pagination swiper-pagination2" style="width: 100%"></div>
 	            </div>
-   				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	
