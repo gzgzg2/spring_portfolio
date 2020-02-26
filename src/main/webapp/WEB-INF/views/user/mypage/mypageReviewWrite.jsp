@@ -31,6 +31,9 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
     <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
     <style>
+    	.cke_inner.cke_reset {
+    		height: 400px
+    	}
         .item {
             width: 80%;
             height: 300px;
@@ -92,7 +95,6 @@
             border-radius: 5px;
             background-color: #ccc;
         }
-		.text { display: none; }
     </style>
 </head>
 
@@ -122,67 +124,18 @@
             </div>
 
             <div id="memberForm">
-                <h2 id="frmH2">예약 관리</h2>
+                <h2 id="frmH2">리뷰 작성</h2>
                 <div class="reserve">
-                    <div class="item">
-                        <div class="item_header">
-                            <h4>[제주 안덕] 산방산탄산온천 - A-1. 성인 1인 이용권</h4>
-                            <h5>2020-02-23</h5>
-                        </div>
-                        <div class="item_body">
-                            <h5>예약자 이름:</h5><p>이름이름</p>
-                            <h5>예약자 번호:</h5><p>01011112222</p>
-                            <h5>인원수:</h5><p>3</p>
-                            <h5>총가격:</h5><p>26700</p>
-                        </div>
-                        <div class="item_footer">
-                            <div class="button_container">
-                                <button onclick="writeReview(1)">리뷰 쓰기</button>
-                                <button>예약 취소</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text 1">
-                        <p><i class="fas fa-sort-up"></i></p>
-                        <form action="">
-                            <input type="hidden" name="book_uid">
-                            <input type="number" min="1" max="10" name="review_star" style="width: 7%;" value="10">
-                            <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
-                            <textarea name="review_content" id="editor1"></textarea>
-                            <button type="submit">작성 완료</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="reserve">
-                    <div class="item">
-                        <div class="item_header">
-                            <h4>[제주 안덕] 산방산탄산온천 - A-1. 성인 1인 이용권</h4>
-                            <h5>2020-02-23</h5>
-                        </div>
-                        <div class="item_body">
-                            <h5>예약자 이름:</h5><p>이름이름</p>
-                            <h5>예약자 번호:</h5><p>01011112222</p>
-                            <h5>인원수:</h5><p>3</p>
-                            <h5>총가격:</h5><p>26700</p>
-                        </div>
-                        <div class="item_footer">
-                            <div class="button_container">
-                                <button onclick="writeReview(2)">리뷰 쓰기</button>
-                                <button>예약 취소</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text 2">
-                        <p><i class="fas fa-sort-up"></i></p>
-                        <form action="">
-                            <input type="hidden" name="book_uid">
-                            <input type="number" min="1" max="10" name="review_star" style="width: 7%;" value="10">
-                            <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
-                            <textarea name="review_content" id="editor1"></textarea>
-                            <button type="submit">작성 완료</button>
-                        </form>
-                    </div>
-                </div>
+                	<div class="text">
+		                <form action="">
+		                    <input type="hidden" name="book_uid">
+		                    <input type="number" class="review_star" name="review_star" min="1" max="10" style="width: 7%;" value="10">
+		                    <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
+		                    <textarea name="review_content" id="editor1"></textarea>
+		                    <button type="submit">작성 완료</button>
+		                </form>
+		        	</div>
+	        	</div>
             </div>
         </div>
    </section>
@@ -199,6 +152,14 @@
     <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
+        
+       	$(document).ready(function() {
+       		$(".review_star").change(function() {
+       			if ($(".review_star").val() === "" || parseInt($(".review_star").val().trim()) > 10 || parseInt($(".review_star").val().trim()) == 0) {
+       				$(".review_star").val("10")
+       			}
+       		})
+       	})
     </script>
 </body>
 

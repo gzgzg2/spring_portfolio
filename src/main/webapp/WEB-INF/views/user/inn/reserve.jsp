@@ -123,7 +123,7 @@
                                     <label>
                                       	예약자 핸드폰 <br>
                                         <input type="text" name="book_member_tel" value="">
-                                        <button type="button" onclick="sendSMS()">휴대폰 인증</button>
+                                        <button type="button" class="sendSMS" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
                                     <label class="auth">
                                         <input type="text" name="authKey">
@@ -298,8 +298,12 @@
     		$("input:checkbox[name='same_member_tel']").click(function() {
     			if ($("input:checkbox[name='same_member_tel']").prop("checked")) {
     				$("input:text[name='book_member_tel']").val("${member.member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
+    				$("input:hidden[name='ifChkSMS']").val("1")
+    				$(".sendSMS").css("display", "none");
     			} else {
     				$("input:text[name='book_member_tel']").val("").prop("readonly", false).css("background-color", "white")
+    				$("input:hidden[name='ifChkSMS']").val("0")
+    				$(".sendSMS").css("display", "inline");
     			}
     		})
     		$("input:checkbox[name='term_all']").click(function() {

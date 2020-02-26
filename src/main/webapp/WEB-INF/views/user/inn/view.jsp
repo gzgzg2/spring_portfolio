@@ -1108,31 +1108,31 @@
     </footer>
     <!-- Footer Section End -->
     <div class="modal_layer select_date">
-    	<form action="${pageContext.request.contextPath}/user/inn/reserve" method="POST" onsubmit="return chkSubmit()">
-    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    		<input type="hidden" name="room_uid" value=""/>
-    		<input type="hidden" name="book_date" value=""/>
-    		<input type="hidden" name="book_date_end" value=""/>
-	        <div class="modal_inner">
-	            <div class="modal_top">
-	                <div><i class="icon_close"></i></div>
-	                <h3>객실 예약</h3>
-	            </div>
-	            <div class="modal_description">
-	                <section class="dhx_sample-container">
-	                    <div class="dhx_sample-container__widget" id="calendar"></div>
-	                </section>
-	            </div>
-	            <div class="modal_button row">
-	                <div class="modal_prev col-sm-6">
-	                    <button>prev</button>
-	                </div>
-	                <div class="modal_next col-sm-6">
+        <div class="modal_inner">
+            <div class="modal_top">
+                <div><i class="icon_close"></i></div>
+                <h3>객실 예약</h3>
+            </div>
+            <div class="modal_description">
+                <section class="dhx_sample-container">
+                    <div class="dhx_sample-container__widget" id="calendar"></div>
+                </section>
+            </div>
+            <div class="modal_button row">
+                <div class="modal_prev col-sm-6">
+                    <button>prev</button>
+                </div>
+                <div class="modal_next col-sm-6">
+                	<form action="${pageContext.request.contextPath}/user/inn/reserve" method="POST" onsubmit="return chkSubmit()">
+			    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			    		<input type="hidden" name="room_uid" value=""/>
+			    		<input type="hidden" name="book_date" value=""/>
+			    		<input type="hidden" name="book_date_end" value=""/>
 	                    <button type="submit">next</button>
-	                </div>
-	            </div>
-	        </div>
-        </form>
+	            	</form>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Search model Begin -->
     <div class="search-model">
@@ -1286,7 +1286,7 @@
         	
         	if (book_date.trim().length != 0 && book_date_end.trim().length != 0 && book_date != book_date_end) {
         		var year = book_date.substring(0, 4)
-         		var month = book_date.substring(5, 7)
+         		var month = book_date.substring(5, 7).replaceAll("0", "")
           		var date = book_date.substring(8, 10)
           		
           		if (year >= now.getFullYear() && month >= now.getMonth() + 1 && date > now.getDate()) {

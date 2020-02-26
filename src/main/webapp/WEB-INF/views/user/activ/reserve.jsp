@@ -291,9 +291,11 @@
     			if ($("input:checkbox[name='same_member_tel']").prop("checked")) {
     				$("input:text[name='book_member_tel']").val("${member[0].member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
     				$("input:hidden[name='ifChkSMS']").val("1")
+    				$(".sendSMS").css("display", "none");
     			} else {
     				$("input:text[name='book_member_tel']").val("").prop("readonly", false).css("background-color", "white")
     				$("input:hidden[name='ifChkSMS']").val("0")
+    				$(".sendSMS").css("display", "inline");
     			}
     		})
     		$("input:checkbox[name='term_all']").click(function() {

@@ -329,32 +329,32 @@
     <!-- Footer Section End -->
 
     <div class="modal_layer select_date">
-    	<form action="${pageContext.request.contextPath}/user/tour/reserve" method="POST" onsubmit="return chkSubmit()">
-    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    		<input type="hidden" name="tour_uid" value="${tour_uid }"/>
-	        <div class="modal_inner">
-	            <div class="modal_top">
-	                <div><i class="icon_close"></i></div>
-	                <h3>객실 예약</h3>
-	            </div>
-	            <div class="modal_description">
-					<section class="dhx_sample-container">
-						<div class="dhx_sample-container__widget" id="calendar"></div>
-					</section>
+        <div class="modal_inner">
+            <div class="modal_top">
+                <div><i class="icon_close"></i></div>
+                <h3>객실 예약</h3>
+            </div>
+            <div class="modal_description">
+				<section class="dhx_sample-container">
+					<div class="dhx_sample-container__widget" id="calendar"></div>
+				</section>
+				<form action="${pageContext.request.contextPath}/user/tour/reserve" method="POST" onsubmit="return chkSubmit()">
 					<label style="width: 100%; text-align: center;">인원 수 : <input type="text" name="book_member_cnt" value="1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></label>
-	            </div>
-	            <div class="modal_button row">
-	                <div class="modal_prev col-sm-6">
-	                    <button>prev</button>
-	                </div>
-	                <div class="modal_next col-sm-6">
-	                    <button type="submit" onclick="updateValue()">next</button>
-	                    <input class="dhx_sample-input" type="text" name="book_date" style="visibility: hidden;">
-	                </div>
-	            </div>
-	        </div>
-    	</form>
-    </div>
+            </div>
+            <div class="modal_button row">
+                <div class="modal_prev col-sm-6">
+                    <button>prev</button>
+                </div>
+                <div class="modal_next col-sm-6">
+	    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	    			<input type="hidden" name="tour_uid" value="${tour_uid }"/>
+                    <button type="submit" onclick="updateValue()">next</button>
+                    <input class="dhx_sample-input" type="text" name="book_date" style="visibility: hidden;">
+                 </form>
+              </div>
+          </div>
+      </div>
+ 	</div>
 
     <!-- Search model Begin -->
     <div class="search-model">
