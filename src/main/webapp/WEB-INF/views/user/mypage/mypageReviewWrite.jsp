@@ -127,8 +127,9 @@
                 <h2 id="frmH2">리뷰 작성</h2>
                 <div class="reserve">
                 	<div class="text">
-		                <form action="">
-		                    <input type="hidden" name="book_uid">
+		                <form action="${pageContext.request.contextPath }/user/mypage/mypageReviewWriteOk" method="POST" onsubmit="return chkSubmit()">
+                           	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		                    <input type="hidden" name="book_uid" value="${book_uid }">
 		                    <input type="number" class="review_star" name="review_star" min="1" max="10" style="width: 7%;" value="10">
 		                    <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
 		                    <textarea name="review_content" id="editor1"></textarea>
@@ -160,6 +161,17 @@
        			}
        		})
        	})
+       	
+       	function chkSubmit() {
+       		if ($("input:text[name='review_title']").val().trim().length > 5) {
+       			return true;
+       		} else {
+       			alert("제목은 5글자 이상으로 입력하세요");
+       			$("input:text[name='review_title']").focus();
+       		}
+       		
+       		return false;
+       	}
     </script>
 </body>
 

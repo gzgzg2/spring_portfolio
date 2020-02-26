@@ -430,13 +430,14 @@
     		var d = new Date();
     		var book_date = $("input:text[name='book_date']").val();
 	   		var year = parseInt("20" + book_date.substring(6))
-	   		var month = parseInt(book_date.substring(3, 5))
+	   		var month = parseInt(book_date.substring(3, 5).replace("0", ""))
     		var date = parseInt(book_date.substring(0, 2))
     		
-    		if (year >= d.getFullYear() && month >= d.getMonth() + 1 && date > d.getDate()) {
+    		if (year >= d.getFullYear() && ((month == d.getMonth() + 1 && date > d.getDate()) || (month > d.getMonth() + 1))) {
     			$("input:text[name='book_date']").val(year + "-" + month + "-" + date)
     		} else {
-    			alert(year + "/" + month + "/" + date + " 이후로 선택해주세요")
+    			alert(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " 이후로 선택해주세요")
+    			return false;
     		}
     		
 	   		var book_member_cnt = parseInt($("input:text[name='book_member_cnt']").val().trim());

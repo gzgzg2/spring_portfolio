@@ -1289,7 +1289,7 @@
          		var month = book_date.substring(5, 7).replaceAll("0", "")
           		var date = book_date.substring(8, 10)
           		
-          		if (year >= now.getFullYear() && month >= now.getMonth() + 1 && date > now.getDate()) {
+    			if (year >= d.getFullYear() && ((month == d.getMonth() + 1 && date > d.getDate()) || (month > d.getMonth() + 1))) {
           			return true;
           		} else {
           			alert(now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate() + " 이후로 선택해주세요")

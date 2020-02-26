@@ -9,7 +9,6 @@
 
 	<bean id="customAccessDenied" class="com.lec.mgb.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccess" class="com.lec.mgb.security.CustomLoginSuccessHandler"/>
-	<bean id="customLogoutSuccess" class="com.lec.mgb.security.CustomLogoutSuccessHandler"/>
 
 	
 	<!-- security 요소들  -->

@@ -30,69 +30,50 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
     <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
+    
     <style>
-        .item {
-            width: 80%;
-            height: 300px;
-            margin: 2% auto;
-            border: 5px solid #ccc;
-            border-radius: 10px;
-        }
-        .text {
-            width: 80%;
-            margin: 0 auto;
-        }
-        .text > p {
-            text-align: center;
-            font-size: 2em;
-        }
-        .text input[type="text"], .text input[type="number"] {
-            margin: 10px 0px;
-            border: 1px solid #d1d1d1;
-            padding: 10px;
-        }
-        .text button[type="submit"] {
-            width: 100%;
-            margin: 10px 0px;
-            border: none;
-            padding: 10px;
-            background-color: #ccc;
-        }
-        .item_header {
-            padding: 1%;
-            background-color: #ccc;
-        }
-        .item_body {
-            width: 50%;
-            float: left;
-            padding: 1.5%;
-        }
-        .item_body h5 {
-            padding: 3px;
-            float: left;
-        }
-        .item_body p {
-            width: 100%;
-            text-align: right;
-        }
-        .item_footer {
-            float: left;
-            width: 50%;
-            padding: 1.5%;
-        }
-        .button_container {
-            width: 90%;
-            margin: 0 auto;
-            padding-top: 7%;
-        }
-        .button_container button {
-            padding: 15px 50px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #ccc;
-        }
-		.text { display: none; }
+    	.nice-select {
+			width: 100%;
+			margin: 5px 0px 20px 0px;
+		}
+		
+		.paging p {
+			text-align: center;
+			padding-top: 700px;
+		}
+		.paging > p > span { padding-left: 5px; }
+		.paging_button {
+			width: 62px;
+			margin: 0 auto;
+		}
+		.paging_button button {
+			border: none;
+			background-color: white;
+		}
+    	.reserve { width: 85%; margin: 0 auto; }
+    	.reserve_row { margin: 20px 0px; }
+    	.item { 
+    		width: 45%;
+    		float: left;
+    		border: 3px solid #ccc;
+    		border-radius: 15px;
+    		margin: 7px;
+    	}
+    	.item > div { padding: 15px; }
+    	.item_header { height: 80px; background-color: #ccc; }
+    	.item_header h5 { font-size: 1.2em; font-weight: bold; }
+    	.item_header h6 { font-weight: bold; margin-top: 5px; }
+    	.item_body { margin: 0px 10px; }
+    	.item_body table { width: 100%; }
+    	.item_body td  { text-align: right; }
+    	.item_footer {
+    		width: 80%;
+    		margin: 0 auto;
+    	}
+    	.item_footer button {
+    		padding: 5px 10px;
+    		margin-bottom: 20px;
+    	}
     </style>
 </head>
 
@@ -107,7 +88,7 @@
 		</c:otherwise>
    	</c:choose>
 
-   <section id="member">
+   <section id="member" style="height: 100%;">
        <div id="memDiv">
            <h2 id="memberH2">마이페이지</h2>
            <div id="side">
@@ -123,66 +104,20 @@
 
             <div id="memberForm">
                 <h2 id="frmH2">예약 관리</h2>
-                <div class="reserve">
-                    <div class="item">
-                        <div class="item_header">
-                            <h4>[제주 안덕] 산방산탄산온천 - A-1. 성인 1인 이용권</h4>
-                            <h5>2020-02-23</h5>
-                        </div>
-                        <div class="item_body">
-                            <h5>예약자 이름:</h5><p>이름이름</p>
-                            <h5>예약자 번호:</h5><p>01011112222</p>
-                            <h5>인원수:</h5><p>3</p>
-                            <h5>총가격:</h5><p>26700</p>
-                        </div>
-                        <div class="item_footer">
-                            <div class="button_container">
-                                <button onclick="writeReview(1)">리뷰 쓰기</button>
-                                <button>예약 취소</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text 1">
-                        <p><i class="fas fa-sort-up"></i></p>
-                        <form action="">
-                            <input type="hidden" name="book_uid">
-                            <input type="number" min="1" max="10" name="review_star" style="width: 7%;" value="10">
-                            <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
-                            <textarea name="review_content" id="editor1"></textarea>
-                            <button type="submit">작성 완료</button>
-                        </form>
-                    </div>
+                <div style="width: 85%; margin: 0 auto;">
+                	<select name="orderBy">
+						<option value="dateHigh">최근 예약 순</option>
+						<option value="dateLow">오래된 예약 순</option>
+					</select>
                 </div>
-                <div class="reserve">
-                    <div class="item">
-                        <div class="item_header">
-                            <h4>[제주 안덕] 산방산탄산온천 - A-1. 성인 1인 이용권</h4>
-                            <h5>2020-02-23</h5>
-                        </div>
-                        <div class="item_body">
-                            <h5>예약자 이름:</h5><p>이름이름</p>
-                            <h5>예약자 번호:</h5><p>01011112222</p>
-                            <h5>인원수:</h5><p>3</p>
-                            <h5>총가격:</h5><p>26700</p>
-                        </div>
-                        <div class="item_footer">
-                            <div class="button_container">
-                                <button onclick="writeReview(2)">리뷰 쓰기</button>
-                                <button>예약 취소</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text 2">
-                        <p><i class="fas fa-sort-up"></i></p>
-                        <form action="">
-                            <input type="hidden" name="book_uid">
-                            <input type="number" min="1" max="10" name="review_star" style="width: 7%;" value="10">
-                            <input type="text" name="review_title" style="width: 92%; float: right;" placeholder="제목을 입력하세요">
-                            <textarea name="review_content" id="editor1"></textarea>
-                            <button type="submit">작성 완료</button>
-                        </form>
-                    </div>
-                </div>
+                <div class="reserve"></div>
+                <div class="paging" style="width: 100%">
+		        	<p>Page<span class="0">1</span></p>
+		        	<div class="paging_button">
+				        <button onclick="change(0)">◀</button>
+				        <button onclick="change(1)">▶</button>
+		        	</div>
+		        </div>
             </div>
         </div>
    </section>
@@ -196,9 +131,182 @@
     <script src="${pageContext.request.contextPath}/USERJS/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
-    <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+    
     <script>
-        CKEDITOR.replace('editor1');
+	    function dateHigh(page, viewPage) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/mypage/ajax/reserve/dateHigh/${sessionScope.loginUid }/" + page + "/" + viewPage,
+				method: "GET",
+				success: function(data) {
+					var row = ""
+					for (i = 1; i <= data.length; i++) {
+						if (i == 1 || i % 2 == 1) {
+							row += "<div class='reserve_row'>"
+						}
+						if (i % 2 == 1) {
+							row += "<div class='item'>"
+						} else {
+							row += "<div class='item' style='float: right'>"	
+						}
+            			row += "<div class='item_header'>"
+            			row += "<h5>" + data[i - 1].book_name + "</h5>"
+            			row += "</div>"
+            			row += "<div class='item_body'>"
+            			row += "<table>"
+            			row += "<tr>"
+            			row += "<th>예약자 이름</th>"
+            			row += "<td>"
+            			row += data[i - 1].book_member_name
+            			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+           				row += "<th>예약자 번호</th>"
+               			row += "<td>"
+               			row += data[i - 1].book_member_tel
+               			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>인원 수</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_member_cnt
+              			row += "명</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>총 가격</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_cost
+              			row += "</td>"
+            			row += "</tr>"
+            			row += "</table>"
+            			row += "</div>"
+            			row += "<div class='item_footer'>"
+         				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+               			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+               			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+               			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+               			row += "</form>"
+       					row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
+              			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+             			row += "<button type='submit' style='float: right;'>예약 취소</button>"
+               			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+               			row += "</form>"
+            			row += "</div>"
+            			row += "</div>"
+           				if (i % 2 == 0) { row += "</div>" }
+					}
+					$(".reserve").html(row);
+					if (row.length == 0) {
+						dateHigh(page - 4, viewPage)
+						$(".paging p span").text(page / 4)
+						alert("더 이상 예약이 없습니다")
+					}
+				}
+			})
+		}
+	    
+	    function dateLow(page, viewPage) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/mypage/ajax/reserve/dateLow/${sessionScope.loginUid }/" + page + "/" + viewPage,
+				method: "GET",
+				success: function(data) {
+					var row = ""
+					for (i = 1; i <= data.length; i++) {
+						if (i == 1 || i % 2 == 1) {
+							row += "<div class='reserve_row'>"
+						}
+						if (i % 2 == 1) {
+							row += "<div class='item'>"
+						} else {
+							row += "<div class='item' style='float: right'>"	
+						}
+            			row += "<div class='item_header'>"
+            			row += "<h5>" + data[i - 1].book_name + "</h5>"
+            			row += "</div>"
+            			row += "<div class='item_body'>"
+            			row += "<table>"
+            			row += "<tr>"
+            			row += "<th>예약자 이름</th>"
+            			row += "<td>"
+            			row += data[i - 1].book_member_name
+            			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+           				row += "<th>예약자 번호</th>"
+               			row += "<td>"
+               			row += data[i - 1].book_member_tel
+               			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>인원 수</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_member_cnt
+              			row += "명</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>총 가격</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_cost
+              			row += "</td>"
+            			row += "</tr>"
+            			row += "</table>"
+            			row += "</div>"
+            			row += "<div class='item_footer'>"
+            			row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+            			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+              			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+              			row += "</form>"
+        				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
+              			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+             			row += "<button type='submit' style='float: right;'>예약 취소</button>"
+              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+               			row += "</form>"
+            			row += "</div>"
+            			row += "</div>"
+           				if (i % 2 == 0) { row += "</div>" }
+					}
+					$(".reserve").html(row);
+					if (row.length == 0) {
+						dateLow(page - 4, viewPage)
+						$(".paging p span").text(page / 4)
+						alert("더 이상 예약이 없습니다")
+					}
+				}
+			})
+		}
+	    
+	    function change(go) {
+    		var curPage = parseInt($(".paging p span").text());
+    		var curOption = $(".current").text();
+    		
+    		if (go == 0 && curPage != 1) {
+    			if (curOption === "최근 예약 순") {
+    				dateHigh((curPage * 4) - 8, 4);
+    			} else if (curOption === "오래된 예약 순") {
+    				dateLow((curPage * 4) - 8, 4);
+    			}
+   				$(".paging p span").text(curPage - 1)
+    		} else if (go == 1) {
+    			if (curOption === "최근 예약 순") {
+    				dateHigh((curPage * 4), 4);
+    			} else if (curOption === "오래된 예약 순") {
+    				dateLow((curPage * 4), 4);
+    			}
+   				$(".paging p span").text(curPage + 1)
+    		}
+    	}
+    
+    	$(document).ready(function() {
+    		$("li[data-value='dateHigh']").click(function() {
+    			$(".paging p span").text(1)
+    			dateHigh(0, 4);
+    		})
+    		$("li[data-value='dateLow']").click(function() {
+    			$(".paging p span").text(1)
+    			dateLow(0, 4);
+    		})
+    		dateHigh(1, 4);
+    	})
     </script>
 </body>
 

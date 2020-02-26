@@ -68,7 +68,7 @@
       }
       .swiper-container {
         width: 100%;
-        height: 1000px;
+        height: 1250px;
       }
       .swiper-slide {
         text-align: center;
@@ -95,7 +95,16 @@
     </style>
     
     <style>
+    	#navYamHot1 > ul > li { height: 330px; margin-top: 1%; }
+    	.navYam2 > ul > li { height: 330px; margin-top: 5%; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
+    	.item_info > h5 { height: 61px; }
+    	.item_info > p { height: 45px; }
+    	.item_img { height: 300px; }
+    	.item_img > img {
+	    	width: 100%;
+			height: 100%;
+		}
     	/* Sections
    ========================================================================== */
 /**
@@ -1198,7 +1207,7 @@ legend {
 					                                  <ul>
 					                                  	</c:if>
 					                                      <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
-					                                      	<div class="item_img">
+					                                      	<div class="item_img" style="height: 170px">
 					                                      		<img src="${dto.inn_pic }"/>
 					                                      	</div>
 					                                      	<div class="item_info" style="padding: 7px;">
@@ -1256,8 +1265,8 @@ legend {
 											</span>
 					              		${dto.inn_name }</h5>
 					              		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
-					              		<p style="margin: 0px 10px 0px 0px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></p>
-					              		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
+					              		<p style="height: 1.2em; margin: 0px 10px 0px 0px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></p>
+					              		<p style="height: 1.5em; margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
 					              	</div> 
 				                </div>
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
@@ -1281,7 +1290,7 @@ legend {
 	                	<c:if test="${status.count % 5 == 1 || status.count == 1 }">
 	                		<ul></c:if>
 	                			<li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
-	                				<div class="item_img">
+	                				<div class="item_img" style="height: 170px;">
                                   		<img src="${dto.inn_pic }"/>
                                   	</div>
                                   	<div class="item_info" style="padding: 7px;">

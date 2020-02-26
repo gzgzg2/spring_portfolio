@@ -127,7 +127,7 @@
                                     <label>
                                       	예약자 핸드폰 <br>
                                         <input type="text" name="book_member_tel" value="">
-                                        <button>휴대폰 인증</button>
+                                        <button type="button" class="sendSMS" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
                                     <label class="auth">
                                         <input type="text" name="authKey">

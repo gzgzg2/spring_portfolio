@@ -87,7 +87,7 @@
 	
 	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
-		r.review_uid, r.review_title, r.review_star, r.review_content, r.review_id, m.member_uid, m.member_id, m.member_pic
+			r.review_uid, r.review_title, r.review_star, r.review_content, r.review_id, m.member_uid, m.member_id, m.member_pic
 		FROM
 			review r, book b, ticket t, activ a, member m
 		WHERE
