@@ -59,20 +59,23 @@
    	<div id="pwChange" class="modal">
 		<div class="ramimo">
 			<span class="close">&times;</span><br>
-			<form id="passFrm" method="POST">
+			<form id="passFrm" method="POST" action="${pageContext.request.contextPath}/user/mypage/passwordChange">
 				<label class="label">
 					<span class="pwSpan">현재 비밀번호</span><br>
 					<input class="passwordInput" type="password" name="member_pw"/><br>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</label>
 				
 				<label class="label">
 					<span class="pwSpan">변경할 비밀번호</span><br>
 					<input class="passwordInput" type="password" name="member_newPw"/><br>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</label>
 				
 				<label class="label">
 					<span class="pwSpan">비밀번호 확인</span><br>
 					<input id="newPwChk" type="password" name="member_pwCheck"/><br>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</label>
 				
 				<hr>
@@ -97,7 +100,8 @@
             <div id="memberForm">
                 <h2 id="frmH2">개인정보</h2>
                 <p id="frmP">서비스에서 사용하는 기본 정보입니다.</p>
-                <form name="frm" action="" method="POST">
+                <form name="frm" action="${pageContext.request.contextPath}/user/mypage/mypageUpdateOk" method="POST">
+                <input type="hidden" id="security" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div id="ftableDiv">
                     <table id="ftable">
                         <tr>
@@ -129,6 +133,7 @@
                         </tr>
                     </table>
                 </div>
+                	<input type="submit" value="변경하기"/>
                 </form>
             </div>
         </div>

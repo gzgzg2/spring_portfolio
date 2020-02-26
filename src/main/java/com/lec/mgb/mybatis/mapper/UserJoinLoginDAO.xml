@@ -12,4 +12,8 @@
 		 	(#{dto.member_name},#{dto.member_id},#{dto.member_pw}, #{dto.member_pwEncode},
 		 	#{dto.member_email}, #{dto.member_tel});
 	</insert>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE member_id = #{param1}
+	</select>
 </mapper>	

@@ -9,5 +9,5 @@ public interface MyPageDAO {
 	public MyPageInfoDTO selectByUid(int uid);
 	public int mypageUpdate(int uid, @Param("dto") MyPageInfoDTO dto);
 	public int deleteMember(int uid);
-	
+	public int updatePassword(int uid, @Param("dto") MyPageInfoDTO dto);
 }

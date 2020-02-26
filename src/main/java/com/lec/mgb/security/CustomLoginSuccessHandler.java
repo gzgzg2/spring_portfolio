@@ -72,7 +72,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			System.out.println(httpSession.getAttribute("userPic"));
 			
 			System.out.println(request.getContextPath() + "/user/mypage/mypageInfo");
-			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo");
+			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo/"+httpSession.getAttribute("loginUid"));
 			return;
 		}
 		

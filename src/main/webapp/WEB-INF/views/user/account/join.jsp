@@ -53,7 +53,53 @@
         .row div:nth-child(1) i { color: #57b846; }
     </style>
 </head>
-
+    
+<script>
+	// form 검증
+	function chkSubmit(){
+		frm = document.forms["frm"];
+		
+		var name = frm["member_name"].value.trim();
+		var tel = frm["member_tel"].value.trim();
+		var id = frm["member_id"].value.trim();
+		var pw = frm["member_pw"].value.trim();
+		var pwCk = frm["member_pwCheck"].value.trim();
+		var email = frm["member_email"].value.trim();
+		
+		if(name == ""){
+			alert("이름를 입력해주세요.");
+			frm["member_name"].focus();
+			return false;
+		}
+		if(id == ""){
+			alert("아이디를 입력해주세요");
+			frm["member_id"].focus();
+			return false;
+		}
+		if(email == ""){
+			alert("이메일을 입력해주세요.");
+			frm["member_email"].focus();
+			return false;
+		}
+		if(tel == ""){
+			alert("전화번호를 입력해주세요.");
+			frm["member_tel"].focus();
+			return false;
+		}
+		if(pw == ""){
+			alert("비밀번호를 입력해주세요.");
+			frm["member_pw"].focus();
+			return false;
+		}
+		if(pwCk == ""){
+			alert("비밀번호확인을 입력해주세요.");
+			frm["member_pwCk"].focus();
+			return false;
+		}
+		
+		return true;
+	}
+</script>
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -103,19 +149,20 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 login_form">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/joinOk" method="POST">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" name="frm" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST" onsubmit="return chkSubmit()">
 					<span class="login100-form-title">
 						JOIN
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
 						<input class="input100" type="text" name="member_name" placeholder="이름">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<input type="hidden" id="security" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
                     
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="member_id" placeholder="아이디">
+						<input class="input100" type="text" id="member_id" name="member_id" placeholder="아이디">
+						<div id="idCheck"></div>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
@@ -139,7 +186,7 @@
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="password" placeholder="비밀번호 체크">
+						<input class="input100" type="password" name="member_pwCheck" placeholder="비밀번호 체크">
 						<span class="focus-input100"></span>
                     </div>
 
@@ -153,7 +200,7 @@
                     </div>
 
 					<div class="container-login100-form-btn">
-						<input type="submit" value="회원가입"/>
+						<input type="submit" id="btnSubmit" value="회원가입"/>
 							
 					</div>
 
@@ -187,6 +234,39 @@
                 $(this).css("color", "#57b846")
             })
         })
+    </script>
+    
+      <script>
+    	$("#member_id").keyup(function(){
+    		var member_id = $("#member_id").val();
+    		var security = $("security").val();
+    			
+    		$.ajax({
+    			async: true,
+    			url : '${pageContext.request.contextPath}/user/account/idCheck?member_id=' + member_id,
+    			dataType : 'json',
+    			contentType : "application/json; charset=UTF-8",
+    			type : 'GET',
+    			success : function(data) {
+    				console.log(data);
+    				
+    				if (data == 1) {
+    					$("#idCheck").text("사용중인 아이디입니다.");
+    					$("#member_id").focus();
+    					$("#btnSubmit").attr("disabled", true);
+    				} else if (member_id == "") {
+    					$("#idCheck").text("아이디를 입력해주세요");
+    					$("#btnSubmit").attr("disabled", true);
+    				} else if (data == 0) {
+    					$("#idCheck").text("사용가능한 아이디입니다.");
+    					$("#btnSubmit").attr("disabled", false);
+    				}
+    			} , error : function() {
+					console.log("실패");
+				}
+    		});
+    	});
+    
     </script>
 </body>
 

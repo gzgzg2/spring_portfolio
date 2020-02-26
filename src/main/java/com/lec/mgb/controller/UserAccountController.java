@@ -1,5 +1,6 @@
 package com.lec.mgb.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,14 +11,18 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lec.mgb.c.C;
 import com.lec.mgb.command.Command;
 import com.lec.mgb.command.UserDeleteCommand;
 import com.lec.mgb.command.UserJoinOkCommand;
 import com.lec.mgb.mybatis.beans.MyPageInfoDTO;
+import com.lec.mgb.mybatis.beans.UserJoinLoginDAO;
 import com.lec.mgb.validation.JoinValidator;
 
 @Controller
@@ -61,4 +66,30 @@ public class UserAccountController {
 		command.execute(model);
 		return "user/account/accountBye";
 	} 
+	
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(@RequestParam String member_id) {
+		System.out.println("들어왔다");
+		UserJoinLoginDAO dao = C.sqlSesssion.getMapper(UserJoinLoginDAO.class);
+		int resultcnt = dao.idCheck(member_id);
+		return resultcnt;
+	}
+	
+	@RequestMapping("/logoutOk")
+	public String logoutPOST(HttpSession session) {
+		System.out.println("들어왔더 POST");
+
+		System.out.println(session.getAttribute("loginUid"));
+		System.out.println(session.getAttribute("userPic"));
+		
+		session.removeAttribute("loginUid");
+		session.removeAttribute("userPic");
+		
+		System.out.println(session.getAttribute("loginUid"));
+		System.out.println(session.getAttribute("userPic"));
+
+		return "user/account/logoutOk";
+	}
+	
 }

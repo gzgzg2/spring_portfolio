@@ -29,6 +29,7 @@
                                     <li><a href="./rooms.html">홈</a></li>
                                     <li><a href="./about-us.html">제주여행</a></li>
                                     <li><a href="./pages.html">내플래너</a>
+                                    <li><a href="${pageContext.request.contextPath}/user/account/logoutOk">로그아웃</a>
                                         <ul class="dropdown">
                                             <li><a href="./room-details.html">Room Details</a></li>
                                             <li><a href="./blog-details.html">Blog Details</a></li>

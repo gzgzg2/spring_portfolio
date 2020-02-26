@@ -1,7 +1,5 @@
 package com.lec.mgb.command;
 
-import java.util.Map;
-
 import org.springframework.ui.Model;
 
 import com.lec.mgb.c.C;

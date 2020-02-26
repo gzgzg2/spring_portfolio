@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${joinOk == 0 }">
+<c:if test="${result == 0 }">
 	<script>
-		alert("가입 실패");
+		alert("탈퇴 실패");
 	</script>
 </c:if>
-<c:if test="${joinOk > 0 }">
+<c:if test="${result > 0 }">
 	<script>
-		alert("가입성공");
+		alert("탈퇴 성공");
 		location.href="${pageContext.request.contextPath}/user/account/login";
 	</script>			
 </c:if>
