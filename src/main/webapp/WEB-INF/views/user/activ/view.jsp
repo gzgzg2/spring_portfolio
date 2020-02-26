@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -12,12 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
-
-    <!-- Calendar -->
-	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>
-	<link rel="stylesheet" href="./calendar_trial/codebase/calendar.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/index.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/calendar.css?v=6.4.1">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -36,6 +31,16 @@
         .activ table {font-size: 0.95em;}
         .activ table tr:first-child {border-top: 3px solid #eee;}
         .activ table tr {border-bottom: 3px solid #eee; margin-block-end: 5px;}
+        
+        .bd-hero-text h2 {
+        	background-color: rgba(68,68,68,0.6);
+        	padding: 15px 0px;
+        	font-weight: bold;
+        }
+        
+        .bd-hero-text ul li {
+        	font-weight: bold;
+        }
         
         .activ_shop_info {
         	margin-top: 40px;
@@ -148,12 +153,25 @@
             padding-top: 30px;
             clear: both;
         }
-
+        .paging { text-align: center; }
+		.paging p {
+			text-align: center;
+		}
+		.paging > p > span { padding-left: 5px; }
+		.paging_button {
+			width: 62px;
+			margin: 0 auto;
+		}
+		.paging_button button {
+			border: none;
+			background-color: white;
+		}
+		.star_avg > span { padding-left: 5px; }
+		.comment-option > h5 { padding-bottom: 30px; }
     </style>
 
     <!-- Css Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/elegant-icons.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/flaticon.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/owl.carousel.min.css">
@@ -162,6 +180,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/magnific-popup.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
+    <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -177,8 +196,8 @@
                         <span>액티비티</span>
                         <h2>${dto[0].activ_name }</h2>
                         <ul>
-                            <li class="b-time" style="color: white"><i class="icon_clock_alt"></i> ${dto[0].activ_loc }</li>
-                            <li style="color: white"><i class="icon_phone"></i> ${dto[0].activ_tel }</li>
+                            <li class="b-time" style="color: white"><i class="fas fa-map-marker-alt"></i> ${dto[0].activ_loc }</li>
+                            <li style="color: white"><i class="fas fa-phone-alt"></i> ${dto[0].activ_tel }</li>
                         </ul>
                         <div>
                             <button onclick="goTicket()">
@@ -241,8 +260,8 @@
                                             </div>
 	                                        </div>
 	                                        <div class="ticket_price col-sm-6">
-	                                            <p>${dto.ticket_first_cost }</p>
-	                                            <p>${dto.ticket_last_cost }</p>
+	                                            <p><c:if test="${dto.ticket_first_cost != 0 }"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/> 원</c:if></p>
+	                                            <p><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/> 원</p>
 	                                        </div>
                                  		</div>
                                 	</div>
@@ -258,29 +277,22 @@
                         </div>
                         <div class="comment-option">
                             <h3>리뷰</h3>
+                            <c:set var="total" value="0"/>
+                            <c:forEach var="review" items="${review }">
+                            	<c:set var="total" value="${total + review.review_star }"/>
+                            </c:forEach>
                             <div class="star_avg">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <span>10</span>
+                                <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
                             <h5>전체 리뷰 ${fn:length(review) }개</h5>
-                            <c:forEach var="review" items="${review }">
-	                            <div class="single-comment-item first-comment">
-	                                <div class="sc-author">
-	                                    <img src="${review.member_pic }" alt="">
-	                                </div>
-	                                <div class="sc-text">
-	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
-	                                    <div style="padding: 10px;">
-		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
-		                                    <p>${review.review_content }</p>	                                    
-	                                    </div>
-	                                </div>
-	                            </div>
-                            </c:forEach>
+                            <div class="review"></div>
+                            <div class="paging">
+					        	<p>Page<span class="0">1</span></p>
+					        	<div class="paging_button">
+							        <button onclick="change(0)">◀</button>
+							        <button onclick="change(1)">▶</button>
+					        	</div>
+					        </div>
                         </div>
                     </div>
                 </div>
@@ -290,46 +302,31 @@
     <!-- Blog Details Section End -->
 
     <!-- Recommend Blog Section Begin -->
-    <section class="recommend-blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Recommended</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${fn:length(popular) >= 3 }">
+	    <section class="recommend-blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="section-title">
+	                        <h2 style="font-weight: bold;">추천 숙소</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<c:forEach var="i" begin="0" end="2" step="1">
+		                <div class="col-sm-4 recommend" onclick="location.href='${pageContext.request.contextPath}/user/activ/view/${popular[i].activ_uid }'">
+		                    <div class="blog-item set-bg" data-setbg="${popular[i].activ_pic }">
+		                        <div class="bi-text">
+		                            <h4 style="color: white; font-weight: bold;">${popular[i].activ_name }</h4>
+		                            <div class="b-time"><i class="fas fa-map-marker-alt"></i> ${popular[i].activ_loc }</div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	            </div>
+	        </div>
+	    </section>
+   	</c:if>
     <!-- Recommend Blog Section End -->
 
     <!-- Footer Section Begin -->
@@ -341,7 +338,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img src="${pageContext.request.contextPath }/resources/img/footer-logo.png" alt="">
                                 </a>
                             </div>
                             <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
@@ -464,7 +461,7 @@
             	$(this).parent().find(".book_member_cnt").text(book_member_cnt - 1)
             })
             
-            $(".bd-hero-text > ul > li:nth-child(2)").text(change($(".bd-hero-text > ul > li:nth-child(2)").text()));
+            $(".bd-hero-text > ul > li:nth-child(2)").html(tel($(".bd-hero-text > ul > li:nth-child(2)").html()));
         })
         function goTicket() {
             $(".ativ_info").css("display", "none")
@@ -472,9 +469,97 @@
             $(".comment-option").css("display", "none")
         }
         
-        function change(num) {
+        function tel(num) {
         	return num.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
         }
+        
+        function change(go) {
+    		var curPage = parseInt($(".paging p span").text());
+    		var curOption = $(".current").text();
+    		
+    		if (go == 0 && curPage != 1) {
+    			paging((curPage * 5) - 10, 5);
+   				$(".paging p span").text(curPage - 1)
+    		} else if (go == 1) {
+    			paging(curPage * 5, 5);
+   				$(".paging p span").text(curPage + 1)
+    		}
+    		
+    		location.href="#comment";
+    	}
+        
+        function paging(writePage, page) {
+        	$.ajax({
+    			url: "${pageContext.request.contextPath}/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/" + writePage + "/" + page,
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+    					row += "<img src='" + data[i].member_pic + "' alt=''>";
+    					row += "</div>";
+    					row += "<div class='sc-text'>";
+    					row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>"
+    					row += "<div style='padding: 10px;'>";
+    					row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].member_id + "</p>";
+    					row += "<p>" + data[i].review_content + "</p>";
+    					row += "</div>";
+    					row += "</div>";
+    					row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    					paging(writePage - 5, 5);
+    					$(".paging p span").text(writePage / 5);
+    					alert("더 이상 리뷰가 없습니다");
+    				}
+    			}
+    		})
+        }
+        
+        $(document).ready(function() {
+        	var star = $(".star_avg span").text();
+        	var icon = "";        	
+        	star = Math.floor(star);
+        	
+        	for (i = 0; i < Math.floor(star / 2); i++) { icon += "<i class='fas fa-star'></i>"; }
+        	if (star % 2 == 1) icon += "<i class='fas fa-star-half-alt'></i>";
+        	icon += ("<span>" + $(".star_avg span").text() + "</span>");
+        	
+        	$(".star_avg").html(icon);
+        	
+        	star = 5 - $(".star_avg i").length;
+        	for (i = 0; i < star; i++) { $(".star_avg span").before("<i class='far fa-star'></i>"); }
+        	
+        	$.ajax({
+    			url: "${pageContext.request.contextPath}/user/activ/ajax/review/" + ${dto[0].activ_uid } + "/0/5",
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+    					row += "<img src='" + data[i].member_pic + "' alt=''>";
+    					row += "</div>";
+    					row += "<div class='sc-text'>";
+    					row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>"
+    					row += "<div style='padding: 10px;'>";
+    					row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].member_id + "</p>";
+    					row += "<p>" + data[i].review_content + "</p>";
+    					row += "</div>";
+    					row += "</div>";
+    					row += "</div>";
+    				}
+    				$(".review").html(row);
+    				
+    				if (row.trim().length == 0) {
+    	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    			$(".star_avg").html("");
+    	    		}
+    			}
+    		})
+        })
     </script>
 
 </body>

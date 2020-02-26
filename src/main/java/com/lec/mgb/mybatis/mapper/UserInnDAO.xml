@@ -4,9 +4,65 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.UserInnDAO">
+	<select id="selectInn" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and not r.room_last_cost IN (0)
+		GROUP BY
+			i.inn_uid;
+	</select>
+	<select id="selectInnSale" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, r.room_first_cost, i.inn_pic
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and not r.room_first_cost IN (0)
+			and not r.room_last_cost IN (0)
+		GROUP BY
+			i.inn_uid;
+	</select>
+	<select id="selectInnPopular" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+		     i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, ro.room_last_cost, AVG(r.review_star) 'review_star', i.inn_pic
+		FROM
+		     inn i, room ro, book b, review r
+		WHERE
+			 i.inn_uid = ro.inn_uid
+			 and ro.room_uid = b.room_uid  
+		     and b.book_uid = r.book_uid
+			 and not ro.room_last_cost IN (0)
+		GROUP BY
+		     i.inn_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
+	</select>
+	
+	<select id="selectInnByKeyword" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and not r.room_last_cost IN (0)
+			and i.inn_loc like (#{inn_loc})
+			and i.inn_name like (#{inn_name})
+			and not r.room_last_cost IN (0)
+		GROUP BY
+			i.inn_uid;
+	</select>
+
 	<select id="selectInnByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 
-			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep, i.inn_pic,
+			i.inn_name, i.inn_loc, i.inn_ment, i.inn_info, i.inn_sep, i.inn_pic, i.inn_uid,
 			r.room_uid, r.room_name, r.room_info, r.room_pic, r.room_first_cost, r.room_last_cost
 		FROM
 			inn i, room r
@@ -15,9 +71,9 @@
 			and i.inn_uid = #{inn_uid};
 	</select>
 	
-	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+	<select id="selectReviewStarByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT
-			re.review_uid, re.review_title, re.review_star, re.review_content, re.review_id, m.member_uid, m.member_id, m.member_pic
+			re.review_star
 		FROM
 			review re, book b, room r, inn i, member m
 		WHERE
@@ -25,7 +81,26 @@
 			and b.member_uid = m.member_uid
 			and b.room_uid = r.room_uid
 			and r.inn_uid = i.inn_uid
-			and i.inn_uid = #{inn_uid};
+			and i.inn_uid = #{inn_uid}
+		ORDER BY
+			re.review_uid DESC;
+	</select>
+	
+	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			re.review_uid, re.review_title, re.review_star, re.review_content, re.review_id, m.member_uid, b.book_member_name, m.member_pic
+		FROM
+			review re, book b, room r, inn i, member m
+		WHERE
+			re.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.room_uid = r.room_uid
+			and r.inn_uid = i.inn_uid
+			and i.inn_uid = #{inn_uid}
+		ORDER BY
+			re.review_uid DESC
+		LIMIT
+			#{writePages}, #{page};
 	</select>
 	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
@@ -51,20 +126,44 @@
 		INSERT INTO
 			book(book_date, book_cost, book_name, book_member_name, book_member_tel, member_uid, room_uid)
 		VALUES
-			(now(), #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.room_uid});
+			(#{dto.book_date}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.room_uid});
 	</insert>
 	
-	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+	<select id="selectTitleByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT
-			m.member_uid, i.inn_name, r.room_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			i.inn_name, r.room_name
 		FROM
-			book b, member m, inn i, room r
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+		AND
+			r.room_uid = #{room_uid}
+	</select>
+	
+	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			b.book_uid
+		FROM
+			book b, member m, room r, inn i
 		WHERE
 			b.member_uid = #{member_uid}
 			and b.room_uid = r.room_uid
 			and r.inn_uid = i.inn_uid
 		ORDER BY
 			b.book_uid desc
+		LIMIT 1;
+	</select>
+	
+	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT
+			m.member_uid, i.inn_name, r.room_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt, b.book_cost
+		FROM
+			book b, member m, inn i, room r
+		WHERE
+			b.member_uid = #{member_uid}
+			and b.book_uid = #{book_uid}
+			and b.room_uid = r.room_uid
+			and r.inn_uid = i.inn_uid
 		LIMIT 1;
 	</select>
 </mapper>	

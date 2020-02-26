@@ -4,15 +4,85 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.UserActivDAO">
+	<select id="selectActiv" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+			and not t.ticket_last_cost IN (0)
+		GROUP BY
+			a.activ_uid;
+	</select>
+	<select id="selectActivSale" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, t.ticket_first_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.ticket_uid
+			and not t.ticket_first_cost IN (0)
+			and not t.ticket_last_cost IN (0)
+		GROUP BY
+			a.activ_uid;
+	</select>
+	<select id="selectActivPopular" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+		     a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, AVG(r.review_star) 'review_star', a.activ_pic
+		FROM
+		     activ a, ticket t, book b, review r
+		WHERE
+			 a.activ_uid = t.activ_uid
+			 and t.ticket_uid = b.ticket_uid
+		     and b.book_uid = r.book_uid
+			 and not t.ticket_last_cost IN (0)
+		GROUP BY
+		     t.ticket_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
+	</select>
+	<select id="selectActivByKeyword" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.ticket_uid
+			and not t.ticket_last_cost IN (0)
+			and not t.ticket_last_cost IN (0)
+			and a.activ_name like (#{activ_name})
+			and a.activ_loc like (#{activ_loc})
+		GROUP BY
+			a.activ_uid;
+	</select>
+	
 	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 
-			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel,
+			a.activ_name, a.activ_loc, a.activ_info, a.activ_shop_info, a.activ_pic, a.activ_tel, a.activ_uid,
 			t.ticket_uid, t.ticket_name, t.ticket_first_cost, t.ticket_last_cost, t.ticket_info
 		FROM
 			activ a, ticket t
 		WHERE
 			a.activ_uid = t.activ_uid
 			and a.activ_uid = #{activ_uid};
+	</select>
+	
+	<select id="selectReviewStarByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			r.review_star
+		FROM
+			review r, book b, ticket t, activ a, member m
+		WHERE
+			r.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
+			and a.activ_uid = #{activ_uid}
+		ORDER BY
+			r.review_uid DESC;
 	</select>
 	
 	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
@@ -25,7 +95,11 @@
 			and b.member_uid = m.member_uid
 			and b.ticket_uid = t.ticket_uid
 			and t.activ_uid = a.activ_uid
-			and a.activ_uid = #{activ_uid};
+			and a.activ_uid = #{activ_uid}
+		ORDER BY
+			r.review_uid DESC
+		LIMIT
+			#{writePages}, #{page};
 	</select>
 	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
@@ -54,17 +128,41 @@
 			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.ticket_uid});
 	</insert>
 	
-	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+	<select id="selectTitleByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT
-			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			a.activ_name, t.ticket_name
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.activ_uid
+		AND
+			t.ticket_uid = #{ticket_uid}
+	</select>
+	
+	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			b.book_uid
 		FROM
 			book b, member m, ticket t, activ a
 		WHERE
-			b.member_uid = 1
+			b.member_uid = #{member_uid}
 			and b.ticket_uid = t.ticket_uid
 			and t.activ_uid = a.activ_uid
 		ORDER BY
 			b.book_uid desc
+		LIMIT 1;
+	</select>
+	
+	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT
+			m.member_uid, a.activ_name, t.ticket_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt, b.book_cost, b.book_date
+		FROM
+			book b, member m, activ a, ticket t
+		WHERE
+			b.member_uid = #{member_uid}
+			and b.book_uid = #{book_uid}
+			and b.ticket_uid = t.ticket_uid
+			and t.activ_uid = a.activ_uid
 		LIMIT 1;
 	</select>
 </mapper>

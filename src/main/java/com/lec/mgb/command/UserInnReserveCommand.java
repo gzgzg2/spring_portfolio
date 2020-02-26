@@ -19,7 +19,7 @@ public class UserInnReserveCommand implements Command {
 		int room_uid = (int)map.get("room_uid");
 		String book_date = (String)map.get("book_date");
 		
-		UserInnDTO member = dao.selectMemberByUid(member_uid);		
+		UserInnDTO member = dao.selectMemberByUid(member_uid);
 		UserInnDTO dto = dao.selectRoomNameByUid(room_uid);
 		
 		System.out.println(book_date);

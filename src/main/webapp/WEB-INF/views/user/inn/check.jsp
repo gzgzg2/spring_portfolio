@@ -13,12 +13,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
 
-    <!-- Calendar -->
-	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>
-	<link rel="stylesheet" href="./calendar_trial/codebase/calendar.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/index.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/calendar.css?v=6.4.1">
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -88,26 +82,26 @@
             <div class="row" style=" width: 80%; margin: 0 auto;">
                 <div class="modal_layer select_date">
                     <div class="modal_inner">
-	                    <c:if test="${sessionScope.loginUid == dto.member_uid }">
-	                        <div class="modal_top">
-	                            <h3>객실 예약</h3>
+	                    <div class="modal_top">
+	                        <h3>객실 예약</h3>
+	                    </div>
+	                    <div class="modal_description">
+	                        <h5>객실 이름</h5>
+	                        <p>${dto.inn_name }<br>${dto.room_name }</p>
+	                        <h5>체크인 날짜</h5>
+	                        <p>${fn:substring(dto.book_date, 0, 10) }</p>
+	                        <h5>예약자명</h5>
+	                        <p>${dto.book_member_name }</p>
+	                        <h5>예약자 번호</h5>
+	                        <p class="tel">${dto.book_member_tel }</p>
+	                        <h5>총 가격</h5>
+	                        <p class="cost">${dto.book_cost }</p>
+	                    </div>
+	                    <div class="modal_button">
+	                        <div class="modal_back">
+	                            <button onclick="location.href = './index.html'">메인 화면으로</button>
 	                        </div>
-	                        <div class="modal_description">
-	                            <h5>객실 이름</h5>
-	                            <p>${dto.inn_name }<br>${dto.room_name }</p>
-	                            <h5>티켓 구매일</h5>
-	                            <p>${dto.book_date }</p>
-	                            <h5>예약자명</h5>
-	                            <p>${dto.book_member_name }</p>
-	                            <h5>예약자 번호</h5>
-	                            <p class="tel">${dto.book_member_tel }</p>
-	                        </div>
-	                        <div class="modal_button">
-	                            <div class="modal_back">
-	                                <button onclick="location.href = './index.html'">메인 화면으로</button>
-	                            </div>
-	                        </div>
-	                	</c:if>
+	                    </div>
                     </div>
                 </div>
             </div>
@@ -230,6 +224,7 @@
             })
             
             $(".tel").text(change($(".tel").text()));
+           	$(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
         })
         function openModal() {
             $(".modal_layer").css("display", "block");

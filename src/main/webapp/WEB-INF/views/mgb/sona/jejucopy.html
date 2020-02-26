@@ -25,6 +25,45 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/style_rami.css" type="text/css">
+    <link rel="stylesheet" href="css/swiper.min.css" type="text/css">
+
+    <style>
+        html, body {
+          position: relative;
+          height: 100%;
+        }
+        body {
+          background: #eee;
+          font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          color:#000;
+          margin: 0;
+          padding: 0;
+        }
+        .swiper-container {
+          width: 100%;
+          height: 500px;
+        }
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+    
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+      </style>
 </head>
 
 <body>
@@ -191,33 +230,92 @@
                         <div class="ap-title">
                             <div id="siva3">
                                 <h2 id="hotel1">호텔</h2>
-                                <nav class="navYam2">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                        <li>4</li>
-                                        <li>5</li>
-                                    </ul>
-                                </nav>
-                                <nav class="navYam2">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                        <li>4</li>
-                                        <li>5</li>
-                                    </ul>
-                                </nav>
-                                <nav class="navYam2">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                        <li>4</li>
-                                        <li>5</li>
-                                    </ul>
-                                </nav>
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                      <div class="swiper-slide">
+                                        <nav class="navYam2">
+                                            <ul>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                      </div>
+                                      <div class="swiper-slide">
+                                        <nav class="navYam2">
+                                            <ul>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                                <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+                                                    <div class="item_img">
+                                                        <img src="//image.goodchoice.kr/resize_490x348/affiliate/2017/12/20/5a39b87d73159.jpg"/>
+                                                    </div>
+                                                    <div class="item_info" style="padding: 7px;">
+                                                        <h5 style="font-weight: bold; margin-top: 5px;">${dto.inn_name }<span>${dto.inn_sep }</span></h5>
+                                                        <p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+                                                        <p style="margin-bottom: 0px; text-align: right;">~ ${dto.room_last_cost }</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                      </div>
+                                      <div class="swiper-slide">Slide 3</div>
+                                      <div class="swiper-slide">Slide 4</div>
+                                      <div class="swiper-slide">Slide 5</div>
+                                      <div class="swiper-slide">Slide 6</div>
+                                      <div class="swiper-slide">Slide 7</div>
+                                      <div class="swiper-slide">Slide 8</div>
+                                      <div class="swiper-slide">Slide 9</div>
+                                      <div class="swiper-slide">Slide 10</div>
+                                    </div>
+                                    <!-- Add Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                  </div>
                             </div>
                         </div>
                     </div>    
@@ -363,6 +461,16 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="../js//swiper.min.js"></script>
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+          pagination: {
+            el: '.swiper-pagination',
+            dynamicBullets: true,
+          },
+        });
+      </script>
 </body>
 
 </html>

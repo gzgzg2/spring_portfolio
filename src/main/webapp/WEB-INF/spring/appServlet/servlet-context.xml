@@ -18,6 +18,7 @@
 	<resources mapping="/USERJS/**" location="/USERJS/" />
 	<resources mapping="/USERSOURCE/**" location="/USERSOURCE/" />
 	<resources mapping="/ADMINCSS/**" location="/ADMINCSS/" />
+	<resources mapping="/ckeditor/**" location="/ckeditor/" />
 
 	<!-- security csrf -->
 	

@@ -13,19 +13,13 @@ public class UserActivCheckCommand implements Command {
 	@Override
 	public void execute(Model model) {
 		Map<String, Object> map = model.asMap();
-		int member_uid = (int)map.get("member_uid");
-		UserActivDTO dto = (UserActivDTO)map.get("dto");
+		int member_uid = (Integer)map.get("member_uid");
+		int book_uid = (Integer)map.get("book_uid");
 		
 		UserActivDAO dao = C.sqlSesssion.getMapper(UserActivDAO.class);
-		int cnt = dao.insertBook(member_uid, dto);
+		UserActivDTO dto = dao.selectCheckByUid(member_uid, book_uid);
 		
-		if (cnt == 1) {
-			dto = dao.selectCheckNameByUid(1);
-			System.out.println(dto.getBook_member_name());
-			model.addAttribute("dto", dto);
-		}
-		
-		model.addAttribute("cnt", cnt);
+		model.addAttribute("dto", dto);
 	}
 
 }

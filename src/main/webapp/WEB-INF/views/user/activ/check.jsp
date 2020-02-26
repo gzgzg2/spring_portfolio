@@ -88,28 +88,28 @@
             <div class="row" style=" width: 80%; margin: 0 auto;">
                 <div class="modal_layer select_date">
                     <div class="modal_inner">
-	                    <c:if test="${1 == dto.member_uid }">
-	                        <div class="modal_top">
-	                            <h3>액티비티 예약</h3>
+	                    <div class="modal_top">
+	                        <h3>액티비티 예약</h3>
+	                    </div>
+	                    <div class="modal_description">
+	                        <h5>액티비티 제목</h5>
+	                        <p>${dto.activ_name } - ${dto.ticket_name }</p>
+	                        <h5>인원 수</h5>
+	                        <p>${dto.book_member_cnt }</p>
+	                        <h5>티켓 구매일</h5>
+	                        <p>${dto.book_date }</p>
+	                        <h5>예약자명</h5>
+	                        <p>${dto.book_member_name }</p>
+	                        <h5>예약자 번호</h5>
+	                        <p class="tel">${dto.book_member_tel }</p>
+	                        <h5>총 가격</h5>
+	                        <p class="cost">${dto.book_cost }</p>
+	                    </div>
+	                    <div class="modal_button">
+	                        <div class="modal_back">
+	                            <button onclick="location.href = './index.html'">메인 화면으로</button>
 	                        </div>
-	                        <div class="modal_description">
-	                            <h5>액티비티 제목</h5>
-	                            <p>${dto.activ_name } - ${dto.ticket_name }</p>
-	                            <h5>인원 수</h5>
-	                            <p>${dto.book_member_cnt }</p>
-	                            <h5>티켓 구매일</h5>
-	                            <p>${dto.book_date }</p>
-	                            <h5>예약자명</h5>
-	                            <p>${dto.book_member_name }</p>
-	                            <h5>예약자 번호</h5>
-	                            <p class="tel">${dto.book_member_tel }</p>
-	                        </div>
-	                        <div class="modal_button">
-	                            <div class="modal_back">
-	                                <button onclick="location.href = './index.html'">메인 화면으로</button>
-	                            </div>
-	                        </div>
-	                	</c:if>
+	                    </div>
                     </div>
                 </div>
             </div>
@@ -232,6 +232,7 @@
             })
             
             $(".tel").text(change($(".tel").text()));
+            $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
         })
         function openModal() {
             $(".modal_layer").css("display", "block");

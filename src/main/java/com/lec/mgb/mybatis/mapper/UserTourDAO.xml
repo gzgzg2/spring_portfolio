@@ -4,6 +4,49 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.lec.mgb.mybatis.beans.UserTourDAO">
+
+	<select id="selectTourByStarHigh" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT 
+		   t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star) 'review_star'
+		FROM
+		   tour t LEFT OUTER JOIN book b ON t.tour_uid = b.tour_uid  
+		   LEFT OUTER JOIN review r ON b.book_uid = r.book_uid
+		GROUP BY
+		   t.tour_uid
+		ORDER BY
+		   r.review_star DESC
+		LIMIT
+			#{fromRow}, #{writePages};
+	</select>
+
+	<select id="selectTourByCostHigh" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT 
+		   t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star) 'review_star'
+		FROM
+		   tour t LEFT OUTER JOIN book b ON t.tour_uid = b.tour_uid  
+		   LEFT OUTER JOIN review r ON b.book_uid = r.book_uid
+		GROUP BY
+		   t.tour_uid
+		ORDER BY
+		   t.tour_cost DESC
+		LIMIT
+		   #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="selectTourByCostLow" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT 
+		   t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star) 'review_star'
+		FROM
+		   tour t LEFT OUTER JOIN book b ON t.tour_uid = b.tour_uid  
+		   LEFT OUTER JOIN review r ON b.book_uid = r.book_uid
+		GROUP BY
+		   t.tour_uid
+		ORDER BY
+		   t.tour_cost ASC
+		LIMIT
+		   #{fromRow}, #{writePages};
+	</select>
+
 	<select id="selectTourByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		select
 			*
@@ -11,6 +54,18 @@
 			tour
 		where
 			tour_uid = #{tour_uid};
+	</select>
+	
+	<select id="selectReviewStarByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT
+			re.review_star
+		FROM
+			review re, book b, tour t, member m
+		WHERE
+			re.book_uid = b.book_uid
+			and b.member_uid = m.member_uid
+			and b.tour_uid = t.tour_uid
+			and t.tour_uid = #{tour_uid};
 	</select>
 	
 	<select id="selectReviewByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
@@ -22,7 +77,28 @@
 			re.book_uid = b.book_uid
 			and b.member_uid = m.member_uid
 			and b.tour_uid = t.tour_uid
-			and t.tour_uid = #{tour_uid};
+			and t.tour_uid = #{tour_uid}
+		ORDER BY
+			re.review_uid DESC
+		LIMIT
+			#{writePages}, #{page};
+	</select>
+	
+	<select id="selectTourPopular" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT 
+		     t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, AVG(r.review_star) 'review_star', t.tour_pic
+		FROM
+		     tour t, book b, review r
+		WHERE
+			 t.tour_uid = b.tour_uid  
+		     and b.book_uid = r.book_uid
+			 and not t.tour_cost IN (0)
+		GROUP BY
+		     t.tour_uid
+		ORDER BY
+		     AVG(r.review_star) DESC
+		LIMIT
+			 0, 10;
 	</select>
 	
 	<select id="selectMemberByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
@@ -38,19 +114,37 @@
 		INSERT INTO
 			book(book_date, book_member_cnt, book_cost, book_name, book_member_name, book_member_tel, member_uid, tour_uid)
 		VALUES
-			(now(), #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.tour_uid});
+			(#{dto.book_date}, #{dto.book_member_cnt}, #{dto.book_cost}, #{dto.book_name}, #{dto.book_member_name}, #{dto.book_member_tel}, #{member_uid}, #{dto.tour_uid});
 	</insert>
 	
-	<select id="selectCheckNameByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+	<select id="selectTitleByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT tour_name
+		FROM tour
+		WHERE tour_uid = #{tour_uid}
+	</select>
+	
+	<select id="selectBookUidByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
 		SELECT
-			m.member_uid, t.tour_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt
+			b.book_uid
 		FROM
 			book b, member m, tour t
 		WHERE
-			b.member_uid = 1
+			b.member_uid = #{member_uid}
 			and b.tour_uid = t.tour_uid
 		ORDER BY
 			b.book_uid desc
+		LIMIT 1;
+	</select>
+	
+	<select id="selectCheckByUid" resultType="com.lec.mgb.mybatis.beans.UserTourDTO">
+		SELECT
+			m.member_uid, t.tour_name, b.book_member_name, b.book_member_tel, b.book_date, b.book_member_cnt, b.book_cost
+		FROM
+			book b, member m, tour t
+		WHERE
+			b.member_uid = #{member_uid}
+			and b.book_uid = #{book_uid}
+			and b.tour_uid = t.tour_uid
 		LIMIT 1;
 	</select>
 </mapper>

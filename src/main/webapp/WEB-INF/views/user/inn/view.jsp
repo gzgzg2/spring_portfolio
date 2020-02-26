@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -22,8 +23,12 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 
     <style>
+    	.star_avg span {
+    		padding-left: 5px;
+    	}
     	.dhx_calendar.dhx_widget.dhx_widget--bordered { margin: 0 auto; }
     	#google_maps {
     		display: none;
@@ -160,6 +165,9 @@
         }
         .event_link div {
             display: none !important
+        }
+        .comment {
+        	overflow: hidden;
         }
         .right .comment {
             display: block;
@@ -847,12 +855,34 @@
         .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5) {
             color: #aaa;
         }
-        @media (min-width: 991px) {
+        .inn_img {
+        	width: 100%;
+    		height: 250px;
+        }
+        @media (max-width: 1200px) {
+        }
+        @media (max-width: 991px) {
             .inn_img {width: 100%}
+            .info-section { position: relative; top: 250px; }
+            .inn-info { padding-top: 110px; }
         }
         .comment_mobile {
         	display: none;
         }
+        .paging { text-align: center; }
+        .paging p {
+			text-align: center;
+		}
+		.paging > p > span { padding-left: 5px; }
+		.paging_button {
+			width: 62px;
+			margin: 0 auto;
+		}
+		.paging_button button {
+			border: none;
+			background-color: white;
+		}
+		.recommend:hover { cursor: pointer; }
     </style>
 
     <!-- Css Styles -->
@@ -871,6 +901,10 @@
 <body>
     <!-- Header Section Begin -->
 	<jsp:include page="../userHeader.jsp"/>
+	<c:set var="total" value="0"/>
+    <c:forEach var="review" items="${review }">
+    	<c:set var="total" value="${total + review.review_star }"/>
+    </c:forEach>
 
     <!-- Blog Details Hero Section Begin -->
     <section style="padding-top: 50px; height: 350px;" class="blog-details-hero set-bg">
@@ -879,17 +913,17 @@
                 <div class="col-lg-5 inn_img">
                     <img src="${dto[0].inn_pic }">
                 </div>
-                <div class="col-lg-7"">
+                <div class="col-lg-7 inn-info">
                     <h3 style="white-space: nowrap;"><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #dfa974; border: 1px solid #dfa974; border-radius: 5px;">
 					<c:if test="${dto[0].inn_sep == 1 }">호텔</c:if>
 					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
-                    <p style="margin-top: 7px; color: rgb(255,167,38)"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">9.5</span>만족해요</p>
+                    <p style="margin-top: 7px; color: rgb(255,167,38)"><c:if test="${total != 0 }"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span></c:if><span class="star_comment"></span></p>
                     <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
                     <div class="comment" style="background: #ececec; padding: 12px 17px;">
                         <strong>사장님 한마디</strong>
-                        <button style="float: right; background: none; border: none; margin-right: 2%;">더보기</button>
+                        <button class="more" style="float: right; background: none; border: none; margin-right: 2%;" onclick="more()">더보기</button>
                         <div class="clamp" style="font-size: 0.9em; margin-top: 10px;">${dto[0].inn_ment }
                         </div>
                     </div>
@@ -902,7 +936,7 @@
     <section class="blog-details-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 offset-lg-1">
+                <div class="info-section col-lg-10 offset-lg-1">
                     <div class="blog-details-text">
                         <div class="bd-title">
                             <ul>
@@ -932,8 +966,8 @@
 		                                    <div class="price">
 		                                        <strong>가격</strong>
 		                                            <div>
-		                                                <p class="through_none" style="text-decoration: inherit; visibility: hidden;">${dto.room_first_cost }</p>
-		                                                <p><b style="color: rgba(0,0,0,1)">${dto.room_last_cost }</b> <!-- 표시금액 --></p>
+		                                                <p class="through_none" style="text-decoration: line-through;"><c:if test="${dto.room_first_cost != 0 }"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></c:if></p>
+		                                                <p><b style="color: rgba(0,0,0,1)"><c:if test="${dto.room_last_cost != 0 }"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/> 원</c:if><c:if test="${dto.room_last_cost == 0 }">가격 준비 중!</c:if></b> <!-- 표시금액 --></p>
 		                                            </div>
 		                                    </div>
 		                                    <c:if test="${dto.room_last_cost == 0 || empty sessionScope.loginUid }"><button type="button" style="background-color: #bbb; border-color: #bbb;" disabled="disabled" class="gra_left_right_red"> 전화로 예약해주세요</button></c:if>
@@ -947,31 +981,20 @@
                         <div class="room_info_more">
                             ${dto[0].inn_info }
                         </div>
-                        <div class="comment-option">
+                        <div id="comment" class="comment-option">
                             <h3>리뷰</h3>
                             <div class="star_avg">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <span>10</span>
+                                <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
-                            <h5>전체 리뷰 ${fn:length(review) }개</h5>
-                            <c:forEach var="review" items="${review }">
-	                            <div class="single-comment-item first-comment">
-	                                <div class="sc-author">
-	                                    <img src="${review.member_pic }" alt="">
-	                                </div>
-	                                <div class="sc-text">
-	                                    <h6 style="margin-top: 7px; text-align: left;">${review.review_title }<span style="color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;">${review.review_star }</span></h6>
-	                                    <div style="padding: 10px;">
-		                                    <p style="font-weight: 600; left; margin-bottom: 10px;">${review.member_id }</p>
-		                                    <p>${review.review_content }</p>	                                    
-	                                    </div>
-	                                </div>
-	                            </div>
-                            </c:forEach>
+                            <h5 style="padding-bottom: 50px;">전체 리뷰 ${fn:length(review) }개</h5>
+                            <div class="review"></div>
+                            <div class="paging">
+					        	<p>Page<span class="0">1</span></p>
+					        	<div class="paging_button">
+							        <button onclick="change(0)">◀</button>
+							        <button onclick="change(1)">▶</button>
+					        	</div>
+					        </div>
                         </div>
                     </div>
                 </div>
@@ -980,46 +1003,36 @@
     </section>
     <!-- Blog Details Section End -->
     <!-- Recommend Blog Section Begin -->
-    <section class="recommend-blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Recommended</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <c:if test="${fn:length(popular) >= 3 }">
+	    <section class="recommend-blog-section spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="section-title">
+	                        <h2 style="font-weight: bold;">추천 숙소</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<c:forEach var="i" begin="0" end="2" step="1">
+		                <div class="col-sm-4 recommend" onclick="location.href='${pageContext.request.contextPath}/user/inn/view/${popular[i].inn_uid }'">
+		                    <div class="blog-item set-bg" data-setbg="${popular[i].inn_pic }">
+		                        <div class="bi-text">
+		                            <span class="b-tag">
+		                            	<c:if test="${popular[i].inn_sep == 1 }">호텔</c:if>
+										<c:if test="${popular[i].inn_sep == 2 }">펜션</c:if>
+										<c:if test="${popular[i].inn_sep == 3 }">리조트</c:if>
+		                            </span>
+		                            <h4 style="color: white; font-weight: bold;">${popular[i].inn_name }</h4>
+		                            <div class="b-time"><i class="fas fa-map-marker-alt"></i> ${popular[i].inn_loc }</div>
+		                        </div>
+		                    </div>
+		                </div>
+					</c:forEach>
+	            </div>
+	        </div>
+	    </section>
+   	</c:if>
     <!-- Recommend Blog Section End -->
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -1030,7 +1043,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img src="${pageContext.request.contextPath }/resources/img/footer-logo.png" alt="">
                                 </a>
                             </div>
                             <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
@@ -1095,31 +1108,31 @@
     </footer>
     <!-- Footer Section End -->
     <div class="modal_layer select_date">
-    	<form action="${pageContext.request.contextPath}/user/inn/reserve" method="POST" onsubmit="return chkSubmit()">
-    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    		<input type="hidden" name="room_uid" value=""/>
-    		<input type="hidden" name="book_date" value=""/>
-    		<input type="hidden" name="book_date_end" value=""/>
-	        <div class="modal_inner">
-	            <div class="modal_top">
-	                <div><i class="icon_close"></i></div>
-	                <h3>객실 예약</h3>
-	            </div>
-	            <div class="modal_description">
-	                <section class="dhx_sample-container">
-	                    <div class="dhx_sample-container__widget" id="calendar"></div>
-	                </section>
-	            </div>
-	            <div class="modal_button row">
-	                <div class="modal_prev col-sm-6">
-	                    <button>prev</button>
-	                </div>
-	                <div class="modal_next col-sm-6">
+        <div class="modal_inner">
+            <div class="modal_top">
+                <div><i class="icon_close"></i></div>
+                <h3>객실 예약</h3>
+            </div>
+            <div class="modal_description">
+                <section class="dhx_sample-container">
+                    <div class="dhx_sample-container__widget" id="calendar"></div>
+                </section>
+            </div>
+            <div class="modal_button row">
+                <div class="modal_prev col-sm-6">
+                    <button>prev</button>
+                </div>
+                <div class="modal_next col-sm-6">
+                	<form action="${pageContext.request.contextPath}/user/inn/reserve" method="POST" onsubmit="return chkSubmit()">
+			    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			    		<input type="hidden" name="room_uid" value=""/>
+			    		<input type="hidden" name="book_date" value=""/>
+			    		<input type="hidden" name="book_date_end" value=""/>
 	                    <button type="submit">next</button>
-	                </div>
-	            </div>
-	        </div>
-        </form>
+	            	</form>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Search model Begin -->
     <div class="search-model">
@@ -1161,10 +1174,81 @@
             $(".modal_inner .icon_close").click(function() {
                 $(".modal_layer").css("display", "none")
             })
+            $.ajax({
+    			url: "${pageContext.request.contextPath}/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/0/5",
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+	                    row += "<img src='" + data[i].member_pic + "' alt=''>";
+	                    row += "</div>";
+	                    row += "<div class='sc-text'>";
+	                    row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>";
+						row += "<div style='padding: 10px;''>";
+						row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].book_member_name + "</p>";
+						row += "<p>" + data[i].review_content + "</p>";
+						row += "</div>";
+						row += "</div>";
+						row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    	    			$(".paging").html("리뷰가 없습니다<br>리뷰를 등록해주세요");
+    	    			$(".star_avg").html("");
+    	    		}
+    			}
+    		})
         })
         function openModal(room_uid) {
             $(".modal_layer").css("display", "block")
             $("input:hidden[name='room_uid']").val(room_uid)
+        }
+        
+        function change(go) {
+    		var curPage = parseInt($(".paging p span").text());
+    		var curOption = $(".current").text();
+    		
+    		if (go == 0 && curPage != 1) {
+    			paging((curPage * 5) - 10, 5);
+   				$(".paging p span").text(curPage - 1)
+    		} else if (go == 1) {
+    			paging(curPage * 5, 5);
+   				$(".paging p span").text(curPage + 1)
+    		}
+    		
+    		location.href="#comment";
+    	}
+        
+        function paging(writePage, page) {
+        	$.ajax({
+    			url: "${pageContext.request.contextPath}/user/inn/ajax/review/" + ${dto[0].inn_uid } + "/" + writePage + "/" + page,
+    			method: "GET",
+    			success: function(data) {
+    				var row = "";
+    				for (i = 0; i < data.length; i++) {
+    					row += "<div class='single-comment-item first-comment'>";
+    					row += "<div class='sc-author'>";
+	                    row += "<img src='" + data[i].member_pic + "' alt=''>";
+	                    row += "</div>";
+	                    row += "<div class='sc-text'>";
+	                    row += "<h6 style='margin-top: 7px; text-align: left;'>" + data[i].review_title + "<span style='color: white; font-weight: 300; padding: 2px 5px; margin-left: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;'>" + data[i].review_star + "</span></h6>";
+						row += "<div style='padding: 10px;''>";
+						row += "<p style='font-weight: 600; left; margin-bottom: 10px;'>" + data[i].book_member_name + "</p>";
+						row += "<p>" + data[i].review_content + "</p>";
+						row += "</div>";
+						row += "</div>";
+						row += "</div>";
+    				}
+    				$(".review").html(row);
+    				if (row.trim().length == 0) {
+    					paging(writePage - 5, 5);
+    					$(".paging p span").text(writePage / 5);
+    					alert("더 이상 리뷰가 없습니다");
+    				}
+    			}
+    		})
         }
     </script>
 
@@ -1202,7 +1286,7 @@
         	
         	if (book_date.trim().length != 0 && book_date_end.trim().length != 0 && book_date != book_date_end) {
         		var year = book_date.substring(0, 4)
-         		var month = book_date.substring(5, 7)
+         		var month = book_date.substring(5, 7).replaceAll("0", "")
           		var date = book_date.substring(8, 10)
           		
           		if (year >= now.getFullYear() && month >= now.getMonth() + 1 && date > now.getDate()) {
@@ -1214,6 +1298,56 @@
         	
         	return false;
         }
+        
+        function more() {
+        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
+        	var h2 = $(".inn-info p").eq(0).outerHeight()
+        	var h3 = $(".inn-info p").eq(1).outerHeight()
+        	
+        	if ($(".more").text() === "더보기") {
+        		$(".more").text("접기")
+            	$(".comment").css("height", "auto")
+        	} else if ($(".more").text() === "접기") {
+        		$(".more").text("더보기")
+            	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
+        	}
+        }
+        
+        $(document).ready(function() {
+        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
+        	var h2 = $(".inn-info p").eq(0).outerHeight()
+        	var h3 = $(".inn-info p").eq(1).outerHeight()
+        	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
+        	
+        	var star = $(".star_avg span").text();
+        	var icon = "";        	
+        	star = Math.floor(star);
+        	
+        	for (i = 0; i < Math.floor(star / 2); i++) { icon += "<i class='fas fa-star'></i>"; }
+        	if (star % 2 == 1) icon += "<i class='fas fa-star-half-alt'></i>";
+        	icon += ("<span>" + $(".star_avg span").text() + "</span>");
+        	
+        	$(".star_avg").html(icon);
+        	
+        	star = 5 - $(".star_avg i").length;
+        	for (i = 0; i < star; i++) { 
+        		$(".star_avg span").before("<i class='far fa-star'></i>"); 
+       		}
+        	
+        	var starCeil = Math.ceil("${total / fn:length(review) }");
+        	
+        	if (starCeil >= 9) {
+	        	$(".star_comment").text("완벽해요")
+        	} else if (starCeil >= 7) {
+        		$(".star_comment").text("만족해요")
+        	} else if (starCeil >= 5) {
+        		$(".star_comment").text("그저 그래요")
+        	} else if (starCeil >= 3) {
+        		$(".star_comment").text("별로에요")
+        	} else if (starCeil >= 0) {
+        		$(".star_comment").text("끔찍해요")
+        	}
+        })
     </script>
 </body>
 

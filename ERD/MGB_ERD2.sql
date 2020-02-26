@@ -10,6 +10,10 @@ DROP TABLE IF EXISTS ROOM;
 DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
+
+DROP TABLE IF EXISTS member_auth;
+DROP TABLE member_auth cascade;
+
 DROP TABLE IF EXISTS PLANNER;
 DROP TABLE IF EXISTS member cascade;
 DROP TABLE IF EXISTS TOUR;
@@ -26,7 +30,7 @@ CREATE TABLE ACTIV
 	activ_loc varchar(50) NOT NULL,
 	activ_info text,
 	activ_shop_info text,
-	activ_tel int,
+	activ_tel varchar(50),
 	activ_pic varchar(200),
 	PRIMARY KEY (activ_uid),
 	UNIQUE (activ_uid)
@@ -41,7 +45,7 @@ CREATE TABLE BOOK
 	book_cost int NOT NULL,
 	book_name varchar(100) NOT NULL,
 	book_member_name varchar(50) NOT NULL,
-	book_member_tel int NOT NULL,
+	book_member_tel varchar(50) NOT NULL,
 	member_uid int,
 	room_uid int,
 	ticket_uid int,
@@ -92,7 +96,7 @@ CREATE TABLE MEMBER
 	member_gender varchar(2) CHECK(member_gender IN ('M','F')),
 	member_birth date,
 	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
-	member_tel varchar(50) NOT null default '010-0000-0000',
+	member_tel varchar(50) NOT null default '01000000000',
 	enabled char(1) default '1',
 	auth varchar(50) NOT null default 'ROLE_MEMBER',
 	PRIMARY KEY (member_uid),
@@ -340,4 +344,42 @@ insert into member(
 	member_pic,
 	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');
 
+
+
+INSERT INTO LOCAL(
+	local_name,
+	local_hello,
+	local_lat,
+	local_lng,
+	local_loc,
+	local_tel
+	) VALUES 
+('우도(해양도립공원)','소가 누워있는 형상을 하고 있는 제주의 가장 큰 부속섬','33.51949','126.95109','제주특별자치도 제주시 우도면 삼양고수물길 1','064-782-5671'),
+('성산일출봉(UNESCO 세계자연유산)','바다위에 우뚝 솟아난 수성화산·유네스코 세계자연유산, 천연기념물 제420호, 올레1코스','33.462147','126.936424','제주특별자치도 서귀포시 성산읍 일출로 284-12','064-783-0959'),
+('사려니숲길','제주 숨은 비경 31, 삼나무 향기에 취하며 걷는 아름답고 청정한 숲길','33.40845','126.63976','제주특별자치도 제주시 조천읍 교래리 산 137-1','064-900-8800'),
+('카멜리아힐','사계절마다 다양한 풍경이 있는, 제주의 자연을 담은 동양최대동백수목원','33.289135','126.37011','제주 서귀포시 안덕면 병악로 166','064-792-0088'),
+('협재해수욕장','비양도, 은모래, 바다가 그려낸 그림같이 아름다운 해변','33.393845','126.239716','제주특별자치도 제주시 한림읍 한림로 329-10','064-728-3981'),
+('월정리해변','달이 머물다 가는 제주도의 아름다운 해변','33.555809408904416','126.79662397696836','제주특별자치도 제주시 구좌읍 해맞이해안로 480-1','064-728-3394'),
+('함덕해수욕장',"에매랄드처럼 빛나는 '한국의 몰디브'",'33.54379','126.668846','제주특별자치도 제주시 조천읍 조함해안로 519-10','064-728-3989'),
+('산굼부리',"사계절마다 다른풍경의 '분화구 식물원', 국가지정 문화재 천연기념물 263호",'33.4316207','126.6900058','제주특별자치도 제주시 조천읍 비자림로 768','064-783-9900'),
+('새별오름','제주 서부 애월에 위치해 있으며 억새가 아름다운 오름','33.36723','126.35711','제주특별자치도 제주시 애월읍 봉성리 산 59-8','064-728-2752')
+;
+
+
+
+
+SELECT 
+	t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star)
+FROM
+	tour t LEFT OUTER JOIN book b ON t.tour_uid = b.tour_uid  
+	LEFT OUTER JOIN review r ON b.book_uid = r.book_uid
+GROUP BY
+	t.tour_uid
+ORDER BY
+	t.tour_cost ASC;
+
+
+
 insert into authorities values ('user00', 'ROLE_USER');
+
+select * from `local`;

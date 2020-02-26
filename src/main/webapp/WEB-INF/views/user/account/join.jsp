@@ -149,7 +149,7 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 login_form">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" name="frm" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST" onsubmit="return chkSubmit()">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST">
 					<span class="login100-form-title">
 						JOIN
 					</span>

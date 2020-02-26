@@ -17,12 +17,13 @@ public class UserTourDTO {
 	private String member_id;
 	private String member_pic;
 	
-	private Timestamp book_date;
+	private int book_uid;
+	private String book_date;
 	private int book_member_cnt;
 	private int book_cost;
 	private String book_name;
 	private String book_member_name;
-	private int book_member_tel;
+	private String book_member_tel;
 	private int member_uid;
 	
 	private String member_name;
@@ -35,8 +36,8 @@ public class UserTourDTO {
 
 	public UserTourDTO(int tour_uid, String tour_name, int tour_cost, int tour_period, String tour_info,
 			String tour_pic, int review_uid, String review_title, int review_star, String review_content,
-			String member_id, String member_pic, Timestamp book_date, int book_member_cnt, int book_cost,
-			String book_name, String book_member_name, int book_member_tel, int member_uid, String member_name,
+			String member_id, String member_pic, int book_uid, String book_date, int book_member_cnt, int book_cost,
+			String book_name, String book_member_name, String book_member_tel, int member_uid, String member_name,
 			String member_tel) {
 		super();
 		this.tour_uid = tour_uid;
@@ -51,6 +52,7 @@ public class UserTourDTO {
 		this.review_content = review_content;
 		this.member_id = member_id;
 		this.member_pic = member_pic;
+		this.book_uid = book_uid;
 		this.book_date = book_date;
 		this.book_member_cnt = book_member_cnt;
 		this.book_cost = book_cost;
@@ -158,11 +160,19 @@ public class UserTourDTO {
 		this.member_pic = member_pic;
 	}
 
-	public Timestamp getBook_date() {
+	public int getBook_uid() {
+		return book_uid;
+	}
+
+	public void setBook_uid(int book_uid) {
+		this.book_uid = book_uid;
+	}
+
+	public String getBook_date() {
 		return book_date;
 	}
 
-	public void setBook_date(Timestamp book_date) {
+	public void setBook_date(String book_date) {
 		this.book_date = book_date;
 	}
 
@@ -198,11 +208,11 @@ public class UserTourDTO {
 		this.book_member_name = book_member_name;
 	}
 
-	public int getBook_member_tel() {
+	public String getBook_member_tel() {
 		return book_member_tel;
 	}
 
-	public void setBook_member_tel(int book_member_tel) {
+	public void setBook_member_tel(String book_member_tel) {
 		this.book_member_tel = book_member_tel;
 	}
 
@@ -230,5 +240,6 @@ public class UserTourDTO {
 		this.member_tel = member_tel;
 	}
 
+	
 	
 }

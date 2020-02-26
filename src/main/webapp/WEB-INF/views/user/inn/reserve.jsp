@@ -13,12 +13,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
 
-    <!-- Calendar -->
-	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>
-	<link rel="stylesheet" href="./calendar_trial/codebase/calendar.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/index.css?v=6.4.1">
-	<link rel="stylesheet" href="./calendar_trial/samples/common/calendar.css?v=6.4.1">
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -43,6 +37,7 @@
         }
         .reserve > div > h4 {
         	margin-bottom: 8px;
+        	font-weight: bold;
         }
         .reserve {
             height: 800px;
@@ -87,6 +82,7 @@
             background-color: #dfa974;
             vertical-align: bottom;
         }
+        .auth { display: none; }
     </style>
 </head>
 
@@ -103,16 +99,18 @@
                 <div class="col-lg-8">
                     <div class="blog-details-text">
                         <div class="reserve">
-                            <form action="${pageContext.request.contextPath}/user/inn/check" method="POST" onsubmit="return chkSubmit()">
+                            <form action="${pageContext.request.contextPath}/user/inn/reserveOk" method="POST" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="title">
-                                    <h2>액티비티 예약</h2>
+                                    <h2>숙소 예약</h2>
                                 </div>
                                 <div class="info">
                                     <input type="hidden" name="book_name" value="${dto.inn_name } - ${dto.room_name }" />
                                     <input type="hidden" name="book_cost" value="${dto.room_last_cost }" />
+                                    <input type="hidden" name="book_date" value="${book_date }" />
                                     <input type="hidden" name="member_uid" value="${member_uid }" />
                                     <input type="hidden" name="room_uid" value="${dto.room_uid }" />
+                                    <input type="hidden" name="ifChkSMS" value="0" />
                                     <h5>예약자 정보</h5>
                                     <label>
                                      	예약자 이름<br>
@@ -125,11 +123,11 @@
                                     <label>
                                       	예약자 핸드폰 <br>
                                         <input type="text" name="book_member_tel" value="">
-                                        <button>휴대폰 인증</button>
+                                        <button type="button" class="sendSMS" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
-                                    <label>
-                                        <input type="text">
-                                        <button>인증번호 확인</button>
+                                    <label class="auth">
+                                        <input type="text" name="authKey">
+                                        <button onclick="chkSMS()">인증번호 확인</button>
                                     </label>
                                     <label>
 	                                    <input type="checkbox" name="same_member_tel"/>
@@ -165,6 +163,10 @@
 	                            <h4>숙소 이름</h4>
 	                            <p>${dto.inn_name }<br>${dto.room_name }</p>
 	                        </div>
+	                        <div class="inn_name">
+	                        	<h4>체크인 날짜</h4>
+								<p>${book_date }</p>
+	                        </div>
 	                        <div class="room_name">
 	                            <h4>객실 타입</h4>
 	                            <p>
@@ -175,11 +177,15 @@
 	                        </div>
 	                        <div class="room_price">
 	                            <h4>총가격</h4>
-	                            <p>${dto.room_last_cost }</p>
+	                            <p class="cost">${dto.room_last_cost }</p>
 	                        </div>
 	                        <div class="res_button">
 	                            <button type="submit">예약 하기</button>
 	                        </div>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/user/inn/sendSMS" method="POST" onsubmit="return chkSMS()" id="smsForm">
+                        	<input type="hidden" name="tel"/>
+                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </div>
                 </div>
@@ -196,7 +202,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img src="${pageContext.request.contextPath }/resources/img/footer-logo.png" alt="">
                                 </a>
                             </div>
                             <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
@@ -292,8 +298,12 @@
     		$("input:checkbox[name='same_member_tel']").click(function() {
     			if ($("input:checkbox[name='same_member_tel']").prop("checked")) {
     				$("input:text[name='book_member_tel']").val("${member.member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
+    				$("input:hidden[name='ifChkSMS']").val("1")
+    				$(".sendSMS").css("display", "none");
     			} else {
     				$("input:text[name='book_member_tel']").val("").prop("readonly", false).css("background-color", "white")
+    				$("input:hidden[name='ifChkSMS']").val("0")
+    				$(".sendSMS").css("display", "inline");
     			}
     		})
     		$("input:checkbox[name='term_all']").click(function() {
@@ -303,10 +313,13 @@
     				$(".term").find("input:checkbox").prop("checked", false)
     			}
     		})
+
+            $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
     		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
     			!$("input:text[name='book_member_tel']").val().trim().length == 0 &&
+    			$("input:hidden[name='ifChkSMS']").val().trim() == 1 &&
     			$("input:checkbox[name='term1']").prop("checked") &&
     			$("input:checkbox[name='term2']").prop("checked") &&
     			$("input:checkbox[name='term3']").prop("checked")) {
@@ -317,6 +330,64 @@
     			$("input:text[name='book_member_name']").focus()
     		} else if ($("input:text[name='book_member_tel']").val().trim().length == 0) {
 	    		$("input:text[name='book_member_tel']").focus()
+    		}
+    		
+    		return false;
+    	}
+    	function sendSMS() {
+    		if ($("input:text[name='book_member_tel']").val().trim().length == 11) {
+    			var rd = Math.floor(Math.random()*(999999-100000+1)) + 100000 + "";
+    			var tel = $("input:text[name='book_member_tel']").val().trim();
+    			
+    			$.ajax({
+        			url : "${pageContext.request.contextPath}/user/sendSMS",
+        			type : "POST",
+        			cache : false,
+        			data : {  // POST 방식 ajax() request 할시 parameter
+        				"rd" : rd,
+        				"tel" : tel,
+        				"${_csrf.parameterName }" : "${_csrf.token }"
+        			},
+        			success : function(data, status){
+        				if(status == "success"){
+        					if (data == 1) {
+	        					alert("인증번호가 휴대폰으로 전송 되었습니다!");
+	        					$(".auth").css("display", "block");
+	            				$("input:text[name='book_member_tel']").val("${member.member_tel }").prop("readonly", true).css("background-color", "#fcfcfc")
+        					} else {
+        						alert("전화번호를 확인해주세요!");
+        					}
+        				}
+        			}
+        		});  			
+    		}
+    		
+    		return false;
+    	}
+    	function chkSMS() {
+    		if ($("input:text[name='authKey']").val().trim().length == 6) {
+    			var authKey = $("input:text[name='authKey']").val().trim();
+    			
+    			$.ajax({
+        			url : "${pageContext.request.contextPath}/user/chkSMS",
+        			type : "POST",
+        			cache : false,
+        			data : {  // POST 방식 ajax() request 할시 parameter
+        				"authKey" : authKey,
+        				"${_csrf.parameterName }" : "${_csrf.token }"
+        			},
+        			success : function(data, status){
+        				if(status == "success"){
+        					if (data == 1) {
+        						alert("휴대폰 인증 성공");
+        						$("input:hidden[name='ifChkSMS']").val("1");
+        						$(".auth").html("");
+        					} else {
+        						alert("인증번호를 확인해주세요");
+        					}
+        				}
+        			}
+        		});  			
     		}
     		
     		return false;
