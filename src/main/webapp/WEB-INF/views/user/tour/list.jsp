@@ -252,7 +252,7 @@
     					row += "<img src='" + data[i].tour_pic + "' style='height: 250px'>";
     					row += "<div class='ri-text'>";
     					row += "<h4 style='height: 100px'>" + data[i].tour_name + "</h4>";
-    					row += "<h3>" + data[i].tour_cost + "<span>/성인 1명</span></h3>";
+    					row += "<h3>" + data[i].tour_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원<span>/성인 1명</span></h3>";
     					row += "<table>";
     					row += "<tbody>";
     					row += "<tr>";
@@ -293,7 +293,7 @@
     					row += "<img src='" + data[i].tour_pic + "' style='height: 250px'>";
     					row += "<div class='ri-text'>";
     					row += "<h4 style='height: 100px'>" + data[i].tour_name + "</h4>";
-    					row += "<h3>" + data[i].tour_cost + "<span>/성인 1명</span></h3>";
+    					row += "<h3>" + data[i].tour_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원<span>/성인 1명</span></h3>";
     					row += "<table>";
     					row += "<tbody>";
     					row += "<tr>";
@@ -334,7 +334,7 @@
     					row += "<img src='" + data[i].tour_pic + "' style='height: 250px'>";
     					row += "<div class='ri-text'>";
     					row += "<h4 style='height: 100px'>" + data[i].tour_name + "</h4>";
-    					row += "<h3>" + data[i].tour_cost + "<span>/성인 1명</span></h3>";
+    					row += "<h3>" + data[i].tour_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원<span>/성인 1명</span></h3>";
     					row += "<table>";
     					row += "<tbody>";
     					row += "<tr>";

@@ -7,4 +7,10 @@
 	<select id="selectMemberByNameAndEmail" parameterType="String" resultType="String">
 		SELECT member_id FROM MEMBER WHERE member_name = #{member_name} AND member_email = #{member_email}
 	</select>
-</mapper>	
+	<update id="updateMemberPw">
+		UPDATE member SET member_pw = #{member_pw}, member_pwEncode = #{member_pwEncode} WHERE member_id = #{member_id}
+	</update>
+	<select id="selectMemberById" resultType="com.lec.mgb.mybatis.beans.MyPageInfoDTO">
+		SELECT member_email, member_pw FROM MEMBER WHERE member_id = #{member_id}
+	</select>
+</mapper>

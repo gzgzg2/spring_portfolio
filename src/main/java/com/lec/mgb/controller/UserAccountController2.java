@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.lec.mgb.c.C;
 import com.lec.mgb.command.Command;
 import com.lec.mgb.command.UserFindIDOkCommand;
+import com.lec.mgb.command.UserFindPWOkCommand;
 import com.lec.mgb.validation.JoinValidator;
 
 @Controller
@@ -45,6 +46,19 @@ public class UserAccountController2 {
 		
 		new UserFindIDOkCommand().execute(model);
 		return "/user/account/findIDOk";
+	}
+	
+	@RequestMapping("/findPW")
+	public String findPW(Model model) {
+		return "/user/account/findPW";
+	}
+	
+	@RequestMapping("/findPWOk")
+	public String findPWOk(String member_id, String member_tel, Model model) {
+		model.addAttribute("member_id", member_id);
+		
+		new UserFindPWOkCommand().execute(model);
+		return "/user/account/findPWOk";
 	}
 	
 }

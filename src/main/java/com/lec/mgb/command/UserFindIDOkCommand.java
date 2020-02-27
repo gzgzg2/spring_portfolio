@@ -48,7 +48,7 @@ public class UserFindIDOkCommand implements Command {
 			    final String BODY = String.join(
 			        System.getProperty("line.separator"),
 			        "<h1>[귤귤 플래너] 아이디 찾기</h1>",
-			        "<p>당신의 아이디는 " + member_id + " 입니다.</p>."
+			        "<p>당신의 아이디는 " + member_id + " 입니다.</p>"
 			    );
 				
 				Properties props = System.getProperties();

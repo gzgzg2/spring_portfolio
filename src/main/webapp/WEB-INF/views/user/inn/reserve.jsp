@@ -122,11 +122,11 @@
                                     </label>
                                     <label>
                                       	예약자 핸드폰 <br>
-                                        <input type="text" name="book_member_tel" value="">
+                                        <input type="text" name="book_member_tel" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <button type="button" class="sendSMS" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
                                     <label class="auth">
-                                        <input type="text" name="authKey">
+                                        <input type="text" name="authKey" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <button onclick="chkSMS()">인증번호 확인</button>
                                     </label>
                                     <label>
@@ -176,7 +176,7 @@
 								</p>
 	                        </div>
 	                        <div class="room_price">
-	                            <h4>총가격</h4>
+	                            <h4>총 가격</h4>
 	                            <p class="cost">${dto.room_last_cost }</p>
 	                        </div>
 	                        <div class="res_button">

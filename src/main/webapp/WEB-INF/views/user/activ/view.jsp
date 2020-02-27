@@ -330,7 +330,7 @@
     <!-- Recommend Blog Section End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer-section">
+    <footer class="footer-section" style="margin-top: 50px;">
         <div class="container">
             <div class="footer-text">
                 <div class="row">

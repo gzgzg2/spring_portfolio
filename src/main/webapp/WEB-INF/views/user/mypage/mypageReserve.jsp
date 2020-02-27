@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -34,7 +35,7 @@
     <style>
     	.nice-select {
 			width: 100%;
-			margin: 5px 0px 20px 0px;
+			margin: 30px 0px 20px 0px;
 		}
 		
 		.paging p {
@@ -162,7 +163,7 @@
             			row += "<tr>"
            				row += "<th>예약자 번호</th>"
                			row += "<td>"
-               			row += data[i - 1].book_member_tel
+                   		row += data[i - 1].book_member_tel.toString().replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3")
                			row += "</td>"
             			row += "</tr>"
             			row += "<tr>"
@@ -174,7 +175,7 @@
             			row += "<tr>"
           				row += "<th>총 가격</th>"
               			row += "<td>"
-              			row += data[i - 1].book_cost
+               			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               			row += "</td>"
             			row += "</tr>"
             			row += "</table>"
@@ -233,7 +234,7 @@
             			row += "<tr>"
            				row += "<th>예약자 번호</th>"
                			row += "<td>"
-               			row += data[i - 1].book_member_tel
+                   		row += data[i - 1].book_member_tel.toString().replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3")
                			row += "</td>"
             			row += "</tr>"
             			row += "<tr>"
@@ -245,7 +246,7 @@
             			row += "<tr>"
           				row += "<th>총 가격</th>"
               			row += "<td>"
-              			row += data[i - 1].book_cost
+               			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               			row += "</td>"
             			row += "</tr>"
             			row += "</table>"
@@ -305,7 +306,74 @@
     			$(".paging p span").text(1)
     			dateLow(0, 4);
     		})
-    		dateHigh(1, 4);
+    		
+    		$.ajax({
+				url: "${pageContext.request.contextPath}/user/mypage/ajax/reserve/dateLow/${sessionScope.loginUid }/0/4",
+				method: "GET",
+				success: function(data) {
+					var row = ""
+					for (i = 1; i <= data.length; i++) {
+						if (i == 1 || i % 2 == 1) {
+							row += "<div class='reserve_row'>"
+						}
+						if (i % 2 == 1) {
+							row += "<div class='item'>"
+						} else {
+							row += "<div class='item' style='float: right'>"	
+						}
+            			row += "<div class='item_header'>"
+            			row += "<h5>" + data[i - 1].book_name + "</h5>"
+            			row += "</div>"
+            			row += "<div class='item_body'>"
+            			row += "<table>"
+            			row += "<tr>"
+            			row += "<th>예약자 이름</th>"
+            			row += "<td>"
+            			row += data[i - 1].book_member_name
+            			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+           				row += "<th>예약자 번호</th>"
+               			row += "<td>"
+               			row += data[i - 1].book_member_tel.toString().replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3")
+               			row += "</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>인원 수</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_member_cnt
+              			row += "명</td>"
+            			row += "</tr>"
+            			row += "<tr>"
+          				row += "<th>총 가격</th>"
+              			row += "<td>"
+              			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              			row += "</td>"
+            			row += "</tr>"
+            			row += "</table>"
+            			row += "</div>"
+            			row += "<div class='item_footer'>"
+            			row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+            			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+              			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+              			row += "</form>"
+        				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
+              			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+             			row += "<button type='submit' style='float: right;'>예약 취소</button>"
+              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+               			row += "</form>"
+            			row += "</div>"
+            			row += "</div>"
+           				if (i % 2 == 0) { row += "</div>" }
+					}
+					$(".reserve").html(row);
+					if (row.length == 0) {
+						$(".reserve").html("<p style='padding-top: 2.5%; padding-left: 35%; font-size: 1.5em;'>예약이 아직 없습니다</p>");
+						$(".paging").html("");
+					}
+				}
+			})
     	})
     </script>
 </body>

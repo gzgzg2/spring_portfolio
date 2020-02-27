@@ -211,12 +211,12 @@
                         <div class="tour_info" style="clear: both;">
                             ${dto[0].tour_info }
                         </div>
-                        <div class="comment-option">
+                        <div class="comment-option" style="clear: both;">
                             <h3>리뷰</h3>
                             <div class="star_avg">
                                 <span><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span>
                             </div>
-                            <h5>전체 리뷰 ${fn:length(review) }개</h5>
+                            <h5 style="padding-bottom: 30px;">전체 리뷰 ${fn:length(review) }개</h5>
                             <div class="review"></div>
                             <div class="paging">
 					        	<p>Page<span class="0">1</span></p>

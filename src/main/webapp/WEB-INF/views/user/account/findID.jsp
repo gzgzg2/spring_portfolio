@@ -89,12 +89,12 @@
 						아이디 찾기	
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="member_name" placeholder="Username">
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter Username">
+						<input class="input100" type="text" name="member_name" placeholder="이름">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
+					<div class="wrap-input100 validate-input" data-validate = "Please enter email">
 						<input class="input100" type="text" name="member_email" placeholder="E-mail">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>

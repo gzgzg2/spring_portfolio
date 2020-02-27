@@ -1454,11 +1454,17 @@ legend {
     			var curOption = $(".current").text();
     			ajaxKeyword = $("#search").val();
 
+    			// 특수문자 체크
     			var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
    			    if (regExp.test(ajaxKeyword)) {
-   			        //특수문자 제거
    			        ajaxKeyword = ajaxKeyword.replace(regExp, "")
    			    }
+    			
+    			// 자음 모음 체크
+    			var pattern = /([^가-힣\x20])/i; 
+    			if (pattern.test(ajaxKeyword)) { 
+    				ajaxKeyword = ajaxKeyword.replace(pattern, " ")
+    			}
     			
     			if (curOption === "전체") {
     				ajaxOption = "all"
