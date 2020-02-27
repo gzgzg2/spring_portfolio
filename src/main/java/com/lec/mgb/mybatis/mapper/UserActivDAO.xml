@@ -38,7 +38,7 @@
 		     and b.book_uid = r.book_uid
 			 and not t.ticket_last_cost IN (0)
 		GROUP BY
-		     t.ticket_uid
+		     a.activ_uid
 		ORDER BY
 		     AVG(r.review_star) DESC
 		LIMIT

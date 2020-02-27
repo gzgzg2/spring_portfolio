@@ -165,7 +165,10 @@
     <!-- Header Section Begin -->
 	<jsp:include page="../userHeader.jsp"/>
     <!-- Header End -->
-	
+	<c:if test="${fn:length(dto) == 0}">
+		<jsp:include page="../notFound.jsp"/>
+	</c:if>
+	<c:if test="${fn:length(dto) >= 1}">
 	<c:set var="total" value="0"/>
 	<c:forEach var="review" items="${review }">
 		<c:set var="total" value="${total + review.review_star }"/>
@@ -260,7 +263,8 @@
 	    </section>
    	</c:if>
     <!-- Recommend Blog Section End -->
-
+	</c:if>
+	
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">

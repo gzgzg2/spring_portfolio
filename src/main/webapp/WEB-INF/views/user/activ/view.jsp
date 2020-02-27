@@ -186,7 +186,11 @@
 <body>
     <!-- Offcanvas Menu Section End -->
 	<jsp:include page="../userHeader.jsp"/>
-
+	
+	<c:if test="${fn:length(dto) == 0}">
+		<jsp:include page="../notFound.jsp"/>
+	</c:if>
+	<c:if test="${fn:length(dto) >= 1}">
     <!-- Blog Details Hero Section Begin -->
     <section class="blog-details-hero set-bg" data-setbg="${dto[0].activ_pic }">
         <div class="container">
@@ -328,6 +332,7 @@
 	    </section>
    	</c:if>
     <!-- Recommend Blog Section End -->
+	</c:if>
 
     <!-- Footer Section Begin -->
     <footer class="footer-section" style="margin-top: 50px;">
@@ -406,7 +411,7 @@
         </div>
     </div>
     <!-- Search model end -->
-
+	
     <!-- Js Plugins -->
     <script src="${pageContext.request.contextPath}/USERJS/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/bootstrap.min.js"></script>

@@ -34,6 +34,14 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <style>
+    	body {
+    		overflow-x: hidden;
+    	}
+    	.breadcrumb-section2 {
+    		background-image: url("https://img-wishbeen.akamaized.net/plan/1438766732219_Sparkling-sea.jpg");
+    		background-size: cover;
+    		background-position: 50%;
+    	}
     	.item_info h5 {
     		line-height: 1.5em;
     	}
@@ -101,15 +109,18 @@
     </style>
     
     <style>
-    	.navYam2 > ul > li { height: 300px; margin-top: 5%; }
+    	#hotel1 { padding: 10px 0px; color: white; font-weight: bold; }
+    	.navYam2 > ul > li { height: 300px; margin-top: 5%; background-color: white; border: 1px solid #ebebeb; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
-    	.item_info > h5 { height: 81px; }
+    	.item_info > h5 { height: 68px; }
     	.item_info > p { height: 45px; }
     	.item_img { height: 133px; }
     	.item_img > img {
 	    	width: 100%;
 			height: 100%;
 		}
+		.hothot2 { background-color: white; border: 1px solid #ebebeb; }
+		#navYamHot1 ul li { height: 300px; background-color: white; border: 1px solid #ebebeb; }
     	/* Sections
    ========================================================================== */
 	/**
@@ -1145,15 +1156,11 @@
 
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section2">
-        <div class="container">
+        <div style="width: 100%">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>여기는 액티비티</h2>
-                        <div class="bt-option">
-                            <a href="./index.html">Home</a>
-                            <span>액티비티</span>
-                        </div>
+                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">액티비티</h2>
                     </div>
                 </div>
             </div>
@@ -1243,7 +1250,7 @@
     <section class="Hot2">
             <div class="section-title">
                 <span>할인 중인 액티비티입니다</span>
-                <h2>할인 액티비티</h2>
+                <h2 style="font-weight: bold; color: white;">할인 액티비티</h2>
             </div>
             
             <div id="hotId2">
@@ -1265,15 +1272,15 @@
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
-   					<div class="swiper-pagination swiper-pagination2" style="width: 100%"></div>
 	            </div>
+				<div class="swiper-pagination swiper-pagination2" style="width: 100%"></div>
             </div>
     </section>
 	
 	<!-- 액티비티 -->
     <section class="sivaHotH">
         <div id="siva5">
-            <h2 id="sivaH5">인기 액티비티</h2>
+            <h2 id="sivaH5" style="font-weight: bold; padding: 10px 0px;">인기 액티비티</h2>
             <div id="button1">
                 
             </div>

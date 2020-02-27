@@ -883,6 +883,37 @@
 			background-color: white;
 		}
 		.recommend:hover { cursor: pointer; }
+		
+		.comment {
+			display: block;
+		    position: relative;
+		    margin-top: 16px;
+		    padding: 26px 24px;
+		    background: #ececec;
+		}
+		.comment strong {
+			display: block;
+		    margin-bottom: 15px;
+		    font-size: 16px;
+		    color: rgba(0,0,0,0.87);
+		}
+		.comment button {
+			position: absolute;
+		    top: 24px;
+		    right: 24px;
+		    background: none;
+		    border: none;
+		    font-size: 16px;
+		    color: rgb(0,121,107);
+		}
+		.comment .clamp {
+		    display: -webkit-box;
+		    -webkit-line-clamp: 2;
+		    -webkit-box-orient: vertical;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		}
+		
     </style>
 
     <!-- Css Styles -->
@@ -901,6 +932,11 @@
 <body>
     <!-- Header Section Begin -->
 	<jsp:include page="../userHeader.jsp"/>
+	
+	<c:if test="${fn:length(dto) == 0}">
+		<jsp:include page="../notFound.jsp"/>
+	</c:if>
+	<c:if test="${fn:length(dto) >= 1}">
 	<c:set var="total" value="0"/>
     <c:forEach var="review" items="${review }">
     	<c:set var="total" value="${total + review.review_star }"/>
@@ -920,13 +956,12 @@
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
 					</span>${dto[0].inn_name }</h3>
                     <p style="margin-top: 7px; color: rgb(255,167,38)"><c:if test="${total != 0 }"><span style="color: white; font-weight: 300; padding: 2px 5px; margin-right: 5px; background-color: rgb(255,167,38); border: 1px solid rgb(255,167,38); border-radius: 5px;"><fmt:formatNumber value="${total / fn:length(review) }" pattern=".0"/></span></c:if><span class="star_comment"></span></p>
-                    <p style="background-color: #ececec; padding: 5px 7px;">${dto[0].inn_loc }</p>
-                    <div class="comment" style="background: #ececec; padding: 12px 17px;">
-                        <strong>사장님 한마디</strong>
-                        <button class="more" style="float: right; background: none; border: none; margin-right: 2%;" onclick="more()">더보기</button>
-                        <div class="clamp" style="font-size: 0.9em; margin-top: 10px;">${dto[0].inn_ment }
-                        </div>
-                    </div>
+                    <p style="background-color: #ececec; padding: 5px 10px;">${dto[0].inn_loc }</p>
+                    <div class="comment" style="height: 120px;">
+	                	<strong>사장님 한마디</strong>
+						<button onclick="more()" class="more">더보기</button>
+						<div class="clamp">${dto[0].inn_ment }</div>
+					</div>
                 </div>
             </div>
         </div>
@@ -947,7 +982,7 @@
                                 <li>리뷰</li>
                             </ul>
                         </div>
-                        <div class="bd-title" style="clear: both;">
+                        <div class="bd-title" style="padding-top: 20px; clear: both;">
                             <article class="room_info on">
                             	<c:forEach  var="dto" items="${dto }">
 	                                <div class="room">
@@ -1034,6 +1069,8 @@
 	    </section>
    	</c:if>
     <!-- Recommend Blog Section End -->
+    </c:if>
+    
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -1300,24 +1337,23 @@
         }
         
         function more() {
-        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
-        	var h2 = $(".inn-info p").eq(0).outerHeight()
-        	var h3 = $(".inn-info p").eq(1).outerHeight()
-        	
         	if ($(".more").text() === "더보기") {
         		$(".more").text("접기")
             	$(".comment").css("height", "auto")
+            	$(".clamp").css("height", "auto")
+            	$(".clamp").css("display", "block")
+            	$(".clamp").css("overflow", "hidden")
         	} else if ($(".more").text() === "접기") {
         		$(".more").text("더보기")
-            	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
+            	$(".comment").css("height", "120px")
+            	$(".clamp").css("display", "-webkit-box")
+            	$(".clamp").css("-webkit-line-clamp", "2")
+            	$(".clamp").css("-webkit-box-orient", "vertical")
+            	$(".clamp").css("text-overflow", "ellipsis")
         	}
         }
         
         $(document).ready(function() {
-        	var h1 = $(".inn-info h3").outerHeight() + $(".inn-info h3").height()
-        	var h2 = $(".inn-info p").eq(0).outerHeight()
-        	var h3 = $(".inn-info p").eq(1).outerHeight()
-        	$(".comment").css("height", 250 - (h1 + h2 + h3) + 7)
         	
         	var star = $(".star_avg span").text();
         	var icon = "";        	

@@ -34,6 +34,14 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     	
     <style>
+    	.body {
+    		overflow-x: hidden;
+    	}
+    	.breadcrumb-section2 {
+    		background-image: url("https://www.oriental.co.kr/resources/images/homepage/KOR/index/main_visual_01.jpg");
+    		background-size: cover;
+    		background-position: 10%;
+    	}
     	.item_info h5 {
     		line-height: 1.5em;
     	}
@@ -69,7 +77,7 @@
       }
       .swiper-container {
         width: 100%;
-        height: 1250px;
+        height: 1150px;
       }
       .swiper-slide {
         text-align: center;
@@ -96,16 +104,19 @@
     </style>
     
     <style>
-    	#navYamHot1 > ul > li { height: 330px; margin-top: 1%; }
-    	.navYam2 > ul > li { height: 330px; margin-top: 5%; }
+    	#hotel1 { padding: 10px 0px; color: white; font-weight: bold; }
+    	.navYam2 > ul > li { height: 300px; margin-top: 5%; background-color: white; border: 1px solid #ebebeb; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
-    	.item_info > h5 { height: 61px; }
+    	.item_info > h5 { height: 68px; }
     	.item_info > p { height: 45px; }
-    	.item_img { height: 300px; }
+    	.item_img { height: 146px; }
     	.item_img > img {
 	    	width: 100%;
 			height: 100%;
 		}
+		.hothot2 { background-color: white; border: 1px solid #ebebeb; }
+		.hothot2 > .item_img { height: 300px; }
+		#navYamHot1 ul li { height: 300px; background-color: white; border: 1px solid #ebebeb; }
     	/* Sections
    ========================================================================== */
 /**
@@ -1141,15 +1152,11 @@ legend {
 
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section2">
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>여기는 숙소</h2>
-                        <div class="bt-option">
-                            <a href="./index.html">Home</a>
-                            <span>숙소</span>
-                        </div>
+                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">숙소</h2>
                     </div>
                 </div>
             </div>
@@ -1208,7 +1215,7 @@ legend {
 					                                  <ul>
 					                                  	</c:if>
 					                                      <li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
-					                                      	<div class="item_img" style="height: 170px">
+					                                      	<div class="item_img">
 					                                      		<img src="${dto.inn_pic }"/>
 					                                      	</div>
 					                                      	<div class="item_info" style="padding: 7px;">
@@ -1245,7 +1252,7 @@ legend {
     <section class="Hot2">
             <div class="section-title">
                 <span>할인 중인 숙소입니다</span>
-                <h2>할인 숙소</h2>
+                <h2 style="font-weight: bold; color: white;">할인 숙소</h2>
             </div>
             
             <div id="hotId2">
@@ -1273,15 +1280,15 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
+   					<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
-   				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	
 	<!-- 액티비티 -->
     <section class="sivaHotH">
         <div id="siva5">
-            <h2 id="sivaH5">인기 숙소</h2>
+            <h2 id="sivaH5" style="font-weight: bold; padding: 10px 0px;">인기 숙소</h2>
             <div id="button1">
                 
             </div>
@@ -1291,7 +1298,7 @@ legend {
 	                	<c:if test="${status.count % 5 == 1 || status.count == 1 }">
 	                		<ul></c:if>
 	                			<li onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
-	                				<div class="item_img" style="height: 170px;">
+	                				<div class="item_img">
                                   		<img src="${dto.inn_pic }"/>
                                   	</div>
                                   	<div class="item_info" style="padding: 7px;">

@@ -30,6 +30,14 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
 
 	<style>
+		body {
+    		overflow-x: hidden;
+    	}
+    	.breadcrumb-section2 {
+    		background-image: url("https://new7wonders.com/app/uploads/sites/4/2016/09/044-Seongsan-Ilchulbong-and-Hallasan-1920x1227.jpg");
+    		background-size: cover;
+    		background-position: 30%;
+    	}
 		.nice-select {
 			width: 100%;
 			margin: 5px 0px 20px 0px;
@@ -54,16 +62,12 @@
     <jsp:include page="../topMenuIncludeMyPage.jsp"/>
 
     <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
-        <div class="container">
+    <div class="breadcrumb-section2">
+        <div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
-                        <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>Rooms</span>
-                        </div>
+                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">투어</h2>
                     </div>
                 </div>
             </div>
