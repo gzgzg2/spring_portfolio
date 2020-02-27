@@ -12,7 +12,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>액티비티 | 찾기</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -112,7 +112,7 @@
     	#hotel1 { padding: 10px 0px; color: white; font-weight: bold; }
     	.navYam2 > ul > li { height: 300px; margin-top: 5%; background-color: white; border: 1px solid #ebebeb; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
-    	.item_info > h5 { height: 68px; }
+    	.item_info > h5 { height: 75px; }
     	.item_info > p { height: 45px; }
     	.item_img { height: 133px; }
     	.item_img > img {

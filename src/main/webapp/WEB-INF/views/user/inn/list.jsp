@@ -12,7 +12,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>숙소 | 찾기</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     	
     <style>
-    	.body {
+    	body {
     		overflow-x: hidden;
     	}
     	.breadcrumb-section2 {

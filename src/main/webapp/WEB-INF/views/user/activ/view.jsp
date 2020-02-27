@@ -12,7 +12,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>액티비티 | 상세페이지</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -31,6 +31,10 @@
         .activ table {font-size: 0.95em;}
         .activ table tr:first-child {border-top: 3px solid #eee;}
         .activ table tr {border-bottom: 3px solid #eee; margin-block-end: 5px;}
+        
+        body {
+        	overflow-x: hidden;
+        }
         
         .bd-hero-text h2 {
         	background-color: rgba(68,68,68,0.6);
@@ -193,9 +197,9 @@
 	<c:if test="${fn:length(dto) >= 1}">
     <!-- Blog Details Hero Section Begin -->
     <section class="blog-details-hero set-bg" data-setbg="${dto[0].activ_pic }">
-        <div class="container">
+        <div>
             <div class="row">
-                <div class="col-lg-10 offset-lg-1">
+                <div class="col-lg-12">
                     <div class="bd-hero-text">
                         <span>액티비티</span>
                         <h2>${dto[0].activ_name }</h2>

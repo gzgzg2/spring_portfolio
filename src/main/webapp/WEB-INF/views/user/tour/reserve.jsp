@@ -9,7 +9,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>투어 | 예약</title>
 
     <!-- Calendar -->
 	<script type="text/javascript" src="./calendar_trial/codebase/calendar.js?v=6.4.1"></script>

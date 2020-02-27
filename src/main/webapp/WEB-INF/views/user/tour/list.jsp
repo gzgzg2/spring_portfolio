@@ -11,7 +11,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>투어 | 찾기</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -31,7 +31,12 @@
 
 	<style>
 		body {
+			background: #eee;
     		overflow-x: hidden;
+    	}
+    	.room-item {
+    		background: white;
+    		box-shadow: 0px 14px 38px -18px rgba(0,0,0,0.75);
     	}
     	.breadcrumb-section2 {
     		background-image: url("https://new7wonders.com/app/uploads/sites/4/2016/09/044-Seongsan-Ilchulbong-and-Hallasan-1920x1227.jpg");
@@ -52,7 +57,7 @@
 		}
 		.paging_button button {
 			border: none;
-			background-color: white;
+			background: #eee;
 		}
 	</style>
 
