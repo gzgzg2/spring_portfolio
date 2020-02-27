@@ -58,6 +58,22 @@
 		GROUP BY
 			a.activ_uid;
 	</select>
+	<select id="selectActivAjax" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
+		SELECT 
+			a.activ_uid, a.activ_name, a.activ_loc, t.ticket_last_cost, a.activ_pic
+		FROM
+			activ a, ticket t
+		WHERE
+			a.activ_uid = t.ticket_uid
+			and not t.ticket_last_cost IN (0)
+			and not t.ticket_last_cost IN (0)
+			and a.activ_loc like (#{activ_loc})
+			and a.activ_name like (#{activ_name})
+		GROUP BY
+			a.activ_uid
+		LIMIT
+			0, 10;
+	</select>
 	
 	<select id="selectActivByUid" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 

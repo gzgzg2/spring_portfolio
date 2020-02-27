@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.lec.mgb.mybatis.beans.UserFindDAO">	
+	<select id="selectMemberByNameAndEmail" parameterType="String" resultType="String">
+		SELECT member_id FROM MEMBER WHERE member_name = #{member_name} AND member_email = #{member_email}
+	</select>
+</mapper>	

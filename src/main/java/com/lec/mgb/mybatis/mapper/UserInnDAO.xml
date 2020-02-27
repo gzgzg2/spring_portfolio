@@ -59,6 +59,23 @@
 		GROUP BY
 			i.inn_uid;
 	</select>
+	
+	<select id="selectInnAjax" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
+		SELECT 
+			i.inn_uid, i.inn_name, i.inn_sep, i.inn_loc, r.room_last_cost, i.inn_pic
+		FROM
+			inn i, room r
+		WHERE
+			i.inn_uid = r.inn_uid
+			and not r.room_last_cost IN (0)
+			and i.inn_loc like (#{inn_loc})
+			and i.inn_name like (#{inn_name})
+			and not r.room_last_cost IN (0)
+		GROUP BY
+			i.inn_uid
+		LIMIT
+			0, 10;
+	</select>
 
 	<select id="selectInnByUid" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 

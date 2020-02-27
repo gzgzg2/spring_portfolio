@@ -10,6 +10,7 @@ public interface UserInnDAO {
 	public UserInnDTO [] selectInnSale();
 	public UserInnDTO [] selectInnPopular();
 	public UserInnDTO [] selectInnByKeyword(@Param("inn_loc")String inn_loc, @Param("inn_name")String inn_name);
+	public ArrayList<UserInnDTO> selectInnAjax(@Param("inn_loc")String inn_loc, @Param("inn_name")String inn_name);
 	public UserInnDTO [] selectInnByUid(int inn_uid);
 	public ArrayList<UserTourDTO> selectReviewByUid(@Param("inn_uid")int inn_uid, @Param("writePages")int writePages, @Param("page")int page);
 	public UserInnDTO [] selectReviewStarByUid(int inn_uid);

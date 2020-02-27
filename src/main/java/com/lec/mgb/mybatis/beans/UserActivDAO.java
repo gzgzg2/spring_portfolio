@@ -10,6 +10,7 @@ public interface UserActivDAO {
 	public UserActivDTO [] selectActivSale();
 	public UserActivDTO [] selectActivPopular();
 	public UserActivDTO [] selectActivByKeyword(@Param("activ_loc")String activ_loc, @Param("activ_name")String activ_name);
+	public ArrayList<UserActivDTO> selectActivAjax(@Param("activ_loc")String activ_loc, @Param("activ_name")String activ_name);
 	public UserActivDTO [] selectActivByUid(int activ_uid);
 	public UserActivDTO [] selectReviewStarByUid(int activ_uid);
 	public ArrayList<UserTourDTO> selectReviewByUid(@Param("activ_uid")int activ_uid, @Param("writePages")int writePages, @Param("page")int page);

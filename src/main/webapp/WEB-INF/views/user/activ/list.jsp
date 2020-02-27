@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style_rami.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/swiper.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <style>
     	.item_info h5 {
@@ -1387,6 +1388,8 @@
     <script src="${pageContext.request.contextPath}/USERJS/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/main.js"></script>
     <script src="${pageContext.request.contextPath}/USERJS/swiper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
     <script>
     var swiper1 = new Swiper('.swiper1', {
@@ -1429,6 +1432,69 @@
     			$(".Hot2").css("display", "none");
     			$(".sivaHotH").css("display", "none");
     		}
+    		
+    		var ajaxOption = "";
+    		var ajaxKeyword = "";
+    		
+    		$("#search").keyup(function() {
+    			var curOption = $(".current").text();
+    			ajaxKeyword = $("#search").val();
+    			
+    			var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
+   			    if (regExp.test(ajaxKeyword)) {
+   			        //특수문자 제거
+   			        ajaxKeyword = ajaxKeyword.replace(regExp, "")
+   			    }
+    			
+    			if (curOption === "전체") {
+    				ajaxOption = "all"
+    			} else if (curOption === "제주시") {
+    				ajaxOption = "jeju"
+    			} else if (curOption === "서귀포시") {
+    				ajaxOption = "seogwipo"
+    			}
+    		})
+    		
+    		$("#search").autocomplete({
+                source : function( request, response ) {
+                     $.ajax({
+                            type: 'get',
+                            url: "http://localhost:8090/mgb/user/activ/ajax/" + ajaxOption + "/" + ajaxKeyword,
+                            dataType: "json",
+                            success: function(data) {
+                                response(
+                                    $.map(data, function(item) {  
+                                        return {
+                                            label: item.activ_name,  
+                                            value: item.activ_name, 
+                                            test : item.activ_name 
+                                        }
+                                    })
+                                );
+                            }
+                       });
+                    },
+                select : function(event, ui) {
+                    console.log(ui);
+                    console.log(ui.item.activ_name);
+                    console.log(ui.item.activ_name);
+                    console.log(ui.item.activ_name);
+                    
+                },
+                focus : function(event, ui) {
+                    return false;
+                },
+                minLength: 1,
+                autoFocus: true,
+                classes: {
+                    "ui-autocomplete": "highlight"
+                },
+                delay: 100,
+                position: { my : "right top", at: "right bottom" },
+                close : function(event){
+                    console.log(event);
+                }
+            });
     	})
     </script>
     
