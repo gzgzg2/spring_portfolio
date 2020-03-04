@@ -107,6 +107,7 @@
         	margin: 20px 0px;
             border: 3px solid #dfa974;
             border-radius: 5px;
+            height: 150px;
         }
         
         .ticket_header {
@@ -119,12 +120,34 @@
             font-weight: 600;
         }
         .ticket_description p {
-            margin: 20px;
+            margin: 12px 20px;
+            height: 27px;
+        }
+        .ticket_amount {
+        	margin-top: 15px;
         }
         .ticket_amount > div {
             margin-left: 20px;
-            border: 1px solid #dfa974;
         }
+        .ticket_amount button {
+        	border: rgba(223,169,116,0.5) 1px solid;
+        	border-radius: 5px;
+        	background-color: rgba(223,169,116,0.5);
+        	padding: 0px 7px;
+        	width: 26px;
+        	color: white;
+        	font-weight: bold;
+        }
+        .ticket_amount button[disabled='disabled'] {
+        	border: #e3e3e3 1px solid;
+        	border-radius: 5px;
+        	background-color: #e3e3e3;
+        	padding: 0px 7px;
+        	width: 26px;
+        	color: black;
+        	font-weight: 100;
+        }
+        .book_member_cnt { margin: 0px 8px; }
         .ticket_amount button, .ticket_amount div {
             float: left;
         }
@@ -257,14 +280,19 @@
                                         </div>
                                     </div>
                                     <div class="ticket_description">
-                                        <p>${dto.ticket_info }</p>
+                                        <c:if test="${fn:length(dto.ticket_info) == 0 }">
+                                        	<p style="color: #aaa;">아직 설명이 없습니다!</p>
+                                        </c:if>
+                                        <c:if test="${fn:length(dto.ticket_info) != 0 }">
+                                        	<p>${dto.ticket_info }</p>
+                                        </c:if>
                                     </div>
                                     <div class="ticket_footer row">
                                         <div class="ticket_amount col-sm-6">
                                             <div>
-                                                <button type="button" class="ticketDec" disabled="true">-</button>
+                                                <button type="button" class="ticketDec" disabled="disabled">-</button>
                                                 	<div class="book_member_cnt">0</div>
-                                                <button type="button" class="ticketInc" disabled="true">+</button>
+                                                <button type="button" class="ticketInc" disabled="disabled">+</button>
                                             </div>
 	                                        </div>
 	                                        <div class="ticket_price col-sm-6">

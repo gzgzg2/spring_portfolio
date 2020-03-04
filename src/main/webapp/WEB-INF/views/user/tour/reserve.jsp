@@ -68,8 +68,201 @@
             height: 45px;
             border: none;
             background-color: #dfa974;
+        }
+        .info > label > span:nth-child(3) {
+			padding-right: 17px;
+		}
+		.info > label > input[type="text"] {
+			width: 55%;
+			padding: 5px;
+			margin-left: 5px;
+			border: none;
+			background-color: #eee !important;
+			border-bottom: 3px solid #bbb;
+		}
+		.info > label > input[type="text"]:read-only {
+			background-color: #eee !important;
+			font-weight: bold;
+		}
+		.info > label > input[type="text"]:focus {
+			border-bottom: 3px solid #dfa974;
+		}
+		.info > label > button {
+			color: white;
+			width: 23%;
+			padding: 5px;
+			margin-left: 5px;
+			background-color: #dfa974;
+			border: 2px solid #dfa974;
+			border-radius: 5px;
+		}
+        .term > label > button {
+            color: white;
+            width: 100%;
+            height: 45px;
+            border: none;
+            background-color: #dfa974;
 
         }
+        input[type="checkbox"] {
+		    border: 0;
+		    clip: rect(0 0 0 0);
+		    height: 1px;
+		    margin: -1px;
+		    overflow: hidden;
+		    padding: 0;
+		    position: absolute;
+		    width: 1px;
+		}
+		
+		input[type="checkbox"]:focus + label:before,
+		input[type="checkbox"]:hover + label:before {
+		    border-color: black;
+		}
+		
+		input[type="checkbox"]:active + label:before {
+		    -webkit-transition-duration: 0;
+		    transition-duration: 0;
+		    -webkit-filter: brightness(0.2);
+		    filter: brightness(0.2);
+		}
+		
+		input[type="checkbox"] + label {
+		    position: relative;
+		    padding-left: 1.5em;
+		    margin: 0px 0px 0px 20px;
+		    vertical-align: middle;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		}
+		
+		.term input[type="checkbox"] + label {
+			margin-bottom: 5px;
+		}
+		
+		input[type="checkbox"] + label:before {
+		    box-sizing: content-box;
+		    content: '';
+		    color: black;
+		    position: absolute;
+		    top: 50%;
+		    left: 0;
+		    width: 14px;
+		    height: 14px;
+		    margin-top: -9px;
+		    border: 2px solid grey;
+		    text-align: center;
+		}
+		
+		input[type="checkbox"] + label:after {
+		    box-sizing: content-box;
+		    content: '';
+		    background-color: black;
+		    position: absolute;
+		    top: 50%;
+		    left: 4px;
+		    width: 10px;
+		    height: 10px;
+		    margin-top: -5px;
+		    -webkit-transform: scale(0);
+		    transform: scale(0);
+		    -webkit-transform-origin: 50%;
+		    transform-origin: 50%;
+		    -webkit-transition: -webkit-transform 200ms ease-out;
+		    transition: -webkit-transform 200ms ease-out;
+		    transition: transform 200ms ease-out;
+		    transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+		}
+		
+		input[type="checkbox"] + label:after {
+		    background-color: transparent;
+		    top: 50%;
+		    left: 4px;
+		    width: 8px;
+		    height: 3px;
+		    margin-top: -4px;
+		    border-style: solid;
+		    border-color: black;
+		    border-width: 0 0 3px 3px;
+		    -webkit-border-image: none;
+		    -o-border-image: none;
+		    border-image: none;
+		    -webkit-transform: rotate(-45deg) scale(0);
+		    transform: rotate(-45deg) scale(0);
+		    -webkit-transition: none;
+		    transition: none;
+		}
+		
+		input[type="checkbox"]:checked + label:after {
+		    content: '';
+		    -webkit-transform: rotate(-45deg) scale(1);
+		    transform: rotate(-45deg) scale(1);
+		    -webkit-transition: -webkit-transform 200ms ease-out;
+		    transition: -webkit-transform 200ms ease-out;
+		    transition: transform 200ms ease-out;
+		    transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+		}
+		input[type="checkbox"]:checked + label:before {
+		    -webkit-animation: borderscale 200ms ease-in;
+		    animation: borderscale 200ms ease-in;
+		}
+		
+		input[type="checkbox"]:checked + label:after {
+		    -webkit-transform: rotate(-45deg) scale(1);
+		    transform: rotate(-45deg) scale(1);
+		}
+		@-webkit-keyframes borderscale {
+		    50% {
+		        box-shadow: 0 0 0 2px black;
+		    }
+		}
+		@keyframes borderscale {
+		    50% {
+		        box-shadow: 0 0 0 2px black;
+		    }
+		}
+		.error-msg {
+		    display: block;
+		    color: red;
+		    max-height: 0;
+		    overflow: hidden;
+		    -webkit-transition: max-height 500ms ease-out;
+		    transition: max-height 500ms ease-out;
+		    will-change: max-height;
+		}
+		
+		:required:not(:focus) ~ .error-msg,
+		:invalid:required ~ .error-msg {
+		    max-height: 9em;
+		}
+		
+		input:focus {
+		    border: 1px solid black;
+		}
+		
+		input:not(:focus):invalid {
+		    border: 1px solid red;
+		    outline: none;
+		}
+		
+		input:not(:focus):valid {
+		    border: 1px solid green;
+		}
+		
+		* {
+		    box-sizing: border-box;
+		}
+		
+		form ul {
+		    list-style: none;
+		}
+		
+		label {
+		    cursor: pointer;
+		    display: inline-block;
+		}
         
         .inn_name, .room_name, .room_price {
             padding: 25px;
@@ -117,46 +310,53 @@
                                     <input type="hidden" name="ifChkSMS" value="0" />
                                     <h5>예약자 정보</h5>
                                     <label>
-                                     	예약자 이름<br>
-                                        <input type="text" name="book_member_name" value="">
+                                     	<span>예약자이름</span>
+                                        <input type="text" name="book_member_name" value="" placeholder="예약자 이름을 입력해주세요">
                                     </label>
+                                    <ul>
+                                    	<li>
+                                    		<input id="checkbox1" type="checkbox" name="same_member_name"/>
+                                    		<label style="margin-left: 19%" for="checkbox1">사용자 정보와 같습니다.</label>
+                                   		</li>
+                                    </ul>
                                     <label>
-	                                    <input type="checkbox" name="same_member_name"/>
-	                                                                               사용자 정보와 같습니다.
-                                    </label>
-                                    <label>
-                                      	예약자 핸드폰 <br>
-                                        <input type="text" name="book_member_tel" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                     	<span>휴대폰번호</span>
+                                        <input type="text" placeholder="- 뺴고 입력하세요" name="book_member_tel" value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <button type="button" class="sendSMS" onclick="sendSMS()">휴대폰 인증</button>
                                     </label>
                                     <label class="auth">
+                                    	<span>인증번호</span>
                                         <input type="text" name="authKey" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                         <button onclick="chkSMS()">인증번호 확인</button>
                                     </label>
-                                    <label>
-	                                    <input type="checkbox" name="same_member_tel"/>
-	                                                                               사용자 정보와 같습니다.
-                                    </label>
+                                    <ul>
+                                    	<li>
+                                    		<input id="checkbox2" type="checkbox" name="same_member_tel"/>
+                                    		<label style="margin-left: 19%" for="checkbox2">사용자 정보와 같습니다.</label>
+                                   		</li>
+                                    </ul>
                                 </div>
                                 <div class="term">
                                     <h5>이용 약관</h5>
-                                    <label>
-                                        <input type="checkbox" name="term_all">
-                                        <strong>전체 동의</strong>
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="term1">
-                                     	개인정보 수집 및 이용 동의 (필수)
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="term2">
-                                                                                        개인정보 제 3자 제공 동의 (필수)
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" name="term3">
-                                                                                         만 14세 이상입니다. (필수)
-                                    </label>
-                                    <label><button type="submit">예약 하기</button> </label>
+                                    <ul>
+                                    	<li>
+                                    		<input id="checkbox3" type="checkbox" name="term_all"/>
+                                    		<label for="checkbox3">전체 동의</label>
+                                   		</li>
+                                   		<li>
+                                    		<input id="checkbox4" type="checkbox" name="term1"/>
+                                    		<label for="checkbox4">개인정보 수집 및 이용 동의 (필수)</label>
+                                   		</li>
+                                   		<li>
+                                    		<input id="checkbox5" type="checkbox" name="term2"/>
+                                    		<label for="checkbox5">개인정보 제 3자 제공 동의 (필수)</label>
+                                   		</li>
+                                   		<li>
+                                    		<input id="checkbox6" type="checkbox" name="term3"/>
+                                    		<label for="checkbox6">만 14세 이상입니다. (필수)</label>
+                                   		</li>
+                                   	</ul>
+                                    <label style="margin-top: 20%;"><button type="submit">예약 하기</button></label>
                                 </div>
 	                        </div>
 	                    </div>

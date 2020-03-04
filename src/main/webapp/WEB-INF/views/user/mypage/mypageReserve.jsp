@@ -35,12 +35,12 @@
     <style>
     	.nice-select {
 			width: 100%;
-			margin: 30px 0px 20px 0px;
+			margin: 20px 0px;
 		}
 		
 		.paging p {
 			text-align: center;
-			padding-top: 700px;
+			padding-top: 670px;
 		}
 		.paging > p > span { padding-left: 5px; }
 		.paging_button {
@@ -103,7 +103,7 @@
                 </nav>
             </div>
 
-            <div id="memberForm">
+            <div id="memberForm" style="height: 91%">
                 <h2 id="frmH2">예약 관리</h2>
                 <div style="width: 85%; margin: 0 auto;">
                 	<select name="orderBy">
@@ -176,7 +176,7 @@
           				row += "<th>총 가격</th>"
               			row += "<td>"
                			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              			row += "</td>"
+              			row += "원</td>"
             			row += "</tr>"
             			row += "</table>"
             			row += "</div>"
@@ -247,7 +247,7 @@
           				row += "<th>총 가격</th>"
               			row += "<td>"
                			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              			row += "</td>"
+              			row += "원</td>"
             			row += "</tr>"
             			row += "</table>"
             			row += "</div>"
@@ -348,7 +348,7 @@
           				row += "<th>총 가격</th>"
               			row += "<td>"
               			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              			row += "</td>"
+              			row += "원</td>"
             			row += "</tr>"
             			row += "</table>"
             			row += "</div>"

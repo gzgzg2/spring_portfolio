@@ -17,8 +17,6 @@
     <!-- Calendar -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/USERJS/calendar.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/calendar1.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner2.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner3.css">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
