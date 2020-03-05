@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.lec.mgb.mybatis.beans.MainAjaxDAO">
+    	<select id="select" resultType="com.lec.mgb.mybatis.beans.PlannerDTO">
+			SELECT 
+				planner_uid,
+				planner_title,
+				planner_view_cnt,
+				planner_stat,
+				planner_cost_trans,
+				planner_cost_inn,
+				planner_cost_eat,
+				planner_cost_etc,
+				member_uid
+			FROM 
+				planner
+		</select>
+
+	   </mapper>	

@@ -32,5 +32,21 @@
 			LOCAL
 		WHERE local_uid = #{param1}
 	</select>
+	
+	
+	<select id="search" resultType="com.lec.mgb.mybatis.beans.LocalDTO">
+		SELECT
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,	
+			local_tel,
+			local_pic
+		FROM
+			LOCAL
+		WHERE local_name like #{param1}
+	</select>
     
     </mapper>	
