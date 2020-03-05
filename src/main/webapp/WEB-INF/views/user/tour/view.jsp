@@ -72,6 +72,10 @@
             border-radius: 5px;
             background-color: #dfa974;
         }
+		.bd-hero-text div button:hover {
+			background-color: #bd9266;
+            border: 1px solid #bd9266;
+		}
 
         .modal_layer {
             display: none;
@@ -112,10 +116,16 @@
             margin-left: 60%;
             background-color: #fff;
         }
+        .modal_prev button:hover {
+            background-color: #f7f7f7;
+        }
         .modal_next button {
             margin-left: 20%;
             color: white;
             background-color: #dfa974;
+        }
+        .modal_next button:hover {
+            background-color: #bd9266;
         }
 
         .comment-option {
@@ -143,6 +153,41 @@
 		}
 		.star_avg > span { padding-left: 5px; }
 		body {overflow-x: hidden;}
+		
+		.member_cnt {
+			padding: 10px 0px;
+			width: 170px;
+			margin: 0 auto;
+		}
+		.member_cnt span {
+			float: left;
+    		margin: 1px 25px 0px 0px;
+		}
+        .member_cnt button {
+        	border: rgba(223,169,116,0.5) 1px solid;
+        	border-radius: 5px;
+        	background-color: rgba(223,169,116,0.5);
+        	padding: 0px 7px;
+        	width: 26px;
+        	color: white;
+        	font-weight: bold;
+        }
+        .member_cnt button:hover {
+        	background-color: rgba(223,169,116,0.8);
+       	}
+        .member_cnt button[disabled='disabled'] {
+        	border: #e3e3e3 1px solid;
+        	border-radius: 5px;
+        	background-color: #e3e3e3;
+        	padding: 0px 7px;
+        	width: 26px;
+        	color: black;
+        	font-weight: 100;
+        }
+        .book_member_cnt { margin: 0px 8px; }
+        .member_cnt button, .member_cnt div {
+            float: left;
+        }
     </style>
 
     <!-- Css Styles -->
@@ -341,11 +386,17 @@
 					<div class="dhx_sample-container__widget" id="calendar"></div>
 				</section>
 				<form action="${pageContext.request.contextPath}/user/tour/reserve" method="POST" onsubmit="return chkSubmit()">
-					<label style="width: 100%; text-align: center;">인원 수 : <input type="text" name="book_member_cnt" value="1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></label>
+					<input type="hidden" name="book_member_cnt" value="1" />				
+					<div class="member_cnt">
+						<span>인원 수</span>
+                        <button type="button" class="ticketDec">-</button>
+                        	<div class="book_member_cnt">1</div>
+                        <button type="button" class="ticketInc">+</button>
+                    </div>
             </div>
             <div class="modal_button row">
                 <div class="modal_prev col-sm-6">
-                    <button>prev</button>
+                    <button type="button" onclick="$('.modal_layer').css('display', 'none')">prev</button>
                 </div>
                 <div class="modal_next col-sm-6">
 	    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -393,6 +444,24 @@
             $(".modal_inner .icon_close").click(function() {
                 $(".modal_layer").css("display", "none")
                 $("input:text[name='book_member_cnt']").val("1")
+            })
+            
+            $(".ticketInc").click(function() {
+            	var book_member_cnt = parseInt($("input:hidden[name='book_member_cnt']").val());
+            	$("input:hidden[name='book_member_cnt']").val(book_member_cnt + 1)
+            	$(this).parent().find(".book_member_cnt").text(book_member_cnt + 1)
+            })
+            $(".ticketDec").click(function() {
+            	var book_member_cnt = parseInt($("input:hidden[name='book_member_cnt']").val());
+            	
+            	if (book_member_cnt == 1) {
+            		$(".modal_layer").css("display", "none");
+            		
+            		return false;
+            	}
+            	
+            	$("input:hidden[name='book_member_cnt']").val(book_member_cnt - 1)
+            	$(this).parent().find(".book_member_cnt").text(book_member_cnt - 1)
             })
         })
         function openModal() {

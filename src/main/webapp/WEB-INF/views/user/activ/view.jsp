@@ -93,7 +93,14 @@
             border-radius: 5px;
             background-color: #dfa974;
         }
-
+		.bd-hero-text div button:hover {
+			background-color: #bd9266;
+            border: 1px solid #bd9266;
+		}
+		.ativ_ticket > form > div > button:hover {
+			background-color: #bd9266;
+            border: 1px solid #bd9266;
+		}
         .comment-option {
             display: none;
         }
@@ -138,6 +145,9 @@
         	color: white;
         	font-weight: bold;
         }
+        .ticket_amount button:hover {
+        	background-color: rgba(223,169,116,0.8);
+       	}
         .ticket_amount button[disabled='disabled'] {
         	border: #e3e3e3 1px solid;
         	border-radius: 5px;
@@ -267,7 +277,7 @@
                             </div>
                         </div>
                         <div class="ativ_ticket">
-                            <form method="POST" action="${pageContext.request.contextPath}/user/activ/reserve">
+                            <form method="POST" action="${pageContext.request.contextPath}/user/activ/reserve" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <h3>티켓</h3>
                                 <c:forEach var="dto" items="${dto }">
@@ -476,6 +486,7 @@
             	$(".ticketInc").attr("disabled", true)
             	$(".ticketDec").attr("disabled", true)
             	$("input:hidden[name='book_member_cnt']").val(1);
+            	$(".book_member_cnt").text(0);
             	$(this).parent().parent().parent().next().next().find(".book_member_cnt").text(1);
             	$(this).parent().parent().parent().next().next().find(".ticketInc").attr("disabled", false)
             	$(this).parent().parent().parent().next().next().find(".ticketDec").attr("disabled", false)
@@ -553,6 +564,14 @@
     				}
     			}
     		})
+        }
+        
+        function chkSubmit() {
+        	if (typeof $("input:radio[name='ticket_uid']:checked").val() != "undefined") {
+        		return true;
+        	}
+       		alert("티켓을 확인해주세요!");
+        	return false;
         }
         
         $(document).ready(function() {

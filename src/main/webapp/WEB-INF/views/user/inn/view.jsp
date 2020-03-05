@@ -483,6 +483,10 @@
             color: #fff;
             text-align: center
         }
+        .room_info .info button:hover {
+        	background-color: #bd9266;
+            border: 1px solid #bd9266;
+        }
         .room_info .info .none ul,
         .room_info .info .none div .through {
             visibility: hidden
@@ -845,10 +849,16 @@
             margin-left: 60%;
             background-color: #fff;
         }
+        .modal_prev button:hover {
+            background-color: #f7f7f7;
+        }
         .modal_next button {
             margin-left: 20%;
             color: white;
             background-color: #dfa974;
+        }
+        .modal_next button:hover {
+            background-color: #bd9266;
         }
         .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5) {
             color: #aaa;
