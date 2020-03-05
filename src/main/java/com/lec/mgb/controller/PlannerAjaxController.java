@@ -10,7 +10,7 @@ import com.lec.mgb.c.C;
 import com.lec.mgb.mybatis.beans.AjaxLocalList;
 import com.lec.mgb.mybatis.beans.LocalAjaxDAO;
 import com.lec.mgb.mybatis.beans.LocalDTO;
-import com.lec.mgb.mybatis.beans.PlanDTO;
+
 
 @RestController
 @RequestMapping("/AJAXLocal")
@@ -46,6 +46,26 @@ public class PlannerAjaxController {
 	return arr;
 	}
 	
+	@RequestMapping("/Search/{SearchText}")
+	public AjaxLocalList SearchList(@PathVariable("SearchText") String SearchText){
+	
+		AjaxLocalList result = new AjaxLocalList();
+		ArrayList<LocalDTO> list = null;
+		
+		LocalAjaxDAO dao = C.sqlSesssion.getMapper(LocalAjaxDAO.class);
+		SearchText = "%"+SearchText+"%";
+		list = dao.search(SearchText);
+		result.setList(list);
+		
+		if(list != null && list.size() > 0) {
+			result.setStatus("OK");
+			result.setCount(list.size());
+		} else {
+			result.setStatus("FAIL");
+		}
+		
+		return result;
+	}
 	
 	
 }

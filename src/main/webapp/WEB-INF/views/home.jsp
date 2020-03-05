@@ -1,21 +1,71 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html lang = "ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/welcome.css">
-	<title>Home</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/welcome.css">
+ 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slick.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicktheme.css">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png">
+    <title>귤귤 플래너</title>
+    <style>
+    
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: .2;
+    }
+    
+    .slick-active {
+      opacity: .5;
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/USERJS/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: false,
+        nextArrow: false,
+        autoplay:true,
+        autoplaySpeed:2000
+      });
+    });
+</script>
+
 </head>
 <body>
 <div class="wrap">
     <header>
         <div>
             <div class="logo">
-            <img src="${pageContext.request.contextPath}/USERCSS/assets/images/logo-inverse.png">
-            	귤귤플래너
+                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png">
+               		 귤귤 플래너
             </div>
             <div class="on_pc">
                 <ul>
@@ -32,7 +82,20 @@
         <div>
             <div class="left">
                 <div>
-                    <img src="https://imagecdn.tour2000.co.kr/upload/Images/display/20191219130842_3693621297.png">
+                    <section class="regular slider">
+                        <div>
+                          <img src="${pageContext.request.contextPath}/USERCSS/assets/images/welcome01.jpg">
+                        </div>
+                        <div>
+                          <img src="${pageContext.request.contextPath}/USERCSS/assets/images/welcome02.jpg">
+                        </div>
+                        <div>
+                          <img src="${pageContext.request.contextPath}/USERCSS/assets/images/welcome03.jpg">
+                        </div>
+                        <div>
+                          <img src="${pageContext.request.contextPath}/USERCSS/assets/images/welcome04.png">
+                        </div>
+                      </section>    
                 </div>
             </div>
             <div class="right">

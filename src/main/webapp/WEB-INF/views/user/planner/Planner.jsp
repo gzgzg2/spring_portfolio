@@ -12,17 +12,64 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-
+ 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>MGB_Planner 플래너작성</title>
-
+<!-- Calendar
+	<script type="text/javascript" src="${pageContext.request.contextPath}/USERJS/calender.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/calendar1.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner2.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner3.css"> -->
 <link href="${pageContext.request.contextPath}/USERCSS/mainplanner.css"
-	rel="stylesheet" text="text/css">
-	  <script>
-  </script>
+	rel="stylesheet">
+<style>
+	.modal_layer {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .modal_inner {
+            width:600px;
+            height:650px;
+            margin: 3.5% auto 0px auto;
+            background: #eeeeee;
+            z-index: 10;
+        }   
+        .modal_top h3 {
+            position: relative;
+            bottom: 30px;
+            text-align: center;
+        }
+        .modal_top div {
+            width: 98%;
+            font-size: 50px;
+            text-align: right;
+        }
+        .modal_description {
+            padding: 30px;
+        }
+        .modal_button div button {
+            width: 20%;
+            height: 35px;
+            border: none;
+        }
+        .modal_prev button {
+            margin-left: 60%;
+            background-color: #fff;
+        }
+        .modal_next button {
+            margin-left: 20%;
+            color: white;
+            background-color: #dfa974;
+        }
+</style>
 </head>
 <body>
 	<div
@@ -119,12 +166,16 @@
 				<div class="scrollbar-sidebar">
 					<div class="app-sidebar__inner">
 						<ul class="vertical-nav-menu">
-							<li class="app-sidebar__heading"><h2>mgb 플래너</h2></li>
-							<li><a href="#" class="mm-active"> <i
-									class="metismenu-icon pe-7s-plane"></i> Guest님의 여행목록입니다.
-							</a></li>
+							<li class="app-sidebar__heading"><h2>귤귤 플래너</h2></li>
+							<li>
+								<a class="mm-active"> <i class="metismenu-icon pe-7s-plane"></i> Guest님의 여행목록입니다.</a>
+								<a class="mm-active"> <i class="metismenu-icon pe-7s-paper-plane"></i> 출발일자 : 
+										
+								</a>	
+												
+							</li>
 						</ul>
-						<div class = "planList"></div>
+						<div id = "planList"></div>
 					</div>
 					
 				</div>
@@ -147,12 +198,20 @@
 					<div
 						style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
 						class="go-right">
+						
+							<a class="p-0 btn" onclick=saveOk()> 
+							<img width="42" class="rounded-circle" src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
+								alt="">플래너 저장하기 
+								<i class="fa fa-angle-down ml-2 opacity-8"></i>
+							</a>
+							
+<!-- 						
 						<div class="btn-group">
 							<a data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false" class="p-0 btn"> <img width="42"
 								class="rounded-circle"
 								src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
-								alt=""> GUEST로 작업중 <i
+								alt=""> GUEST로 작업중/Guest는 저장 할 수 없습니다. <i
 								class="fa fa-angle-down ml-2 opacity-8"></i>
 							</a>
 							<div tabindex="-1" role="menu" aria-hidden="true"
@@ -165,17 +224,35 @@
 								<button type="button" tabindex="0" class="dropdown-item">회원가입
 									하기</button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
 		</div>
 	
 
-
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
 	<script>
+		var index = 0;
+		var polyline = new Array();
+		var linePath = new Array();
+		var planSchedule = new Array();
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth();
+		var year = today.getFullYear();
+		
+		
+		polyline = new kakao.maps.Polyline({
+			   
+		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeColor: '#000000', // 선의 색깔입니다
+		    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid', // 선의 스타일입니다
+		    endArrow: true,
+		    zIndex:20
+		});
 		var locations = new Array();
 		var container = document.getElementById('map');
 		var options = {
@@ -250,9 +327,10 @@
 
 				// 마커를 생성합니다
 				var marker = new kakao.maps.Marker({
+					zIndex: 1,
 					map : map, // 마커를 표시할 지도
 					position : locations[i].latlng, // 마커를 표시할 위치
-					image : markerImage,
+					//image : markerImage,
 					title : locations[i].local_name
 					
 				// 마커 이미지 
@@ -264,6 +342,7 @@
 					content : locations[i].content,
 					map: map,
 					position: marker.getPosition(),
+					zIndex: 2,
 					clickable:true
 				});
 				overlay.setMap(null);
@@ -303,33 +382,155 @@
 			
 		// DIV내용 구성
 		function planList(jsonObj) {
+			alert(index);
 			var html = 
-			'<ul style="margin-top:10px"><li>여행지 : '+jsonObj.local_name+'</li>'
-			+ '<li>상세주소 : 상세주소는 안알랴쥼 ㅎㅎ</li></ul>';
+			'<ul style="margin-top:10px" lat = "'+jsonObj.local_lat+'" lng = "'+jsonObj.local_lng+'" uid = "'+jsonObj.local_uid+'" pid = "'+index+'">'
+			+ '<li id = "local_name">여행지 : '+jsonObj.local_name+'</li>'
+			+ '<li>숙박일 : </li><input type="date" id = "stay'+index+'" />'
+			+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'"/>'
 			
-			$('.planList').append(html);
+			+ '</ul>';
+			
+			$('#planList').append(html);
+			index++;
+		//	PlanList.push({
+		//		latlng: new kakao.maps.LatLng(jsonObj.local_lat,jsonObj.local_lng)
+		//	});
+			planSchedule.push({
+					plan_local_uid : jsonObj.local_uid,
+					plan_date : 2020-02-28,
+					plan_stay : 2,
+					trans_uid : 1,
+					planner_uid : 5,
+					plan_next_local_uid : null});
+			linePath.push(new kakao.maps.LatLng(parseFloat(jsonObj.local_lat),parseFloat(jsonObj.local_lng)));
+			polyline.setPath(linePath);
+			
+			line();
+			polyline.setMap(null);
+			// 지도에 선을 표시합니다 
+			polyline.setMap(map);
 			}
+			
 		};
 
-		 $(document).ready(function(){
-				$('.planList').sortable();
-				$('.planList').disableSelection();
-		 });
+
 		// 검색기능
 		function Search() {
-			
-			
-		}
+			var a = $('.search-input').val().trim();
+			if(a != ""){
+				if(a.length <= 1){
+					alert("검색어는 두글자 이상 입력해주세요");
+				}else{
+					alert(a);
+					var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+					$.ajax({
+						url : url,
+						type : "GET",
+						cache : false,
+						success : function(data, status) {
+							if (status == "success") {
+								SearchList(data);
+							};
+						}
+					});//end ajax
+				}
+			}
+		};// end Search()
+		
+		function SearchList(jsonObj) {
+			//데이터가져와서 특정 오버레이 오픈시켜주기
+			var count = jsonObj.count;
+			var list = jsonObj.list;
+			if(count == 0){
+				alert("검색된 결과가 없습니다. 검색어를 확인해주세요")
+			}else if(count == 1){
+				alert(list[0].local_name)
+				var myLatlng = new kakao.maps.LatLng(list[0].local_lat,list[0].local_lng);
+				
+				overlay = new kakao.maps.CustomOverlay();
+				var content = document.createElement('div')
+				content.className = 'wrap';
+				content.innerHTML=
+					'   <div class="info">' + 
+					'        <div class="title">' + list[0].local_name + 
+					'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+					'        </div>' + 
+					'        <div class="body">' + 
+					'            <div class="img">' +
+					'                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">' +
+					'            </div>' + 
+					'            <div class="desc">' + 
+					'                <div class="ellipsis">'+list[0].local_hello+'</div>' + 
+					'                <div class="jibun ellipsis">tel : '+list[0].local_tel+'</div>' + 
+					'                <div><button class="Add" onclick="Add('+list[0].local_uid+')">지역 추가하기</button></div>' + 
+					'            </div>' + 
+					'        </div>' + 
+					'    </div>';
+				overlay.setContent(content);
+				overlay.setPosition(myLatlng);		
+				map.setLevel(9);
+				map.setCenter(myLatlng);
+				overlay.setMap(map);
+				
+			}else{
+				alert("2개 이상의 결과가 존재합니다. 조금 더 정확한 검색어를 입력해주세요")
+			}
+		};
 		
 		// 오버레이 삭제
 		function closeOverlay() {
+			//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
+			// 포문 안에서는 작동을 안하는 이유는 뭘까요 히뱀 ? ㅎㅎㅎ
 			overlay.setMap(null);
+			};
+		
+		// 선긋기
+		function line() {
+			
+			$('#planList').sortable({
+				cursor : 'move',
+				opacity : 0.5,
+				update:function(){
+					
+					lineLat = $('#planList').sortable('toArray',{attribute: "lat"});
+					lineLng = $('#planList').sortable('toArray',{attribute: "lng"});
+					planLocalUid = $('#planList').sortable('toArray',{attribute: "uid"});
+					index = $('#planList').sortable('toArray',{attribute: "pid"});
+						// 지도에 표시할 선의 위치배열을 생성합니다
+						linePath = [];
+						planSchedule = [];
+						for (var i = 0; i < lineLat.length; i++) {
+							linePath.push(new kakao.maps.LatLng(parseFloat(lineLat[i]),parseFloat(lineLng[i])));
+							plan_stay : $('#stay'+i+'').val('');
+							trans_uid : $('#trans'+i+'').val('');
+					
+							
+							polyline.setPath(linePath);	
+						}
+						
+					}// end UpdateFunction
+				
+			});// end sortable()
+			$('#planList').disableSelection();
+		};
+		
+		function saveOk() {
+			//일정이 없을때는 실행 안되게 막아주기
+			if(planSchedule.length == 0){
+				alert("최소 한 곳 이상의 여행지를 선택해주세요.");
+				
+			}else{
+				// 존재하는 플래너일 경우 UPDATE해주기
+				
+				// 새 플래너일 경우 SAVE 해주기
+				location.href = "${pageContext.request.contextPath}/plan/saveOk";
+				
 			}
+			
+		};
+		
 	</script>
-
-
-
-
 
 
 	<script type="text/javascript"

@@ -7,4 +7,6 @@ public interface LocalAjaxDAO {
 	public PlanDTO insertPlan();
 	public PlannerDTO insertPlanner();
 	public LocalDTO selectPlan(int local_uid);
+	public ArrayList<LocalDTO> search(String SearchText);
+	public ArrayList<LocalDTO> save();
 }
