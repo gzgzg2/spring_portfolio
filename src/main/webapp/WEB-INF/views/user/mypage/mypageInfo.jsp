@@ -41,8 +41,43 @@
 		}
 	}
 </script>
+
+ <script>
+	function chkSubmit(){
+		frm = document.forms["passFrm"];
+		
+		var pw = frm["member_pw"].value.trim();
+		var pwCk = frm["member_newPw"].value.trim();
+		var newPwChk = frm["newPwChk"].value.trim();
+		
+		if(pw == ""){
+			alert("비밀번호를 입력해주세요.");
+			frm["member_pw"].focus();
+			return false;
+		}
+		if(pwCk == ""){
+			alert("변경할 비밀번호를 입력해주세요.");
+			frm["member_newPw"].focus();
+			return false;
+		}
+		if(newPwChk == ""){
+			alert("확인할 비밀번호를 입력해주세요.");
+			frm["newPwChk"].focus();
+			return false;
+		}
+		
+		if(newPwChk != pwCk) {
+			alert("비밀번호가 다릅니다");
+			return false
+		}
+		
+		return true;
+	}
+</script>
+
 <body>
 	<c:choose>
+	
 		<c:when test="${not empty sessionScope.loginUid}">
 			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
 		</c:when>
@@ -59,7 +94,7 @@
    	<div id="pwChange" class="modal">
 		<div class="ramimo">
 			<span class="close">&times;</span><br>
-			<form id="passFrm" method="POST" action="${pageContext.request.contextPath}/user/mypage/passwordChange">
+			<form id="passFrm" method="POST" onsubmit="return chkSubmit();" action="${pageContext.request.contextPath}/user/mypage/passwordChange">
 				<label class="label">
 					<span class="pwSpan">현재 비밀번호</span><br>
 					<input class="passwordInput" type="password" name="member_pw"/><br>
@@ -89,51 +124,52 @@
            <div id="side">
                 <nav id="sidenav">
                     <ul id="sideul">
-                        <li><a href="">개인정보</a></li>
-                        <li><a href="">리뷰관리</a></li>
-                        <li><a href="">예약관리</a></li>
+                      	<li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo">개인정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReview">리뷰관리</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReserve">예약관리</a></li>
                         <li><a href="">내플래너</a></li>
                     </ul>
                 </nav>
             </div>
 
             <div id="memberForm">
-                <h2 id="frmH2">개인정보</h2>
+                <h2 id="frmH2">개인정보</h2> 
                 <p id="frmP">서비스에서 사용하는 기본 정보입니다.</p>
-                <form name="frm" action="${pageContext.request.contextPath}/user/mypage/mypageUpdateOk" method="POST">
-                <input type="hidden" id="security" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <form name="frm" enctype="multipart/form-data" action="${pageContext.request.contextPath}/user/mypage/mypageUpdateOk" method="POST">
+                <input type="hidden" name="member_pic" value="${dto.member_pic}"/>
+                <input type="hidden"  name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div id="ftableDiv">
                     <table id="ftable">
                         <tr>
-                            <td>프로필</td>
-                            <td><label>나만의 프로필 이미지로 변경해보세요.<input type="file"></label></td>
+                            <td id="tdFILE">사진<div id="fileChangeBtn"><label id="fileLabel">&nbsp;&nbsp;클릭하여 원하는 사진으로 변경해보세요.<input id="fileBtn" name="upload" type="file" accept="image/jpeg, image/png"></label></div></td>
+                            <td><img id="imgId" src="${pageContext.request.contextPath}/USERPIC/${dto.member_pic }">
+                            	<input type="hidden"  name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </td>
                             <td><input type="button" value="회원탈퇴" onclick="memberDelete();" ></td>
-   
+                        </tr>
+					
+                        <tr>
+                            <td>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="koText" class="textSize">${dto.member_name}</span></td>
+                            <td>성별&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textSize"></span></td>
+                            <td>생년월일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textSize"></span></td>
                         </tr>
 
                         <tr>
-                            <td>이름${dto.member_name}</td>
-                            <td>성별</td>
-                            <td>생년월일</td>
+                            <td><label>이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="mypageInput" name="member_email" value="${dto.member_email}"></label></td>
+                            <td colspan="2"><label>전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="mypageInput" name="member_tel" value="${dto.member_tel}"></label></td>
                         </tr>
 
                         <tr>
-                            <td><label>이메일<input type="text" name="member_email" value="${dto.member_email}"></label></td>
-                            <td colspan="2"><label>전화번호<input type="text" name="member_tel" value="${dto.member_tel}"></label></td>
+                            <td>아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textSize">${dto.member_id}</span></td>
+                            <td colspan="2"></td>
                         </tr>
 
                         <tr>
-                            <td><span>아이디${dto.member_id}</span></td>
-                            <td colspan="2">10</td>
-                        </tr>
-
-                        <tr>
-                            <td>비밀번호</td>
+                            <td><input type="submit" value="정보 변경하기"/></td>
                             <td colspan="2"><input type="button" id="passwordChagneBtn" value="비밀번호 변경 >"></td>
                         </tr>
                     </table>
                 </div>
-                	<input type="submit" value="변경하기"/>
                 </form>
             </div>
         </div>

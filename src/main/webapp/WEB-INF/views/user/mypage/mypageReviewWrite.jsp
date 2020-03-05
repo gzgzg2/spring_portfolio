@@ -115,9 +115,9 @@
            <div id="side">
                 <nav id="sidenav">
                     <ul id="sideul">
-                        <li><a href="">개인정보</a></li>
-                        <li><a href="">리뷰관리</a></li>
-                        <li><a href="">예약관리</a></li>
+                    	<li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo">개인정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReview">리뷰관리</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReserve">예약관리</a></li>
                         <li><a href="">내플래너</a></li>
                     </ul>
                 </nav>

@@ -19,6 +19,7 @@
 	<resources mapping="/USERSOURCE/**" location="/USERSOURCE/" />
 	<resources mapping="/ADMINCSS/**" location="/ADMINCSS/" />
 	<resources mapping="/ckeditor/**" location="/ckeditor/" />
+	<resources mapping="/USERPIC/**" location="/USERPIC/" />
 
 	<!-- security csrf -->
 	
@@ -53,8 +54,8 @@
 		<beans:property name="transactionManager" ref="transactionManager"/>
 	</beans:bean>
 	
-	<!-- 여기에 -->
 	
+
 	
 </beans:beans>
 		

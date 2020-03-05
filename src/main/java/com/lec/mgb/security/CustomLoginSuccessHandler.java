@@ -46,25 +46,28 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		System.out.println("ROLE NAMES: " + roleNames);
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect(request.getContextPath() + "/admin/admin-BookingManage");
+			response.sendRedirect(request.getContextPath() + "/admin_test/admin_InnManage");
 			return;
 		}
 		
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
+			
 			HttpSession httpSession = request.getSession(true);
+			
 			MyPageInfoDTO dto = new MyPageInfoDTO();
 			
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
 			UserDetails userDetails = (UserDetails)principal;
 			
 			MyPageDAO dao = C.sqlSesssion.getMapper(MyPageDAO.class);
 			String member_id = userDetails.getUsername();
+			
 			dto = dao.selectMember(member_id);
 			
 			System.out.println(dao.selectMember(member_id));
 			System.out.println(member_id);
+			
 			httpSession.setAttribute("loginUid", dto.getMember_uid());
 			httpSession.setAttribute("userPic", dto.getMember_pic());
 			
@@ -72,7 +75,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			System.out.println(httpSession.getAttribute("userPic"));
 			
 			System.out.println(request.getContextPath() + "/user/mypage/mypageInfo");
-			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo/"+httpSession.getAttribute("loginUid"));
+			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo");
+//			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo/"+httpSession.getAttribute("loginUid"));
 			return;
 		}
 		

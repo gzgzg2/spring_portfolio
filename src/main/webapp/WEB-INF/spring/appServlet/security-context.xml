@@ -9,7 +9,7 @@
 
 	<bean id="customAccessDenied" class="com.lec.mgb.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccess" class="com.lec.mgb.security.CustomLoginSuccessHandler"/>
-
+	
 	
 	<!-- security 요소들  -->
 	<security:http>

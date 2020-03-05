@@ -184,6 +184,7 @@
     width: 100%;
     height: 90%;
     background-color: rgb(233, 233, 233);
+    position: relative;
 }
 
 #memberH2 {
@@ -194,7 +195,6 @@
 #memDiv {
     width: 95%;
     height: 95%;
-    background-color: aquamarine;
     margin: 0 auto;
     top: 3%;
     position: relative;
@@ -234,8 +234,11 @@
 }
 
 #frmH2 {
-    padding-top: 2.5%;
+    padding-top: 1%;
     padding-left: 40%;
+    color: rgb(60,60,60);
+    font-size: 30px; 
+    font-weight: bold;
 }
 
 #frmP {
@@ -255,7 +258,8 @@
 
 #ftable tr, #ftable td{
     width: 400px;
-    padding: 25px;
+    height: 90px;
+    padding: 20px;
     border-bottom: 1px solid #cccccc;
 }
 
@@ -384,4 +388,230 @@
 
 .inputSpan {
     margin-left: 20px;
+}
+
+/* password 변경 */
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1; /*앞에 보이게 하기*/
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: none;
+}
+
+.ramimo {
+	background-color: #fefefe;
+	padding: 20px;
+	width: 30%;
+	height: 55%;
+	margin: 10% auto;
+	border: 1px solid #888;
+}
+
+.close {
+ 	color: #aaa;
+ 	font-size: 30px;
+ 	font-weigth: bold;
+ 	margin-left: 90%;
+ 	float: right;
+}
+
+
+.close:hover {
+	color: black;
+	cursor: pointer;
+}
+
+
+.passwordInput {
+	margin: 0 auto;
+	width: 60%;
+	padding: 10px;
+	-webkit-appearance: none;
+	border: 2px solid #999;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	margin-bottom: 30px
+}
+
+#passFrm {
+	margin:0 auto;
+	width: 100%;
+	height: auto;
+}
+
+#newPwChk {
+	margin: 0 auto;
+	width: 60%;
+	padding: 10px;
+	-webkit-appearance: none;
+	border: 2px solid #4FC9DE;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	margin-bottom: 7%;
+}
+
+.label {
+	display: block;
+	margin: 0 auto;
+}
+
+.label:nth-child(1) {
+	margin-top: 
+}
+
+hr {
+	height: 2px;
+	color: #dddddd;
+}
+
+/* 마이페이지 이미지파일*/
+
+#imgId {
+	margin-left: 10%;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+}
+
+#fileLabel {
+	margin-left: 5px;
+	margin-top: 2px;
+	padding: 15px;
+}
+
+#fileLabel:hover {
+	cursor: pointer;
+}
+
+#fileBtn {
+	display: none;
+}
+
+#fileChangeBtn {
+	width: 390px;
+	height: auto;
+}
+
+#ftable tr:hover {
+	background-color: rgba(213,213,213,0.3);
+}
+
+.mypageInput {
+	border: none;
+	padding: 10px;
+	font-size: 19px;
+	color: rgb(60,60,60);
+	font-weight:500;
+	background-color: rgba(213,213,213,0.0);
+}
+
+.mypageInput:hover {
+	cursor: text;
+}
+
+
+.textSize {
+	color: rgb(60,60,60);
+	padding: 10px;
+	font-weight:500;
+	font-size: 19px;
+}
+
+#koText {
+	font-weight: bold;
+}
+
+
+/* 마이페이지 리뷰 스타일 */
+
+#review {
+    width: 100%;
+    height: 140%;
+    background-color: rgb(233, 233, 233);
+    position: relative;
+}
+
+#reviewDiv {
+    width: 95%;
+    height: 90%;
+    margin: 0 auto;
+    top: 3%;
+    position: relative;
+}
+
+#Reviewside {
+    width: 15%;
+    height: 30%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    top: 7%;
+    left: 7%;
+    position: absolute;
+    float: left;
+}
+
+#reviewArea {
+    width: 95%;
+    height: auto;
+    margin-left: 2.5%;
+    border: 1px solid #cccccc;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom: none;
+}
+
+#reviewFormArea {
+    top: 7%;
+    width: 70%;
+    height: 90%;
+    left: 24%;
+    border-radius: 20px;
+    position: absolute;
+    background-color: #ffffff;
+}
+
+#ReviewH2 {
+  padding-left: 7.5%;
+  padding-bottom: 3%;
+}
+
+.reviewArea{ 
+  max-width:90%; 
+  margin: 0 auto; 
+  position:relative; 
+}
+.reviewArea ul li{
+  display:  inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
+  line-height:40px;
+}
+.reviewArea label{
+  display:block;
+  width:100%; 
+  height:40px;
+  line-height:40px;
+}
+.reviewArea input{display:none;}
+
+.a{
+  display:none; 
+
+}
+.reviewArea input:checked ~ label{
+  background:#ccc;
+}
+.reviewArea input:checked ~ .a{
+  display:block;
+}
 }

@@ -12,10 +12,10 @@ public class MyPageInfoCommand implements Command {
 	
 	public void execute(Model model) {
 		
-		String member_uid = (String)model.getAttribute("member_uid");
+		int member_uid = (int)model.getAttribute("member_uid");
 		
 		MyPageDAO dao = C.sqlSesssion.getMapper(MyPageDAO.class);
-		MyPageInfoDTO dto = dao.selectByUid(Integer.parseInt(member_uid));
+		MyPageInfoDTO dto = dao.selectByUid(member_uid);
 		System.out.println(dto.getMember_email());
 		model.addAttribute("dto",dto);
 	}
