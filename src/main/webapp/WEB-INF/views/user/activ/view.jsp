@@ -205,6 +205,10 @@
 		}
 		.star_avg > span { padding-left: 5px; }
 		.comment-option > h5 { padding-bottom: 30px; }
+		.bd-title > ul > li { color: #AAAAAA; }
+		.bd-title > ul > li:nth-child(1) { color: #212529; }
+		.bd-title > ul > li:nth-child(2) { color: #212529; }
+		.bd-title > ul > li:nth-child(4) { color: #212529; }
     </style>
 
     <!-- Css Styles -->
@@ -471,16 +475,28 @@
                 $(".ativ_info").css("display", "block")
                 $(".ativ_ticket").css("display", "none")
                 $(".comment-option").css("display", "none")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(0).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
             $(".bd-title > ul > li").eq(2).click(function() {
                 $(".ativ_info").css("display", "none")
                 $(".ativ_ticket").css("display", "block")
                 $(".comment-option").css("display", "none")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(2).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
             $(".bd-title > ul > li").eq(4).click(function() {
                 $(".ativ_info").css("display", "none")
                 $(".ativ_ticket").css("display", "none")
                 $(".comment-option").css("display", "block")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(4).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
             $("input:radio[name='ticket_uid']").click(function() {
             	$(".ticketInc").attr("disabled", true)

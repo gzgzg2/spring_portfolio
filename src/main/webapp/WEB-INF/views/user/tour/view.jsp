@@ -188,6 +188,9 @@
         .member_cnt button, .member_cnt div {
             float: left;
         }
+		.bd-title > ul > li { color: #AAAAAA; }
+		.bd-title > ul > li:nth-child(1) { color: #212529; }
+		.bd-title > ul > li:nth-child(2) { color: #212529; }
     </style>
 
     <!-- Css Styles -->
@@ -435,10 +438,16 @@
             $(".bd-title > ul > li").eq(0).click(function() {
                 $(".tour_info").css("display", "block")
                 $(".comment-option").css("display", "none")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(0).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
             })
             $(".bd-title > ul > li").eq(2).click(function() {
                 $(".tour_info").css("display", "none")
                 $(".comment-option").css("display", "block")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(2).css("color", "#212529")
             })
 
             $(".modal_inner .icon_close").click(function() {

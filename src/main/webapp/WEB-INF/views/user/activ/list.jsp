@@ -1277,6 +1277,7 @@
             </div>
     </section>
 	
+	<c:if test="${fn:length(popular) != 0 }">
 	<!-- 액티비티 -->
     <section class="sivaHotH">
         <div id="siva5">
@@ -1306,6 +1307,11 @@
             </div>
         </div>
     </section>
+	</c:if>
+	
+	<c:if test="${fn:length(popular) == 0 }">
+		<section style="height: 300px;"></section>
+	</c:if>
 	
     <!-- Footer Section Begin -->
     <footer class="footer-section">

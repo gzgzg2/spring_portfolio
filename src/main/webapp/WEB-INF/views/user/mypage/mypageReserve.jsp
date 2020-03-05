@@ -95,10 +95,10 @@
            <div id="side">
                 <nav id="sidenav">
                     <ul id="sideul">
-                        <li><a href="">개인정보</a></li>
-                        <li><a href="">리뷰관리</a></li>
-                        <li><a href="">예약관리</a></li>
-                        <li><a href="">내플래너</a></li>
+                        <li><a href="./mypageInfo">개인정보</a></li>
+                        <li><a href="./mypageReview">리뷰관리</a></li>
+                        <li><a href="./mypageReserve">예약관리</a></li>
+                        <li><a href="./mypagePlanner">내플래너</a></li>
                     </ul>
                 </nav>
             </div>
@@ -176,16 +176,24 @@
           				row += "<th>총 가격</th>"
               			row += "<td>"
                			row += data[i - 1].book_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              			row += "원</td>"
+              			row += "원</td>"	
             			row += "</tr>"
             			row += "</table>"
             			row += "</div>"
             			row += "<div class='item_footer'>"
-         				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
-               			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-               			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
-               			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
-               			row += "</form>"
+          				if (data[i - 1].review_uid != 0) {
+              				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
+                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
+                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
+                   			row += "</form>"
+              			} else {
+              				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+                   			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+                   			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+                   			row += "</form>"
+              			}
        					row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
               			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
              			row += "<button type='submit' style='float: right;'>예약 취소</button>"
@@ -252,11 +260,19 @@
             			row += "</table>"
             			row += "</div>"
             			row += "<div class='item_footer'>"
-            			row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
-            			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-              			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
-              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
-              			row += "</form>"
+           				if (data[i - 1].review_uid != 0) {
+               				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
+                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
+                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
+                   			row += "</form>"
+               			} else {
+               				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+                   			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+                   			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+                   			row += "</form>"
+               			}
         				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
               			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
              			row += "<button type='submit' style='float: right;'>예약 취소</button>"
@@ -308,7 +324,7 @@
     		})
     		
     		$.ajax({
-				url: "${pageContext.request.contextPath}/user/mypage/ajax/reserve/dateLow/${sessionScope.loginUid }/0/4",
+				url: "${pageContext.request.contextPath}/user/mypage/ajax/reserve/dateHigh/${sessionScope.loginUid }/0/4",
 				method: "GET",
 				success: function(data) {
 					var row = ""
@@ -338,11 +354,20 @@
                			row += data[i - 1].book_member_tel.toString().replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3")
                			row += "</td>"
             			row += "</tr>"
-            			row += "<tr>"
-          				row += "<th>인원 수</th>"
-              			row += "<td>"
-              			row += data[i - 1].book_member_cnt
-              			row += "명</td>"
+            			if (data[i - 1].room_uid == 0) {
+            				row += "<th>인원 수</th>"
+                  			row += "<td>"
+                  			row += data[i - 1].book_member_cnt
+                  			row += "명</td>"
+            			} else {
+            				var year = new Date(data[i - 1].book_date).getFullYear();
+            				var month = new Date(data[i - 1].book_date).getMonth() + 1;
+            				var date = new Date(data[i - 1].book_date).getDate();
+            				row += "<th>체크인 날짜</th>"
+                  			row += "<td>"
+                  			row += year + "-" + month + "-" + date
+                  			row += "</td>"
+            			}
             			row += "</tr>"
             			row += "<tr>"
           				row += "<th>총 가격</th>"
@@ -353,11 +378,19 @@
             			row += "</table>"
             			row += "</div>"
             			row += "<div class='item_footer'>"
-            			row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
-            			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-              			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
-              			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
-              			row += "</form>"
+            			if (data[i - 1].review_uid != 0) {
+            				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
+                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
+                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
+                   			row += "</form>"
+            			} else {
+            				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+                   			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
+                   			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
+                   			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
+                   			row += "</form>"
+            			}
         				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReserveDeleteOk' method='post'>"
               			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
              			row += "<button type='submit' style='float: right;'>예약 취소</button>"

@@ -6,9 +6,11 @@
 <mapper namespace="com.lec.mgb.mybatis.beans.MyPageReserveDAO">
 	<select id="selectDateHigh" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT
-			b.book_uid, b.book_date, b.book_member_cnt, b.book_cost, b.book_name, book_member_name, book_member_tel
+			b.book_uid, b.book_date, b.book_member_cnt, b.book_cost, b.book_name, b.book_member_name, b.book_member_tel, b.room_uid, r.review_uid
 		FROM
-			book b
+			book b LEFT OUTER JOIN review r
+		on 
+			b.book_uid = r.book_uid
 		WHERE
 			b.member_uid = #{member_uid}
 		ORDER BY
@@ -18,9 +20,11 @@
 	</select>
 	<select id="selectDateLow" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT
-			b.book_uid, b.book_date, b.book_member_cnt, b.book_cost, b.book_name, book_member_name, book_member_tel
+			b.book_uid, b.book_date, b.book_member_cnt, b.book_cost, b.book_name, b.book_member_name, b.book_member_tel, b.room_uid, b.book_date, r.review_uid
 		FROM
-			book b
+			book b LEFT OUTER JOIN review r
+		on 
+			b.book_uid = r.book_uid
 		WHERE
 			b.member_uid = #{member_uid}
 		ORDER BY

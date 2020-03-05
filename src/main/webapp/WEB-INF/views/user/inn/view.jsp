@@ -1204,16 +1204,28 @@
                 $(".room_info").css("display", "block")
                 $(".room_info_more").css("display", "none")
                 $(".comment-option").css("display", "none")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(0).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
             $(".bd-title > ul > li").eq(2).click(function() {
                 $(".room_info").css("display", "none")
                 $(".room_info_more").css("display", "block")
                 $(".comment-option").css("display", "none")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(2).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
             $(".bd-title > ul > li").eq(4).click(function() {
                 $(".room_info").css("display", "none")
                 $(".room_info_more").css("display", "none")
                 $(".comment-option").css("display", "block")
+                $(".bd-title > ul > li").css("color", "#AAAAAA")
+                $(".bd-title > ul > li").eq(4).css("color", "#212529")
+                $(".bd-title > ul > li").eq(1).css("color", "#212529")
+                $(".bd-title > ul > li").eq(3).css("color", "#212529")
             })
 
             $(".modal_inner .icon_close").click(function() {
