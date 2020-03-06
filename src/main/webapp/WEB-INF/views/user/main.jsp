@@ -106,17 +106,20 @@
                     </div>
                     <div>
                         <ul>
-                            <li><a onclick="descPlanner()">최신</a></li>
-                            <li><a onclick="PlannerCnt()">조회수</a></li>
+                            <li>최신순으로 정렬되었습니다.</li>
                         </ul>
                     </div>
                     <div class="new">
                         <ul>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li id = "map0"></li>
+                            <li id = "map1"><a href="#"></a></li>
+                            <li id = "map2"><a href="#"></a></li>
+                            <li id = "map3"><a href="#"></a></li>
                         </ul>
+                        <a onclick = showDetail(0);>자세히 보기</a>
+                        <a onclick = showDetail(1);>자세히 보기</a>
+                        <a onclick = showDetail(2);>자세히 보기</a>
+                        <a onclick = showDetail(3);>자세히 보기</a>
                     </div>
                 </div>
             </section>
@@ -148,11 +151,11 @@
             <section class="section4">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>다른 여행자들의 플래너 855,014개</h3>
+                        <h3>다른 여행자들의 플래너 2개</h3>
                     </div>
                     <div>
                         <ul>
-                            <li><a href="#">최신</a></li>
+                            <li>최신순으로 정렬되었습니다.</li>
                         </ul>
                     </div>
                     <div>
@@ -222,6 +225,8 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="${pageContext.request.contextPath}/USERJS/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
       $(".regular").slick({
@@ -238,44 +243,124 @@
         slidesToShow: 4,
         slidesToScroll: 1
       });
+      PlannerUid();
     });
     
-    // 플래너 최근순 ajax
-    function descPlanner(){
-    	var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+    var view_planner_uid = new Array();
+    // 검색되는 플래너 UID가져오기
+    function PlannerUid(){
+    	var url = "${pageContext.request.contextPath}/AJAXMain/listCnt";
 		$.ajax({
 			url : url,
 			type : "GET",
 			cache : false,
 			success : function(data, status) {
 				if (status == "success") {
-					updateView(data);
+					View(data);
 				};
 			}
 		});//end ajax
     }
-   
-    // 플래너 조회수 순 ajax
-    function plannerCnt(){
-    	var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+    
+ function View(jsonObj){
+		var list = jsonObj.list;
+		var count = jsonObj.count;
+		for (var i = 0; i < count; i++) {
+			var planner_uid = list[i].planner_uid;
+			descPlanner(planner_uid,i);
+			view_planner_uid.push(planner_uid);
+		}
+	} //end 
+    
+
+    function descPlanner(planner_uid,i){
+    	var url = "${pageContext.request.contextPath}/AJAXMain/list/"+planner_uid+"";
 		$.ajax({
 			url : url,
 			type : "GET",
 			cache : false,
 			success : function(data, status) {
 				if (status == "success") {
-					updateView(data);
+					updateView(data,i);
 				};
 			}
-		});//end ajax	
+		});//end ajax
     }
-    
-    
+       
     // 플래너 업데이트 
-    function updateView(){
-    	
-    	
-    }
+    function updateView(jsonObj,i){
+
+    	var count = jsonObj.count;
+		var list = jsonObj.list;
+		var arrLat = new Array();
+		var arrLng = new Array();
+		var locations = new Array();
+		
+		
+		
+		
+		var container = document.getElementById('map'+i+'');
+		var options = {
+			center : new kakao.maps.LatLng(33.506964, 126.493271),
+			level : 12
+		};
+		var map = new kakao.maps.Map(container, options);
+		
+		
+	
+		for (var i = 0; i < count; i++) {
+           	// 마커 좌표 배열담아주기
+			locations.push({
+				latlng : new kakao.maps.LatLng(
+						parseFloat(list[i].local_lat),
+						parseFloat(list[i].local_lng)),
+			});
+			
+		}
+		
+		polyline = new kakao.maps.Polyline({
+			   
+		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeColor: '#000000', // 선의 색깔입니다
+		    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid', // 선의 스타일입니다
+		    endArrow: true,
+		    zIndex:20,
+		    setPath : locations
+		});
+		
+		var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
+
+		for (var i = 0; i < locations.length; i++) {
+
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize = new kakao.maps.Size(13, 13);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc,
+					imageSize);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				zIndex: 1,
+				map : map, // 마커를 표시할 지도
+				position : locations[i].latlng, // 마커를 표시할 위치
+				image : markerImage,
+				title : locations[i].local_name
+			});
+		
+			
+		}
+		
+		map.setZoomable(false);  
+		
+	} //end updateView
+	
+	function showDetail(index){
+		alert(view_planner_uid[index]);
+		location.href = "${pageContext.request.contextPath}/plan/showplanner";
+	}
+    
     
     
 </script>

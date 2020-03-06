@@ -365,8 +365,16 @@ INSERT INTO LOCAL(
 ('새별오름','제주 서부 애월에 위치해 있으며 억새가 아름다운 오름','33.36723','126.35711','제주특별자치도 제주시 애월읍 봉성리 산 59-8','064-728-2752')
 ;
 
+INSERT INTO TRANS VALUES(1,"비행기",NULL);
+INSERT INTO TRANS VALUES(2,"배",NULL);
+INSERT INTO TRANS VALUES(3,"자동차",NULL);
 
 
+INSERT INTO PLAN VALUES(1,NOW(),1,1,1,1,2);
+INSERT INTO PLAN VALUES(2,NOW(),1,1,1,2,6);
+INSERT INTO PLAN VALUES(3,NOW(),1,1,1,3,5);
+INSERT INTO PLAN VALUES(4,NOW(),1,1,2,2,1);
+INSERT INTO PLAN VALUES(5,NOW(),1,1,2,1,NULL);
 
 SELECT 
 	t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star)

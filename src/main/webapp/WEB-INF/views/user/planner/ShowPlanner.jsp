@@ -17,12 +17,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<title>MGB_Planner 플래너작성</title>
-<!-- Calendar
-	<script type="text/javascript" src="${pageContext.request.contextPath}/USERJS/calender.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/calendar1.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner2.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/caledner3.css"> -->
+<title>귤귤_Planner</title>
 <link href="${pageContext.request.contextPath}/USERCSS/mainplanner.css"
 	rel="stylesheet">
 <style>
@@ -271,7 +266,7 @@
 		var map = new kakao.maps.Map(container, options);
 
 		// AJAX컨트롤
-		var url = "${pageContext.request.contextPath}/AJAXLocal/list";
+		var url = "${pageContext.request.contextPath}/AJAXMain/list/"+2+"";
 		$.ajax({
 			url : url,
 			type : "GET",

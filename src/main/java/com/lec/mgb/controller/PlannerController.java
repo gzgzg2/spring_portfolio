@@ -26,6 +26,12 @@ String location;
 		return location;
 	}
 	
+	@RequestMapping("/showplanner")
+	public String openPlanner() {
+		location = "user/planner/ShowPlanner";
+		return location;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/saveOk")
 	public String saveOk(Model model, HttpSession session, HttpServletRequest request) {
 		location = "user/planner/saveOk";
