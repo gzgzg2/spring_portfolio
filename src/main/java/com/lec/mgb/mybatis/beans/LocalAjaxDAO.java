@@ -9,4 +9,5 @@ public interface LocalAjaxDAO {
 	public LocalDTO selectPlan(int local_uid);
 	public ArrayList<LocalDTO> search(String SearchText);
 	public ArrayList<LocalDTO> save();
+	public ArrayList<PlanDTO> savePlan();
 }

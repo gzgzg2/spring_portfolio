@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.mgb.c.C;
 import com.lec.mgb.mybatis.beans.AjaxLocalList;
+import com.lec.mgb.mybatis.beans.AjaxPlanList;
 import com.lec.mgb.mybatis.beans.LocalAjaxDAO;
 import com.lec.mgb.mybatis.beans.LocalDTO;
+import com.lec.mgb.mybatis.beans.PlanDTO;
 
 
 @RestController

@@ -48,5 +48,24 @@
 			LOCAL
 		WHERE local_name like #{param1}
 	</select>
+	
+	
+	<insert id="savePlan" flushCache="true"
+		parameterType="com.lec.mgb.mybatis.beans.PlanDTO">
+		INSERT INTO PLAN
+			(plan_date,
+			 plan_stay,
+			 trans_uid,
+			 planner_uid,
+			 plan_local_uid,
+			 plan_next_local_uid)
+		VALUES
+			(#{plan_date},
+			#{plan_stay},
+			#{trans_uid},
+			#{planner_uid},
+			#{plan_local_uid},
+			#{plan_next_local_uid})
+	</insert>
     
     </mapper>	

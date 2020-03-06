@@ -69,7 +69,7 @@
             </div>
             <div class="on_pc">
                 <ul>
-                    <li><a href="#">홈</a></li>
+                    <li><a href="${pageContext.request.contextPath}/main">홈</a></li>
                     <li><a href="#">탐색</a></li>
                     <li><a href="#">한국투어</a></li>
                     <li><a href="#">숙소</a></li>

@@ -169,13 +169,18 @@
 							<li class="app-sidebar__heading"><h2>귤귤 플래너</h2></li>
 							<li>
 								<a class="mm-active"> <i class="metismenu-icon pe-7s-plane"></i> Guest님의 여행목록입니다.</a>
-								<a class="mm-active"> <i class="metismenu-icon pe-7s-paper-plane"></i> 출발일자 : 
-										
+								<a class="mm-active"> <i class="metismenu-icon pe-7s-paper-plane"></i> 출발일자 : <input id="start_time" type="date"/> 
+								
 								</a>	
 												
 							</li>
 						</ul>
-						<div id = "planList"></div>
+						<form id="planListForm" method="get" action="${pageContext.request.contextPath}/plan/saveOk" onsubmit="return saveOk()">
+						<div id = "planList" style="overflow:auto; height:300px;">
+						
+						</div>
+						<input type="submit" value="제출"/>
+						</form>
 					</div>
 					
 				</div>
@@ -199,10 +204,12 @@
 						style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
 						class="go-right">
 						
-							<a class="p-0 btn" onclick=saveOk()> 
-							<img width="42" class="rounded-circle" src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
-								alt="">플래너 저장하기 
-								<i class="fa fa-angle-down ml-2 opacity-8"></i>
+							<a class="p-0 btn" onclick="planListForm.submit()">
+							
+							<img width="42px" class="rounded-circle" src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
+								alt=""> 플래너 저장하기
+								
+								<!-- <input value="플래너 저장하기" type="button" onclick="planListForm.submit()"> --> 
 							</a>
 							
 <!-- 						
@@ -235,6 +242,7 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
 	<script>
 		var index = 0;
+		var arr = new Array();
 		var polyline = new Array();
 		var linePath = new Array();
 		var planSchedule = new Array();
@@ -382,27 +390,21 @@
 			
 		// DIV내용 구성
 		function planList(jsonObj) {
-			alert(index);
+			
 			var html = 
 			'<ul style="margin-top:10px" lat = "'+jsonObj.local_lat+'" lng = "'+jsonObj.local_lng+'" uid = "'+jsonObj.local_uid+'" pid = "'+index+'">'
 			+ '<li id = "local_name">여행지 : '+jsonObj.local_name+'</li>'
-			+ '<li>숙박일 : </li><input type="date" id = "stay'+index+'" />'
-			+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'"/>'
+			+ '<li>숙박일 : </li><input type="text" id = "stay'+index+'" name = "stay'+index+'"/>박'
+			+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'" name = "trans'+index+'"/>'
 			
 			+ '</ul>';
-			
+			arr.push(index);
 			$('#planList').append(html);
 			index++;
 		//	PlanList.push({
 		//		latlng: new kakao.maps.LatLng(jsonObj.local_lat,jsonObj.local_lng)
 		//	});
-			planSchedule.push({
-					plan_local_uid : jsonObj.local_uid,
-					plan_date : 2020-02-28,
-					plan_stay : 2,
-					trans_uid : 1,
-					planner_uid : 5,
-					plan_next_local_uid : null});
+		
 			linePath.push(new kakao.maps.LatLng(parseFloat(jsonObj.local_lat),parseFloat(jsonObj.local_lng)));
 			polyline.setPath(linePath);
 			
@@ -422,7 +424,7 @@
 				if(a.length <= 1){
 					alert("검색어는 두글자 이상 입력해주세요");
 				}else{
-					alert(a);
+					
 					var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
 					$.ajax({
 						url : url,
@@ -445,7 +447,7 @@
 			if(count == 0){
 				alert("검색된 결과가 없습니다. 검색어를 확인해주세요")
 			}else if(count == 1){
-				alert(list[0].local_name)
+				
 				var myLatlng = new kakao.maps.LatLng(list[0].local_lat,list[0].local_lng);
 				
 				overlay = new kakao.maps.CustomOverlay();
@@ -480,8 +482,7 @@
 		
 		// 오버레이 삭제
 		function closeOverlay() {
-			//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
-			// 포문 안에서는 작동을 안하는 이유는 뭘까요 히뱀 ? ㅎㅎㅎ
+
 			overlay.setMap(null);
 			};
 		
@@ -496,15 +497,21 @@
 					lineLat = $('#planList').sortable('toArray',{attribute: "lat"});
 					lineLng = $('#planList').sortable('toArray',{attribute: "lng"});
 					planLocalUid = $('#planList').sortable('toArray',{attribute: "uid"});
-					index = $('#planList').sortable('toArray',{attribute: "pid"});
+					planindex = $('#planList').sortable('toArray',{attribute: "pid"});
 						// 지도에 표시할 선의 위치배열을 생성합니다
 						linePath = [];
 						planSchedule = [];
+						arr = [];
 						for (var i = 0; i < lineLat.length; i++) {
 							linePath.push(new kakao.maps.LatLng(parseFloat(lineLat[i]),parseFloat(lineLng[i])));
-							plan_stay : $('#stay'+i+'').val('');
-							trans_uid : $('#trans'+i+'').val('');
-					
+							arr.push(planindex[i]);
+							// 변경되면 모든 숙박일과 교통수단을 초기화
+							
+							
+							planSchedule.push({
+								plan_local_uid : planLocalUid[i],
+								plan_next_local_uid : planLocalUid[i+1]
+								});
 							
 							polyline.setPath(linePath);	
 						}
@@ -517,17 +524,14 @@
 		
 		function saveOk() {
 			//일정이 없을때는 실행 안되게 막아주기
-			if(planSchedule.length == 0){
+			alert("들어오니?");
+			if($('#trans0').val() == null){
 				alert("최소 한 곳 이상의 여행지를 선택해주세요.");
-				
+				return false;
 			}else{
-				// 존재하는 플래너일 경우 UPDATE해주기
-				
-				// 새 플래너일 경우 SAVE 해주기
-				location.href = "${pageContext.request.contextPath}/plan/saveOk";
-				
+				return true;
 			}
-			
+			return false;
 		};
 		
 	</script>

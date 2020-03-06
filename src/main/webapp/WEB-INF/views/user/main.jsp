@@ -46,7 +46,7 @@
          <div class="mgb_header">
                 <div class="mgb_inner_wrap">
                     <nav class="gnb_container">
-                        <h1 class="mgb_logo"><a href="/"><img src="img/gul7.png"></a></h1>
+                        <h1 class="mgb_logo"><a href="/"><img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png">귤귤플래너</a></h1>
                         <ul class="on_pc">
                             <li class="gnb_item"><a href="/">예약내역</a></li>
                             <li class="gnb_item"><a href="/">고객센터</a></li>
@@ -74,24 +74,21 @@
                 <div class="mgb_inner_wrap">
                     <div class="sec1_left">
                         <div class="sec1_img">
-                            <img src="">
+                            <img style = "height: 300px; width: 100%;"src="${pageContext.request.contextPath}/USERCSS/assets/images/main.jpg">
                         </div>
                     </div>
                     <div class="sec1_right">
                         <div>
                             <div>
                                 <h3>
-                                    스투비플래너로
-                                    상상속 유럽여행을 현실로 만들어 보세요.
-                                    855,014명의 유럽계획 데이터를 활용한
-                                    추천과 시뮬레이션 기능을 활용해
-                                    여행 아이디어를 실제 여행으로 만들어
-                                    예상 비용과 소요시간을 계산해 보세요.
+                                당신의 상상속 제주여행을 귤귤플래너에서 실현하세요.
+                                제주 여행 맞춤 플래너와 투어 숙소등을 확인하시고 예약하세요.
+                                다른 여행자들의 플래너를 확인하시고, 자신의 플래너에 도움을 받으세요.
                                 </h3>
                             </div>
                             <div class="sec1_right_bot">
                                 <div class="sec1_right_rw">
-                                    <a href="#">플래너 시작</a>
+                                    <a href="${pageContext.request.contextPath}/plan/planner">플래너 시작</a>
                                 </div>
                                 <div class="sec1_right_lw">
                                     <a href="#">맞춤여행 의뢰</a>
@@ -109,7 +106,8 @@
                     </div>
                     <div>
                         <ul>
-                            <li><a href="#">최신</a></li>
+                            <li><a onclick="descPlanner()">최신</a></li>
+                            <li><a onclick="PlannerCnt()">조회수</a></li>
                         </ul>
                     </div>
                     <div class="new">
@@ -241,5 +239,44 @@
         slidesToScroll: 1
       });
     });
+    
+    // 플래너 최근순 ajax
+    function descPlanner(){
+    	var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+		$.ajax({
+			url : url,
+			type : "GET",
+			cache : false,
+			success : function(data, status) {
+				if (status == "success") {
+					updateView(data);
+				};
+			}
+		});//end ajax
+    }
+   
+    // 플래너 조회수 순 ajax
+    function plannerCnt(){
+    	var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+		$.ajax({
+			url : url,
+			type : "GET",
+			cache : false,
+			success : function(data, status) {
+				if (status == "success") {
+					updateView(data);
+				};
+			}
+		});//end ajax	
+    }
+    
+    
+    // 플래너 업데이트 
+    function updateView(){
+    	
+    	
+    }
+    
+    
 </script>
 </html>

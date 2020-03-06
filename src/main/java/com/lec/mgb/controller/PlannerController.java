@@ -2,11 +2,13 @@ package com.lec.mgb.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.mgb.command.PlanSaveCommand;
 import com.lec.mgb.command.PlannerSaveCommand;
@@ -24,14 +26,18 @@ String location;
 		return location;
 	}
 	
-	@RequestMapping("/saveOk")
-	public String saveOk(Model model, HttpSession session) {
+	@RequestMapping(method = RequestMethod.GET, value = "/saveOk")
+	public String saveOk(Model model, HttpSession session, HttpServletRequest request) {
 		location = "user/planner/saveOk";
 		
 		//model.addAttribute("member_uid", session.getAttribute("loginUid"));
 		model.addAttribute("member_uid", 1);
-		model.addAttribute("planner_title",123);
+		model.addAttribute("planner_title",12);
 		new PlannerSaveCommand().execute(model);
+		
+		
+		request.getParameter("trans1");
+		
 		
 		return location;
 	}
