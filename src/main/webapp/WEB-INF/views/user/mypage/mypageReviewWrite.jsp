@@ -59,8 +59,11 @@
             margin: 10px 0px;
             border: none;
             padding: 10px;
-            background-color: #ccc;
+            background-color: #8EC0E4;
+            color: white;
+            font-weight: 500;
         }
+        .text button[type="submit"]:hover { background-color: #6AAFE6; }
         .item_header {
             padding: 1%;
             background-color: #ccc;

@@ -121,7 +121,7 @@
 							Don’t have an account?
 						</span>
 
-						<a href="${pageContext.request.contextPath}/join.jsp" class="txt3">
+						<a href="${pageContext.request.contextPath}/user/account/join" class="txt3">
 							Join now
 						</a>
 					</div>

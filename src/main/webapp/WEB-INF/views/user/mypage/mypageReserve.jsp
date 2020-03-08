@@ -50,19 +50,20 @@
 		.paging_button button {
 			border: none;
 			background-color: white;
+			color: #8EC0E4;
 		}
     	.reserve { width: 85%; margin: 0 auto; }
     	.reserve_row { margin: 20px 0px; }
     	.item { 
     		width: 45%;
     		float: left;
-    		border: 3px solid #ccc;
+    		border: 3px solid #8EC0E4;
     		border-radius: 15px;
     		margin: 7px;
     	}
     	.item > div { padding: 15px; }
-    	.item_header { height: 80px; background-color: #ccc; }
-    	.item_header h5 { font-size: 1.2em; font-weight: bold; }
+    	.item_header { height: 80px; background-color: #8EC0E4; }
+    	.item_header h5 { font-size: 1.2em; font-weight: 500; color: white; text-shadow: 0px 2px 5px #6AAFE6; }
     	.item_header h6 { font-weight: bold; margin-top: 5px; }
     	.item_body { margin: 0px 10px; }
     	.item_body table { width: 100%; }
@@ -72,9 +73,14 @@
     		margin: 0 auto;
     	}
     	.item_footer button {
-    		padding: 5px 10px;
+    		padding: 10px 18px;
     		margin-bottom: 20px;
+    		background-color: #8EC0E4;
+    		border: none;
+    		font-weight: 500;
+    		color: white;
     	}
+    	.item_footer button:hover { background-color: #6AAFE6; }
     </style>
 </head>
 
@@ -89,7 +95,7 @@
 		</c:otherwise>
    	</c:choose>
 
-   <section id="member" style="height: 100%;">
+   <section id="member" style="height: 110%;">
        <div id="memDiv">
            <h2 id="memberH2">마이페이지</h2>
            <div id="side">

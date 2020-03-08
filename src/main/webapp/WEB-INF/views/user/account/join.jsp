@@ -50,7 +50,8 @@
             color: rgb(214, 214, 214);
         }
         .row i:hover { cursor: pointer; }
-        .row div:nth-child(1) i { color: #57b846; }
+        .row div:nth-child(1) i { color: #8EC0E4; }
+        .auth { display: none; }
     </style>
 </head>
     
@@ -59,6 +60,7 @@
 	function chkSubmit(){
 		frm = document.forms["frm"];
 		
+		var ifChkSMS = frm["ifChkSMS"].value.trim();
 		var name = frm["member_name"].value.trim();
 		var tel = frm["member_tel"].value.trim();
 		var id = frm["member_id"].value.trim();
@@ -84,6 +86,11 @@
 		if(tel == ""){
 			alert("전화번호를 입력해주세요.");
 			frm["member_tel"].focus();
+			return false;
+		}
+		if(ifChkSMS == ""){
+			alert("핸드폰 인증을 해주세요.");
+			frm["member_pwCk"].focus();
 			return false;
 		}
 		if(pw == ""){
@@ -150,6 +157,8 @@
 		<div class="container-login100">
 			<div class="wrap-login100 login_form">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST">
+					<input type="hidden" name="ifChkSMS" value="0">
+					
 					<span class="login100-form-title">
 						JOIN
 					</span>
@@ -173,13 +182,25 @@
 						<span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
-						<input class="input100" type="text" name="member_tel" placeholder="전화번호">
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter tel">
+						<input class="input100" type="text" name="member_tel" placeholder="전화번호" style="display: inline; width: 60%;" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						<button class="login100-form-btn sendSMS" style="display: inline; width: 40%; height: 55px; float: right; border-radius: 0px 25px 25px 0px;" type="button" onclick="sendSMS()">
+							휴대폰 인증
+						</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
-                    </div>
+					</div>
+					
+					<div class="wrap-input100 validate-input auth" data-validate = "Please enter tel" style="margin-top: 16px;">
+						<input class="input100" type="text" name="authKey" placeholder="인증번호 입력" style="display: inline; width: 60%;" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						<button class="login100-form-btn" style="display: inline; width: 40%; height: 55px; float: right; border-radius: 0px 25px 25px 0px;" type="button" onclick="chkSMS()">
+							인증번호 확인
+						</button>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<span class="focus-input100"></span>
+					</div>
                     
-                    <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter password">
+                    <div class="wrap-input100 validate-input m-b-16" style="margin-top: 16px; data-validate = "Please enter password">
 						<input class="input100" type="password" name="member_pw" placeholder="비밀번호">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
@@ -199,17 +220,18 @@
                         </div>
                     </div>
 
-					<div class="container-login100-form-btn">
-						<input type="submit" id="btnSubmit" value="회원가입"/>
-							
+					<div class="container-login100-form-btn" style="margin-top: 16px;">
+						<button id="btnSubmit" class="login100-form-btn" type="submit">
+							회원가입
+						</button>
 					</div>
-
+					
 					<div class="flex-col-c p-t-170 p-b-40">
 						<span class="txt1 p-b-9">
 							Do you have an account?
 						</span>
 
-						<a href="./login.html" class="txt3">
+						<a href="./login" class="txt3">
 							Login
 						</a>
 					</div>
@@ -231,12 +253,75 @@
         $(document).ready(function() {
             $(".row div i").click(function() {
                 $(".row div i").css("color", "rgb(214, 214, 214)")
-                $(this).css("color", "#57b846")
+                $(this).css("color", "#8EC0E4")
             })
         })
     </script>
     
       <script>
+      function sendSMS() {
+			if ($("input:text[name='member_tel']").val().trim().length == 11) {
+				var rd = Math.floor(Math.random()*(999999-100000+1)) + 100000 + "";
+				var tel = $("input:text[name='member_tel']").val().trim();
+				
+				$.ajax({
+	    			url : "${pageContext.request.contextPath}/user/sendSMS",
+	    			type : "POST",
+	    			cache : false,
+	    			data : {  // POST 방식 ajax() request 할시 parameter
+	    				"rd" : rd,
+	    				"tel" : tel,
+	    				"${_csrf.parameterName }" : "${_csrf.token }"
+	    			},
+	    			success : function(data, status){
+	    				if(status == "success"){
+	    					if (data == 1) {
+	        					alert("인증번호가 휴대폰으로 전송 되었습니다!");
+	        					$(".auth").css("display", "block");
+	            				$("input:text[name='member_tel']").prop("readonly", true)
+      						$("input:hidden[name='ifChkSMS']").val("0");
+	    					} else {
+	    						alert("전화번호를 확인해주세요!");
+	    					}
+	    				}
+	    			}
+	    		});
+			} else {
+  			alert("전화번호를 확인해주세요!");
+  		}
+			
+			return false;
+		}
+	    function chkSMS() {
+	  		if ($("input:text[name='authKey']").val().trim().length == 6) {
+	  			var authKey = $("input:text[name='authKey']").val().trim();
+	  			
+	  			$.ajax({
+	      			url : "${pageContext.request.contextPath}/user/chkSMS",
+	      			type : "POST",
+	      			cache : false,
+	      			data : {  // POST 방식 ajax() request 할시 parameter
+	      				"authKey" : authKey,
+	      				"${_csrf.parameterName }" : "${_csrf.token }"
+	      			},
+	      			success : function(data, status){
+	      				if(status == "success"){
+	      					if (data == 1) {
+	      						alert("휴대폰 인증 성공");
+	      						$("input:hidden[name='ifChkSMS']").val("1");
+	      						$(".auth").html("");
+	      					} else {
+	      						alert("인증번호를 확인해주세요");
+	      					}
+	      				}
+	      			}
+	      		});  			
+	  		} else {
+					alert("인증번호를 확인해주세요!");
+				}
+	  		
+	  		return false;
+	  	}
     	$("#member_id").keyup(function(){
     		var member_id = $("#member_id").val();
     		var security = $("security").val();

@@ -58,10 +58,13 @@
         }
         .modal_button div button {
             color: white;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
             width: 100%;
             height: 45px;
             border: none;
+        }
+        .modal_button div button:ㅙㅍㄷㄱ {
+            background-color: #6AAFE6;
         }
 
     </style>
