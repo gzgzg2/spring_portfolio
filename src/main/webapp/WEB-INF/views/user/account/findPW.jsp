@@ -99,7 +99,7 @@
 
 					<div class="wrap-input100 validate-input" data-validate = "Please enter tel">
 						<input class="input100" type="text" name="member_tel" placeholder="전화번호 입력" style="display: inline; width: 60%;" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-						<button class="login100-form-btn sendSMS" style="display: inline; width: 40%; height: 55px; float: right;" type="button" onclick="sendSMS()">
+						<button class="login100-form-btn sendSMS" style="display: inline; width: 40%; height: 55px; float: right; border-radius: 0px 25px 25px 0px;" type="button" onclick="sendSMS()">
 							휴대폰 인증
 						</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -108,7 +108,7 @@
 					
 					<div class="wrap-input100 validate-input auth" data-validate = "Please enter tel" style="margin-top: 16px;">
 						<input class="input100" type="text" name="authKey" placeholder="인증번호 입력" style="display: inline; width: 60%;" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-						<button class="login100-form-btn" style="display: inline; width: 40%; height: 55px; float: right;" type="button" onclick="chkSMS()">
+						<button class="login100-form-btn" style="display: inline; width: 40%; height: 55px; float: right; border-radius: 0px 25px 25px 0px;" type="button" onclick="chkSMS()">
 							인증번호 확인
 						</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

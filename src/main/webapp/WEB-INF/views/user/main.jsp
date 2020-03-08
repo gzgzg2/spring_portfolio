@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,6 +40,9 @@
 
     .slick-current {
       opacity: 1;
+    }
+    .hothot2 {
+    	border: 1px solid #ebebeb;
     }
     </style>
 </head>
@@ -127,7 +133,7 @@
             <section class="section3">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>유럽 현지투어 얼리버드 & 결합 SALE</h3>
+                        <h3>투어 별점순(제목 정해주세요 ㅎㅎ)</h3>
                     </div>
                     <div class="sale">
                         <ul>
@@ -151,68 +157,50 @@
             <section class="section4">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>다른 여행자들의 플래너 2개</h3>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>최신순으로 정렬되었습니다.</li>
-                        </ul>
+                        <h3>액티비티 할인율순(제목 정해주세요 ㅎㅎ)</h3>
                     </div>
                     <div>
                         <section class="regular slider">
-                            <div>
-                              <img src="http://placehold.it/350x300?text=1">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=2">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=3">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=4">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=5">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=6">
-                            </div>
-                          </section>    
+                            <c:forEach var="dto" items="${activ }" varStatus="status">
+				                <div class="hothot2" onclick="location.href='${pageContext.request.contextPath }/user/activ/view/${dto.activ_uid }'">
+					                <div class="item_img2">
+					              		<img src="${dto.activ_pic }"/>
+					              	</div>
+					              	<div class="item_info" style="padding: 7px;">
+					              		<h5 style="font-weight: bold; margin-top: 5px;">${dto.activ_name }</h5>
+					              		<p class="activ_loc" style="margin-bottom: 0px;">${fn:substring(dto.activ_loc, 8, fn:length(dto.activ_loc)) }</p>
+					              		<p style="margin: 20px 10px 0px 0px; height: 20px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/></p>
+					              		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/>원 ~</p>
+					              	</div> 
+				                </div>
+				    		</c:forEach>
+                       </section>    
                     </div>
                     <div>
-                        <h3>얼리버드 추천</h3>
+                        <h3>숙소 할인율순(제목 정해주세요 ㅎㅎ)</h3>
                     </div>
                     <div>
                         <section class="center slider">
-                            <div>
-                              <img src="http://placehold.it/350x300?text=1">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=2">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=3">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=4">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=5">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=6">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=7">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=8">
-                            </div>
-                            <div>
-                              <img src="http://placehold.it/350x300?text=9">
-                            </div>
-                          </section>
+                            <c:forEach var="dto" items="${inn }" varStatus="status">
+				                <div class="hothot2" onclick="location.href='${pageContext.request.contextPath }/user/inn/view/${dto.inn_uid }'">
+					                <div class="item_img">
+					              		<img src="${dto.inn_pic }"/>
+					              	</div>
+					              	<div class="item_info" style="padding: 7px;">
+					              		<h5 style="font-weight: bold; margin-top: 5px;">
+					              			<span class="sep">
+	                                      		<c:if test="${dto.inn_sep == 1 }">호텔</c:if>
+												<c:if test="${dto.inn_sep == 2 }">펜션</c:if>
+												<c:if test="${dto.inn_sep == 3 }">리조트</c:if>
+											</span>
+					              		${dto.inn_name }</h5>
+					              		<p class="inn_loc" style="margin-bottom: 0px;">${fn:substring(dto.inn_loc, 8, fn:length(dto.inn_loc)) }</p>
+					              		<p style="height: 1.2em; margin: 0px 10px 0px 0px; text-align: right; font-size: 0.8em; text-decoration: line-through;"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></p>
+					              		<p style="height: 1.5em; margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
+					              	</div> 
+				                </div>
+					    	</c:forEach>
+                        </section>
                     </div>
                 </div>
             </section>
@@ -361,6 +349,44 @@
 		location.href = "${pageContext.request.contextPath}/plan/showplanner";
 	}
     
+	$(document).ready(function() {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/user/tour/ajax/starHigh/0/10",
+			method: "GET",
+			success: function(data) {
+				var row = "<div class='sale'>";
+				for (i = 0; i < data.length; i++) {
+					if (i == 0 || i == 5) { row +="<ul>"; }
+					row += "<li>";
+					row += "<div>";
+					row += "<div class='room-item'>";
+					row += "<img src='" + data[i].tour_pic + "' style='width: 100%; height: 139.5px;'>";
+					row += "<div class='ri-text' style='margin: 5px 0px 0px 7px'>";
+					row += "<h4 style='height: 25px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'><a href='./user/tour/view/" + data[i].tour_uid + "'>"  + data[i].tour_name + "</a></h4>";
+					row += "<h5>" + data[i].tour_cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원<span>/성인 1명</span></h5>";
+					row += "<table style='float: left; width: 60%;'>";
+					row += "<tbody>";
+					row += "<tr>";
+					row += "<td class='r-o'>기간:</td>";
+					row += "<td style='float:right'>" + data[i].tour_period + "박 " + (parseInt(data[i].tour_period) + 1) + "일</td>";
+					row += "</tr>";
+					row += "<tr>";
+					row += "<td class='r-o'>별점:</td>";
+					row += "<td style='float:right'>" + data[i].review_star + "</td>";
+					row += "</tr>";
+					row += "</tbody>";
+					row += "</table>";
+					row += "</div>";
+					row += "</div>";
+					row += "</div>";
+					row += "</li>";
+					if (i == 4 || i == 10) { row +="</ul>"; }
+				}
+				row += "</div>";
+				$(".sale").html(row)
+			}
+		})
+	})
     
     
 </script>

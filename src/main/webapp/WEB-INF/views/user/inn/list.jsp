@@ -1460,7 +1460,7 @@ legend {
     		$("#search").keyup(function() {
     			var curOption = $(".current").text();
     			ajaxKeyword = $("#search").val();
-
+    			
     			// 특수문자 체크
     			var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
    			    if (regExp.test(ajaxKeyword)) {
@@ -1511,7 +1511,7 @@ legend {
                 focus : function(event, ui) {  
                     return false;
                 },
-                minLength: 1,
+                minLength: 2,
                 autoFocus: true,
                 classes: { 
                     "ui-autocomplete": "highlight"
