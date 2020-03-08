@@ -107,7 +107,7 @@
 	                    </div>
 	                    <div class="modal_button">
 	                        <div class="modal_back">
-	                            <button onclick="location.href = './index.html'">메인 화면으로</button>
+	                            <button onclick="location.href = '${pageContext.request.contextPath }/user/mypage/mypageReserve'">예약 관리로 이동</button>
 	                        </div>
 	                    </div>
                     </div>

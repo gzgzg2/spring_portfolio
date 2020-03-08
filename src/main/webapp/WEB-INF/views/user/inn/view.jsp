@@ -27,7 +27,7 @@
     	.star_avg span {
     		padding-left: 5px;
     	}
-    	.dhx_calendar.dhx_widget.dhx_widget--bordered { margin: 0 auto; }
+    	.dhx_calendar.dhx_widget.dhx_widget--bordered { margin: 0 auto; width: 380px; }
     	#google_maps {
     		display: none;
     	}
@@ -484,8 +484,8 @@
             text-align: center
         }
         .room_info .info button:hover {
-        	background-color: #bd9266;
-            border: 1px solid #bd9266;
+        	background-color: #66AFE6;
+            border: 1px solid #66AFE6;
         }
         .room_info .info .none ul,
         .room_info .info .none div .through {
@@ -776,7 +776,7 @@
 	    .room_info .info .hotel .through{margin-bottom:6px !important;padding-top:14px !important}
         .gra_left_right_red{
             margin-top: 50px;
-            background: #dfa974;
+            background: #8EC0E4;
         }
         .bd-title>ul>li {
             list-style: none;
@@ -822,9 +822,9 @@
         }
         .modal_inner {
             width:600px;
-            height:650px;
+            height:580px;
             margin: 3.5% auto 0px auto;
-            background: #eeeeee;
+            background: #faf5f0;
             z-index: 10;
         }   
         .modal_top h3 {
@@ -841,24 +841,25 @@
             padding: 30px;
         }
         .modal_button div button {
-            width: 20%;
-            height: 35px;
+            width: 30%;
+            height: 42px;
             border: none;
         }
         .modal_prev button {
-            margin-left: 60%;
+            margin-left: 61%;
             background-color: #fff;
         }
         .modal_prev button:hover {
-            background-color: #f7f7f7;
+            background-color: #66AFE6;
+            color: white;
         }
         .modal_next button {
-            margin-left: 20%;
+            margin-left: 10%;
             color: white;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
         .modal_next button:hover {
-            background-color: #bd9266;
+            background-color: #66AFE6;
         }
         .bd-title > ul > li:nth-child(3), .bd-title > ul > li:nth-child(5) {
             color: #aaa;
@@ -958,7 +959,7 @@
                     <img src="${dto[0].inn_pic }">
                 </div>
                 <div class="col-lg-7 inn-info">
-                    <h3 style="white-space: nowrap;"><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #dfa974; border: 1px solid #dfa974; border-radius: 5px;">
+                    <h3 style="white-space: nowrap;"><span style="color: white; font-weight: bold; padding: 2px 5px; margin-right: 5px; font-size: 0.8em; background-color: #8EC0E4; border: 1px solid #8EC0E4; border-radius: 5px;">
 					<c:if test="${dto[0].inn_sep == 1 }">호텔</c:if>
 					<c:if test="${dto[0].inn_sep == 2 }">펜션</c:if>
 					<c:if test="${dto[0].inn_sep == 3 }">리조트</c:if>
@@ -1174,7 +1175,7 @@
                 <div><i class="icon_close"></i></div>
                 <h3>객실 예약</h3>
             </div>
-            <div class="modal_description">
+            <div class="modal_description" style="padding: 0px 0px 30px 0px;">
                 <section class="dhx_sample-container">
                     <div class="dhx_sample-container__widget" id="calendar"></div>
                 </section>
@@ -1331,7 +1332,8 @@
         var calendar = new dhx.Calendar("calendar", {
             css: "dhx_widget--bordered",
             range: true,
-            value: [firstDate, secondDate]
+            value: [firstDate, secondDate],
+            width: "360px"
         });
         
         calendar.events.on("change",function(firstDate, secondDate, click){
@@ -1353,21 +1355,32 @@
         });
         
         function chkSubmit() {
-        	var now = new Date(Date.now());
+        	var d = new Date(Date.now());
         	var book_date = $("input:hidden[name='book_date']").val()
         	var book_date_end = $("input:hidden[name='book_date_end']").val()
         	
-        	if (book_date.trim().length != 0 && book_date_end.trim().length != 0 && book_date != book_date_end) {
-        		var year = book_date.substring(0, 4)
-         		var month = book_date.substring(5, 7).replaceAll("0", "")
-          		var date = book_date.substring(8, 10)
-          		
-    			if (year >= d.getFullYear() && ((month == d.getMonth() + 1 && date > d.getDate()) || (month > d.getMonth() + 1))) {
-          			return true;
-          		} else {
-          			alert(now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate() + " 이후로 선택해주세요")
-          		}
-        	}
+			if (book_date.length != 0 && book_date_end.length != 0 && book_date != book_date_end) {
+		   		var year = parseInt(book_date.substring(0, 5))
+		   		var month = parseInt(book_date.substring(6, 8).replace("0", ""))
+	    		var date = parseInt(book_date.substring(8))
+		   		var endyear = parseInt(book_date_end.substring(0, 5))
+		   		var endmonth = parseInt(book_date_end.substring(6, 8).replace("0", ""))
+	    		var enddate = parseInt(book_date_end.substring(8))
+	    		if (year <= endyear && month <= endmonth && date < enddate) {	    			
+		    		if (year >= d.getFullYear() && ((month == d.getMonth() + 1 && date > d.getDate()) || (month > d.getMonth() + 1))) {
+		    			$("input:text[name='book_date']").val(year + "-" + month + "-" + date)
+		    			return true;
+		    		} else {
+		    			alert(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " 이후로 선택해주세요")
+		    		}
+	    		} else {
+	    			alert("날짜를 확인해주세요")
+	    		}
+			} else {
+    			alert("날짜를 확인해주세요")
+    		}
+    		
+    		
         	
         	return false;
         }

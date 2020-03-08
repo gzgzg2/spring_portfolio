@@ -23,12 +23,14 @@
 }
 
 .notfound .notfound-404 {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: inline-block;
-  width: 140px;
-  height: 140px;
+	position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    width: 146px;
+    height: 150px;
+    background-image: url("${pageContext.request.contextPath }/resources/img/error.png");
+    background-size: cover
 }
 
 .notfound .notfound-404:before {

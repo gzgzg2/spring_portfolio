@@ -1237,8 +1237,8 @@ legend {
 				                           </c:if>
 				                    	</c:forEach>
 			                    	</div>
+	                    		<div class="swiper-pagination swiper-pagination1"></div>
 			                	</div>
-			                  <div class="swiper-pagination swiper-pagination1"></div>
                             </div>
                         </div>
                     </div>
@@ -1280,8 +1280,8 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
-   					<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
+				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	

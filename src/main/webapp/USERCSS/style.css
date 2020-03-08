@@ -32,8 +32,11 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 html, body {
 	height: 100%;
+	font-family: "Noto Sans KR";
 }
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
@@ -1011,7 +1014,7 @@ ul, ol {
 	position: absolute;
 	right: -13px;
 	top: 1px;
-	content: "";
+	content: "�꼨";
 	font-size: 18px;
 	font-family: "FontAwesome";
 	color: #aaaab3;
@@ -1595,8 +1598,8 @@ ul, ol {
 .bd-hero-text span {
 	font-size: 12px;
 	color: #ffffff;
-	background: #dfa974;
-	font-weight: 500;
+	background: #8EC0E4;
+	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	display: inline-block;

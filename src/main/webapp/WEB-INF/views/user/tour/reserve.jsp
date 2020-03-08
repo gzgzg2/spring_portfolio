@@ -67,7 +67,7 @@
             width: 100%;
             height: 45px;
             border: none;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
         .info > label > span:nth-child(3) {
 			padding-right: 17px;
@@ -85,15 +85,15 @@
 			font-weight: bold;
 		}
 		.info > label > input[type="text"]:focus {
-			border-bottom: 3px solid #dfa974;
+			border-bottom: 3px solid #8EC0E4;
 		}
 		.info > label > button {
 			color: white;
 			width: 23%;
 			padding: 5px;
 			margin-left: 5px;
-			background-color: #dfa974;
-			border: 2px solid #dfa974;
+			background-color: #8EC0E4;
+			border: 2px solid #8EC0E4;
 			border-radius: 5px;
 		}
         .term > label > button {
@@ -101,7 +101,7 @@
             width: 100%;
             height: 45px;
             border: none;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
 
         }
         input[type="checkbox"] {
@@ -276,7 +276,7 @@
             padding: 17px;
             border: none;
             color: white;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
             vertical-align: bottom;
         }
         .auth { display: none; }

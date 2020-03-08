@@ -53,6 +53,7 @@
 		}
 		
 		.custom-control.custom-checkbox ul li label{
+		  font-weight: 500;
 		  padding-left: 35px;
 		  display: block;
 		  position: relative;
@@ -91,8 +92,8 @@
 		  border-radius: 100%;
 		  height: 10px;
 		  width: 10px;
-		  top: 2.7px;
-		  left: 3.3px;
+		  top: 3px;
+		  left: 3px;
 		  margin: auto;
 		  transition: background 0.1s linear;
 		  -webkit-transition: background 0.1s linear;
@@ -198,7 +199,7 @@
         }
         
         .bd-hero-text h2 {
-        	background-color: rgba(68,68,68,0.6);
+        	text-shadow: 0px 2px 6px grey;
         	padding: 15px 0px;
         	font-weight: bold;
         }
@@ -250,17 +251,17 @@
             width: 100%;
             margin-top: 10px;
             padding: 10px 20px;
-            border: 1px solid #dfa974;
+            border: 1px solid #8EC0E4;
             border-radius: 5px;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
 		.bd-hero-text div button:hover {
-			background-color: #bd9266;
-            border: 1px solid #bd9266;
+			background-color: #6AAFE6;
+            border: 1px solid #6AAFE6;
 		}
 		.ativ_ticket > form > div > button:hover {
-			background-color: #bd9266;
-            border: 1px solid #bd9266;
+			background-color: #6AAFE6;
+            border: 1px solid #6AAFE6;
 		}
         .comment-option {
             display: none;
@@ -273,13 +274,13 @@
         }
         .ticket {
         	margin: 20px 0px;
-            border: 3px solid #dfa974;
+            border: 3px solid #8EC0E4;
             border-radius: 5px;
             height: 150px;
         }
         
         .ticket_header {
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
 
         .ticket_header label {
@@ -298,16 +299,16 @@
             margin-left: 20px;
         }
         .ticket_amount button {
-        	border: rgba(223,169,116,0.5) 1px solid;
+        	border: #8EC0E4 1px solid;
         	border-radius: 5px;
-        	background-color: rgba(223,169,116,0.5);
+        	background-color: #8EC0E4;
         	padding: 0px 7px;
         	width: 26px;
         	color: white;
         	font-weight: bold;
         }
         .ticket_amount button:hover {
-        	background-color: rgba(223,169,116,0.8);
+        	background-color: #6AAFE6;
        	}
         .ticket_amount button[disabled='disabled'] {
         	border: #e3e3e3 1px solid;
@@ -340,9 +341,9 @@
             height: 45px;
             color: white;
             font-weight: 600;
-            border: 1px solid #dfa974;
+            border: 1px solid #8EC0E4;
             border-radius: 5px;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
         .ativ_ticket {
             display: none;
