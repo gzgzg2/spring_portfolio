@@ -13,7 +13,9 @@
 			i.inn_uid = r.inn_uid
 			and not r.room_last_cost IN (0)
 		GROUP BY
-			i.inn_uid;
+			i.inn_uid
+		LIMIT
+			0, 100;
 	</select>
 	<select id="selectInnSale" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT
@@ -25,7 +27,11 @@
 			and not r.room_first_cost IN (0)
 			and not r.room_last_cost IN (0)
 		GROUP BY
-			i.inn_uid;
+			i.inn_uid
+		ORDER BY
+			ROUND((r.room_first_cost - r.room_last_cost) / r.room_first_cost * 100) DESC
+		LIMIT
+			0, 100;
 	</select>
 	<select id="selectInnPopular" resultType="com.lec.mgb.mybatis.beans.UserInnDTO">
 		SELECT 

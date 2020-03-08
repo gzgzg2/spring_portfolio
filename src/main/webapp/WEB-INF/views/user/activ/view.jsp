@@ -32,6 +32,167 @@
         .activ table tr:first-child {border-top: 3px solid #eee;}
         .activ table tr {border-bottom: 3px solid #eee; margin-block-end: 5px;}
         
+		.custom-control.custom-checkbox ul{
+		  list-style: none;
+		  margin: 0;
+		  padding: 0;
+			overflow: hidden;
+		}
+		
+		.custom-control.custom-checkbox ul li{
+		  color: white;
+		  display: block;
+		  position: relative;
+		  float: left;
+		  width: 100%;
+		}
+		
+		.custom-control.custom-checkbox ul li input[type=radio]{
+		  position: absolute;
+		  visibility: hidden;
+		}
+		
+		.custom-control.custom-checkbox ul li label{
+		  padding-left: 35px;
+		  display: block;
+		  position: relative;
+		  font-size: 1.35em;
+		  height: 30px;
+		  z-index: 9;
+		  cursor: pointer;
+		  -webkit-transition: all 0.1s linear;
+		}
+		
+		.custom-control.custom-checkbox ul li:hover label{
+			color: #FFFFFF;
+		}
+		
+		.custom-control.custom-checkbox ul li .check{
+		  display: block;
+		  position: absolute;
+		  border: 3px solid white;
+		  border-radius: 100%;
+		  height: 22px;
+		  width: 22px;
+		  top: 6px;
+		  z-index: 5;
+		  transition: border .1s linear;
+		  -webkit-transition: border .1s linear;
+		}
+		
+		.custom-control.custom-checkbox ul li:hover .check {
+		  border: 3px solid #FFFFFF;
+		}
+		
+		.custom-control.custom-checkbox ul li .check::before {
+		  display: block;
+		  position: absolute;
+			content: '';
+		  border-radius: 100%;
+		  height: 10px;
+		  width: 10px;
+		  top: 2.7px;
+		  left: 3.3px;
+		  margin: auto;
+		  transition: background 0.1s linear;
+		  -webkit-transition: background 0.1s linear;
+		}
+		
+		input[type=radio]:checked ~ .check {
+		  border: 5px solid white;
+		}
+		
+		input[type=radio]:checked ~ .check::before{
+		  background: white;
+		}
+		
+		input[type=radio]:checked ~ label{
+		  color: white;
+		}
+		
+		.signature {
+			margin: 10px auto;
+			padding: 10px 0;
+			width: 100%;
+		}
+		
+		.signature p{
+			text-align: center;
+			font-family: Helvetica, Arial, Sans-Serif;
+			font-size: 0.85em;
+			color: white;
+		}
+		
+		.signature .much-heart{
+			display: inline-block;
+			position: relative;
+			margin: 0 4px;
+			height: 10px;
+			width: 10px;
+			background: white;
+			border-radius: 4px;
+			-ms-transform: rotate(45deg);
+		    -webkit-transform: rotate(45deg);
+		    transform: rotate(45deg);
+		}
+		
+		.signature .much-heart::before, 
+		.signature .much-heart::after {
+			  display: block;
+		  content: '';
+		  position: absolute;
+		  margin: auto;
+		  height: 10px;
+		  width: 10px;
+		  border-radius: 5px;
+		  background: white;
+		  top: -4px;
+		}
+		
+		.signature .much-heart::after {
+			bottom: 0;
+			top: auto;
+			left: -4px;
+		}
+		
+		.signature a {
+			color: #AAAAAA;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+		
+		/* Styles for alert... 
+		by the way it is so weird when you look at your code a couple of years after you wrote it XD */
+		
+		.alert {
+			box-sizing: border-box;
+			background-color: #BDFFE1;
+			width: 100%;
+			position: relative; 
+			top: 0;
+			left: 0;
+			z-index: 300;
+			padding: 20px 40px;
+			color: #333;
+		}
+		
+		.alert h2 {
+			font-size: 22px;
+			color: #232323;
+			margin-top: 0;
+		}
+		
+		.alert p {
+			line-height: 1.6em;
+			font-size:18px;
+		}
+		
+		.alert a {
+			color: #232323;
+			font-weight: bold;
+		}
+        
         body {
         	overflow-x: hidden;
         }
@@ -284,13 +445,17 @@
                             <form method="POST" action="${pageContext.request.contextPath}/user/activ/reserve" onsubmit="return chkSubmit()">
                             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <h3>티켓</h3>
-                                <c:forEach var="dto" items="${dto }">
+                                <c:forEach var="dto" items="${dto }" varStatus="status">
                            		<div class="ticket">
                                     <div class="ticket_header">
                                         <div class="custom-control custom-checkbox">
-                                            <label><input type="radio" name="ticket_uid" value="${dto.ticket_uid }">
-                                            	${dto.ticket_name }
-                                            </label>
+                                            <ul>
+											  <li>
+											    <input type="radio" id="f-option${status.count }" name="ticket_uid" value="${dto.ticket_uid }">
+											    <label for="f-option${status.count }">${dto.ticket_name }</label>
+											    <div class="check"></div>
+											  </li>
+											</ul>
                                         </div>
                                     </div>
                                     <div class="ticket_description">
@@ -311,7 +476,26 @@
 	                                        </div>
 	                                        <div class="ticket_price col-sm-6">
 	                                            <p><c:if test="${dto.ticket_first_cost != 0 }"><fmt:formatNumber value="${dto.ticket_first_cost }" pattern="#,###"/> 원</c:if></p>
-	                                            <p><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/> 원</p>
+	                                            <p>
+	                                            	<c:if test="${dto.ticket_first_cost != 0 }">
+		                                            	<c:set var="disRate" value="${(dto.ticket_first_cost - dto.ticket_last_cost) / dto.ticket_first_cost * 100 }" />
+		                                            	<c:set var="disRate" value="${disRate+((disRate%1>0.5)?(1-(disRate%1))%1:-(disRate%1))}" />
+   														<fmt:parseNumber var="disRate" type="number" value="${disRate }" />
+		                                            	<span style="font-size: 0.7em; margin-right: 5px; display: inline-block;
+    position: relative;
+    top: -2px;
+    margin-right: 4px;
+    padding: 2px 2px 1px 2px;
+    background: rgb(255, 43, 92);
+    font-size: 14px;
+    line-height: normal;
+    color: #fff;
+    padding: 0px 3px;">
+		                                            		${disRate }%
+		                                            	</span>
+	                                            	</c:if>
+	                                            	<fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/> 원
+                                           		</p>
 	                                        </div>
                                  		</div>
                                 	</div>
@@ -503,9 +687,9 @@
             	$(".ticketDec").attr("disabled", true)
             	$("input:hidden[name='book_member_cnt']").val(1);
             	$(".book_member_cnt").text(0);
-            	$(this).parent().parent().parent().next().next().find(".book_member_cnt").text(1);
-            	$(this).parent().parent().parent().next().next().find(".ticketInc").attr("disabled", false)
-            	$(this).parent().parent().parent().next().next().find(".ticketDec").attr("disabled", false)
+            	$(this).parent().parent().parent().parent().next().next().find(".book_member_cnt").text(1);
+            	$(this).parent().parent().parent().parent().next().next().find(".ticketInc").attr("disabled", false)
+            	$(this).parent().parent().parent().parent().next().next().find(".ticketDec").attr("disabled", false)
             })
             $(".ticketInc").click(function() {
             	var book_member_cnt = parseInt($("input:hidden[name='book_member_cnt']").val());
@@ -548,8 +732,8 @@
     			paging(curPage * 5, 5);
    				$(".paging p span").text(curPage + 1)
     		}
-    		
-    		location.href="#comment";
+
+    		$('html').scrollTop($(".blog-details-hero.set-bg").outerHeight());
     	}
         
         function paging(writePage, page) {

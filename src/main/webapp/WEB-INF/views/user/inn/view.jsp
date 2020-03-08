@@ -1010,7 +1010,23 @@
 		                                        <strong>가격</strong>
 		                                            <div>
 		                                                <p class="through_none" style="text-decoration: line-through;"><c:if test="${dto.room_first_cost != 0 }"><fmt:formatNumber value="${dto.room_first_cost }" pattern="#,###"/></c:if></p>
-		                                                <p><b style="color: rgba(0,0,0,1)"><c:if test="${dto.room_last_cost != 0 }"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/> 원</c:if><c:if test="${dto.room_last_cost == 0 }">가격 준비 중!</c:if></b> <!-- 표시금액 --></p>
+		                                                <p>
+		                                                	<b style="color: rgba(0,0,0,1)">
+		                                                		<c:if test="${dto.room_first_cost != 0 }">
+					                                            	<c:set var="disRate" value="${(dto.room_first_cost - dto.room_last_cost) / dto.room_first_cost * 100 }" />
+					                                            	<c:set var="disRate" value="${disRate+((disRate%1>0.5)?(1-(disRate%1))%1:-(disRate%1))}" />
+			   														<fmt:parseNumber var="disRate" type="number" value="${disRate }" />
+					                                            	<span style="font-size: 0.7; margin-right: 5px; padding: 0px 3px;">
+					                                            		${disRate }%
+					                                            	</span>
+				                                            	</c:if>
+		                                                		<c:if test="${dto.room_last_cost != 0 }">
+		                                                		<fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/> 원
+		                                                		</c:if>
+		                                                		<c:if test="${dto.room_last_cost == 0 }">가격 준비 중!
+		                                                		</c:if>
+	                                                		</b>
+                                                		</p>
 		                                            </div>
 		                                    </div>
 		                                    <c:if test="${dto.room_last_cost == 0 || empty sessionScope.loginUid }"><button type="button" style="background-color: #bbb; border-color: #bbb;" disabled="disabled" class="gra_left_right_red"> 전화로 예약해주세요</button></c:if>
@@ -1274,8 +1290,8 @@
     			paging(curPage * 5, 5);
    				$(".paging p span").text(curPage + 1)
     		}
-    		
-    		location.href="#comment";
+
+    		$('html').scrollTop($(".blog-details-hero.set-bg").outerHeight());
     	}
         
         function paging(writePage, page) {

@@ -512,19 +512,25 @@
             $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
-    		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
-    			!$("input:text[name='book_member_tel']").val().trim().length == 0 &&
+    		if ($("input:text[name='book_member_name']").val().trim().length != 0 &&
+    			$("input:text[name='book_member_tel']").val().trim().length != 0 &&
     			$("input:hidden[name='ifChkSMS']").val().trim() == 1 &&
     			$("input:checkbox[name='term1']").prop("checked") &&
     			$("input:checkbox[name='term2']").prop("checked") &&
-    			$("input:checkbox[name='term3']").prop("checked")) {
+    			$("input:checkbox[name='term3']").prop("checked"))  {
 				return true;
     		}
     		
     		if ($("input:text[name='book_member_name']").val().trim().length == 0) {
     			$("input:text[name='book_member_name']").focus()
+    			alert("예약자 이름을 입력해주세요")
     		} else if ($("input:text[name='book_member_tel']").val().trim().length == 0) {
 	    		$("input:text[name='book_member_tel']").focus()
+    			alert("휴대폰 번호를 입력해주세요")
+    		} else if (!$("input:checkbox[name='term1']").prop("checked") ||
+    			!$("input:checkbox[name='term2']").prop("checked") ||
+    			!$("input:checkbox[name='term3']").prop("checked")) {    			
+    			alert("이용 약관을 확인해주세요")
     		}
     		
     		return false;

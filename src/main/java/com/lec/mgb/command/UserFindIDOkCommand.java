@@ -43,7 +43,7 @@ public class UserFindIDOkCommand implements Command {
 			    final String HOST = "smtp.gmail.com";
 			    final int PORT = 25;
 			    
-			    final String SUBJECT = "메일 제목";
+			    final String SUBJECT = "[귤귤 플래너] 아이디 찾기";
 			    
 			    final String BODY = String.join(
 			        System.getProperty("line.separator"),

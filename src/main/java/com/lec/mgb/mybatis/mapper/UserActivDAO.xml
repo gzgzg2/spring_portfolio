@@ -13,7 +13,9 @@
 			a.activ_uid = t.activ_uid
 			and not t.ticket_last_cost IN (0)
 		GROUP BY
-			a.activ_uid;
+			a.activ_uid
+		LIMIT 
+			0, 100;
 	</select>
 	<select id="selectActivSale" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 
@@ -25,7 +27,11 @@
 			and not t.ticket_first_cost IN (0)
 			and not t.ticket_last_cost IN (0)
 		GROUP BY
-			a.activ_uid;
+			a.activ_uid
+		ORDER BY
+			ROUND((t.ticket_first_cost - t.ticket_last_cost) / t.ticket_first_cost * 100) DESC
+		LIMIT 
+			0, 100;
 	</select>
 	<select id="selectActivPopular" resultType="com.lec.mgb.mybatis.beans.UserActivDTO">
 		SELECT 

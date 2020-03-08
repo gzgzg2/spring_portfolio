@@ -172,7 +172,9 @@
 	    				}
 	    			}
 	    		});
-			}
+			} else {
+    			alert("전화번호를 확인해주세요!");
+    		}
 			
 			return false;
 		}
@@ -200,11 +202,20 @@
         				}
         			}
         		});  			
-    		}
+    		} else {
+				alert("인증번호를 확인해주세요!");
+			}
     		
     		return false;
     	}
 	    function chkSubmit() {
+	    	if ($("input:text[name='member_id']").val().trim().length == 0) {
+				alert("아이디를 입력해주세요")	
+				$("input:text[name='member_id']").focus()
+    		} else if ($("input:hidden[name='ifChkSMS']").val().trim() == 0) {
+				$("input:text[name='member_tel']").focus()
+		    	alert("휴대폰 인증을 해주세요!")
+    		}
 	    	if ($("input:hidden[name='ifChkSMS']").val().trim() == 1 &&
     			$("input:text[name='member_id']").val().trim().length > 0) {
 				return true;
