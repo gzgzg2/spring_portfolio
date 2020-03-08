@@ -38,9 +38,9 @@
     		overflow-x: hidden;
     	}
     	.breadcrumb-section2 {
-    		background-image: url("https://www.oriental.co.kr/resources/images/homepage/KOR/index/main_visual_01.jpg");
+    		background-image: url("https://www.oriental.co.kr/resources/images/homepage/KOR/index/main_visual_02.jpg");
     		background-size: cover;
-    		background-position: 10%;
+    		background-position: 30%;
     	}
     	.item_info h5 {
     		line-height: 1.5em;
@@ -1237,8 +1237,8 @@ legend {
 				                           </c:if>
 				                    	</c:forEach>
 			                    	</div>
+	                    		<div class="swiper-pagination swiper-pagination1"></div>
 			                	</div>
-			                  <div class="swiper-pagination swiper-pagination1"></div>
                             </div>
                         </div>
                     </div>
@@ -1280,8 +1280,8 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
-   					<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
+				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	

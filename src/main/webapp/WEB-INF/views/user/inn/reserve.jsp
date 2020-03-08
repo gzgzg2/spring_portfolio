@@ -63,7 +63,7 @@
             width: 100%;
             height: 45px;
             border: none;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
 
         }
         .info > label > span:nth-child(3) {
@@ -82,15 +82,15 @@
 			font-weight: bold;
 		}
 		.info > label > input[type="text"]:focus {
-			border-bottom: 3px solid #dfa974;
+			border-bottom: 3px solid #8EC0E4;
 		}
 		.info > label > button {
 			color: white;
 			width: 23%;
 			padding: 5px;
 			margin-left: 5px;
-			background-color: #dfa974;
-			border: 2px solid #dfa974;
+			background-color: #8EC0E4;
+			border: 2px solid #8EC0E4;
 			border-radius: 5px;
 		}
         .term > label > button {
@@ -98,7 +98,7 @@
             width: 100%;
             height: 45px;
             border: none;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
 
         }
         input[type="checkbox"] {
@@ -273,7 +273,7 @@
             padding: 17px;
             border: none;
             color: white;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
             vertical-align: bottom;
         }
         .auth { display: none; }
@@ -518,19 +518,25 @@
             $(".cost").text($(".cost").text().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
     	})
     	function chkSubmit() {
-    		if (!$("input:text[name='book_member_name']").val().trim().length == 0 &&
-    			!$("input:text[name='book_member_tel']").val().trim().length == 0 &&
+    		if ($("input:text[name='book_member_name']").val().trim().length != 0 &&
+    			$("input:text[name='book_member_tel']").val().trim().length != 0 &&
     			$("input:hidden[name='ifChkSMS']").val().trim() == 1 &&
     			$("input:checkbox[name='term1']").prop("checked") &&
     			$("input:checkbox[name='term2']").prop("checked") &&
-    			$("input:checkbox[name='term3']").prop("checked")) {
+    			$("input:checkbox[name='term3']").prop("checked"))  {
 				return true;
     		}
     		
     		if ($("input:text[name='book_member_name']").val().trim().length == 0) {
     			$("input:text[name='book_member_name']").focus()
+    			alert("예약자 이름을 입력해주세요")
     		} else if ($("input:text[name='book_member_tel']").val().trim().length == 0) {
 	    		$("input:text[name='book_member_tel']").focus()
+    			alert("휴대폰 번호를 입력해주세요")
+    		} else if (!$("input:checkbox[name='term1']").prop("checked") ||
+    			!$("input:checkbox[name='term2']").prop("checked") ||
+    			!$("input:checkbox[name='term3']").prop("checked")) {    			
+    			alert("이용 약관을 확인해주세요")
     		}
     		
     		return false;

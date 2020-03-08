@@ -25,7 +25,7 @@
 
     <style>
     	.bd-hero-text h2 {
-        	background-color: rgba(68,68,68,0.6);
+        	text-shadow: 0px 2px 6px grey;
         	padding: 15px 0px;
         	font-weight: bold;
         }
@@ -68,13 +68,13 @@
             width: 60%;
             margin: 10px auto 0px auto;
             padding: 10px 20px;
-            border: 1px solid #dfa974;
+            border: 1px solid #8EC0E4;
             border-radius: 5px;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
 		.bd-hero-text div button:hover {
-			background-color: #bd9266;
-            border: 1px solid #bd9266;
+			background-color: #66AFE6;
+            border: 1px solid #66AFE6;
 		}
 
         .modal_layer {
@@ -105,27 +105,27 @@
             text-align: right;
         }
         .modal_description {
-            padding: 30px;
+            padding: 0px 0px 30px 0px;
         }
         .modal_button div button {
-            width: 20%;
-            height: 35px;
+            width: 30%;
+            height: 42px;
             border: none;
         }
         .modal_prev button {
-            margin-left: 60%;
+            margin-left: 61%;
             background-color: #fff;
         }
         .modal_prev button:hover {
-            background-color: #f7f7f7;
+            background-color: #66AFE6;
         }
         .modal_next button {
-            margin-left: 20%;
+            margin-left: 10%;
             color: white;
-            background-color: #dfa974;
+            background-color: #8EC0E4;
         }
         .modal_next button:hover {
-            background-color: #bd9266;
+            background-color: #66AFE6;
         }
 
         .comment-option {
@@ -164,16 +164,16 @@
     		margin: 1px 25px 0px 0px;
 		}
         .member_cnt button {
-        	border: rgba(223,169,116,0.5) 1px solid;
+        	border: #8EC0E4 1px solid;
         	border-radius: 5px;
-        	background-color: rgba(223,169,116,0.5);
+        	background-color: #8EC0E4;
         	padding: 0px 7px;
         	width: 26px;
         	color: white;
         	font-weight: bold;
         }
         .member_cnt button:hover {
-        	background-color: rgba(223,169,116,0.8);
+        	background-color: #66AFE6;
        	}
         .member_cnt button[disabled='disabled'] {
         	border: #e3e3e3 1px solid;
@@ -382,10 +382,10 @@
         <div class="modal_inner">
             <div class="modal_top">
                 <div><i class="icon_close"></i></div>
-                <h3>객실 예약</h3>
+                <h3>투어 예약</h3>
             </div>
             <div class="modal_description">
-				<section class="dhx_sample-container">
+				<section class="dhx_sample-container" style="padding-bottom: 20px;">
 					<div class="dhx_sample-container__widget" id="calendar"></div>
 				</section>
 				<form action="${pageContext.request.contextPath}/user/tour/reserve" method="POST" onsubmit="return chkSubmit()">
@@ -397,7 +397,7 @@
                         <button type="button" class="ticketInc">+</button>
                     </div>
             </div>
-            <div class="modal_button row">
+            <div class="modal_button row" style="padding-top: 20px;">
                 <div class="modal_prev col-sm-6">
                     <button type="button" onclick="$('.modal_layer').css('display', 'none')">prev</button>
                 </div>
@@ -479,7 +479,7 @@
     </script>
 
     <script>
-		var calendar = new dhx.Calendar("calendar", {value: new Date(), css: "dhx_widget--bordered"});
+		var calendar = new dhx.Calendar("calendar", {value: new Date(), css: "dhx_widget--bordered", width: "360px"});
 		function updateValue() {
 			document.querySelector(".dhx_sample-input").value = calendar.getValue();
 		}

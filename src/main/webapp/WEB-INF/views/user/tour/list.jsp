@@ -215,6 +215,8 @@
     			} 
    				$(".paging p span").text(curPage + 1)
     		}
+    		
+    		$('html').scrollTop($(".breadcrumb-section2").outerHeight());
     	}
     
     	$(document).ready(function() {

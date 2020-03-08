@@ -90,18 +90,18 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter Username">
-						<input class="input100" type="text" name="member_name" placeholder="이름">
+						<input class="input100" type="text" name="member_name" placeholder="이름" />
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Please enter email">
-						<input class="input100" type="text" name="member_email" placeholder="E-mail">
+						<input class="input100" type="text" name="member_email" placeholder="E-mail" />
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn" style="margin-top: 16px;">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							아이디 찾기
 						</button>
 					</div>
