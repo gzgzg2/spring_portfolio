@@ -301,8 +301,8 @@
 		
 		var container = document.getElementById('map'+i+'');
 		var options = {
-			center : new kakao.maps.LatLng(33.506964, 126.493271),
-			level : 12
+			center : new kakao.maps.LatLng(33.377949, 126.540633),
+			level : 11
 		};
 		var map = new kakao.maps.Map(container, options);
 		

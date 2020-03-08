@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,7 +13,7 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
- 
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -26,49 +27,56 @@
 <link href="${pageContext.request.contextPath}/USERCSS/mainplanner.css"
 	rel="stylesheet">
 <style>
-	.modal_layer {
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-        .modal_inner {
-            width:600px;
-            height:650px;
-            margin: 3.5% auto 0px auto;
-            background: #eeeeee;
-            z-index: 10;
-        }   
-        .modal_top h3 {
-            position: relative;
-            bottom: 30px;
-            text-align: center;
-        }
-        .modal_top div {
-            width: 98%;
-            font-size: 50px;
-            text-align: right;
-        }
-        .modal_description {
-            padding: 30px;
-        }
-        .modal_button div button {
-            width: 20%;
-            height: 35px;
-            border: none;
-        }
-        .modal_prev button {
-            margin-left: 60%;
-            background-color: #fff;
-        }
-        .modal_next button {
-            margin-left: 20%;
-            color: white;
-            background-color: #dfa974;
-        }
+.modal_layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 10;
+}
+
+.modal_inner {
+	width: 600px;
+	height: 650px;
+	margin: 3.5% auto 0px auto;
+	background: #eeeeee;
+	z-index: 10;
+}
+
+.modal_top h3 {
+	position: relative;
+	bottom: 30px;
+	text-align: center;
+}
+
+.modal_top div {
+	width: 98%;
+	font-size: 50px;
+	text-align: right;
+}
+
+.modal_description {
+	padding: 30px;
+}
+
+.modal_button div button {
+	width: 20%;
+	height: 35px;
+	border: none;
+}
+
+.modal_prev button {
+	margin-left: 60%;
+	background-color: #fff;
+}
+
+.modal_next button {
+	margin-left: 20%;
+	color: white;
+	background-color: #dfa974;
+}
 </style>
 </head>
 <body>
@@ -76,7 +84,12 @@
 		class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 		<div class="app-header header-shadow">
 			<div class="app-header__logo">
-				<div class="logo-src"></div>
+				<div class="logo-src">
+					<img width="42px"
+						src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
+						alt="">
+				</div>
+				<h5>귤귤 플래너</h5>
 				<div class="header__pane ml-auto">
 					<div>
 						<button type="button"
@@ -166,77 +179,94 @@
 				<div class="scrollbar-sidebar">
 					<div class="app-sidebar__inner">
 						<ul class="vertical-nav-menu">
-							<li class="app-sidebar__heading"><h2>귤귤 플래너</h2></li>
-							<li>
-								<a class="mm-active"> <i class="metismenu-icon pe-7s-plane"></i> Guest님의 여행목록입니다.</a>
-								<a class="mm-active"> <i class="metismenu-icon pe-7s-paper-plane"></i> 출발일자 : <input id="start_time" type="date"/> 
-								
-								</a>	
-												
-							</li>
+
+							<li><a class="mm-active"> <i
+									class="metismenu-icon pe-7s-plane"></i> <c:if
+										test="${sessionScope.userId == null}">Guest</c:if> <c:if
+										test="${sessionScope.userId != null}">${sessionScope.userId }</c:if>님의
+									여행목록입니다.
+							</a> <a class="mm-active"> <i
+									class="metismenu-icon pe-7s-paper-plane"></i> 출발일자 : <input
+									style="background: none; border: none; width: 130px; height: 30px;"
+									id="start_time" type="date" />
+
+							</a></li>
 						</ul>
-						<form id="planListForm" method="get" action="${pageContext.request.contextPath}/plan/saveOk" onsubmit="return saveOk()">
-						<div id = "planList" style="overflow:auto; height:300px;">
-						
-						</div>
-						<input type="submit" value="제출"/>
+						<form id="planListForm" method="get"
+							action="${pageContext.request.contextPath}/plan/saveOk"
+							onsubmit="return saveOk()">
+							<div id="planList" style="overflow: auto; height: 480px;">
+
+							</div>
+
 						</form>
 					</div>
-					
+
 				</div>
+
+			</div>
+
+
+
+			<div class="app-main__inner" id="map">
+				<div class="search-wrapper">
+					<div class="input-holder">
+						<input type="text" class="search-input" placeholder="지역을 검색하세요">
+						<button class="search-icon" onclick="Search()">
+							<span></span>
+						</button>
+					</div>
+					<button class="close"></button>
+				</div>
+				<c:choose>
+					<c:when test="${not empty sessionScope.userId}">
+						<div
+							style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
+							class="go-right">
+
+							<a class="p-0 btn" onclick="planListForm.submit()"> <img
+								width="42px" class="rounded-circle"
+								src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
+								alt=""> 플래너 저장하기 ${sessionScope.loginUid } <!-- <input value="플래너 저장하기" type="button" onclick="planListForm.submit()"> -->
+							</a>
+						</div>
+					</c:when>
+
+					<c:otherwise>
+						<div
+							style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
+							class="go-right">
+							<div class="btn-group">
+								<a data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false" class="p-0 btn"> <img width="42"
+									class="rounded-circle"
+									src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
+									alt=""> GUEST로 작업중/Guest는 저장 할 수 없습니다.
+									${sessionScope.userId } <i
+									class="fa fa-angle-down ml-2 opacity-8"></i>
+								</a>
+								<div tabindex="-1" role="menu" aria-hidden="true"
+									class="dropdown-menu dropdown-menu-right">
+									<h6 tabindex="-1" class="dropdown-header">Guest는 저장을 할 수
+										없습니다.</h6>
+									<div tabindex="-1" class="dropdown-divider"></div>
+									<button type="button"
+										onclick="location.href = '${pageContext.request.contextPath}/user/account/login'"
+										tabindex="0" class="dropdown-item">로그인 하기</button>
+									<button type="button"
+										onclick="location.href = '${pageContext.request.contextPath}/user/account/join'"
+										tabindex="0" class="dropdown-item">회원가입 하기</button>
+								</div>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
+				
 				
 			</div>
-			
-			
-			
-				<div class="app-main__inner" id="map">
-					<div class="search-wrapper">
-						<div class="input-holder">
-							<input type="text" class="search-input" placeholder="지역을 검색하세요">
-							<button class="search-icon" onclick="Search()">
-								<span></span>
-							</button>
-						</div>
-						<button class="close"></button>
-					</div>
-
-					<div
-						style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
-						class="go-right">
-						
-							<a class="p-0 btn" onclick="planListForm.submit()">
-							
-							<img width="42px" class="rounded-circle" src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
-								alt=""> 플래너 저장하기
-								
-								<!-- <input value="플래너 저장하기" type="button" onclick="planListForm.submit()"> --> 
-							</a>
-							
-<!-- 						
-						<div class="btn-group">
-							<a data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false" class="p-0 btn"> <img width="42"
-								class="rounded-circle"
-								src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
-								alt=""> GUEST로 작업중/Guest는 저장 할 수 없습니다. <i
-								class="fa fa-angle-down ml-2 opacity-8"></i>
-							</a>
-							<div tabindex="-1" role="menu" aria-hidden="true"
-								class="dropdown-menu dropdown-menu-right">
-								<h6 tabindex="-1" class="dropdown-header">Guest는 저장을 할 수
-									없습니다.</h6>
-								<div tabindex="-1" class="dropdown-divider"></div>
-								<button type="button" tabindex="0" class="dropdown-item">로그인
-									하기</button>
-								<button type="button" tabindex="0" class="dropdown-item">회원가입
-									하기</button>
-							</div>
-						</div> -->
-					</div>
-				</div>
-			</div>
 		</div>
-	
+	</div>
+
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57cb4002a8435e61d895fd45dcbcb3fe"></script>
@@ -250,17 +280,15 @@
 		var day = today.getDate();
 		var month = today.getMonth();
 		var year = today.getFullYear();
-		
-		
+
 		polyline = new kakao.maps.Polyline({
-			   
-			
-		    strokeWeight: 5, // 선의 두께 입니다
-		    strokeColor: '#000000', // 선의 색깔입니다
-		    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-		    strokeStyle: 'solid', // 선의 스타일입니다
-		    endArrow: true,
-		    zIndex:20
+
+			strokeWeight : 5, // 선의 두께 입니다
+			strokeColor : '#000000', // 선의 색깔입니다
+			strokeOpacity : 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+			strokeStyle : 'solid', // 선의 스타일입니다
+			endArrow : true,
+			zIndex : 999
 		});
 		var locations = new Array();
 		var container = document.getElementById('map');
@@ -289,40 +317,43 @@
 			var list = jsonObj.list;
 			var arrLat = new Array();
 			var arrLng = new Array();
-			
-			
+
 			for (var i = 0; i < count; i++) {
 				// content내용작성
 				var content = document.createElement('div')
 				content.className = 'wrap';
-				content.innerHTML = '    <div class="info">' + 
-	           						'        <div class="title">' + list[i].local_name + 
-	          						'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-	            					'        </div>' + 
-	            					'        <div class="body">' + 
-	            					'            <div class="img">' +
-	            					'                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">' +
-	            					'           </div>' + 
-	            					'            <div class="desc">' + 
-	            					'                <div class="ellipsis">'+list[i].local_hello+'</div>' + 
-	            					'                <div class="jibun ellipsis">tel : '+list[i].local_tel+'</div>' + 
-	            					'                <div><button class="Add" onclick="Add('+list[i].local_uid+')">지역 추가하기</button></div>' + 
-	            					'            </div>' + 
-	            					'        </div>' + 
-	            					'    </div>';
-				
-	           	// 마커 좌표 배열담아주기
+				content.innerHTML = '    <div class="info">'
+						+ '        <div class="title">'
+						+ list[i].local_name
+						+ '            <div class="close" onclick="closeOverlay()" title="닫기"></div>'
+						+ '        </div>'
+						+ '        <div class="body">'
+						+ '            <div class="img">'
+						+ '                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">'
+						+ '           </div>'
+						+ '            <div class="desc">'
+						+ '                <div class="ellipsis">'
+						+ list[i].local_hello
+						+ '</div>'
+						+ '                <div class="jibun ellipsis">tel : '
+						+ list[i].local_tel
+						+ '</div>'
+						+ '                <div><button class="Add" onclick="Add('
+						+ list[i].local_uid + ')">지역 추가하기</button></div>'
+						+ '            </div>' + '        </div>'
+						+ '    </div>';
+
+				// 마커 좌표 배열담아주기
 				locations.push({
-					content :content,
+					content : content,
 					latlng : new kakao.maps.LatLng(
 							parseFloat(list[i].local_lat),
 							parseFloat(list[i].local_lng)),
 					local_name : list[i].local_name
 				});
-				
+
 			}
-			
-			
+
 			var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
 
 			for (var i = 0; i < locations.length; i++) {
@@ -336,23 +367,22 @@
 
 				// 마커를 생성합니다
 				var marker = new kakao.maps.Marker({
-					zIndex: 1,
+					zIndex : 1,
 					map : map, // 마커를 표시할 지도
 					position : locations[i].latlng, // 마커를 표시할 위치
-					//image : markerImage,
+					image : markerImage,
 					title : locations[i].local_name
-					
+
 				// 마커 이미지 
 				});
-				
 
 				// 인포윈도우를 생성합니다
 				var overlay = new kakao.maps.CustomOverlay({
 					content : locations[i].content,
-					map: map,
-					position: marker.getPosition(),
-					zIndex: 2,
-					clickable:true
+					map : map,
+					position : marker.getPosition(),
+					zIndex : 2,
+					clickable : true
 				});
 				overlay.setMap(null);
 
@@ -367,17 +397,18 @@
 					});
 
 					// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-					kakao.maps.event.addListener(map, 'click', function () {
+					kakao.maps.event.addListener(map, 'click', function() {
 						overlay.setMap(null);
 					});
-				})(marker, overlay);	
+				})(marker, overlay);
 			}
 		} //end parseJSON
-	
+
 		//Add 버튼이 눌렀을때 DIV추가
 		function Add(local_uid) {
-			
-			var url = "${pageContext.request.contextPath}/AJAXLocal/AddPlan/"+local_uid+"";
+
+			var url = "${pageContext.request.contextPath}/AJAXLocal/AddPlan/"
+					+ local_uid + "";
 			$.ajax({
 				url : url,
 				type : "GET",
@@ -385,48 +416,53 @@
 				success : function(data, status) {
 					if (status == "success") {
 						planList(data);
-					};
+					}
+					;
 				}
 			});//end ajax
-			
-		// DIV내용 구성
-		function planList(jsonObj) {
-			
-			var html = 
-			'<ul style="margin-top:10px" lat = "'+jsonObj.local_lat+'" lng = "'+jsonObj.local_lng+'" uid = "'+jsonObj.local_uid+'" pid = "'+index+'">'
-			+ '<li id = "local_name">여행지 : '+jsonObj.local_name+'</li>'
-			+ '<li>숙박일 : </li><input type="text" id = "stay'+index+'" name = "stay'+index+'"/>박'
-			+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'" name = "trans'+index+'"/>'
-			
-			+ '</ul>';
-			arr.push(index);
-			$('#planList').append(html);
-			index++;
-		//	PlanList.push({
-		//		latlng: new kakao.maps.LatLng(jsonObj.local_lat,jsonObj.local_lng)
-		//	});
-		
-			linePath.push(new kakao.maps.LatLng(parseFloat(jsonObj.local_lat),parseFloat(jsonObj.local_lng)));
-			polyline.setPath(linePath);
-			
-			line();
-			polyline.setMap(null);
-			// 지도에 선을 표시합니다 
-			polyline.setMap(map);
-			}
-			
-		};
 
+			// DIV내용 구성
+			function planList(jsonObj) {
+
+				var html = '<ul style="margin-top:10px; border : 1.5px solid #03a6ff; padding:10px; border-radius:7px;" lat = "'+jsonObj.local_lat+'" lng = "'+jsonObj.local_lng+'" uid = "'+jsonObj.local_uid+'" pid = "'+index+'">'
+						+ '<li style="list-style:none" id = "local_name">여행지 : '
+						+ jsonObj.local_name
+						+ '</li>'
+						+ '<li style="list-style:none"><span style = "width : 100px">숙박일 : </span><input style = "width : 50px; background : none; border : none; text-align : right;" type="number" id = "stay'+index+'" name = "stay'+index+'"/>박</li>'
+						//		+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'" name = "trans'+index+'"/>'
+
+						+ '</ul>';
+				arr.push(index);
+				$('#planList').append(html);
+				index++;
+				//	PlanList.push({
+				//		latlng: new kakao.maps.LatLng(jsonObj.local_lat,jsonObj.local_lng)
+				//	});
+
+				linePath.push(new kakao.maps.LatLng(
+						parseFloat(jsonObj.local_lat),
+						parseFloat(jsonObj.local_lng)));
+				polyline.setPath(linePath);
+
+				line();
+
+				polyline.setMap(null);
+				// 지도에 선을 표시합니다 
+				polyline.setMap(map);
+			}
+
+		};
 
 		// 검색기능
 		function Search() {
 			var a = $('.search-input').val().trim();
-			if(a != ""){
-				if(a.length <= 1){
+			if (a != "") {
+				if (a.length <= 1) {
 					alert("검색어는 두글자 이상 입력해주세요");
-				}else{
-					
-					var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"+a+"";
+				} else {
+
+					var url = "${pageContext.request.contextPath}/AJAXLocal/Search/"
+							+ a + "";
 					$.ajax({
 						url : url,
 						type : "GET",
@@ -434,107 +470,122 @@
 						success : function(data, status) {
 							if (status == "success") {
 								SearchList(data);
-							};
+							}
+							;
 						}
 					});//end ajax
 				}
 			}
 		};// end Search()
-		
+
 		function SearchList(jsonObj) {
 			//데이터가져와서 특정 오버레이 오픈시켜주기
 			var count = jsonObj.count;
 			var list = jsonObj.list;
-			if(count == 0){
+			if (count == 0) {
 				alert("검색된 결과가 없습니다. 검색어를 확인해주세요")
-			}else if(count == 1){
-				
-				var myLatlng = new kakao.maps.LatLng(list[0].local_lat,list[0].local_lng);
-				
+			} else if (count == 1) {
+
+				var myLatlng = new kakao.maps.LatLng(list[0].local_lat,
+						list[0].local_lng);
+
 				overlay = new kakao.maps.CustomOverlay();
 				var content = document.createElement('div')
 				content.className = 'wrap';
-				content.innerHTML=
-					'   <div class="info">' + 
-					'        <div class="title">' + list[0].local_name + 
-					'            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-					'        </div>' + 
-					'        <div class="body">' + 
-					'            <div class="img">' +
-					'                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">' +
-					'            </div>' + 
-					'            <div class="desc">' + 
-					'                <div class="ellipsis">'+list[0].local_hello+'</div>' + 
-					'                <div class="jibun ellipsis">tel : '+list[0].local_tel+'</div>' + 
-					'                <div><button class="Add" onclick="Add('+list[0].local_uid+')">지역 추가하기</button></div>' + 
-					'            </div>' + 
-					'        </div>' + 
-					'    </div>';
+				content.innerHTML = '   <div class="info">'
+						+ '        <div class="title">'
+						+ list[0].local_name
+						+ '            <div class="close" onclick="closeOverlay()" title="닫기"></div>'
+						+ '        </div>'
+						+ '        <div class="body">'
+						+ '            <div class="img">'
+						+ '                <img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png" width="73" height="70">'
+						+ '            </div>'
+						+ '            <div class="desc">'
+						+ '                <div class="ellipsis">'
+						+ list[0].local_hello
+						+ '</div>'
+						+ '                <div class="jibun ellipsis">tel : '
+						+ list[0].local_tel
+						+ '</div>'
+						+ '                <div><button class="Add" onclick="Add('
+						+ list[0].local_uid + ')">지역 추가하기</button></div>'
+						+ '            </div>' + '        </div>'
+						+ '    </div>';
 				overlay.setContent(content);
-				overlay.setPosition(myLatlng);		
+				overlay.setPosition(myLatlng);
 				map.setLevel(9);
 				map.setCenter(myLatlng);
 				overlay.setMap(map);
-				
-			}else{
+
+			} else {
 				alert("2개 이상의 결과가 존재합니다. 조금 더 정확한 검색어를 입력해주세요")
 			}
 		};
-		
+
 		// 오버레이 삭제
 		function closeOverlay() {
 
 			overlay.setMap(null);
-			};
-		
+		};
+
 		// 선긋기
 		function line() {
-			
-			$('#planList').sortable({
-				cursor : 'move',
-				opacity : 0.5,
-				update:function(){
-					
-					lineLat = $('#planList').sortable('toArray',{attribute: "lat"});
-					lineLng = $('#planList').sortable('toArray',{attribute: "lng"});
-					planLocalUid = $('#planList').sortable('toArray',{attribute: "uid"});
-					planindex = $('#planList').sortable('toArray',{attribute: "pid"});
-						// 지도에 표시할 선의 위치배열을 생성합니다
-						linePath = [];
-						planSchedule = [];
-						arr = [];
-						for (var i = 0; i < lineLat.length; i++) {
-							linePath.push(new kakao.maps.LatLng(parseFloat(lineLat[i]),parseFloat(lineLng[i])));
-							arr.push(planindex[i]);
-							// 변경되면 모든 숙박일과 교통수단을 초기화
-							
-							
-							planSchedule.push({
-								plan_local_uid : planLocalUid[i],
-								plan_next_local_uid : planLocalUid[i+1]
+
+			$('#planList').sortable(
+					{
+						cursor : 'move',
+						opacity : 0.5,
+						update : function() {
+
+							lineLat = $('#planList').sortable('toArray', {
+								attribute : "lat"
+							});
+							lineLng = $('#planList').sortable('toArray', {
+								attribute : "lng"
+							});
+							planLocalUid = $('#planList').sortable('toArray', {
+								attribute : "uid"
+							});
+							planindex = $('#planList').sortable('toArray', {
+								attribute : "pid"
+							});
+							// 지도에 표시할 선의 위치배열을 생성합니다
+							linePath = [];
+							planSchedule = [];
+							arr = [];
+							for (var i = 0; i < lineLat.length; i++) {
+								linePath.push(new kakao.maps.LatLng(
+										parseFloat(lineLat[i]),
+										parseFloat(lineLng[i])));
+								arr.push(planindex[i]);
+								// 변경되면 모든 숙박일과 교통수단을 초기화
+
+								planSchedule.push({
+									plan_local_uid : planLocalUid[i],
+									plan_next_local_uid : planLocalUid[i + 1]
 								});
-							
-							polyline.setPath(linePath);	
-						}
-						
-					}// end UpdateFunction
-				
-			});// end sortable()
+
+								polyline.setPath(linePath);
+							}
+
+						}// end UpdateFunction
+
+					});// end sortable()
 			$('#planList').disableSelection();
 		};
-		
+
 		function saveOk() {
 			//일정이 없을때는 실행 안되게 막아주기
 			alert("들어오니?");
-			if($('#trans0').val() == null){
+			if ($('#trans0').val() == null) {
 				alert("최소 한 곳 이상의 여행지를 선택해주세요.");
 				return false;
-			}else{
+			} else {
 				return true;
 			}
 			return false;
 		};
-		
 	</script>
 
 

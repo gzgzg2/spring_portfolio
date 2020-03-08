@@ -9605,7 +9605,7 @@ a, button, .btn {
 .app-header__logo .logo-src {
 	height: 23px;
 	width: 97px;
-	background: url(assets/images/logo-inverse.png)
+	background: url(assets/images/marker.png)
 }
 
 .app-header__menu, .app-header__mobile-menu {
@@ -10468,7 +10468,7 @@ a, button, .btn {
 	flex: 1;
 	display: flex;
 	z-index: 8;
-	position: relative
+	position: relative;
 }
 
 .app-main .app-main__outer {
@@ -10482,7 +10482,7 @@ a, button, .btn {
 	padding: 30px 30px 0;
 	flex: 1;
 	position: relative;
-	overflow: hidden;
+	height:auto;
 }
 
 .app-theme-white.app-container {
@@ -24932,7 +24932,7 @@ a.fc-more:hover {
 	.app-main .app-main__inner {
 		padding: 15px 15px 0;
 		position: relative;
-		overflow: hidden;
+		
 	}
 	.mbg-3, body .card.mb-3 {
 		margin-bottom: 15px !important

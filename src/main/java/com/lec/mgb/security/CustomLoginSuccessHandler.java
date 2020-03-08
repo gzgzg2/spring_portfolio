@@ -70,9 +70,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			
 			httpSession.setAttribute("loginUid", dto.getMember_uid());
 			httpSession.setAttribute("userPic", dto.getMember_pic());
+			httpSession.setAttribute("userId", member_id);
 			
 			System.out.println(httpSession.getAttribute("loginUid"));
 			System.out.println(httpSession.getAttribute("userPic"));
+			System.out.println(httpSession.getAttribute("userId"));
 			
 			System.out.println(request.getContextPath() + "/user/mypage/mypageInfo");
 			response.sendRedirect(request.getContextPath() + "/user/mypage/mypageInfo");
