@@ -28,6 +28,18 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9037ea16d4cbbcb65b73a83b351ca740&libraries=services"></script>
 <script>
+$(document).ready(function(){
+	$(".menu>a").click(function(){
+		var submenu = $(this).next("ul");
+		
+		if(submenu.is(":visible")){
+			submenu.slideUp();
+		} else {
+			submenu.slideDown();
+		}
+	});
+});
+
 function chklocal() {
 
 	frm = document.forms['local_frm'];
@@ -197,21 +209,49 @@ function search_local_addr() {
 							<div class="app-sidebar__inner">
 								<ul class="vertical-nav-menu">
 
-									<li><a href="admin_MemberManage" class="mm-active"> <i
-											class="metismenu-icon pe-7s-rocket"></i> 회원 관리
-									</a></li>
+									<li>
+										<a href="admin_MemberManage" class="mm-active"> 
+											<i class="metismenu-icon pe-7s-users"></i>회원 관리
+										</a>
+									</li>
 
-									<li><a href="admin_LocalManage"> <i
-											class="metismenu-icon pe-7s-mouse"></i> 관광지 관리
-									</a></li>
-									
-									<li><a href="admin_BookingManage"> <i
-											class="metismenu-icon pe-7s-display2"></i> 예약 관리
-									</a></li>
+									<li>
+										<a href="admin_LocalManage">
+											<i class="metismenu-icon pe-7s-mouse"></i>관광지 관리
+										</a>
+									</li>
 
-									<li><a href="admin_MotelManage"> <i
-											class="metismenu-icon pe-7s-display2"></i> 플래너 관리
-									</a></li>
+									<li class="menu">
+										<a href="#">
+											<i class="metismenu-icon pe-7s-note2"></i>예약 관리
+										</a>
+										<ul class="hide">
+											<li>
+												<a href="admin_InnManage"><i
+													class="metismenu-icon pe-7s-home"></i>숙소 예약관리</a>
+											</li>
+											<li>
+												<a href="admin_TourManage">투어 예약관리</a>
+											</li>
+											<li>
+												<a href="admin_ActivManage">액티비티 예약관리</a>
+											</li>
+										</ul>
+									</li>
+
+									<li class="menu">
+										<a href="#">
+											<i class="metismenu-icon pe-7s-plane"></i>플래너 관리
+										</a>
+										<ul class="hide">
+											<li>
+												<a href="admin_PlannerManage">플래너 관리 </a>
+											</li>
+											<li>
+												<a href="admin_GoodPlannerManage">우수 플래너관리</a>
+											</li>
+										</ul>
+									</li>
 
 								</ul>
 							</div>

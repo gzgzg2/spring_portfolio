@@ -14,6 +14,10 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/slicktheme.css">
     <title>귤귤 플래너</title>
     <style>
+    
+    body {
+		overflow-x: hidden;    
+    }
 
     .slick-slide {
       margin: 0px 20px;
@@ -44,37 +48,272 @@
     .hothot2 {
     	border: 1px solid #ebebeb;
     }
+    .header-section.header-normal .menu-item {
+	-webkit-box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
+	box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
+}
+.top-nav {
+	border-bottom: 1px solid #e5e5e5;
+}
+.top-nav .tn-left li {
+	list-style: none;
+	display: inline-block;
+	font-size: 16px;
+	color: #19191a;
+	font-weight: 500;
+	padding: 14px 0 12px;
+	margin-right: 64px;
+	position: relative;
+}
+.top-nav .tn-left li:after {
+	position: absolute;
+	right: -32px;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	background: #e5e5e5;
+	content: "";
+}
+.top-nav .tn-left li:last-child {
+	margin-right: 0;
+}
+.top-nav .tn-left li:last-child:after {
+	display: none;
+}
+.top-nav .tn-left li i {
+	color: #dfa974;
+	margin-right: 4px;
+}
+.top-nav .tn-right {
+	text-align: right;
+}
+.top-nav .tn-right .top-social {
+	display: inline-block;
+	margin-right: 35px;
+	padding: 13px 0;
+}
+.top-nav .tn-right .top-social a {
+	display: inline-block;
+	font-size: 16px;
+	color: #19191a;
+	margin-left: 15px;
+}
+.top-nav .tn-right .bk-btn {
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 700;
+	padding: 16px 28px 15px;
+	background: #dfa974;
+	color: #ffffff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+.top-nav .tn-right .language-option {
+	display: inline-block;
+	margin-left: 30px;
+	cursor: pointer;
+	padding: 13px 0px 11px;
+	position: relative;
+}
+.top-nav .tn-right .language-option:hover .flag-dropdown {
+	top: 40px;
+	opacity: 1;
+	visibility: visible;
+}
+.top-nav .tn-right .language-option img {
+	height: 26px;
+	width: 26px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+.top-nav .tn-right .language-option span {
+	font-size: 16px;
+	color: #19191a;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.top-nav .tn-right .language-option .flag-dropdown {
+	position: absolute;
+	left: 0;
+	top: 60px;
+	width: 100px;
+	background: #ffffff;
+	display: block;
+	padding: 10px 15px;
+	-webkit-box-shadow: 0px 9px 10px rgba(25, 25, 26, 0.2);
+	box-shadow: 0px 9px 10px rgba(25, 25, 26, 0.2);
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	z-index: 99;
+}
+.top-nav .tn-right .language-option .flag-dropdown ul li {
+	list-style: none;
+	text-align: left;
+}
+.top-nav .tn-right .language-option .flag-dropdown ul li a {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: #19191a;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.top-nav .tn-right .language-option .flag-dropdown ul li a:hover {
+	color: #dfa974;
+}
+.menu-item {
+	position: relative;
+	z-index: 9;
+}
+.menu-item .logo {
+	padding: 25px 0;
+}
+.menu-item .logo a {
+	display: inline-block;
+}
+.menu-item .nav-menu {
+	margin-top: 7px;
+	text-align: right;
+}
+.menu-item .nav-menu .mainmenu {
+	display: inline-block;
+}
+.menu-item .nav-menu .mainmenu li {
+	list-style: none;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+}
+.menu-item .nav-menu .mainmenu li.active a:after {
+	opacity: 1;
+}
+.menu-item .nav-menu .mainmenu li:hover>a:after {
+	opacity: 1;
+}
+.menu-item .nav-menu .mainmenu li:hover .dropdown {
+	top: 77px;
+	opacity: 1;
+	visibility: visible;
+}
+.menu-item .nav-menu .mainmenu li a {
+	font-size: 16px;
+	color: #19191a;
+	margin-right: 42px;
+	font-weight: 500;
+	display: inline-block;
+	padding: 27px 0;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.menu-item .nav-menu .mainmenu li a:after {
+	position: absolute;
+	left: 0;
+	top: 52px;
+	width: 100%;
+	height: 2px;
+	background: #dfa974;
+	content: "";
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.menu-item .nav-menu .mainmenu li .dropdown {
+	position: absolute;
+	left: 0;
+	top: 97px;
+	width: 180px;
+	background: #ffffff;
+	z-index: 9;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	-webkit-box-shadow: 0px 9px 15px rgba(25, 25, 26, 0.05);
+	box-shadow: 0px 9px 15px rgba(25, 25, 26, 0.05);
+}
+.menu-item .nav-menu .mainmenu li .dropdown li {
+	list-style: none;
+	display: block;
+}
+.menu-item .nav-menu .mainmenu li .dropdown li a {
+	font-size: 16px;
+	color: #19191a;
+	display: block;
+	text-align: left;
+	padding: 8px 15px;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.menu-item .nav-menu .mainmenu li .dropdown li a:hover {
+	color: #dfa974;
+}
+.menu-item .nav-menu .mainmenu li .dropdown li a:after {
+	display: none;
+}
+.menu-item .nav-menu .nav-right {
+	display: inline-block;
+	margin-left: 43px;
+	padding: 27px 0px;
+}
+.menu-item .nav-menu .nav-right i {
+	font-size: 16px;
+	color: #19191a;
+	cursor: pointer;
+}
+.canvas-open {
+	display: none;
+}
+.offcanvas-menu-wrapper {
+	display: none;
+}
+.col-lg-2 {
+		-ms-flex: 0 0 16.666667%;
+		flex: 0 0 16.666667%;
+		max-width: 16.666667%;
+		float: left;
+		margin-left: 25%;
+	}
+	.col-lg-10 {
+		-ms-flex: 0 0 83.333333%;
+		flex: 0 0 83.333333%;
+		max-width: 83.333333%;
+		margin-right: 10%;
+	}
+img#Myprofile {
+	width: 50px  !important;
+	height: 50px !important;
+	border-radius: 50%  !important;
+}
+
+img#logoG {
+	margin-left: 20px;
+	width: 120px;
+	margin-bottom: 3px;
+}
     </style>
 </head>
+
 <body>
    <div class="wrap">
-      <header>
-         <div class="mgb_header">
-                <div class="mgb_inner_wrap">
-                    <nav class="gnb_container">
-                        <h1 class="mgb_logo"><a href="/"><img src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png">귤귤플래너</a></h1>
-                        <ul class="on_pc">
-                            <li class="gnb_item"><a href="/">예약내역</a></li>
-                            <li class="gnb_item"><a href="/">고객센터</a></li>
-                            <li class="gnb_item"><a href="/">로그인</a></li>
-                            <li class="gnb_item"><a href="/">회원가입</a></li>
-                        </ul>
-                    </nav>
-                    <nav class="lnb_container">
-                        <ul class="lnb_wrap">
-                            <li class="lnb_item"><a href="/">홈</a></li>
-                            <li class="lnb_item"><a href="/">플래너</a></li>
-                            <li class="lnb_item"><a href="/">제주여행</a></li>
-                            <li class="lnb_item"><a href="/">숙소</a></li>
-                            <li class="lnb_item"><a href="/">템플릿</a></li>
-                        </ul>
-                        <div>
-                            <a href="#"><i class="ico_search"></i></a>
-                        </div>
-                    </nav>
-                </div>
-         </div>
-        </header>
+      <c:choose>
+	
+		<c:when test="${not empty sessionScope.loginUid}">
+			<jsp:include page="../user/userLoginHeader.jsp"/>
+		</c:when>
+		
+		<c:otherwise>
+			<jsp:include page="../user/userHeader.jsp"/>
+		</c:otherwise>
+   	</c:choose>
         <main>
             <section class="section1">
                 <div class="mgb_inner_wrap">
@@ -133,7 +372,8 @@
             <section class="section3">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>투어 별점순(제목 정해주세요 ㅎㅎ)</h3>
+                        <h3>투어</h3>
+                        <p>별점순으로 정렬되었습니다.</p>
                     </div>
                     <div class="sale">
                         <ul>
@@ -157,7 +397,8 @@
             <section class="section4">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>액티비티 할인율순(제목 정해주세요 ㅎㅎ)</h3>
+                        <h3>액티비티</h3>
+                        <p>할인율순으로 정렬되었습니다.</p>
                     </div>
                     <div>
                         <section class="regular slider">
@@ -177,7 +418,8 @@
                        </section>    
                     </div>
                     <div>
-                        <h3>숙소 할인율순(제목 정해주세요 ㅎㅎ)</h3>
+                        <h3>숙소</h3>
+                        <p>할인율순으로 정렬되었습니다.</p>
                     </div>
                     <div>
                         <section class="center slider">

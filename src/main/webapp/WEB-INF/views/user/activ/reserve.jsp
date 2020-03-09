@@ -278,7 +278,16 @@
 
 <body>
 
-	<jsp:include page="../userHeader.jsp"/>
+	<c:choose>
+	
+		<c:when test="${not empty sessionScope.loginUid}">
+			<jsp:include page="../userLoginHeader.jsp"/>
+		</c:when>
+		
+		<c:otherwise>
+			<jsp:include page="../userHeader.jsp"/>
+		</c:otherwise>
+   	</c:choose>
 	
     <!-- Blog Details Hero End -->
 
