@@ -1,4 +1,4 @@
-SET SESSION FOREIGN_KEY_CHECKS=0;
+mSET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
@@ -11,8 +11,6 @@ DROP TABLE IF EXISTS INN;
 DROP TABLE IF EXISTS PLAN;
 DROP TABLE IF EXISTS LOCAL;
 
-DROP TABLE IF EXISTS member_auth;
-DROP TABLE member_auth cascade;
 
 DROP TABLE IF EXISTS PLANNER;
 DROP TABLE IF EXISTS member cascade;
@@ -95,7 +93,7 @@ CREATE TABLE MEMBER
 	member_email varchar(50) NOT NULL,
 	member_gender varchar(2) CHECK(member_gender IN ('M','F')),
 	member_birth date,
-	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
+	member_pic varchar(200) NOT NULL DEFAULT 'img_default.png',
 	member_tel varchar(50) NOT null default '01000000000',
 	enabled char(1) default '1',
 	auth varchar(50) NOT null default 'ROLE_MEMBER',
@@ -334,15 +332,7 @@ show tables;
 			  
 SELECT * FROM MEMBER;
 SELECT member_id username, auth FROM MEMBER WHERE member_id = 'alsry1';
-insert into member(
-	member_name,
-	member_id,
-	member_pw,
-	member_email, 
-	member_gender, 
-	member_birth,
-	member_pic,
-	member_tel) values ('조민성', 'qkrdnfka12', 'qkrdnfka1', 'gzgzg2@nate.com', 'M', '19920618', 'aa', '01030651234');
+
 
 
 
@@ -380,11 +370,19 @@ INSERT INTO PLAN VALUES(7,NOW(),1,1,2,1,7);
 INSERT INTO PLAN VALUES(8,NOW(),1,1,2,7,3);
 INSERT INTO PLAN VALUES(9,NOW(),1,1,3,1,2);
 INSERT INTO PLAN VALUES(10,NOW(),1,1,3,2,4);
+INSERT INTO PLAN VALUES(11,NOW(),1,1,3,4,7);
+INSERT INTO PLAN VALUES(12,NOW(),1,1,4,7,2);
+INSERT INTO PLAN VALUES(13,NOW(),1,1,4,2,3);
+INSERT INTO PLAN VALUES(14,NOW(),1,1,4,3,1);
+INSERT INTO PLAN VALUES(15,NOW(),1,1,4,1,8);
+INSERT INTO PLAN VALUES(16,NOW(),1,1,4,8,5);
+
 
 
 INSERT INTO PLANNER VALUES(1,'최현진님 플래너',0,0,0,0,0,0,1);
 INSERT INTO PLANNER VALUES(2,'최현진님 플래너',0,0,0,0,0,0,1);
-INSERT INTO PLANNER VALUES(3,'박지민님 플래너',0,0,0,0,0,0,1);
+INSERT INTO PLANNER VALUES(3,'박지민님 플래너',0,0,0,0,0,0,2);
+INSERT INTO PLANNER VALUES(4,'임민교님 플래너',0,0,0,0,0,0,3);
 SELECT 
 	t.tour_uid, t.tour_name, t.tour_cost, t.tour_period, t.tour_pic, AVG(r.review_star)
 FROM
@@ -395,11 +393,14 @@ GROUP BY
 ORDER BY
 	t.tour_cost ASC;
 
+UPDATE member SET auth='ROLE_ADMIN' WHERE member_uid = 1;
+
+select * from tour;
 
 
 
 
 
-insert into authorities values ('user00', 'ROLE_USER');
+
 
 select * from `local`;
