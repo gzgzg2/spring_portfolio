@@ -11,7 +11,6 @@
 				planner join plan on planner.planner_uid = plan.planner_uid
 				join local on plan.plan_local_uid=local.local_uid
 			where planner.planner_uid = #{param1}
-			order by planner.planner_uid
 		</select>
 		
 		<select id="selectPlannerUid" resultType="com.lec.mgb.mybatis.beans.PlannerListDTO">
@@ -20,8 +19,10 @@
 			FROM 
 				planner join plan on planner.planner_uid = plan.planner_uid
 				join local on plan.plan_local_uid=local.local_uid
+			where planner.planner_stat = 0
 			group by planner.planner_uid
 			order by planner.planner_uid desc
+			
 		</select>
 
 	   </mapper>	

@@ -507,11 +507,11 @@ img#logoG {
             <section class="section2">
                 <div class="mgb_inner_wrap">
                     <div>
-                        <h3>다른 여행자들의 플래너 855,014개</h3>
+                        <h3>우수 플래너</h3>
                     </div>
                     <div>
                         <ul>
-                            <li>최신순으로 정렬되었습니다.</li>
+                            <li>다른 여행자들의 경로를 확인하세요.</li>
                         </ul>
                     </div>
                     <div class="new">
