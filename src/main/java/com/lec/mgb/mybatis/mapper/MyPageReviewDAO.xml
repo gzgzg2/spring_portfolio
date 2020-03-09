@@ -47,4 +47,30 @@
 		 LIMIT 
 		 	#{page}, 10	
 	</select>
+	
+	<select id="selectActiv" resultType="com.lec.mgb.mybatis.beans.MyPageReviewDTO">
+		SELECT 
+			re.review_content, re.review_uid, re.review_title, m.member_name, b.book_uid
+		FROM 
+			member m, review re, book b 
+		 WHERE
+		 	m.member_uid = b.member_uid and b.book_uid = re.review_uid  
+		 AND
+		  	re.review_uid = #{review_uid};
+	</select>
+	
+	<update id="updateReview" flushCache="true">
+		UPDATE
+			REVIEW
+		SET 
+			review_title = #{dto.review_title}, review_content = #{dto.review_content}
+		WHERE 
+			review_uid = #{review_uid}
+	</update>
+	
+	<delete id="deleteReview">
+		delete  from REVIEW where review_uid = #{review_uid}
+	</delete>
+	
+	
 </mapper>

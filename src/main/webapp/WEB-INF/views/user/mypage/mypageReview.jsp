@@ -187,7 +187,7 @@
 								table += "<td><a class='aC' href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" +data[i].review_uid + "'>" + data[i].tour_name + "</a></td>";
 								table += "<td>" + data[i].book_date + "</td>";
 								table += "<td>" + data[i].tour_period + "</td>";
-								table += '<td><a class="aC" href="${pageContext.request.contextPath}/user/mypage/mypageReviewDeleteOk/${dto.review_uid}">리뷰삭제</a></td>';
+								table += '<td><a class="aC" href="${pageContext.request.contextPath}/user/mypage/mypageReviewDeleteOk/'+data[i].book_uid +'>리뷰삭제</a></td>';
 								table += "</tr>";
 							}
 							if (table == "") {
@@ -217,7 +217,7 @@
 								table += "<td>" + data[i].member_name + "</td>";
 								table += "<td><a class='aC' href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" +data[i].review_uid + "'>" + data[i].activ_name + "</a></td>";
 								table += "<td>" + data[i].activ_loc + "</td>";
-								table += '<td><a class="aC" href="${pageContext.request.contextPath}/user/mypage/mypageReviewDeleteOk/${dto.review_uid}">리뷰삭제</a></td>';
+								table += '<td><a class="aC" href="${pageContext.request.contextPath}/user/mypage/mypageReviewDeleteOk/'+data[i].review_uid +'">리뷰삭제</a></td>';
 								table += "</tr>";
 							}
 							if (table == "") {

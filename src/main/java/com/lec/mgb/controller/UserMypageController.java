@@ -9,18 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.mgb.c.C;
 import com.lec.mgb.command.Command;
+import com.lec.mgb.command.MyPageDeleteOkCommand;
 import com.lec.mgb.command.MyPageInfoCommand;
 import com.lec.mgb.command.MyPageInfoUpdateCommand;
 import com.lec.mgb.command.MyPagePWChangeCommand;
+import com.lec.mgb.command.MyPageUpdateOkCommand;
+import com.lec.mgb.command.UserMyPageUpdateCommand;
 import com.lec.mgb.mybatis.beans.MyPageInfoDTO;
+import com.lec.mgb.mybatis.beans.MyPageReviewDTO;
 
 @Controller
 @RequestMapping("/user/mypage")
@@ -80,8 +84,30 @@ public class UserMypageController {
 	@RequestMapping("/mypageReview")
 	public String mypageReview() {
 		return "user/mypage/mypageReview";
-		
 	}
-
+	
+	@RequestMapping("/mypageReviewUpdate/{review_uid}")
+	public String mypageReviewUpdate(@PathVariable("review_uid") String review_uid ,Model model) {
+		model.addAttribute("review_uid", review_uid);
+		command = new UserMyPageUpdateCommand();
+		command.execute(model);
+		System.out.println(model.getAttribute("review_uid"));
+		return "user/mypage/mypageReviewUpdate";
+	}
+	
+	@RequestMapping(value = "/mypageReviewUpadateOk", method = RequestMethod.POST)
+	public String mypageReviewUpdateOk(@ModelAttribute("dto") MyPageReviewDTO dto, Model model) {
+		command = new MyPageUpdateOkCommand();
+		command.execute(model);
+		return "user/mypage/mypageReviewUpdateOk";
+	}
+	
+	@RequestMapping("mypageReviewDeleteOk/{review_uid}")
+	public String mypageReviewDeleteOk(@PathVariable("review_uid") String review_uid ,Model model) {
+		model.addAttribute("review_uid", review_uid);
+		command = new MyPageDeleteOkCommand();
+		command.execute(model);
+		return "user/mypage/mypageReviewDeleteOk";
+	}
 	
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/USERCSS/style.css" type="text/css">
-
+	
     <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/util.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/main.css">
@@ -41,46 +42,19 @@
 </head>
 
 <body>
+   	<c:choose>
+	
+		<c:when test="${not empty sessionScope.loginUid}">
+			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
+		</c:when>
+		
+		<c:otherwise>
+			<jsp:include page="../topMenuIncludeLogOut.jsp"/>
+		</c:otherwise>
+		
+   	</c:choose>
     <!-- Page Preloder -->
-    <header>
-        <div class="menu-item">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="nav-menu">
-                            <nav class="mainmenu">
-                                <ul>
-                                    <li><a href="./index.html">Home</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="active"><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
-                                </ul>
-                            </nav>
-                            <div class="nav-right search-switch">
-                                <i class="icon_search"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+   	
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100  login_form">
