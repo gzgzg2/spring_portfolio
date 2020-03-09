@@ -95,7 +95,7 @@ CREATE TABLE MEMBER
 	member_email varchar(50) NOT NULL,
 	member_gender varchar(2) CHECK(member_gender IN ('M','F')),
 	member_birth date,
-	member_pic varchar(200) NOT NULL DEFAULT 'nopic',
+	member_pic varchar(200) NOT NULL DEFAULT 'img_default.png',
 	member_tel varchar(50) NOT null default '01000000000',
 	enabled char(1) default '1',
 	auth varchar(50) NOT null default 'ROLE_MEMBER',
@@ -395,11 +395,22 @@ GROUP BY
 ORDER BY
 	t.tour_cost ASC;
 
-
-
-
-
-
 insert into authorities values ('user00', 'ROLE_USER');
 
-select * from `local`;
+		delete  from REVIEW where review_uid = 244;
+			
+	SELECT 
+			a.activ_name, a.activ_loc, re.review_uid, re.review_title, m.member_name, b.book_uid
+		FROM 
+			member m , activ a, book b, review re, ticket t
+		 WHERE
+		 	m.member_uid = b.member_uid and b.book_uid = re.review_uid and a.activ_uid = t.activ_uid
+		 AND
+		  	m.member_uid = 2
+		 ORDER BY 
+		 	b.book_uid DESC
+		 LIMIT 
+		 	0, 10	;			
+	
+	
+select * from review;
