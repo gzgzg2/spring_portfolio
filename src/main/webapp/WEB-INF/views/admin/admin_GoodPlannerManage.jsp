@@ -334,7 +334,7 @@ function loadPage(page){
 
 									<li>
 										<a href="admin_LocalManage">
-											<i class="metismenu-icon pe-7s-mouse"></i>관광지 관리
+											<i class="metismenu-icon pe-7s-map-marker"></i>관광지 관리
 										</a>
 									</li>
 
@@ -356,11 +356,11 @@ function loadPage(page){
 										</ul>
 									</li>
 
-									<li class="menu">
-										<a href="#" class="mm-active">
+									<li class="menu" class="mm-active">
+										<a href="#">
 											<i class="metismenu-icon pe-7s-plane"></i>플래너 관리
 										</a>
-										<ul>
+										<ul class="hide">
 											<li>
 												<a href="admin_PlannerManage">플래너 관리 </a>
 											</li>
@@ -368,6 +368,12 @@ function loadPage(page){
 												<a href="admin_GoodPlannerManage" class="mm-active">우수 플래너관리</a>
 											</li>
 										</ul>
+									</li>
+									
+									<li>
+										<a href="admin_data" class="mm-active"> 
+											<i class="metismenu-icon pe-7s-download"></i>데이터 갱신
+										</a>
 									</li>
 
 								</ul>
@@ -416,7 +422,7 @@ function loadPage(page){
 										name="keyword" placeholder="내용을 입력해주세요">
 
 								</div>
-									<button id="admin-search-bar-btn" onclick="search(1)">검색</button>
+									<button class="admin-search-bar-btn" onclick="search(1)">검색</button>
 							</div>
 							
 							<table class="admin-table table-bordered" id="list">

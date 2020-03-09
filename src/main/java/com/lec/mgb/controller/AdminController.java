@@ -57,6 +57,10 @@ public class AdminController {
 		C.context = context;
 	}
 	
+	@RequestMapping(value = "/admin_data")
+	public String admin_data(Model model) {
+		return "admin/admin_data";
+	}
 	
 	// 회원관리
 	@RequestMapping(value = "/admin_MemberManage")

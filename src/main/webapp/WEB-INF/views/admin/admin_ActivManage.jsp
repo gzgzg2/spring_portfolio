@@ -282,7 +282,7 @@ function loadPage(page){
 
 									<li>
 										<a href="admin_LocalManage">
-											<i class="metismenu-icon pe-7s-mouse"></i>관광지 관리
+											<i class="metismenu-icon pe-7s-map-marker"></i>관광지 관리
 										</a>
 									</li>
 
@@ -290,7 +290,7 @@ function loadPage(page){
 										<a href="#" class="mm-active">
 											<i class="metismenu-icon pe-7s-note2"></i>예약 관리
 										</a>
-										<ul>
+										<ul class="hide">
 											<li>
 												<a href="admin_InnManage"><i
 													class="metismenu-icon pe-7s-home"></i>숙소 예약관리</a>
@@ -317,6 +317,12 @@ function loadPage(page){
 											</li>
 										</ul>
 									</li>
+									
+									<li>
+										<a href="admin_data"> 
+											<i class="metismenu-icon pe-7s-download"></i>데이터 갱신
+										</a>
+									</li>
 
 								</ul>
 							</div>
@@ -333,9 +339,6 @@ function loadPage(page){
 
 		                <div class="app-main__inner-crawling">
 		
-		                    <div class="admin-search-motel-crawling-btn">
-	                        	<input type="button" onclick="location.href='./activCrawl'" class="mb-2 mr-2 btn btn-primary active" value="액티비티 정보 가져오기">
-	                   		</div>
 		                    
 							<div class="admin-search-bar">
 

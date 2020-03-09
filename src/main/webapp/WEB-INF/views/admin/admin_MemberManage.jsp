@@ -280,7 +280,7 @@ function chkDelete() {
 
 									<li>
 										<a href="admin_LocalManage">
-											<i class="metismenu-icon pe-7s-mouse"></i>관광지 관리
+											<i class="metismenu-icon pe-7s-map-marker"></i>관광지 관리
 										</a>
 									</li>
 
@@ -314,6 +314,12 @@ function chkDelete() {
 												<a href="admin_GoodPlannerManage">우수 플래너관리</a>
 											</li>
 										</ul>
+									</li>
+									
+									<li>
+										<a href="admin_data"> 
+											<i class="metismenu-icon pe-7s-download"></i>데이터 갱신
+										</a>
 									</li>
 
 								</ul>
