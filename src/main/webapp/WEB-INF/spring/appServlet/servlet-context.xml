@@ -20,6 +20,7 @@
 	<resources mapping="/ADMINCSS/**" location="/ADMINCSS/" />
 	<resources mapping="/ckeditor/**" location="/ckeditor/" />
 	<resources mapping="/USERPIC/**" location="/USERPIC/" />
+	<resources mapping="/LOCALPIC/**" location="/LOCALPIC/" />
 
 	<!-- security csrf -->
 	

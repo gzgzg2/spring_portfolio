@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.IAdminLocalDAO">
+	
+	<insert id="insert" flushCache="true" parameterType="com.lec.mgb.mybatis.beans.AdminLocalDTO">
+		
+		INSERT INTO LOCAL
+			(local_name, local_hello, local_lat, local_lng, local_loc, local_tel, local_pic)
+		VALUES
+			(#{local_name}, #{local_hello}, #{local_lat}, #{local_lng}, #{local_loc}, #{local_tel}, #{local_pic});
+		
+	</insert>
+	
+	<select id="selectByUid" resultType="com.lec.mgb.mybatis.beans.AdminLocalDTO">
+		
+		SELECT 
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,
+			IFNULL(case left(local_tel,2)
+			when '02' then
+				case char_length(local_tel)
+					when '10' then concat('02','-',substring(local_tel,3,4),'-',right(local_tel,4))
+					when '11' then concat('02','-',substring(local_tel,3,3),'-',right(local_tel,4))
+				end
+			else
+				case char_length(local_tel)
+					when '10' then concat(left(local_tel,3),'-',substring(local_tel,4,3),'-',right(local_tel,4))
+					when '11' then concat(left(local_tel,3),'-',substring(local_tel,4,4),'-',right(local_tel,4))
+					when '8' then concat(left(local_tel,4),'-',substring(local_tel,4,4))
+				end
+			end,'미등록') as 'local_tel',
+			local_pic
+		FROM 
+			LOCAL
+		WHERE
+			local_uid = #{local_uid};
+
+	</select>
+	
+	<update id="update">
+		UPDATE
+			LOCAL
+		SET 
+			local_hello = #{a.local_hello},
+			local_pic = #{a.local_pic}
+		WHERE
+			local_uid = #{param1};
+	</update>
+	
+	<delete id="deleteByUid">
+		DELETE FROM LOCAL WHERE local_uid = #{uid};
+	</delete>
+	
+	<select id="select" resultType="com.lec.mgb.mybatis.beans.AdminLocalDTO">
+		SELECT
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,
+			IFNULL(case left(local_tel,2)
+			when '02' then
+				case char_length(local_tel)
+					when '10' then concat('02','-',substring(local_tel,3,4),'-',right(local_tel,4))
+					when '11' then concat('02','-',substring(local_tel,3,3),'-',right(local_tel,4))
+				end
+			else
+				case char_length(local_tel)
+					when '10' then concat(left(local_tel,3),'-',substring(local_tel,4,3),'-',right(local_tel,4))
+					when '11' then concat(left(local_tel,3),'-',substring(local_tel,4,4),'-',right(local_tel,4))
+					when '8' then concat(left(local_tel,4),'-',substring(local_tel,4,4))
+				end
+			end,'미등록') as 'local_tel',
+			local_pic
+		FROM
+			LOCAL
+		ORDER BY
+			local_uid DESC;
+	</select>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*) FROM LOCAL
+	</select>
+	
+	<select id="selectByRow" resultType="com.lec.mgb.mybatis.beans.AdminLocalDTO">
+		SELECT
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,
+			IFNULL(case left(local_tel,2)
+			when '02' then
+				case char_length(local_tel)
+					when '10' then concat('02','-',substring(local_tel,3,4),'-',right(local_tel,4))
+					when '11' then concat('02','-',substring(local_tel,3,3),'-',right(local_tel,4))
+				end
+			else
+				case char_length(local_tel)
+					when '10' then concat(left(local_tel,3),'-',substring(local_tel,4,3),'-',right(local_tel,4))
+					when '11' then concat(left(local_tel,3),'-',substring(local_tel,4,4),'-',right(local_tel,4))
+					when '8' then concat(left(local_tel,4),'-',substring(local_tel,4,4))
+				end
+			end,'미등록') as 'local_tel',
+			local_pic
+		FROM
+			LOCAL
+		ORDER BY
+			local_uid DESC	
+		LIMIT #{fromRow}, #{writePages}
+	</select>
+	
+		<select id="searchname" resultType="com.lec.mgb.mybatis.beans.AdminLocalDTO"> 
+		SELECT 
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,
+			IFNULL(case left(local_tel,2)
+			when '02' then
+				case char_length(local_tel)
+					when '10' then concat('02','-',substring(local_tel,3,4),'-',right(local_tel,4))
+					when '11' then concat('02','-',substring(local_tel,3,3),'-',right(local_tel,4))
+				end
+			else
+				case char_length(local_tel)
+					when '10' then concat(left(local_tel,3),'-',substring(local_tel,4,3),'-',right(local_tel,4))
+					when '11' then concat(left(local_tel,3),'-',substring(local_tel,4,4),'-',right(local_tel,4))
+					when '8' then concat(left(local_tel,4),'-',substring(local_tel,4,4))
+				end
+			end,'미등록') as 'local_tel'
+		FROM 
+			LOCAL
+		WHERE local_name LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			local_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="searchloc" resultType="com.lec.mgb.mybatis.beans.AdminLocalDTO"> 
+		SELECT 
+			local_uid,
+			local_name,
+			local_hello,
+			local_lat,
+			local_lng,
+			local_loc,
+			IFNULL(case left(local_tel,2)
+			when '02' then
+				case char_length(local_tel)
+					when '10' then concat('02','-',substring(local_tel,3,4),'-',right(local_tel,4))
+					when '11' then concat('02','-',substring(local_tel,3,3),'-',right(local_tel,4))
+				end
+			else
+				case char_length(local_tel)
+					when '10' then concat(left(local_tel,3),'-',substring(local_tel,4,3),'-',right(local_tel,4))
+					when '11' then concat(left(local_tel,3),'-',substring(local_tel,4,4),'-',right(local_tel,4))
+					when '8' then concat(left(local_tel,4),'-',substring(local_tel,4,4))
+				end
+			end,'미등록') as 'local_tel'
+		FROM 
+			LOCAL
+		WHERE local_loc LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			local_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+</mapper>

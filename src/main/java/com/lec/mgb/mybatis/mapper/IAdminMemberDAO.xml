@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.IAdminMemberDAO">
+	
+	<select id="select" resultType="com.lec.mgb.mybatis.beans.AdminMemberDTO">
+		SELECT 
+			member_uid,
+			member_name,
+			member_id,
+			member_email,
+			IFNULL(case left(member_tel,2)
+			when '02' then
+				case char_length(member_tel)
+					when '10' then concat('02','-',substring(member_tel,3,4),'-',right(member_tel,4))
+					when '11' then concat('02','-',substring(member_tel,3,3),'-',right(member_tel,4))
+				end
+			else
+				case char_length(member_tel)
+					when '10' then concat(left(member_tel,3),'-',substring(member_tel,4,3),'-',right(member_tel,4))
+					when '11' then concat(left(member_tel,3),'-',substring(member_tel,4,4),'-',right(member_tel,4))
+					when '8' then concat(left(member_tel,4),'-',substring(member_tel,4,4))
+				end
+			end,'미등록') as 'member_tel'
+		FROM 
+			MEMBER
+		ORDER BY
+			member_uid DESC;
+
+	</select>
+	
+	<delete id="deleteByUid">
+		DELETE FROM MEMBER WHERE member_uid = #{uid};
+	</delete>
+	 
+	<select id="selectByRow" resultType="com.lec.mgb.mybatis.beans.AdminMemberDTO">
+		SELECT 
+			member_uid,
+			member_name,
+			member_id,
+			member_email,
+			IFNULL(case left(member_tel,2)
+			when '02' then
+				case char_length(member_tel)
+					when '10' then concat('02','-',substring(member_tel,3,4),'-',right(member_tel,4))
+					when '11' then concat('02','-',substring(member_tel,3,3),'-',right(member_tel,4))
+				end
+			else
+				case char_length(member_tel)
+					when '10' then concat(left(member_tel,3),'-',substring(member_tel,4,3),'-',right(member_tel,4))
+					when '11' then concat(left(member_tel,3),'-',substring(member_tel,4,4),'-',right(member_tel,4))
+					when '8' then concat(left(member_tel,4),'-',substring(member_tel,4,4))
+				end
+			end,'미등록') as 'member_tel'
+		FROM 
+			MEMBER
+		ORDER BY
+			member_uid DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<select id="searchid" resultType="com.lec.mgb.mybatis.beans.AdminMemberDTO"> 
+		SELECT 
+			member_uid,
+			member_name,
+			member_id,
+			member_email,
+			IFNULL(case left(member_tel,2)
+			when '02' then
+				case char_length(member_tel)
+					when '10' then concat('02','-',substring(member_tel,3,4),'-',right(member_tel,4))
+					when '11' then concat('02','-',substring(member_tel,3,3),'-',right(member_tel,4))
+				end
+			else
+				case char_length(member_tel)
+					when '10' then concat(left(member_tel,3),'-',substring(member_tel,4,3),'-',right(member_tel,4))
+					when '11' then concat(left(member_tel,3),'-',substring(member_tel,4,4),'-',right(member_tel,4))
+					when '8' then concat(left(member_tel,4),'-',substring(member_tel,4,4))
+				end
+			end,'미등록') as 'member_tel'
+		FROM 
+			MEMBER
+		WHERE member_id LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			member_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="searchname" resultType="com.lec.mgb.mybatis.beans.AdminMemberDTO"> 
+		SELECT 
+			member_uid,
+			member_name,
+			member_id,
+			member_email,
+			IFNULL(case left(member_tel,2)
+			when '02' then
+				case char_length(member_tel)
+					when '10' then concat('02','-',substring(member_tel,3,4),'-',right(member_tel,4))
+					when '11' then concat('02','-',substring(member_tel,3,3),'-',right(member_tel,4))
+				end
+			else
+				case char_length(member_tel)
+					when '10' then concat(left(member_tel,3),'-',substring(member_tel,4,3),'-',right(member_tel,4))
+					when '11' then concat(left(member_tel,3),'-',substring(member_tel,4,4),'-',right(member_tel,4))
+					when '8' then concat(left(member_tel,4),'-',substring(member_tel,4,4))
+				end
+			end,'미등록') as 'member_tel'
+		FROM 
+			MEMBER
+		WHERE member_name LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			member_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+
+</mapper>

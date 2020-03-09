@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.IAdminPlannerDAO">
+
+	<select id="select" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO">
+		SELECT
+			planner_uid,
+			planner_title,
+			planner_view_cnt,
+			planner_stat,
+			format(planner_cost_trans, 0) planner_cost_trans,
+			format(planner_cost_inn, 0) planner_cost_inn
+		FROM
+			PLANNER
+	</select>
+	
+	<delete id="deleteByUid">
+		DELETE FROM PLANNER WHERE planner_uid = #{uid};
+	</delete>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*) FROM PLANNER
+	</select>
+	
+	<select id="selectByRow" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO">
+		SELECT
+			planner_uid,
+			planner_title,
+			planner_view_cnt,
+			planner_stat,
+			format(planner_cost_trans, 0) planner_cost_trans,
+			format(planner_cost_inn, 0) planner_cost_inn
+		FROM
+			PLANNER
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+
+	<select id="selectViewByRow" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO">
+		SELECT
+			planner_uid,
+			planner_title,
+			planner_view_cnt,
+			planner_stat,
+			format(planner_cost_trans, 0) planner_cost_trans,
+			format(planner_cost_inn, 0) planner_cost_inn
+		FROM
+			PLANNER
+		WHERE planner_stat = '0'
+		ORDER BY
+			planner_view_cnt DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<update id="updateGood">
+		update 
+			planner
+		set
+			planner_stat = '1'
+		where 
+			planner_uid = #{planner_uid};
+	</update>
+	
+	<update id="updateNGood">
+		update 
+			planner
+		set
+			planner_stat = '0'
+		where 
+			planner_uid = #{planner_uid};
+	</update>
+	
+	<select id="select_good" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO">
+		SELECT * FROM PLANNER
+		WHERE planner_stat = '1';
+	</select> 
+	
+	<select id="count_goodPlanner" resultType="int">
+		SELECT COUNT(*) FROM PLANNER WHERE planner_stat = '1';
+	</select>
+	
+	<select id="search_title" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO"> 
+		SELECT 
+			planner_uid,
+			planner_title,
+			planner_view_cnt,
+			planner_stat,
+			format(planner_cost_trans, 0) planner_cost_trans,
+			format(planner_cost_inn, 0) planner_cost_inn
+		FROM 
+			PLANNER
+		WHERE planner_title LIKE CONCAT("%",#{keyword},"%")
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="search_Goodtitle" resultType="com.lec.mgb.mybatis.beans.AdminPlannerDTO"> 
+		SELECT 
+			planner_uid,
+			planner_title,
+			planner_view_cnt,
+			planner_stat,
+			format(planner_cost_trans, 0) planner_cost_trans,
+			format(planner_cost_inn, 0) planner_cost_inn
+		FROM 
+			PLANNER
+		WHERE planner_stat = '0' and planner_title LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY
+			planner_view_cnt DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+		
+</mapper>
