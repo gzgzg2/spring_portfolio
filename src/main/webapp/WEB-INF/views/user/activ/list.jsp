@@ -42,12 +42,32 @@
     		background-size: cover;
     		background-position: 50%;
     	}
-        
-        .breadcrumb-section2 h2, #hotel1, .section-title h2 {
-        	text-shadow: 0px 2px 6px grey;
+        .breadcrumb-text > h2 {
         	padding: 15px 0px;
         	font-weight: bold;
+        	text-shadow: 0px 2px 6px #8EC0E4;
         	color: white;
+        }
+        #hotel1 {
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	background: #8EC0E4;
+		    width: 100%;
+		    text-align: center;
+		    border-radius: 20px 20px 0px 0px;
+        	color: white;
+        	text-shadow: 0px 2px 6px #8EC0E4;
+        }
+        .Hot2 h2, #sivaH5 {
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	background: #8EC0E4;
+		    width: 80%;
+		    margin: 0 auto;
+		    text-align: center;
+		    border-radius: 20px 20px 0px 0px;
+        	color: white;
+        	text-shadow: 0px 2px 6px #8EC0E4;
         }
     	.item_info h5 {
     		line-height: 1.5em;
@@ -111,7 +131,7 @@
     </style>
     
     <style>
-    	#hotel1 { padding: 10px 0px; color: white; font-weight: bold; }
+    	#hotel1 { padding: 10px 0px; font-weight: bold; }
     	.navYam2 > ul > li { height: 300px; margin-top: 5%; background-color: white; border: 1px solid #ebebeb; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
     	.item_info > h5 { height: 75px; }
@@ -1172,7 +1192,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>액티비티</h2>
+                        <h2>액티비티 찾기</h2>
                     </div>
                 </div>
             </div>
@@ -1225,7 +1245,7 @@
                                 <div class="swiper-container swiper1">
                                     <div class="swiper-wrapper">
                                     	<c:forEach var="dto" items="${dto }" varStatus="status">
-	                                    	<c:if test="${status.count % 12 == 1 || status.count == 1 }">
+	                                    	<c:if test="${status.count % 15 == 1 || status.count == 1 }">
 	                                    		<div class="swiper-slide">
 					                              <nav class="navYam2">
 					                                  <ul>
@@ -1240,7 +1260,7 @@
 					                                      		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.ticket_last_cost }" pattern="#,###"/>원 ~</p>
 					                                      	</div> 
 					                                      </li>
-					                                    <c:if test="${status.count % 12 == 0 && status.count != 0 }">
+					                                    <c:if test="${status.count % 15 == 0 && status.count != 0 }">
 				                                  	  </ul>
 					                              </nav>
 				                              </div>
@@ -1262,7 +1282,7 @@
     <section class="Hot2">
             <div class="section-title">
                 <span>할인 중인 액티비티입니다</span>
-                <h2 style="font-weight: bold; color: white;">할인 액티비티</h2>
+                <h2 style="font-weight: bold;">할인 액티비티</h2>
             </div>
             
             <div id="hotId2">
@@ -1453,7 +1473,7 @@
                 focus : function(event, ui) {
                     return false;
                 },
-                minLength: 1,
+                minLength: 2,
                 autoFocus: true,
                 classes: {
                     "ui-autocomplete": "highlight"

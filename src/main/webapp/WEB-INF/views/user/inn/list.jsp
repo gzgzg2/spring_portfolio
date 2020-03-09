@@ -37,12 +37,32 @@
     	body {
     		overflow-x: hidden;
     	}
-        
-        .breadcrumb-section2 h2, #hotel1, .secti on-title h2 {
-        	text-shadow: 0px 2px 6px grey;
+        .breadcrumb-text > h2 {
         	padding: 15px 0px;
         	font-weight: bold;
+        	text-shadow: 0px 2px 6px #8EC0E4;
         	color: white;
+        }
+        #hotel1 {
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	background: #8EC0E4;
+		    width: 100%;
+		    text-align: center;
+		    border-radius: 20px 20px 0px 0px;
+        	color: white;
+        	text-shadow: 0px 2px 6px #8EC0E4;
+        }
+        .Hot2 h2, #sivaH5 {
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	background: #8EC0E4;
+		    width: 80%;
+		    margin: 0 auto;
+		    text-align: center;
+		    border-radius: 20px 20px 0px 0px;
+        	color: white;
+        	text-shadow: 0px 2px 6px #8EC0E4;
         }
     	.breadcrumb-section2 {
     		background-image: url("${pageContext.request.contextPath }/resources/img/innlist.jpg");
@@ -58,8 +78,8 @@
 		    padding: 2px 5px;
 		    margin: 5px;
 		    font-size: 0.8em;
-		    background-color: #dfa974;
-		    border: 1px solid #dfa974;
+		    background-color: #8EC0E4;
+		    border: 1px solid #8EC0E4;
 		    border-radius: 5px;
 		}
 		.hothot2 { height: auto; }
@@ -103,7 +123,7 @@
     </style>
     
     <style>
-    	#hotel1 { padding: 10px 0px; color: white; font-weight: bold; }
+    	#hotel1 { padding: 10px 0px; font-weight: bold; }
     	.navYam2 > ul > li { height: 300px; margin-top: 5%; background-color: white; border: 1px solid #ebebeb; }
     	.navYam2 > ul > li:hover { cursor: pointer; }
     	.item_info > h5 { height: 68px; }
@@ -1213,11 +1233,11 @@ legend {
                     <div class="col-lg-6">
                         <div class="ap-title">
                             <div id="siva3">
-                              <h2 id="hotel1">호텔</h2>
+                              <h2 id="hotel1">숙소 찾기</h2>
                                 <div class="swiper-container swiper1">
                                     <div class="swiper-wrapper">
                                     	<c:forEach var="dto" items="${dto }" varStatus="status">
-	                                    	<c:if test="${status.count % 12 == 1 || status.count == 1 }">
+	                                    	<c:if test="${status.count % 15 == 1 || status.count == 1 }">
 	                                    		<div class="swiper-slide">
 					                              <nav class="navYam2">
 					                                  <ul>
@@ -1238,7 +1258,7 @@ legend {
 					                                      		<p style="margin-bottom: 0px; text-align: right;"><fmt:formatNumber value="${dto.room_last_cost }" pattern="#,###"/>원 ~</p>
 					                                      	</div> 
 					                                      </li>
-					                                    <c:if test="${status.count % 12 == 0 && status.count != 0 }">
+					                                    <c:if test="${status.count % 15 == 0 && status.count != 0 }">
 				                                  	  </ul>
 					                              </nav>
 				                              </div>
@@ -1260,7 +1280,7 @@ legend {
     <section class="Hot2">
             <div class="section-title">
                 <span>할인 중인 숙소입니다</span>
-                <h2 style="font-weight: bold; color: white;">할인 숙소</h2>
+                <h2 style="font-weight: bold;">할인 숙소</h2>
             </div>
             
             <div id="hotId2">
