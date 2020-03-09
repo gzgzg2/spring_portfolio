@@ -77,6 +77,23 @@
 	color: white;
 	background-color: #dfa974;
 }
+
+.Add {
+	margin-top: 5px; 
+	padding:5px 10px;
+	background-color: #03a6ff;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	font-size: 10px;
+}
+
+#titleH2 {
+	font-size: 15px;
+	line-height: 20px;
+	padding-bottom: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -323,9 +340,9 @@
 				var content = document.createElement('div')
 				content.className = 'wrap';
 				content.innerHTML = '    <div class="info">'
-						+ '        <div class="title">'
+						+ '        <div class="title"><span id="titleH2">'
 						+ list[i].local_name
-						+ '            <div class="close" onclick="closeOverlay()" title="닫기"></div>'
+						+ '            </span><div class="close" onclick="closeOverlay()" title="닫기"></div>'
 						+ '        </div>'
 						+ '        <div class="body">'
 						+ '            <div class="img">'
@@ -359,7 +376,7 @@
 			for (var i = 0; i < locations.length; i++) {
 
 				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(25, 25);
+				var imageSize = new kakao.maps.Size(20, 40);
 
 				// 마커 이미지를 생성합니다    
 				var markerImage = new kakao.maps.MarkerImage(imageSrc,

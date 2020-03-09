@@ -193,7 +193,6 @@
 							if (table == "") {
 								tourReviewPage(page - 8);
 								$(".paging2 p span").text(page / 4);
-								alert("데이터가 없습니다");
 							} else if (table.length > 0) {
 								$("#tourTable").html(table);
 							}
@@ -211,19 +210,18 @@
 							var table = "";
 							for (i = 0; i < data.length; i++) {
 								if (i == 0) {
-									table = "<tr><th>작성자</th><th>리뷰제목</th><th>지역</th><th></th></tr>"
+									table = "<tr><th>작성자</th><th>액티비티명</th><th>리뷰제목</th><th></th></tr>"
 								}
 								table += "<tr>";
 								table += "<td>" + data[i].member_name + "</td>";
-								table += "<td><a class='aC' href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" +data[i].review_uid + "'>" + data[i].activ_name + "</a></td>";
-								table += "<td>" + data[i].activ_loc + "</td>";
+								table += "<td>" + data[i].activ_name + "</td>";
+								table += "<td><a class='aC' href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" +data[i].review_uid + "'>" + data[i].review_title + "</a></td>";
 								table += '<td><a class="aC" href="${pageContext.request.contextPath}/user/mypage/mypageReviewDeleteOk/'+data[i].review_uid +'">리뷰삭제</a></td>';
 								table += "</tr>";
 							}
 							if (table == "") {
 								activReviewPage(page - 8);
 								$(".paging1 p span").text(page / 4);
-								alert("데이터가 없습니다");
 							} else if (table.length > 0) {
 								$("#activTable").html(table);
 							}
@@ -256,7 +254,6 @@
 							if (table == "") {
 								roomReviewPage(page - 8);
 								$(".paging3 p span").text(page / 4);
-								alert("데이터가 없습니다");
 							} else if (table.length > 0) {
 								$("#accomTable").html(table);
 							}

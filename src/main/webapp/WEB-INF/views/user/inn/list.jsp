@@ -74,14 +74,6 @@
         position: relative;
         height: 100%;
       }
-      body {
-        background: #eee;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color:#000;
-        margin: 0;
-        padding: 0;
-      }
       .swiper-container {
         width: 100%;
         height: 1150px;
@@ -1155,14 +1147,14 @@ legend {
 </head>
 
 <body>
-    <c:choose>
+            <c:choose>
 	
 		<c:when test="${not empty sessionScope.loginUid}">
-			<jsp:include page="../userLoginHeader.jsp"/>
+			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
 		</c:when>
 		
 		<c:otherwise>
-			<jsp:include page="../userHeader.jsp"/>
+			<jsp:include page="../topMenuIncludeLogOut.jsp"/>
 		</c:otherwise>
    	</c:choose>
 
@@ -1296,8 +1288,8 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
-					<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
+				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	

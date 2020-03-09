@@ -30,8 +30,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="${pageContext.request.contextPath}/user/inn/list">숙소</a>
-                                    <li><a href="${pageContext.request.contextPath}/user/palanner/plan">내플래너</a>
-                                    <li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo">마이페이지</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/plan/planner">플래너</a>
                                     <li><a href="${pageContext.request.contextPath}/user/account/login">로그인</a></li>
                                     <li><a href="${pageContext.request.contextPath}/user/account/join">회원가입</a></li>
                                 </ul>

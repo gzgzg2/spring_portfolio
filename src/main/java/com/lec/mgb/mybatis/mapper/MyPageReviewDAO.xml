@@ -21,9 +21,10 @@
 		SELECT 
 			a.activ_name, a.activ_loc, re.review_uid, re.review_title, m.member_name, b.book_uid
 		FROM 
-			member m , activ a, book b, review re, ticket t
-		 WHERE
-		 	m.member_uid = b.member_uid and b.book_uid = re.review_uid and a.activ_uid = t.activ_uid
+			member m join book b on m.member_uid = b.member_uid   
+			join ticket t on t.ticket_uid = b.ticket_uid 
+			join review re on b.book_uid = re.book_uid
+			join activ a on a.activ_uid = t.activ_uid
 		 AND
 		  	m.member_uid = #{member_uid}
 		 ORDER BY 

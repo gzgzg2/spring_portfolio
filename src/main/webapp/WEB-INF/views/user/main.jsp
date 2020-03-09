@@ -15,10 +15,13 @@
     <title>귤귤 플래너</title>
     <style>
     
-    body {
-		overflow-x: hidden;    
-    }
+    @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+	html, body {
+		height: 100%;
+		font-family: "Noto Sans KR";
+		overflow-x: hidden; 
+	}
     .slick-slide {
       margin: 0px 20px;
     }
@@ -307,11 +310,11 @@ img#logoG {
       <c:choose>
 	
 		<c:when test="${not empty sessionScope.loginUid}">
-			<jsp:include page="../user/userLoginHeader.jsp"/>
+			<jsp:include page="topMenuIncludeMyPage.jsp"/>
 		</c:when>
 		
 		<c:otherwise>
-			<jsp:include page="../user/userHeader.jsp"/>
+			<jsp:include page="topMenuIncludeLogOut.jsp"/>
 		</c:otherwise>
    	</c:choose>
         <main>
@@ -361,10 +364,7 @@ img#logoG {
                             <li id = "map2"><a href="#"></a></li>
                             <li id = "map3"><a href="#"></a></li>
                         </ul>
-                        <a onclick = showDetail(0);>자세히 보기</a>
-                        <a onclick = showDetail(1);>자세히 보기</a>
-                        <a onclick = showDetail(2);>자세히 보기</a>
-                        <a onclick = showDetail(3);>자세히 보기</a>
+                       
                     </div>
                 </div>
             </section>
@@ -377,18 +377,18 @@ img#logoG {
                     </div>
                     <div class="sale">
                         <ul>
-                            <li><a href="#">aaaaaaa</a></li>
-                            <li><a href="#">bbbbb</a></li>
-                            <li><a href="#">ccccccccc</a></li>
-                            <li><a href="#">ddddddd</a></li>
-                            <li><a href="#">eeeeeeeee</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
                         </ul>
                         <ul>
-                            <li><a href="#">fffff</a></li>
-                            <li><a href="#">gggggg</a></li>
-                            <li><a href="#">hhhhhhh</a></li>
-                            <li><a href="#">iiiiiiiiiii</a></li>
-                            <li><a href="#">jjjjjjjjjj</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -540,11 +540,10 @@ img#logoG {
 	
 		for (var i = 0; i < count; i++) {
            	// 마커 좌표 배열담아주기
-			locations.push({
-				latlng : new kakao.maps.LatLng(
+			locations.push(new kakao.maps.LatLng(
 						parseFloat(list[i].local_lat),
 						parseFloat(list[i].local_lng)),
-			});
+			);
 			
 		}
 		
@@ -555,8 +554,8 @@ img#logoG {
 		    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid', // 선의 스타일입니다
 		    endArrow: true,
-		    zIndex:20,
-		    setPath : locations
+		    zIndex:20
+		
 		});
 		
 		var imageSrc = "${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
@@ -574,14 +573,13 @@ img#logoG {
 			var marker = new kakao.maps.Marker({
 				zIndex: 1,
 				map : map, // 마커를 표시할 지도
-				position : locations[i].latlng, // 마커를 표시할 위치
-				image : markerImage,
-				title : locations[i].local_name
+				position : locations[i], // 마커를 표시할 위치
+				image : markerImage
 			});
 		
 			
 		}
-		
+	
 		map.setZoomable(false);  
 		
 	} //end updateView

@@ -31,9 +31,14 @@
 
 	<style>
 		body {
-			background: #eee;
     		overflow-x: hidden;
     	}
+    	.breadcrumb-section2 h2 {
+        	text-shadow: 0px 2px 6px grey;
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	color: white;
+        }
     	.room-item {
     		background: white;
     		box-shadow: 0px 14px 38px -18px rgba(0,0,0,0.75);
@@ -64,14 +69,14 @@
 </head>
 
 <body>
-    <c:choose>
+          <c:choose>
 	
 		<c:when test="${not empty sessionScope.loginUid}">
-			<jsp:include page="../userLoginHeader.jsp"/>
+			<jsp:include page="../topMenuIncludeMyPage.jsp"/>
 		</c:when>
 		
 		<c:otherwise>
-			<jsp:include page="../userHeader.jsp"/>
+			<jsp:include page="../topMenuIncludeLogOut.jsp"/>
 		</c:otherwise>
    	</c:choose>
 
@@ -81,7 +86,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">투어</h2>
+                        <h2>투어</h2>
                     </div>
                 </div>
             </div>

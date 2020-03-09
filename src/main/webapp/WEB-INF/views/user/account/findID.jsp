@@ -81,12 +81,12 @@
 						</button>
 					</div>
 
-					<div class="flex-col-c p-t-170 p-b-40">
+					<div class="flex-col-c p-t-30 p-b-40">
 						<span class="txt1 p-b-9">
 							Don’t have an account?
 						</span>
 
-						<a href="${pageContext.request.contextPath}/join.jsp" class="txt3">
+						<a href="${pageContext.request.contextPath}/user/account/join" class="txt3">
 							Join now
 						</a>
 					</div>
