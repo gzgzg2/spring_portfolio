@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.IAdminBookDAO">
+	
+	<select id="select_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT 
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM ROOM WHERE book.room_uid = room.room_uid)
+		ORDER BY book_uid DESC;
+	</select>
+	
+	<select id="selectByRow_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM ROOM WHERE book.room_uid = room.room_uid)
+		ORDER BY book_uid DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="select_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TOUR WHERE book.tour_uid = tour.tour_uid)
+		ORDER BY book_uid DESC;
+	</select>
+	
+	<select id="selectByRow_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TOUR WHERE book.tour_uid = tour.tour_uid)
+		ORDER BY book_uid DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="select_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TICKET WHERE book.ticket_uid = ticket.ticket_uid)
+		ORDER BY book_uid DESC;
+	</select>
+	
+	<select id="selectByRow_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
+		SELECT
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TICKET WHERE book.ticket_uid = ticket.ticket_uid)
+		ORDER BY book_uid DESC
+		LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="search_selectByRow_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
+		SELECT 
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM 
+			BOOK
+		WHERE EXISTS
+			(SELECT	* FROM ROOM WHERE book.room_uid = room.room_uid) and  book_member_tel LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			book_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="search_selectByRow_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
+		SELECT 
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM 
+			BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TOUR WHERE book.tour_uid = tour.tour_uid) and  book_member_tel LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			book_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	<select id="search_selectByRow_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
+		SELECT 
+			book_date,
+			book_member_cnt,
+			format(book_cost, 0) book_cost,
+			book_name,
+			book_member_name,
+			IFNULL(case left(book_member_tel,2)
+			when '02' then
+				case char_length(book_member_tel)
+					when '10' then concat('02','-',substring(book_member_tel,3,4),'-',right(book_member_tel,4))
+					when '11' then concat('02','-',substring(book_member_tel,3,3),'-',right(book_member_tel,4))
+				end
+			else
+				case char_length(book_member_tel)
+					when '10' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,3),'-',right(book_member_tel,4))
+					when '11' then concat(left(book_member_tel,3),'-',substring(book_member_tel,4,4),'-',right(book_member_tel,4))
+					when '8' then concat(left(book_member_tel,4),'-',substring(book_member_tel,4,4))
+				end
+			end,'미등록') as 'book_member_tel'
+		FROM 
+			BOOK
+		WHERE EXISTS
+			(SELECT	* FROM TICKET WHERE book.ticket_uid = ticket.ticket_uid) and book_member_tel LIKE CONCAT("%",#{keyword},"%")
+		ORDER BY 
+			book_uid DESC
+		 LIMIT #{fromRow}, #{writePages};
+	</select>
+	
+	
+</mapper>

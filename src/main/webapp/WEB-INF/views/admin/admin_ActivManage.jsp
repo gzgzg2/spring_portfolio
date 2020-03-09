@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%!// 페이징 관련 변수들
 	int writePages = 10;%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Language" content="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>관리자 - 회원관리</title>
+<title>관리자 - 액티비티 예약 관리</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 <meta name="description"
@@ -26,8 +26,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <script>
 $(document).ready(function(){
+	
 	$("input#page").val(1);  // 페이지 최초 로딩되면 1페이지로 기본 세팅
 	$("input#search_page").val(1);
 	loadPage(1)// page 읽어오기
@@ -74,149 +76,149 @@ $(document).ready(function(){
 		}
 	});
 	
+	
 });
 
-
-
-//page번째 페이지 목록 로딩
 function loadPage(page){
 
 	$.ajax({
-		url : "${pageContext.request.contextPath}/AdminMemberAJAX/admin_MemberManage/<%=writePages%>/"+ page,
-				type : "GET",
-				cache : false,
-				success : function(data, status) {
-					if (status == "success") {
-						if (updateList(data)) { // 페이지 업데이트
-							// 페이지 로딩이 성공한 뒤라야 현재 페이지 정보 업데이트
-							$("input#page").val(page);
+		url : "${pageContext.request.contextPath}/AdminBookAJAX/admin_ActivManage/<%=writePages%>/"+ page,
+					type : "GET",
+					cache : false,
+					success : function(data, status) {
+						if (status == "success") {
+							if (updateList(data)) { // 페이지 업데이트
+								// 페이지 로딩이 성공한 뒤라야 현재 페이지 정보 업데이트
+								$("input#page").val(page);
+							}
 						}
 					}
-				}
-			});
+				});
 	} // end loadPage()
 
-function updateList(jsonObj) {
-	result = "";
-	if (jsonObj.status == "OK") {
-		var cnt = jsonObj.cnt; // 글 총 개수
-		var count = jsonObj.count; // 글 개수
-		var items = jsonObj.list; // 글 목록
-		
-		var i;
-		
-		for (i = 0; i < count; i++) {
-			result += "<tr>\n";
-			result += "<td>" + items[i].member_name + "</td>\n"
-			result += "<td>" + items[i].member_id + "</td>\n"
-			result += "<td>" + items[i].member_email + "</td>\n"
-			result += "<td>" + items[i].member_tel + "</td>\n"
-			result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='admin_MemberDeleteOk?uid="
-					+ items[i].member_uid + "'>Delete</a></button></td>"
-			result += "</tr>\n";
+	function updateList(jsonObj) {
+		result = "";
+		if (jsonObj.status == "OK") {
+			var count = jsonObj.count; // 글 개수
+			var items = jsonObj.list; // 글 목록
+
+			var i;
+
+			for (i = 0; i < count; i++) {
+				result += "<tr>\n";
+				result += "<td>" + items[i].book_date + "</td>\n"
+				result += "<td>" + items[i].book_member_cnt + "</td>\n"
+				result += "<td>" + items[i].book_cost + "</td>\n"
+				result += "<td>" + items[i].book_name + "</td>\n"
+				result += "<td>" + items[i].book_member_name + "</td>\n"
+				result += "<td>" + items[i].book_member_tel + "</td>\n"
+				result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='#?uid="
+						+ items[i].book_uid + "'>Delete</a></button></td>"
+				result += "</tr>\n";
+			}
+
+			$("#normal").show();
+			$("#search").hide();
+
+			$("table#list tbody").html(result); // 테이블 내용 업데이트
+
+
+			return true;
+		} else {
+			alert("내용이 없습니다");
+			return false;
 		}
-		
-		
-		$("#normal").show()		
-		$("#search").hide();
-		
-		$("table#list tbody").html(result); // 테이블 내용 업데이트
-		//alert("테이블 내용 업데이트 성공")
-		return true;
-	} else {
-		alert("내용이 없습니다");
+
 		return false;
 	}
+	
+	function search(search_page){
 
-	return false;
-}
-	
-function search(search_page){
-
-	var search_option = $('.search_option').val().trim();
-	var keyword = $('.search_text').val();
-	
-	
-	//alert("검색결과 옵션:["+search_option+"], 검색어:["+keyword+"]");
-	
-	// AJAX
-	$.ajax({
-		url : "${pageContext.request.contextPath}/AdminMemberAJAX/admin_MemberManage/" + search_option + "/" + keyword + "/<%=writePages%>/"+search_page,
-		type : "GET",
-		cache : false,
-		success : function(data, status){
-			if(status == "success"){
-				if (updateSearchList(data)) { // 페이지 업데이트
-					// 페이지 로딩이 성공한 뒤라야 현재 페이지 정보 업데이트
+		var search_option = $('.search_option').val().trim();
+		var keyword = $('.search_text').val();
+		
+		
+		//alert("검색결과 옵션:["+search_option+"], 검색어:["+keyword+"]");
+		
+		// AJAX
+		$.ajax({
+			url : "${pageContext.request.contextPath}/AdminBookAJAX/admin_ActivManage/" + search_option + "/" + keyword + "/<%=writePages%>/"+search_page,
+			type : "GET",
+			cache : false,
+			success : function(data, status){
+				if(status == "success"){
+					if (updateSearchList(data)) { // 페이지 업데이트
+						// 페이지 로딩이 성공한 뒤라야 현재 페이지 정보 업데이트
+					}
 				}
 			}
-		}
-	});
-	
-	document.getElementById("search_page").value = search_page;
-}
-
-	
-function updateSearchList(jsonObj) {
-	result = "";
-	if (jsonObj.status == "OK") {
-		var cnt = jsonObj.cnt; // 글 총 개수
-		var count = jsonObj.count; // 글 개수
-		var items = jsonObj.list; // 글 목록
+		});
 		
-		var i;
-		
-		for (i = 0; i < count; i++) {
-			result += "<tr>\n";
-			result += "<td>" + items[i].member_name + "</td>\n"
-			result += "<td>" + items[i].member_id + "</td>\n"
-			result += "<td>" + items[i].member_email + "</td>\n"
-			result += "<td>" + items[i].member_tel + "</td>\n"
-			result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='MemberDeleteOk?uid="
-					+ items[i].member_uid + "'>Delete</a></button></td>"
-			result += "</tr>\n";
-		}
-		
-		
-		$("#normal").hide();
-		$("#search").show();
-		
-		$("button#search_next").show();
-		
-		$("table#list tbody").html(result); // 테이블 내용 업데이트
-		
-		return true;
-	} else {
-		alert("내용이 없습니다");
-		return false;
+		document.getElementById("search_page").value = search_page;
 	}
-}
 
-	
-	
+		
+	function updateSearchList(jsonObj) {
+		result = "";
+		if (jsonObj.status == "OK") {
+			var cnt = jsonObj.cnt; // 글 총 개수
+			var count = jsonObj.count; // 글 개수
+			var items = jsonObj.list; // 글 목록
+			
+			var i;
+			
+			for (i = 0; i < count; i++) {
+				result += "<tr>\n";
+				result += "<td>" + items[i].book_date + "</td>\n"
+				result += "<td>" + items[i].book_member_cnt + "</td>\n"
+				result += "<td>" + items[i].book_cost + "</td>\n"
+				result += "<td>" + items[i].book_name + "</td>\n"
+				result += "<td>" + items[i].book_member_name + "</td>\n"
+				result += "<td>" + items[i].book_member_tel + "</td>\n"
+				result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='#?uid="
+						+ items[i].book_uid + "'>Delete</a></button></td>"
+				result += "</tr>\n";
+			}
+			
+			
+			$("#normal").hide();
+			$("#search").show();
+			
+			$("button#search_next").show();
+			
+			$("table#list tbody").html(result); // 테이블 내용 업데이트
+			
+			return true;
+		} else {
+			alert("내용이 없습니다");
+			return false;
+		}
+	}
 
-function chkDelete() {
-	return confirm("삭제하시겠습니까?")
-}
+	function chkDelete() {
+		return confirm("삭제하시겠습니까?")
+	}
+	
 
 </script>
 
-<style>
-.menu .hide{display:none;}
-</style>
+<c:choose>
+	<c:when test="${empty list || fn.length(list) == 0 }">
+			데이터가 없습니다.<br>
+	</c:when>
 
-<body>
-	<c:choose>
-		<c:when test="${empty list || fn.length(list) == 0 }">
-데이터가 없습니다<br>
-		</c:when>
-		<c:otherwise>
-		<input type="hidden" id="page" />
-		<input type="hidden" id="search_page" />
+	<c:otherwise>
+
+
+		<body>
+
+			<input type="hidden" id="page" />
+			<input type="hidden" id="search_page" />
 			<div
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
+						<div class="logo-src"></div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -273,7 +275,7 @@ function chkDelete() {
 								<ul class="vertical-nav-menu">
 
 									<li>
-										<a href="admin_MemberManage" class="mm-active"> 
+										<a href="admin_MemberManage"> 
 											<i class="metismenu-icon pe-7s-users"></i>회원 관리
 										</a>
 									</li>
@@ -285,10 +287,10 @@ function chkDelete() {
 									</li>
 
 									<li class="menu">
-										<a href="#">
+										<a href="#" class="mm-active">
 											<i class="metismenu-icon pe-7s-note2"></i>예약 관리
 										</a>
-										<ul class="hide">
+										<ul>
 											<li>
 												<a href="admin_InnManage"><i
 													class="metismenu-icon pe-7s-home"></i>숙소 예약관리</a>
@@ -297,7 +299,7 @@ function chkDelete() {
 												<a href="admin_TourManage">투어 예약관리</a>
 											</li>
 											<li>
-												<a href="admin_ActivManage">액티비티 예약관리</a>
+												<a href="admin_ActivManage" class="mm-active">액티비티 예약관리</a>
 											</li>
 										</ul>
 									</li>
@@ -324,19 +326,24 @@ function chkDelete() {
 
 						<div class="app-page-title">
 
-							<h2>회원 관리</h2>
+							<h2>액티비티 예약 관리</h2>
 
 						</div>
 
-						<div class="app-main__inner">
+
+		                <div class="app-main__inner-crawling">
+		
+		                    <div class="admin-search-motel-crawling-btn">
+	                        	<input type="button" onclick="location.href='./activCrawl'" class="mb-2 mr-2 btn btn-primary active" value="액티비티 정보 가져오기">
+	                   		</div>
+		                    
 							<div class="admin-search-bar">
 
 								<div class="admin-search-select">
 
 									<select class="form-control-sm form-control search_option"
 										name="search_option">
-										<option value="member_name">이름</option>
-										<option value="member_id">아이디</option>
+										<option value="book_member_tel">전화번호</option>
 									</select>
 
 								</div>
@@ -347,17 +354,19 @@ function chkDelete() {
 										name="keyword" placeholder="내용을 입력해주세요">
 
 								</div>
-
 									<button class="admin-search-bar-btn" onclick="search(1)">검색</button>
 							</div>
+
 							<table class="admin-table table-bordered" id="list">
 
 								<thead>
 									<tr>
-										<th class="table-th-left">회원 이름</th>
-										<th>회원 아이디</th>
-										<th>회원 이메일</th>
-										<th>회원 전화번호</th>
+										<th class="table-th-left">예약 날짜</th>
+										<th>인원</th>
+										<th>금액</th>
+										<th>예약명</th>
+										<th>예약자 이름</th>
+										<th>예약자 번호</th>
 										<th class="table-th-right">삭제</th>
 									</tr>
 								</thead>
@@ -373,14 +382,14 @@ function chkDelete() {
 								<button type="button" id="search_prev" aria-label="Previous">이전페이지(검색)</button>
 								<button type="button" id="search_next" aria-label="Next">다음페이지(검색)</button>
 							</div>
-
-						</div>
+		                </div>
 
 					</div>
 				</div>
 			</div>
-			<script type="text/javascript" src="${pageContext.request.contextPath}/ADMINCSS/assets/scripts/main.js"></script>
-		</c:otherwise>
-	</c:choose>
+			<script type="text/javascript"
+				src="${pageContext.request.contextPath}/ADMINCSS/assets/scripts/main.js"></script>
+	</c:otherwise>
+</c:choose>
 </body>
 </html>

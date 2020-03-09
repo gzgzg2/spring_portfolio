@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Language" content="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>관리자 - 회원관리</title>
+<title>관리자 - 관광지 관리</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 <meta name="description"
@@ -82,7 +82,7 @@ $(document).ready(function(){
 function loadPage(page){
 
 	$.ajax({
-		url : "${pageContext.request.contextPath}/AdminMemberAJAX/admin_MemberManage/<%=writePages%>/"+ page,
+		url : "${pageContext.request.contextPath}/AdminLocalAJAX/admin_LocalManage/<%=writePages%>/"+ page,
 				type : "GET",
 				cache : false,
 				success : function(data, status) {
@@ -107,21 +107,24 @@ function updateList(jsonObj) {
 		
 		for (i = 0; i < count; i++) {
 			result += "<tr>\n";
-			result += "<td>" + items[i].member_name + "</td>\n"
-			result += "<td>" + items[i].member_id + "</td>\n"
-			result += "<td>" + items[i].member_email + "</td>\n"
-			result += "<td>" + items[i].member_tel + "</td>\n"
-			result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='admin_MemberDeleteOk?uid="
-					+ items[i].member_uid + "'>Delete</a></button></td>"
+			result += "<td>" + items[i].local_name + "</td>\n"
+			result += "<td>" + items[i].local_lat + "</td>\n"
+			result += "<td>" + items[i].local_lng + "</td>\n"
+			result += "<td>" + items[i].local_loc + "</td>\n"
+			result += "<td>" + items[i].local_tel + "</td>\n"
+			result += "<td><a onclick='return chkChange()' href='admin_UpdateLocal?uid="
+				+ items[i].local_uid + "'><button class='admin-delete-btn'>Change</button></a></td>"
+			result += "<td><a onclick='return chkDelete()' href='admin_LocalDeleteOk?uid="
+				+ items[i].local_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 			result += "</tr>\n";
 		}
 		
 		
-		$("#normal").show()		
+		$("#normal").show();		
 		$("#search").hide();
 		
 		$("table#list tbody").html(result); // 테이블 내용 업데이트
-		//alert("테이블 내용 업데이트 성공")
+		
 		return true;
 	} else {
 		alert("내용이 없습니다");
@@ -130,7 +133,8 @@ function updateList(jsonObj) {
 
 	return false;
 }
-	
+
+
 function search(search_page){
 
 	var search_option = $('.search_option').val().trim();
@@ -141,7 +145,7 @@ function search(search_page){
 	
 	// AJAX
 	$.ajax({
-		url : "${pageContext.request.contextPath}/AdminMemberAJAX/admin_MemberManage/" + search_option + "/" + keyword + "/<%=writePages%>/"+search_page,
+		url : "${pageContext.request.contextPath}/AdminLocalAJAX/admin_LocalManage/" + search_option + "/" + keyword + "/<%=writePages%>/"+search_page,
 		type : "GET",
 		cache : false,
 		success : function(data, status){
@@ -168,12 +172,15 @@ function updateSearchList(jsonObj) {
 		
 		for (i = 0; i < count; i++) {
 			result += "<tr>\n";
-			result += "<td>" + items[i].member_name + "</td>\n"
-			result += "<td>" + items[i].member_id + "</td>\n"
-			result += "<td>" + items[i].member_email + "</td>\n"
-			result += "<td>" + items[i].member_tel + "</td>\n"
-			result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='MemberDeleteOk?uid="
-					+ items[i].member_uid + "'>Delete</a></button></td>"
+			result += "<td>" + items[i].local_name + "</td>\n"
+			result += "<td>" + items[i].local_lat + "</td>\n"
+			result += "<td>" + items[i].local_lng + "</td>\n"
+			result += "<td>" + items[i].local_loc + "</td>\n"
+			result += "<td>" + items[i].local_tel + "</td>\n"
+			result += "<td><a onclick='return chkChange()' href='admin_UpdateLocal?uid="
+				+ items[i].local_uid + "'><button class='admin-delete-btn'>Change</button></a></td>"
+			result += "<td><a onclick='return chkDelete()' href='admin_LocalDeleteOk?uid="
+				+ items[i].local_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 			result += "</tr>\n";
 		}
 		
@@ -193,30 +200,34 @@ function updateSearchList(jsonObj) {
 }
 
 	
-	
 
+	
+function addLocal() {
+	return confirm("관광지를 추가하시겠습니까?")
+}
+
+function chkChange() {
+	return confirm("수정하시겠습니까?")
+}
 function chkDelete() {
 	return confirm("삭제하시겠습니까?")
 }
 
 </script>
-
-<style>
-.menu .hide{display:none;}
-</style>
-
 <body>
 	<c:choose>
 		<c:when test="${empty list || fn.length(list) == 0 }">
 데이터가 없습니다<br>
 		</c:when>
 		<c:otherwise>
-		<input type="hidden" id="page" />
-		<input type="hidden" id="search_page" />
+
+			<input type="hidden" id="page" />
+			<input type="hidden" id="search_page" />
 			<div
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
+						<div class="logo-src"></div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -239,6 +250,8 @@ function chkDelete() {
 							</button>
 						</div>
 					</div>
+
+
 				</div>
 
 				<div class="app-main">
@@ -267,19 +280,19 @@ function chkDelete() {
 								</button>
 							</div>
 						</div>
-						
+
 						<div class="scrollbar-sidebar">
 							<div class="app-sidebar__inner">
 								<ul class="vertical-nav-menu">
 
 									<li>
-										<a href="admin_MemberManage" class="mm-active"> 
+										<a href="admin_MemberManage"> 
 											<i class="metismenu-icon pe-7s-users"></i>회원 관리
 										</a>
 									</li>
 
 									<li>
-										<a href="admin_LocalManage">
+										<a href="admin_LocalManage" class="mm-active">
 											<i class="metismenu-icon pe-7s-mouse"></i>관광지 관리
 										</a>
 									</li>
@@ -324,19 +337,26 @@ function chkDelete() {
 
 						<div class="app-page-title">
 
-							<h2>회원 관리</h2>
+							<h2>관광지 관리</h2>
 
 						</div>
 
 						<div class="app-main__inner">
+							
+							<div>
+								<a onclick="return addLocal()" href="admin_AddLocal">
+								<input type="button" id="add_local" value="관광지 추가">
+								</a>
+							</div>
+							
 							<div class="admin-search-bar">
 
 								<div class="admin-search-select">
 
 									<select class="form-control-sm form-control search_option"
 										name="search_option">
-										<option value="member_name">이름</option>
-										<option value="member_id">아이디</option>
+										<option value="local_name">관광지 이름</option>
+										<option value="local_loc">관광지 지역</option>
 									</select>
 
 								</div>
@@ -347,17 +367,18 @@ function chkDelete() {
 										name="keyword" placeholder="내용을 입력해주세요">
 
 								</div>
-
-									<button class="admin-search-bar-btn" onclick="search(1)">검색</button>
+									<button id="admin-search-bar-btn" onclick="search(1)">검색</button>
 							</div>
+							
 							<table class="admin-table table-bordered" id="list">
-
 								<thead>
 									<tr>
-										<th class="table-th-left">회원 이름</th>
-										<th>회원 아이디</th>
-										<th>회원 이메일</th>
-										<th>회원 전화번호</th>
+										<th class="table-th-left">관광지 이름</th>
+										<th>관광지 위도</th>
+										<th>관광지 경도</th>
+										<th>관광지 지역명</th>
+										<th>관광지 번호</th>
+										<th>수정</th>
 										<th class="table-th-right">삭제</th>
 									</tr>
 								</thead>
@@ -384,3 +405,4 @@ function chkDelete() {
 	</c:choose>
 </body>
 </html>
+<!-- https://dlgkstjq623.tistory.com/354 -->
