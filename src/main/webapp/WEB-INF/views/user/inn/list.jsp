@@ -37,10 +37,17 @@
     	body {
     		overflow-x: hidden;
     	}
+        
+        .breadcrumb-section2 h2, #hotel1, .secti on-title h2 {
+        	text-shadow: 0px 2px 6px grey;
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	color: white;
+        }
     	.breadcrumb-section2 {
-    		background-image: url("https://www.oriental.co.kr/resources/images/homepage/KOR/index/main_visual_02.jpg");
+    		background-image: url("${pageContext.request.contextPath }/resources/img/innlist.jpg");
     		background-size: cover;
-    		background-position: 30%;
+    		background-position: 20%;
     	}
     	.item_info h5 {
     		line-height: 1.5em;
@@ -59,7 +66,7 @@
 		.hothot2:hover { cursor: pointer; }
 		.hothot2:nth-child(1) { margin: 0; }
 		.swiper2 { height: 600px !important; }
-		.sivaHotH { margin-top: 320px; }
+		.sivaHotH { margin-top: 400px; }
 		.about-page-text { margin: 0; }
 		.spad { padding: 0; }
 		#navYamHot1 li:hover { cursor: pointer; }
@@ -1084,7 +1091,7 @@ legend {
   color: #fff;
   border: 0;
   cursor: pointer;
-  background: #63c76a;
+  background: #8EC0E4;
   transition: all .2s ease-out, color .2s ease-out;
 }
 
@@ -1093,7 +1100,7 @@ legend {
 }
 
 .s003 form .inner-form .input-field.third-wrap .btn-search:hover {
-  background: #50c058;
+  background: #6AAFE6;
 }
 
 .s003 form .inner-form .input-field.third-wrap .btn-search:focus {
@@ -1156,7 +1163,7 @@ legend {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">숙소</h2>
+                        <h2>숙소</h2>
                     </div>
                 </div>
             </div>
@@ -1237,8 +1244,8 @@ legend {
 				                           </c:if>
 				                    	</c:forEach>
 			                    	</div>
-	                    		<div class="swiper-pagination swiper-pagination1"></div>
 			                	</div>
+	                    		<div class="swiper-pagination swiper-pagination1"></div>
                             </div>
                         </div>
                     </div>
@@ -1280,8 +1287,8 @@ legend {
 				        	<c:if test="${status.count % 3 == 0 && status.count != 0 }"></div></c:if>
 				    	</c:forEach>
 	                </div>
+					<div class="swiper-pagination swiper-pagination2"></div>
 	            </div>
-				<div class="swiper-pagination swiper-pagination2"></div>
             </div>
     </section>
 	

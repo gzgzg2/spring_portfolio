@@ -391,6 +391,7 @@ ul, ol {
 	display: inline-block;
 }
 .menu-item .nav-menu {
+	margin-top: 7px;
 	text-align: right;
 }
 .menu-item .nav-menu .mainmenu {
@@ -990,8 +991,12 @@ ul, ol {
 .breadcrumb-section2 {
 	padding-top: 70px;
 	padding-bottom: 5%;
-	background-color: #673ab7;
+	background-image: url("../USERCSS/img/7.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position:center bottom;
 	margin-bottom: 15px;
+	height: 400px;
 }
 .breadcrumb-text {
 	text-align: center;

@@ -15,7 +15,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Css Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/style_rami.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/USERCSS/bootstrap.min.css">
@@ -114,7 +114,7 @@
 				</label>
 				
 				<hr>
-				<input type="submit" value="변경하기"/>
+				<input id="passSBtn" type="submit" value="변경하기"/>
 			</form>
 		</div>
 	</div>	
@@ -124,10 +124,10 @@
            <div id="side">
                 <nav id="sidenav">
                     <ul id="sideul">
-                      	<li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo">개인정보</a></li>
-                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReview">리뷰관리</a></li>
-                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReserve">예약관리</a></li>
-                        <li><a href="">내플래너</a></li>
+                      	<li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;개인정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReview"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;리뷰관리</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReserve"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;예약관리</a></li>
+                        <li><a href=""><i class="fa fa-plane" aria-hidden="true"></i>&nbsp;&nbsp;내플래너</a></li>
                     </ul>
                 </nav>
             </div>
@@ -145,7 +145,7 @@
                             <td><img id="imgId" src="${pageContext.request.contextPath}/USERPIC/${dto.member_pic }">
                             	<input type="hidden"  name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </td>
-                            <td><input type="button" value="회원탈퇴" onclick="memberDelete();" ></td>
+                            <td><input type="button" class="btnSub" value="회원탈퇴" onclick="memberDelete();" ></td>
                         </tr>
 					
                         <tr>
@@ -165,8 +165,8 @@
                         </tr>
 
                         <tr>
-                            <td><input type="submit" value="정보 변경하기"/></td>
-                            <td colspan="2"><input type="button" id="passwordChagneBtn" value="비밀번호 변경 >"></td>
+                            <td style="width: 50%;"><input class="btnSub" id="subBtn" type="submit" value="정보 변경하기"/></td>
+                            <td colspan="2"><input type="button" class="btnSub" id="passwordChagneBtn" value="비밀번호 변경 "></td>
                         </tr>
                     </table>
                 </div>

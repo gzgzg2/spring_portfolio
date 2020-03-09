@@ -101,10 +101,10 @@
            <div id="side">
                 <nav id="sidenav">
                     <ul id="sideul">
-                        <li><a href="./mypageInfo">개인정보</a></li>
-                        <li><a href="./mypageReview">리뷰관리</a></li>
-                        <li><a href="./mypageReserve">예약관리</a></li>
-                        <li><a href="./mypagePlanner">내플래너</a></li>
+                      	<li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;개인정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReview"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;리뷰관리</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypageReserve"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;예약관리</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/mypage/mypagePlanner"><i class="fa fa-plane" aria-hidden="true"></i>&nbsp;&nbsp;내플래너</a></li>
                     </ul>
                 </nav>
             </div>
@@ -188,13 +188,9 @@
             			row += "</div>"
             			row += "<div class='item_footer'>"
           				if (data[i - 1].review_uid != 0) {
-              				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
-                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
-                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
-                   			row += "</form>"
+                   			row += "<button type='button' onclick=" + "location.href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" + data[i - 1].review_uid + "'" + " style='float: left;'>리뷰 수정</button>"
               			} else {
-              				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
+              				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method=''>"
                    			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
                    			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
                    			row += "<input type='hidden' name='book_uid' value='" + data[i - 1].book_uid + "'>"
@@ -267,12 +263,8 @@
             			row += "</div>"
             			row += "<div class='item_footer'>"
            				if (data[i - 1].review_uid != 0) {
-               				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
-                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
-                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
-                   			row += "</form>"
-               			} else {
+           					row += "<button type='button' onclick=" + "location.href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" + data[i - 1].review_uid + "'" + " style='float: left;'>리뷰 수정</button>"
+                  		} else {
                				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
                    			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
                    			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"
@@ -385,12 +377,8 @@
             			row += "</div>"
             			row += "<div class='item_footer'>"
             			if (data[i - 1].review_uid != 0) {
-            				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate' method='post'>"
-                  			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
-                   			row += "<button type='submit' style='float: left;'>리뷰 수정</button>"
-                   			row += "<input type='hidden' name='review_uid' value='" + data[i - 1].review_uid + "'>"
-                   			row += "</form>"
-            			} else {
+            				row += "<button type='button' onclick=" + "location.href='${pageContext.request.contextPath}/user/mypage/mypageReviewUpdate/" + data[i - 1].review_uid + "'" + " style='float: left;'>리뷰 수정</button>"
+                  		} else {
             				row += "<form action='${pageContext.request.contextPath}/user/mypage/mypageReviewWrite' method='post'>"
                    			row += "<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>"
                    			row += "<button type='submit' style='float: left;'>리뷰 쓰기</button>"

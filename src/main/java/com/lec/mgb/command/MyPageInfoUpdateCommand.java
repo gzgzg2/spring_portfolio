@@ -30,6 +30,7 @@ public class MyPageInfoUpdateCommand implements Command {
 		
 		// 2. 파일 저장할 경로 만들어주기
 		ServletContext context = C.context;
+		System.out.println(context.getRealPath("USERPIC/"));
 		String saveDirectory = context.getRealPath("USERPIC/");
 		
 		// 3. 파일이 있을 때와 없을 때 처리
@@ -59,7 +60,6 @@ public class MyPageInfoUpdateCommand implements Command {
 		}
 		
 		////////////////////////////////////////////////////////////
-		
 		
 //		
 //		if(!file.getOriginalFilename().isEmpty()) {

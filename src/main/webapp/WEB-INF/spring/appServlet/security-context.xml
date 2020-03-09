@@ -21,7 +21,7 @@
 		<security:intercept-url pattern="/user/planner/**" access="permitAll"/>
 		
 		<!-- /sample/member URL요청은 ROLE_MEMBER 라는 권한이 있는 사용자만 접근 가능 -->
-		<security:intercept-url pattern="/user/mypage/mypageInfo" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/user/mypage/**" access="hasRole('ROLE_MEMBER')"/>
 		
 		<!-- /sample/admin URL요청은 ROLE_ADMIN 라는 권한이 있는 사용자만 접근 가능 -->
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
