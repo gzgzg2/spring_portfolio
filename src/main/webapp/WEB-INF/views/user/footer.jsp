@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://kit.fontawesome.com/e68b5cc3ca.js" crossorigin="anonymous"></script>
 <footer class="footer-section" style="margin-top: 50px;">
     <div class="container">
         <div class="footer-text">
@@ -34,7 +35,7 @@
                         <p>최현진 화이팅</p>
                         <form action="#" class="fn-form">
                             <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send"></i></button>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
                         </form>
                     </div>
                 </div>

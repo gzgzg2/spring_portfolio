@@ -165,7 +165,7 @@ CREATE TABLE PLANNER
 CREATE TABLE REVIEW
 (
 	review_uid int NOT NULL AUTO_INCREMENT,
-	review_title varchar(50) NOT NULL,
+	review_title text NOT NULL,
 	review_star int NOT NULL,
 	review_content text,
 	review_id varchar(50) NOT NULL,
