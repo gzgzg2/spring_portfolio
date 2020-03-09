@@ -42,6 +42,13 @@
     		background-size: cover;
     		background-position: 50%;
     	}
+        
+        .breadcrumb-section2 h2, #hotel1, .section-title h2 {
+        	text-shadow: 0px 2px 6px grey;
+        	padding: 15px 0px;
+        	font-weight: bold;
+        	color: white;
+        }
     	.item_info h5 {
     		line-height: 1.5em;
     	}
@@ -105,6 +112,9 @@
       }
       .swiper-slide h5, .swiper-slide p {
       	text-align: left;
+      }
+      .swiper-slide.swiper-slide-active {
+      	margin: 0 !important;
       }
     </style>
     
@@ -1088,7 +1098,7 @@
 	  color: #fff;
 	  border: 0;
 	  cursor: pointer;
-	  background: #63c76a;
+	  background: #8EC0E4;
 	  transition: all .2s ease-out, color .2s ease-out;
 	}
 	
@@ -1097,7 +1107,7 @@
 	}
 	
 	.s003 form .inner-form .input-field.third-wrap .btn-search:hover {
-	  background: #50c058;
+	  background: #6AAFE6;
 	}
 	
 	.s003 form .inner-form .input-field.third-wrap .btn-search:focus {
@@ -1160,7 +1170,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2 style="padding: 15px 0px; background-color: rgba(68,68,68,0.6); color: white; font-weight: bold;">액티비티</h2>
+                        <h2>액티비티</h2>
                     </div>
                 </div>
             </div>
@@ -1279,7 +1289,7 @@
 	
 	<c:if test="${fn:length(popular) != 0 }">
 	<!-- 액티비티 -->
-    <section class="sivaHotH">
+    <section class="sivaHotH" style="margin-top: 400px;">
         <div id="siva5">
             <h2 id="sivaH5" style="font-weight: bold; padding: 10px 0px;">인기 액티비티</h2>
             <div id="button1">
