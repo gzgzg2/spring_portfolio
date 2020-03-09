@@ -10,7 +10,7 @@
 <c:if test="${cnt == 1 }">
 	<script>
 		alert("저장 완료, 마이페이지-내플래너로 이동합니다.");
-		location.href = "${pageContext.request.contextPath}/plan/planner";
+		location.href = "${pageContext.request.contextPath}/user/mypage/mypagePlanner";
 		
 	</script>			
 </c:if>

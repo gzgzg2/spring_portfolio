@@ -11,6 +11,7 @@ import com.lec.mgb.mybatis.beans.AjaxLocalList;
 import com.lec.mgb.mybatis.beans.AjaxPlannerList;
 import com.lec.mgb.mybatis.beans.MainAjaxDAO;
 import com.lec.mgb.mybatis.beans.PlannerDTO;
+import com.lec.mgb.mybatis.beans.PlannerListDAO;
 
 
 @RestController
@@ -46,6 +47,26 @@ public class MainAjaxController {
 		
 		MainAjaxDAO dao = C.sqlSesssion.getMapper(MainAjaxDAO.class);
 		list = dao.selectPlannerUid();
+		result.setList(list);
+		
+		if(list != null && list.size() > 0) {
+			result.setStatus("OK");
+			result.setCount(list.size());
+		} else {
+			result.setStatus("FAIL");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/mypagelistCnt/{member_uid}")
+	public AjaxPlannerList mypagelistCnt(@PathVariable("member_uid") int member_uid){
+		
+		AjaxPlannerList result = new AjaxPlannerList();
+		ArrayList<PlannerDTO> list = null;
+		
+		PlannerListDAO dao = C.sqlSesssion.getMapper(PlannerListDAO.class);
+		list = dao.selectPlannerUid(member_uid);
 		result.setList(list);
 		
 		if(list != null && list.size() > 0) {

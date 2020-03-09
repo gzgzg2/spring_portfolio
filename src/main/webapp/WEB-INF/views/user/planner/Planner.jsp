@@ -77,23 +77,6 @@
 	color: white;
 	background-color: #dfa974;
 }
-
-.Add {
-	margin-top: 5px; 
-	padding:5px 10px;
-	background-color: #03a6ff;
-	border: none;
-	color: white;
-	border-radius: 5px;
-	font-size: 10px;
-}
-
-#titleH2 {
-	font-size: 15px;
-	line-height: 20px;
-	padding-bottom: 5px;
-}
-
 </style>
 </head>
 <body>
@@ -101,12 +84,12 @@
 		class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 		<div class="app-header header-shadow">
 			<div class="app-header__logo">
-				<div class="logo-src">
-					<img width="42px"
-						src="${pageContext.request.contextPath}/USERCSS/assets/images/marker.png"
+				<div class="logo-src" onclick ="location.href='${pageContext.request.contextPath}/main'">
+					<img style="width:120px; margin-left:45px; margin-bottom:5px"
+						src="${pageContext.request.contextPath}/resources/img/logo.png"
 						alt="">
 				</div>
-				<h5>귤귤 플래너</h5>
+				
 				<div class="header__pane ml-auto">
 					<div>
 						<button type="button"
@@ -141,17 +124,30 @@
 				<div class="app-header-right">
 
 					<ul class="header-menu nav">
-						<li class="nav-item"><a href="javascript:void(0);"
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/main"
 							class="nav-link"> <i class="nav-link-icon fa fa-database">
-							</i> Statistics
+							</i> 
+							홈
 						</a></li>
-						<li class="btn-group nav-item"><a href="javascript:void(0);"
+						<li class="btn-group nav-item"><a href="${pageContext.request.contextPath}/user/tour/list"
 							class="nav-link"> <i class="nav-link-icon fa fa-edit"></i>
-								Projects
+							투어
 						</a></li>
-						<li class="dropdown nav-item"><a href="javascript:void(0);"
+						<li class="btn-group nav-item"><a href= "${pageContext.request.contextPath}/user/activ/list"
+							class="nav-link"> <i class="nav-link-icon fa fa-edit"></i>
+							액티비티
+						</a></li>
+						<li class="dropdown nav-item"><a href="${pageContext.request.contextPath}/user/inn/list"
 							class="nav-link"> <i class="nav-link-icon fa fa-cog"></i>
-								Settings
+								숙소
+						</a></li>
+												<li class="dropdown nav-item"><a href="${pageContext.request.contextPath}/plan/planner"
+							class="nav-link"> <i class="nav-link-icon fa fa-cog"></i>
+								플래너
+						</a></li>
+												<li class="dropdown nav-item"><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo"
+							class="nav-link"> <i class="nav-link-icon fa fa-cog"></i>
+								마이페이지
 						</a></li>
 					</ul>
 				</div>
@@ -212,7 +208,7 @@
 						<form id="planListForm" method="get"
 							action="${pageContext.request.contextPath}/plan/saveOk"
 							onsubmit="return saveOk()">
-							<div id="planList" style="overflow: auto; height: 480px;">
+							<div id="planList" style="overflow: auto; height: 799px; margin:15px;">
 
 							</div>
 
@@ -238,20 +234,24 @@
 				<c:choose>
 					<c:when test="${not empty sessionScope.userId}">
 						<div
-							style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
+							style="position: absolute; right: 5px; top: 30px; background: rgba(0,0,0,0.1);
+    padding: 5px;
+    border-radius: 10px; z-index: 12;"
 							class="go-right">
 
 							<a class="p-0 btn" onclick="planListForm.submit()"> <img
 								width="42px" class="rounded-circle"
 								src="${pageContext.request.contextPath}/USERCSS/assets/images/avatars/1.PNG"
-								alt=""> 플래너 저장하기 ${sessionScope.loginUid } <!-- <input value="플래너 저장하기" type="button" onclick="planListForm.submit()"> -->
+								alt=""> 플래너 저장하기 <!-- <input value="플래너 저장하기" type="button" onclick="planListForm.submit()"> -->
 							</a>
 						</div>
 					</c:when>
 
 					<c:otherwise>
 						<div
-							style="position: absolute; right: 5px; top: 30px; background-color: #2196F3; z-index: 12;"
+							style="position: absolute; right: 5px; top: 30px;background: rgba(0,0,0,0.1);
+    padding: 5px;
+    border-radius: 10px; z-index: 12;"
 							class="go-right">
 							<div class="btn-group">
 								<a data-toggle="dropdown" aria-haspopup="true"
@@ -340,9 +340,9 @@
 				var content = document.createElement('div')
 				content.className = 'wrap';
 				content.innerHTML = '    <div class="info">'
-						+ '        <div class="title"><span id="titleH2">'
+						+ '        <div class="title">'
 						+ list[i].local_name
-						+ '            </span><div class="close" onclick="closeOverlay()" title="닫기"></div>'
+						+ '            <div class="close" onclick="closeOverlay()" title="닫기"></div>'
 						+ '        </div>'
 						+ '        <div class="body">'
 						+ '            <div class="img">'
@@ -376,7 +376,7 @@
 			for (var i = 0; i < locations.length; i++) {
 
 				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(20, 40);
+				var imageSize = new kakao.maps.Size(25, 25);
 
 				// 마커 이미지를 생성합니다    
 				var markerImage = new kakao.maps.MarkerImage(imageSrc,
@@ -445,7 +445,7 @@
 						+ '<li style="list-style:none" id = "local_name">여행지 : '
 						+ jsonObj.local_name
 						+ '</li>'
-						+ '<li style="list-style:none"><span style = "width : 100px">숙박일 : </span><input style = "width : 50px; background : none; border : none; text-align : right;" type="number" id = "stay'+index+'" name = "stay'+index+'"/>박</li>'
+						+ '<li style="list-style:none"><span style = "width : 100px">숙박일 : </span><input style = "width : 50px; background : none; border : none; text-align : right;" value = "1" type="number" id = "stay'+index+'" name = "stay'+index+'"/>박</li>'
 						//		+ '<li>교통수단 : </li><input type="text" id = "trans'+index+'" name = "trans'+index+'"/>'
 
 						+ '</ul>';

@@ -632,6 +632,7 @@ img#logoG {
       PlannerUid();
     });
     
+    var polyline = new Array();
     var view_planner_uid = new Array();
     // 검색되는 플래너 UID가져오기
     function PlannerUid(){
@@ -698,16 +699,16 @@ img#logoG {
            	// 마커 좌표 배열담아주기
 			locations.push(new kakao.maps.LatLng(
 						parseFloat(list[i].local_lat),
-						parseFloat(list[i].local_lng)),
+						parseFloat(list[i].local_lng))
 			);
 			
 		}
 		
 		polyline = new kakao.maps.Polyline({
 			   
-		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeWeight: 4, // 선의 두께 입니다
 		    strokeColor: '#000000', // 선의 색깔입니다
-		    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeOpacity: 0.6, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 		    strokeStyle: 'solid', // 선의 스타일입니다
 		    endArrow: true,
 		    zIndex:20
@@ -735,7 +736,8 @@ img#logoG {
 		
 			
 		}
-	
+		polyline.setPath(locations);
+		polyline.setMap(map);
 		map.setZoomable(false);  
 		
 	} //end updateView

@@ -36,8 +36,9 @@ String location;
 	public String saveOk(Model model, HttpSession session, HttpServletRequest request) {
 		location = "user/planner/saveOk";
 		
-		//model.addAttribute("member_uid", session.getAttribute("loginUid"));
-		model.addAttribute("member_uid", 1);
+		model.addAttribute("member_uid", session.getAttribute("loginUid"));
+		
+		
 		model.addAttribute("planner_title",12);
 		new PlannerSaveCommand().execute(model);
 		

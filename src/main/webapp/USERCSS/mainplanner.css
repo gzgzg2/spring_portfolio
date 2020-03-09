@@ -9603,9 +9603,8 @@ a, button, .btn {
 }
 
 .app-header__logo .logo-src {
-	height: 23px;
 	width: 97px;
-	background: url(assets/images/marker.png)
+	
 }
 
 .app-header__menu, .app-header__mobile-menu {
@@ -9858,7 +9857,7 @@ a, button, .btn {
 }
 
 .app-header.header-text-dark .app-header__logo .logo-src {
-	background: url(assets/images/logo-inverse.png)
+	
 }
 
 .app-sidebar {
@@ -10008,7 +10007,9 @@ a, button, .btn {
 .vertical-nav-menu li a.mm-active {
 	color: #343a40;
 	background: #e0f3ff;
-	font-weight: bold
+	font-weight: bold;
+	margin:3px;
+	top: 15px
 }
 
 .vertical-nav-menu i.metismenu-state-icon, .vertical-nav-menu i.metismenu-icon
@@ -10142,7 +10143,7 @@ a, button, .btn {
 }
 
 .app-sidebar.sidebar-text-light .app-header__logo .logo-src {
-	background: url(assets/images/logo.png)
+	
 }
 
 .app-sidebar.sidebar-text-light .app-header__logo .hamburger-inner,
@@ -25229,7 +25230,7 @@ a.fc-more:hover {
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 0px 0 0 8px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}

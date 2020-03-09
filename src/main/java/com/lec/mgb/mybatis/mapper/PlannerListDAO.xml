@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.lec.mgb.mybatis.beans.PlannerListDAO">
+	<select id="select" resultType="com.lec.mgb.mybatis.beans.PlannerListDTO">
+			SELECT 
+				*
+			FROM 
+				planner join plan on planner.planner_uid = plan.planner_uid
+				join local on plan.plan_local_uid=local.local_uid
+			where planner.planner_uid = #{param1}
+			order by planner.planner_uid
+		</select>
+		
+		<select id="selectPlannerUid" resultType="com.lec.mgb.mybatis.beans.PlannerListDTO">
+			SELECT 
+				planner.planner_uid 
+			FROM 
+				planner join plan on planner.planner_uid = plan.planner_uid
+				join local on plan.plan_local_uid=local.local_uid
+			where planner.member_uid = #{param1}
+			group by planner.planner_uid
+			order by planner.planner_uid desc
+		</select>
+
+</mapper>
