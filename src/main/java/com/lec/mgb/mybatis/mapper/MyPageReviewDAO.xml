@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.mgb.mybatis.beans.MyPageReviewDAO">
+
+	<select id="tourRList" resultType="com.lec.mgb.mybatis.beans.MyPageReviewDTO">
+		SELECT 
+			t.tour_name, t.tour_period, b.book_date, re.review_uid, re.review_title, m.member_name, b.book_uid
+		FROM 
+			member m , tour t, book b, review re
+		 WHERE
+		 	m.member_uid = b.member_uid and b.tour_uid = t.tour_uid and b.book_uid = re.book_uid
+		 AND
+		  	m.member_uid = #{member_uid}
+		 ORDER BY 
+		 	b.book_uid DESC
+		 LIMIT 
+		 	#{page}, 10	
+	</select>
+	
+	<select id="activRList" resultType="com.lec.mgb.mybatis.beans.MyPageReviewDTO">
+		SELECT 
+			a.activ_name, a.activ_loc, re.review_uid, re.review_title, m.member_name, b.book_uid
+		FROM 
+			member m , activ a, book b, review re, ticket t
+		 WHERE
+		 	m.member_uid = b.member_uid and b.book_uid = re.review_uid and a.activ_uid = t.activ_uid
+		 AND
+		  	m.member_uid = #{member_uid}
+		 ORDER BY 
+		 	b.book_uid DESC
+		 LIMIT 
+		 	#{page}, 10	
+	</select>
+	
+	<select id="roomRList" resultType="com.lec.mgb.mybatis.beans.MyPageReviewDTO">
+		SELECT 
+			i.inn_name, r.room_name, i.inn_sep , re.review_uid, re.review_title, m.member_name, b.book_uid
+		FROM 
+			member m join book b on m.member_uid = b.member_uid   
+			join room r on b.room_uid = r.room_uid 
+			join review re on b.book_uid = re.book_uid
+			join inn i on i.inn_uid = r.inn_uid 
+		 AND
+		  	m.member_uid = #{member_uid}
+		 ORDER BY 
+		 	b.book_uid DESC
+		 LIMIT 
+		 	#{page}, 10	
+	</select>
+</mapper>

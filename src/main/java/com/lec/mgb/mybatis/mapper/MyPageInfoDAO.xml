@@ -17,7 +17,12 @@
 	</select>
 	
 	<update id="mypageUpdate" flushCache="true">
-		UPDATE MEMBER SET member_email = #{dto.member_email}, member_tel = #{dto.member_tel} 
+		UPDATE 
+			MEMBER 
+		SET 
+			member_email = #{dto.member_email}, 
+			member_tel = #{dto.member_tel},
+			member_pic = #{dto.member_pic}
 		WHERE member_uid = #{param1};
 	</update>
 	

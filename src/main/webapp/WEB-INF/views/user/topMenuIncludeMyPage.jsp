@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
+                            <a href="${pageContext.request.contextPath}/main">
+                                <img id="logoG" src="${pageContext.request.contextPath }/resources/img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -25,20 +25,20 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="./index.html">박지민</a></li>
-                                    <li><a href="./rooms.html">홈</a></li>
-                                    <li><a href="./about-us.html">제주여행</a></li>
-                                    <li><a href="./pages.html">내플래너</a>
-                                    <li><a href="${pageContext.request.contextPath}/user/account/logoutOk">로그아웃</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
+                                    <li class="active"><a href="${pageContext.request.contextPath}/main">홈</a></li>
+                                    <li><a href="./about-us.html">제주여행</a>
+                                    	 <ul class="dropdown">
+                                            <li><a href="${pageContext.request.contextPath}/user/inn/list">숙소</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/user/activ/list">액티비티</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="./blog.html">News</a></li>
-                                    <li><a href="mypageInfo">마이페이지</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/user/palanner/plan">내플래너</a>
+                                    <li><img id="Myprofile" src="${pageContext.request.contextPath}/USERPIC/${sessionScope.userPic }"/>
+                                    	<ul class="dropdown">
+                                            <li><a href="${pageContext.request.contextPath}/user/mypage/mypageInfo">마이페이지</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/user/account/logoutOk">로그아웃</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
