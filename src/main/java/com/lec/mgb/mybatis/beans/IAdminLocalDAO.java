@@ -11,6 +11,7 @@ public interface IAdminLocalDAO {
 	public AdminLocalDTO selectByUid(int uid);
 	
 	public int update(int uid, @Param("a")AdminLocalDTO dto);
+	public int update_nopic(int uid, @Param("a")AdminLocalDTO dto);
 	
 	public int deleteByUid(final int uid);
 	

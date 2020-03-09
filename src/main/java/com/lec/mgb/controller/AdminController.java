@@ -16,6 +16,7 @@ import com.lec.mgb.c.C;
 import com.lec.mgb.command.AdminActivCrawlCommand;
 import com.lec.mgb.command.AdminAddLocalCommand;
 import com.lec.mgb.command.AdminBookActivCommand;
+import com.lec.mgb.command.AdminBookDeleteCommand;
 import com.lec.mgb.command.AdminBookRoomCommand;
 import com.lec.mgb.command.AdminBookTourCommand;
 import com.lec.mgb.command.AdminInnCrawlCommand;
@@ -124,6 +125,15 @@ public class AdminController {
 	
 	
 	// 예약관리
+	// 예약 삭제
+	@RequestMapping(value = "/admin_BookDeleteOk")
+	public String admin_BookdeleteOk(int uid, Model model) {
+		model.addAttribute("uid", uid);
+		new AdminBookDeleteCommand().execute(model);
+		return "admin/admin_BookDeleteOk";
+	}
+	
+	
 	// 숙소관리
 	@RequestMapping(value = "/admin_InnManage")
 	public String admin_InnManage(Model model) {

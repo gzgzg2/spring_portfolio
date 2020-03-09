@@ -16,10 +16,12 @@ public class AdminUpdateLocalCommand implements Command {
 
 	@Override
 	public void execute(Model model) {
-int result = 0;
+		int result = 0;
 		
 		Map<String, Object> map = model.asMap();
 		AdminLocalDTO dto = (AdminLocalDTO)map.get("dto");
+		
+		System.out.println(dto.getLocal_hello());
 		
 		MultipartFile file = (MultipartFile)map.get("upload");
 		
@@ -49,6 +51,7 @@ int result = 0;
 				return; // Ok.jsp -> c:choose result == 101 alert("이미지 파일만 업로드하세요"); history.back();
 			}
 		}
+		System.out.println(dto.getLocal_pic());
 		
 		IAdminLocalDAO dao = C.sqlSesssion.getMapper(IAdminLocalDAO.class);
 		model.addAttribute("result", dao.update(dto.getLocal_uid(), dto));

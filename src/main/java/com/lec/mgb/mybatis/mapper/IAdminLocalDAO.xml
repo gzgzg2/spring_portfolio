@@ -51,6 +51,15 @@
 			local_uid = #{param1};
 	</update>
 	
+	<update id="update_nopic">
+		UPDATE
+			LOCAL
+		SET 
+			local_hello = #{a.local_hello}
+		WHERE
+			local_uid = #{param1};
+	</update>
+	
 	<delete id="deleteByUid">
 		DELETE FROM LOCAL WHERE local_uid = #{uid};
 	</delete>

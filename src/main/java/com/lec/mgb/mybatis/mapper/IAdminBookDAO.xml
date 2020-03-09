@@ -2,8 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.mgb.mybatis.beans.IAdminBookDAO">
 	
+	<delete id="deleteByUid">
+		DELETE FROM BOOK WHERE book_uid = #{uid};
+	</delete>
+	
 	<select id="select_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
-		SELECT 
+		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -30,6 +35,7 @@
 	
 	<select id="selectByRow_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
 		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -57,6 +63,7 @@
 	
 	<select id="select_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
 		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -83,6 +90,7 @@
 	
 	<select id="selectByRow_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
 		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -110,6 +118,7 @@
 	
 	<select id="select_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
 		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -136,6 +145,7 @@
 	
 	<select id="selectByRow_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO">
 		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -162,7 +172,8 @@
 	</select>
 	
 	<select id="search_selectByRow_room" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
-		SELECT 
+		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -191,7 +202,8 @@
 	</select>
 	
 	<select id="search_selectByRow_tour" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
-		SELECT 
+		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,
@@ -220,7 +232,8 @@
 	</select>
 	
 	<select id="search_selectByRow_activ" resultType="com.lec.mgb.mybatis.beans.AdminBookDTO"> 
-		SELECT 
+		SELECT
+			book_uid,
 			book_date,
 			book_member_cnt,
 			format(book_cost, 0) book_cost,

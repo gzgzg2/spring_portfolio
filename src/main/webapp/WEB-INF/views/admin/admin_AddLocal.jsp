@@ -147,13 +147,35 @@ function search_local_addr() {
 
 </script>
 
+<style>
+
+.form-control{
+	margin: 0 25%;
+	width: 50%;
+}
+
+.addr{
+	margin: 0 0 0 25%;
+	width:40%;
+	float:left;
+}
+
+.addr_btn{
+	width:10%;
+	float:left;
+}
+
+</style>
+
 <body>
 	
 
 			<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
-						<div class="logo-src"></div>
+						<div class="logo">
+								<a href="/mgb/main"><img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:140px"/></a>
+						</div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -210,7 +232,7 @@ function search_local_addr() {
 								<ul class="vertical-nav-menu">
 
 									<li>
-										<a href="admin_MemberManage" class="mm-active"> 
+										<a href="admin_MemberManage"> 
 											<i class="metismenu-icon pe-7s-users"></i>회원 관리
 										</a>
 									</li>
@@ -268,13 +290,15 @@ function search_local_addr() {
 						<div class="app-main__inner">
 							
 							<form name="local_frm" action="admin_AddLocalOk" enctype="multipart/form-data" method="post" onsubmit="return chklocal()">
-								
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<input class="form-control" id="local_name" name="local_name" type="text" placeholder="관광지 이름">
 								<br><br>
 								<textarea class="form-control" name="local_hello" placeholder="관광지 소개"></textarea>
 								<br><br>
-								<input class="form-control" id="local_loc" name="local_loc" type="text"  placeholder="주소">
-								<input class="admin-search-bar-btn" type="button" onclick="search_local_addr()" value="주소 검색">
+								<div style=padding-bottom:35px;>
+								<input class="form-control addr" id="local_loc" name="local_loc" type="text"  placeholder="주소">
+								<input class="admin-search-bar-btn addr_btn" type="button" onclick="search_local_addr()" value="주소 검색">
+								</div>
 								<br><br>
 								<input class="form-control" id="local_tel" name="local_tel" type="text" placeholder="관광지 번호">
 								<br><br>

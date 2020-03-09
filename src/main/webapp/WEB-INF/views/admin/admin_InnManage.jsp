@@ -112,8 +112,8 @@ function loadPage(page){
 				result += "<td>" + items[i].book_name + "</td>\n"
 				result += "<td>" + items[i].book_member_name + "</td>\n"
 				result += "<td>" + items[i].book_member_tel + "</td>\n"
-				result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='#?uid="
-						+ items[i].book_uid + "'>Delete</a></button></td>"
+				result += "<td><a onclick='return chkDelete()' href='admin_BookDeleteOk?uid="
+					+ items[i].book_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 				result += "</tr>\n";
 			}
 
@@ -175,8 +175,8 @@ function loadPage(page){
 				result += "<td>" + items[i].book_name + "</td>\n"
 				result += "<td>" + items[i].book_member_name + "</td>\n"
 				result += "<td>" + items[i].book_member_tel + "</td>\n"
-				result += "<td><button class='admin-delete-btn'><a onclick='return chkDelete()' href='#?uid="
-						+ items[i].book_uid + "'>Delete</a></button></td>"
+				result += "<td><a onclick='return chkDelete()' href='admin_BookDeleteOk?uid="
+					+ items[i].book_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 				result += "</tr>\n";
 			}
 			
@@ -218,7 +218,9 @@ function loadPage(page){
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
-						<div class="logo-src"></div>
+						<div class="logo">
+								<a href="/mgb/main"><img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:140px"/></a>
+						</div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -290,7 +292,7 @@ function loadPage(page){
 										<a href="#" class="mm-active">
 											<i class="metismenu-icon pe-7s-note2"></i>예약 관리
 										</a>
-										<ul class="hide">
+										<ul>
 											<li>
 												<a href="admin_InnManage" class="mm-active">숙소 예약관리</a>
 											</li>
@@ -375,12 +377,12 @@ function loadPage(page){
 								</tbody>
 							</table>
 							<div id="normal">
-								<button type="button" id="normal_prev" aria-label="Previous">이전페이지(기본)</button>
-								<button type="button" id="normal_next" aria-label="Next">다음페이지(기본)</button>
+								<button class="admin-page-btn" type="button" id="normal_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn" type="button" id="normal_next" aria-label="Next">다음페이지</button>
 							</div>
 							<div id="search">
-								<button type="button" id="search_prev" aria-label="Previous">이전페이지(검색)</button>
-								<button type="button" id="search_next" aria-label="Next">다음페이지(검색)</button>
+								<button class="admin-page-btn" type="button" id="search_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn" type="button" id="search_next" aria-label="Next">다음페이지</button>
 							</div>
 
 						</div>

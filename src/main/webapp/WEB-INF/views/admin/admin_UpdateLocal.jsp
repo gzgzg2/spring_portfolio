@@ -32,7 +32,8 @@
 <script>
 function chklocal() {
 
-	
+
+
 	return true;
 }
 
@@ -100,7 +101,7 @@ function chklocal() {
 							<div class="app-sidebar__inner">
 								<ul class="vertical-nav-menu">
 
-									<li><a href="admin_MemberManage" class="mm-active"> <i
+									<li><a href="admin_MemberManage"> <i
 											class="metismenu-icon pe-7s-rocket"></i> 회원 관리
 									</a></li>
 
@@ -132,9 +133,10 @@ function chklocal() {
 						<div class="app-main__inner">
 							
 							<form name="local_frm" action="admin_UpdateLocalOk" enctype="multipart/form-data" method="post" onsubmit="return chklocal()">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<input type="hidden" name="local_uid" value="${dto.local_uid }"/>
 								<textarea class="form-control" name="local_hello">${dto.local_hello }</textarea>
 								<br><br>
-								
 								<input id="local_pic" name="upload" type="file"><br>
 								<label for="local_pic"></label>
 								<div class="select_img"><img src="${pageContext.request.contextPath}/LOCALPIC/${dto.local_pic }" /></div>

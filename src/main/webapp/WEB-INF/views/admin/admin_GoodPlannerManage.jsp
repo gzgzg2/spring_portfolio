@@ -34,6 +34,7 @@ $(document).ready(function(){
 	loadPage(1)// page 읽어오기
 	GoodloadPage(1)
 	
+	
 	$("button#normal_prev").click(function(){
 		var curPage = parseInt($("input#page").val());
 		if(curPage == 1){
@@ -104,8 +105,6 @@ function GoodloadPage(gpage){
 			var count = jsonObj.count; // 글 개수
 			var items = jsonObj.list; // 글 목록
 
-			var i;
-
 			for (i = 0; i < count; i++) {
 				result += "<tr>\n";
 				result += "<input type='hidden' value='"+ cnt +"' id='good_count'>"
@@ -119,12 +118,12 @@ function GoodloadPage(gpage){
 
 			$("#normal").show();
 			$("#search").hide();
-
+			
 			$("table#Goodlist tbody").html(result); // 테이블 내용 업데이트
 
 			return true;
 		} else {
-			alert("내용이 없습니다");
+			$("table#Goodlist").html("");	
 			return false;
 		}
 
@@ -163,7 +162,7 @@ function loadPage(page){
 				result += "<td>" + items[i].planner_view_cnt + "</td>\n"
 				result += "<td>" + items[i].planner_cost_trans + "</td>\n"
 				result += "<td>" + items[i].planner_cost_inn + "</td>\n"
-				result += "<td><a onclick='return chkInsert()' href='admin_GoodPlanner?planner_uid=" + items[i].planner_uid +"'><button class='admin-delete-btn'>Delete</button></a></td>"
+				result += "<td><a onclick='return chkInsert()' href='admin_GoodPlanner?planner_uid=" + items[i].planner_uid +"'><button class='admin-activ-btn'>Confirm</button></a></td>"
 				result += "</tr>\n";
 			}
 
@@ -222,7 +221,7 @@ function loadPage(page){
 				result += "<td>" + items[i].planner_view_cnt + "</td>\n"
 				result += "<td>" + items[i].planner_cost_trans + "</td>\n"
 				result += "<td>" + items[i].planner_cost_inn + "</td>\n"
-				result += "<td><a onclick='return chkInsert()' href='admin_GoodPlanner?planner_uid=" + items[i].planner_uid +"'><button class='admin-info-btn'>Select</button></a></td>"
+				result += "<td><a onclick='return chkInsert()' href='admin_GoodPlanner?planner_uid=" + items[i].planner_uid +"'><button class='admin-activ-btn'>Confirm</button></a></td>"
 				result += "</tr>\n";
 			}
 			
@@ -267,6 +266,9 @@ function loadPage(page){
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
+					<div class="logo">
+								<a href="/mgb/main"><img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:140px"/></a>
+						</div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -356,11 +358,11 @@ function loadPage(page){
 										</ul>
 									</li>
 
-									<li class="menu" class="mm-active">
-										<a href="#">
+									<li class="menu">
+										<a href="#" class="mm-active">
 											<i class="metismenu-icon pe-7s-plane"></i>플래너 관리
 										</a>
-										<ul class="hide">
+										<ul>
 											<li>
 												<a href="admin_PlannerManage">플래너 관리 </a>
 											</li>
@@ -368,10 +370,9 @@ function loadPage(page){
 												<a href="admin_GoodPlannerManage" class="mm-active">우수 플래너관리</a>
 											</li>
 										</ul>
-									</li>
-									
+									</li>									
 									<li>
-										<a href="admin_data" class="mm-active"> 
+										<a href="admin_data"> 
 											<i class="metismenu-icon pe-7s-download"></i>데이터 갱신
 										</a>
 									</li>
@@ -390,7 +391,7 @@ function loadPage(page){
 
 						<div class="app-main__inner">
 							
-							<table class="admin-table table-bordered" id="Goodlist">
+							<table class="admin-table table-bordered goodlist" style="margin-bottom: 50px;" id="Goodlist">
 								<thead>
 									<tr>
 										<th class="table-th-left">플래너 제목</th>
@@ -405,7 +406,7 @@ function loadPage(page){
 								</tbody>
 							</table>
 							
-							<div class="admin-search-bar" style="padding: 50px 0 0 0">
+							<div class="admin-search-bar">
 
 								<div class="admin-search-select">
 
@@ -440,12 +441,12 @@ function loadPage(page){
 								</tbody>
 							</table>
 							<div id="normal">
-								<button type="button" id="normal_prev" aria-label="Previous">이전페이지(기본)</button>
-								<button type="button" id="normal_next" aria-label="Next">다음페이지(기본)</button>
+								<button class="admin-page-btn" type="button" id="normal_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn" type="button" id="normal_next" aria-label="Next">다음페이지</button>
 							</div>
 							<div id="search">
-								<button type="button" id="search_prev" aria-label="Previous">이전페이지(검색)</button>
-								<button type="button" id="search_next" aria-label="Next">다음페이지(검색)</button>
+								<button class="admin-page-btn" type="button" id="search_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn" type="button" id="search_next" aria-label="Next">다음페이지</button>
 							</div>
 
 

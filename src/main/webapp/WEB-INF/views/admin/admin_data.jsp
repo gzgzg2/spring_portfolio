@@ -29,6 +29,7 @@
 
 <style>
 .menu .hide{display:none;}
+
 </style>
 <script>
 $(document).ready(function(){
@@ -48,6 +49,9 @@ $(document).ready(function(){
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
+						<div class="logo">
+								<a href="/mgb/main"><img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:140px"/></a>
+						</div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"

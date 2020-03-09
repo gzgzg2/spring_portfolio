@@ -113,7 +113,7 @@ function updateList(jsonObj) {
 			result += "<td>" + items[i].local_loc + "</td>\n"
 			result += "<td>" + items[i].local_tel + "</td>\n"
 			result += "<td><a onclick='return chkChange()' href='admin_UpdateLocal?uid="
-				+ items[i].local_uid + "'><button class='admin-delete-btn'>Change</button></a></td>"
+				+ items[i].local_uid + "'><button class='admin-tour-btn'>Change</button></a></td>"
 			result += "<td><a onclick='return chkDelete()' href='admin_LocalDeleteOk?uid="
 				+ items[i].local_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 			result += "</tr>\n";
@@ -178,7 +178,7 @@ function updateSearchList(jsonObj) {
 			result += "<td>" + items[i].local_loc + "</td>\n"
 			result += "<td>" + items[i].local_tel + "</td>\n"
 			result += "<td><a onclick='return chkChange()' href='admin_UpdateLocal?uid="
-				+ items[i].local_uid + "'><button class='admin-delete-btn'>Change</button></a></td>"
+				+ items[i].local_uid + "'><button class='admin-tour-btn'>Change</button></a></td>"
 			result += "<td><a onclick='return chkDelete()' href='admin_LocalDeleteOk?uid="
 				+ items[i].local_uid + "'><button class='admin-delete-btn'>Delete</button></a></td>"
 			result += "</tr>\n";
@@ -227,7 +227,9 @@ function chkDelete() {
 				class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 				<div class="app-header header-shadow">
 					<div class="app-header__logo">
-						<div class="logo-src"></div>
+						<div class="logo">
+								<a href="/mgb/main"><img src="${pageContext.request.contextPath}/resources/img/logo.png" style="width:140px"/></a>
+						</div>
 						<div class="header__pane ml-auto">
 							<div>
 								<button type="button"
@@ -257,7 +259,7 @@ function chkDelete() {
 				<div class="app-main">
 					<div class="app-sidebar sidebar-shadow">
 						<div class="app-header__logo">
-							<div class="logo-src"></div>
+							
 							<div class="header__pane ml-auto">
 								<div>
 									<button type="button"
@@ -349,9 +351,9 @@ function chkDelete() {
 
 						<div class="app-main__inner">
 							
-							<div>
+							<div style="padding-bottom:20px">
 								<a onclick="return addLocal()" href="admin_AddLocal">
-								<input type="button" id="add_local" value="관광지 추가">
+								<input class="admin-add-btn" type="button" id="add_local" value="관광지 추가">
 								</a>
 							</div>
 							
@@ -393,12 +395,12 @@ function chkDelete() {
 								</tbody>
 							</table>
 							<div id="normal">
-								<button type="button" id="normal_prev" aria-label="Previous">이전페이지(기본)</button>
-								<button type="button" id="normal_next" aria-label="Next">다음페이지(기본)</button>
+								<button class="admin-page-btn" type="button" id="normal_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn"  type="button" id="normal_next" aria-label="Next">다음페이지</button>
 							</div>
 							<div id="search">
-								<button type="button" id="search_prev" aria-label="Previous">이전페이지(검색)</button>
-								<button type="button" id="search_next" aria-label="Next">다음페이지(검색)</button>
+								<button class="admin-page-btn"  type="button" id="search_prev" aria-label="Previous">이전페이지</button>
+								<button class="admin-page-btn"  type="button" id="search_next" aria-label="Next">다음페이지</button>
 							</div>
 
 						</div>
@@ -411,4 +413,3 @@ function chkDelete() {
 	</c:choose>
 </body>
 </html>
-<!-- https://dlgkstjq623.tistory.com/354 -->

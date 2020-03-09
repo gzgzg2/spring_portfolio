@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface IAdminBookDAO {
 	
+	public int deleteByUid(final int uid);
+	
 	public ArrayList<AdminBookDTO> select_room();
 	
 	public ArrayList<AdminBookDTO> selectByRow_room(
