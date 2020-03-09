@@ -61,8 +61,8 @@
 			margin: 0 auto;
 		}
 		.paging_button button {
+			background: none;
 			border: none;
-			background: #eee;
 		}
 	</style>
 

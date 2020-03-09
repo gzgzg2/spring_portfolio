@@ -11,6 +11,20 @@
 			/WEB-INF/spring/appServlet/security-context.xml
 		</param-value>
 	</context-param>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/user/error/404</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/user/error/500</location>
+	</error-page>
+	
+	<error-page>
+		<location>/user/error/error</location>
+	</error-page>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
