@@ -59,7 +59,7 @@
 <script>
 	// form 검증
 	function chkSubmit(){
-		frm = document.forms["frm"];
+		var frm = document.forms["frm"];
 		
 		var ifChkSMS = frm["ifChkSMS"].value.trim();
 		var name = frm["member_name"].value.trim();
@@ -130,7 +130,7 @@
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 login_form">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST">
+				<form name="frm" class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="${pageContext.request.contextPath}/user/account/joinOk" method="POST" onsubmit="return chkSubmit();">
 					<input type="hidden" name="ifChkSMS" value="0">
 					
 					<span class="login100-form-title">
@@ -195,9 +195,7 @@
                     </div>
 
 					<div class="container-login100-form-btn" style="margin-top: 16px;">
-						<button id="btnSubmit" class="login100-form-btn" type="submit">
-							회원가입
-						</button>
+						<input type="submit" id="btnSubmit" class="login100-form-btn" type="submit" value="회원가입">
 					</div>
 					
 					<div class="flex-col-c p-t-170 p-b-40">
